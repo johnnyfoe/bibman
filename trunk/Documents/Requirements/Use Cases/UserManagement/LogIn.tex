@@ -1,0 +1,33 @@
+\section*{User Management - Log In} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User logs in to the system. \\ \hline
+Actors & All users who have signed up. \\ \hline
+Pre-conditions & The user has an account and is not already logged in. \\ \hline
+Success Post-conditions & The user is logged in to the system. \\ \hline
+Failure Post-conditions & The user is not logged in to the system. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User chooses `log in'. \\ \hline
+2 & User enters username and password. \\ \hline
+3 & System ensures that the user has not been issued with a temporary password. \\ \hline
+4 & User is logged in to the system. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+3.a. & User is logging in with a temporary password. \\
+     & System displays the `change password' use case. \\
+     & When the change password use case is completed,  \\
+  & the user is logged in and can begin using the system.  \\
+	 & If they fail to change their password they are not logged in \\ \hline
+\end{tabular}

@@ -1,0 +1,35 @@
+\section*{System Tools - Basic Search} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User searches BibTex entries in the database. \\ \hline
+Actors & All users \\ \hline
+Pre-conditions & None. \\ \hline
+Success Post-conditions & Results of the search are displayed \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User types into search box and chooses which field to search on. \\ \hline
+2 & System updates results pane with each keypress or field choice update and goes back to 1. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+If there are no search results for any query then the system will display a message to bring it to the user's attention.
+
+\paragraph*{Notes} \
+
+Searches will be conducted on the field selected at the time.
+
+\paragraph*{Future Amendments} \
+
+The initial implementation of search may not be `live-updating' to decrease initial development time. \\
+A search on which user entered or uploaded the entry may be relevant. \\
+A search across multiple fields may be relevant
+

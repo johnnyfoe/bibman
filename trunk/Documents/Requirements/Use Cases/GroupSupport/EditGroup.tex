@@ -1,0 +1,38 @@
+\section*{Group Management - Edit Group Information} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User amend details (name and description only) stored about a user group \\ \hline
+Actors & The creator of the group. \\ \hline
+Pre-conditions & The group already exists and the current user created the group. \\ \hline
+Success Post-conditions & The group is modified in the database. \\ \hline
+Failure Post-conditions & The group is not modified in the database. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to edit a group by selecting it and choosing the edit option. \\ \hline
+2 & System shows edit group interface. \\ \hline
+3 & User edits the information for the group \\ \hline
+4 & User confirms the modification. \\ \hline
+5 & System confirms that the modification does not attempt to overwrite an existing group. \\ \hline
+6 & System modifies the group and confirms that the modification has been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+5.a. & Changes will overwrite a group. \\
+     & System raises that the data causes an error and goes back to 2, with information  \\
+  & displayed in fields. \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+The groups functionality may not be included until later stages of development. \\
+Groups will be unique based on their names, not case sensitive.

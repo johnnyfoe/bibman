@@ -1,0 +1,39 @@
+<Project DefaultTargets="Test" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+	<PropertyGroup>
+		<appname>Bibtex</appname>
+	</PropertyGroup>
+	
+	<Import Project="Source/Resources/MSBuildCommunityTasks/MSBuild.Community.Tasks.Targets"/>
+
+
+	<!-- Specify the inputs by type and file name -->
+	<ItemGroup>
+		<ProjectToBuild Include="Source/BibtexEntryManager/BibtexEntryManager/BibtexEntryManager.csproj" />
+		<ProjectTests Include="Source/BibtexEntryManager/BibtexEntryManager.Tests/BibtexEntryManager.Tests.csproj" />
+	</ItemGroup>
+
+	<Target Name="Clean">
+		<MSBuild Projects="Source/BibtexEntryManager/BibtexEntryManager.sln" Targets="Clean" StopOnFirstFailure="true" />
+	</Target>
+
+	<Target Name="Build" DependsOnTargets="Clean">
+		<MSBuild Projects="@(ProjectToBuild)" Properties="Configuration=Release" />
+		<MSBuild Projects="@(ProjectTests)" Properties="Configuration=Release" />
+	</Target>
+
+	<ItemGroup>
+		<Tests Include="Source\BibtexEntryManager\BibtexEntryManager.Tests\bin\Release\BibtexEntryManager.Tests.dll" />
+	</ItemGroup>
+
+	<Target Name="Test" DependsOnTargets="Build">
+		<MakeDir Directories="BuildArtifacts\NUnitResults"/>
+
+		<NUnit Toolpath="Source\Resources\NUnit\" Assemblies="Source\BibtexEntryManager\BibtexEntryManager.Tests\bin\Release\BibtexEntryManager.Tests.dll"  
+			   OutputXmlFile="BuildArtifacts\NUnitResults\output.xml" ContinueOnError="false">
+			<Output TaskParameter="ExitCode" ItemName="NUnitExitCode"/>
+		</NUnit>
+		<Error Text="Test error(s) occured" Condition=" '%(NUnitExitCode.Identity)' != '0'"/>
+	</Target>    
+
+
+</Project>

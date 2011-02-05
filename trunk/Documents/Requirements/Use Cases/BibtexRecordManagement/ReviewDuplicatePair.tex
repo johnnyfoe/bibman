@@ -1,0 +1,36 @@
+\section*{BibTeX Entry Management - Review Duplicate Pairs} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User wishes to review a pair of duplicate entries. \\ \hline
+Actors & All users with write permissions. \\ \hline
+Pre-conditions & The user has performed the Review Duplicates use case and has notified the system that they wish to review a pair of duplicates. \\ \hline
+Success Post-conditions & Two duplicate BibTeX entries are shown. \\ \hline
+Failure Post-conditions & No duplicates are shown. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & System displays a duplicate for the selected entry. \\ \hline
+2 & User chooses which of the duplicates to remove. \\ \hline
+3 & System confirms deletion of duplicate. \\ \hline
+4 & If there is another duplicate of the cite key, the system fetches it and goes back to 2. \\ \hline
+5 & If there is no other duplicate of the cite key, the system displays a message to let the user know. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+2.a. & System does not contain any duplicates. \\
+     & System displays message to user to say that there are no duplicates \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+A `duplicate' is defined as an entry with the same cite key as another. The set of all duplicates is the set of all entries with one cite key.
+

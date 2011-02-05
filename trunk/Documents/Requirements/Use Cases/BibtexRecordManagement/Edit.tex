@@ -1,0 +1,43 @@
+\section*{BibTeX Entry Management - Edit Entry} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User edits an existing BibTeX entry and saves changes to the database. \\ \hline
+Actors & All users with write permissions. \\ \hline
+Pre-conditions & Entry already exists in the database. \\ \hline
+Success Post-conditions & The entry is modified in the database. \\ \hline
+Failure Post-conditions & The entry is left unmodified in the database in precisely the state. \\
+ & it was in before the use case was initiated. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User selects the BibTeX entry to modify. \\ \hline
+2 & User amends the entry. \\ \hline
+3 & User confirms the modification. \\ \hline
+4 & System confirms that the information is valid \& that the cite key is unique. \\ \hline
+5 & System confirms that the modification has been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+4.a. & User has input invalid data. \\
+     & System raises errors in data and goes back to 2. \\ \hline
+4.b. & User has input a cite key that already exists. \\
+     & System raises that the cite key already exists and goes back to 2 so the user can make changes. \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+At any point between 2 and 3, the user may change the type of BibTeX entry. Any information they have entered shall be transferred to the new entry's fields.
+
+\paragraph*{Future Amendments} \
+
+Future versions of the program will include group and concurrency functionality -- if a user wishes to modify a `locked' entry, some form of timeout will be initiated in case the first user has forgotten to commit their changes and left the system.
+

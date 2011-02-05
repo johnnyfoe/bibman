@@ -1,0 +1,22 @@
+\section*{BibTeX Entry Management - Undo the Deletion of an Entry} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User has deleted a BibTeX entry and wants it to be reinstated. \\ \hline
+Actors & All users with write permissions. \\ \hline
+Pre-conditions & The entry was previously deleted. \\ \hline
+Success Post-conditions & The entry is no longer marked as deleted in the database. \\ \hline
+Failure Post-conditions & The entry is left unmodified in the database in precisely the state \\
+ & it was in before the use case was initiated. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User selects the BibTeX entry to delete from a list of deleted entries. \\ \hline
+2 & User presses `Undo delete' \\ \hline
+3 & System confirms that the modification has been completed \\ \hline
+\end{tabular}

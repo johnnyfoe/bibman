@@ -1,0 +1,56 @@
+\section*{BibTeX Entry Management - Import Batch}
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User imports BibTeX entries to the database by uploading a batch file. \\ \hline
+Actors & All users with write permissions. \\ \hline
+Pre-conditions & The file exists on the User's system. \\ \hline
+Success Post-conditions & All entries that do not create exact duplicates are added to the database. \\ \hline
+Failure Post-conditions & No entries are added to the database. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User notifies the system that they wish to upload a BibTeX batch file. \\ \hline
+2 & System displays the import file screen. \\ \hline
+3 & User selects the file for upload on their computer. \\ \hline
+4 & User uploads the file for import. \\ \hline
+5 & System parses the file. \\ \hline
+6 & System performs the `Add Entry' use case (Steps 6 \& 7) for all entries. \\ \hline
+7 & System confirms that the modifications have been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+3.a	& User has selected an unsupported file. \\
+	& System rejects the file, raising errors and goes back to 2. \\ \hline
+4.a	& The filesize is too large. (Maximum size TBA.) \\
+	& System rejects the file, raising errors and goes back to 2. \\ \hline
+5.a	& The file is in an invalid format. \\
+	& System rejects the file, raising errors and goes back to 2. \\ \hline
+5.a	& The file cannot be parsed. \\
+	& System rejects the file, raising errors and goes back to 2. \\ \hline
+6.a. & User has invalid data in the file. \\
+     & System raises errors in data, rejects the file and goes back to 2. \\ 
+     & Rationale: The action is intended to be atomic; if any resubmission \\
+	& has to happen this will avoid duplicates \\ \hline
+6.b. & Entry has an existing (exact) match in the database. \\
+     & System ignores the duplicate and moves onto the next entry. \\ 
+     & Rationale: Reduce the number of duplicates in the system. \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+Maximum filesize has yet to be agreed.
+This use case is intended to be atomic; if any resubmission has to happen this will avoid unnecessary duplicates.
+
+\paragraph*{Future Amendments} \
+
+Initially, the system will only be able to handle .bib files. This will most likely be expanded in a later iteration.
+

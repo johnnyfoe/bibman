@@ -1,0 +1,37 @@
+\section*{Group Management - Create Group} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User creates a user group \\ \hline
+Actors & All users with group creation permissions \\ \hline
+Pre-conditions & The group does not already exist. \\ \hline
+Success Post-conditions & The group is created in the database \\ \hline
+Failure Post-conditions & The group is not created in the database \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to create a group. \\ \hline
+2 & System shows create group interface \\ \hline
+3 & User enters information for the group \\ \hline
+4 & User confirms the addition\\ \hline
+5 & System confirms that the group does not already exist \\ \hline
+6 & System adds the group to the system and confirms that the addition has been completed\\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+5.a. & Group already exists. \\
+     & System raises errors in data and goes back to 2, with information displayed in fields.\\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+The groups functionality may not be included until later stages of development. \\
+Groups will be unique based on their names, not case sensitive.

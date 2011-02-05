@@ -1,0 +1,34 @@
+\section*{BibTeX Entry Management - Review Duplicate Entries} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User wishes to view duplicate entries. \\ \hline
+Actors & All users. \\ \hline
+Pre-conditions & None. \\ \hline
+Success Post-conditions & Duplicate BibTeX entries are shown. \\ \hline
+Failure Post-conditions & No duplicates are shown. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User selects `Review Duplicates' option. \\ \hline
+2 & System collects all entries which are duplicated in the database \\ \hline
+3 & System displays list of duplicated entries \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+2.a. & System does not contain any duplicates. \\
+     & System displays message to user to say that there are no duplicates \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+A `duplicate' is defined as an entry with the same cite key as another. The set of all duplicates is the set of all entries with one cite key.
+

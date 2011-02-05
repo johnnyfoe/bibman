@@ -1,0 +1,33 @@
+\section*{BibTeX Entry Management - Export All Entries}
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User exports all BibTeX entries in the database. \\ \hline
+Actors & All users (See  Future Amendments) \\ \hline
+Pre-conditions & There are entries in the database. \\ \hline
+Success Post-conditions & A file is downloaded by the user. \\ \hline
+Failure Post-conditions & No file is downloaded by the user. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User notifies the system that they wish to download a BibTeX file of all items in the database. \\ \hline
+2 & System displays a file export screen. \\ \hline
+3 & System generates the file from all BibTeX entry data. \\ \hline
+4 & User downloads the file. \\ \hline
+5 & User is redirected to the `home' view. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+No anticipated alternative flow.  Option for export will not be displayed if there are no current entries in the database.
+
+\paragraph*{Future Amendments} \
+
+Initially, the system will only be able to handle .bib files. This will most likely be expanded in a later iteration.
+

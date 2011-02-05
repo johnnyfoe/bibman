@@ -1,0 +1,34 @@
+\section*{BibTeX Entry Management - Add Clone of an Entry} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User makes an exact clone of an existing BibTeX entry. \\ \hline
+Actors & All users with write permissions \\ \hline
+Pre-conditions & The target for cloning must exist in the database. \\ \hline
+Success Post-conditions & The entry is copied into an `add' window to be modified before addition. \\ \hline
+Failure Post-conditions & No clone is added. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User selects the BibTeX entry to clone. \\ \hline
+2 & User presses `Add Clone'. \\ \hline
+3 & System displays an `Add Entry' dialogue box with the fields from the previous entry displayed. \\ \hline
+4 & User confirms that they have finished making modifications. \\ \hline
+5 & System confirms that the information added is valid. \\ \hline
+6 & System confirms that the modification has been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+5.a. & User has input invalid data. \\
+     & System raises errors in data and goes back to 3. \\ \hline
+5.b. & User has input a cite key that already exists. \\
+     & System raises that the cite key already exists and goes back to 3. \\ \hline
+\end{tabular}

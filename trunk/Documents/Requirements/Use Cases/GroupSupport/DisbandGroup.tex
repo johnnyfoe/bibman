@@ -1,0 +1,34 @@
+\section*{Group Management - Disband Group} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User deletes a user group. \\ \hline
+Actors & The creator of the group. \\ \hline
+Pre-conditions & The group already exists and the current user created the group. \\ \hline
+Success Post-conditions & The group is no longer displayed in the system. \\ \hline
+Failure Post-conditions & The group is still displayed in the system. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to disband a group by selecting it and choosing the disband option. \\ \hline
+2 & System shows disband group interface. \\ \hline
+3 & User confirms the removal. \\ \hline
+4 & System modifies the group and confirms that the modification has been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+5.a. & User does not want to disband the group. \\
+     & System goes back to before the use case, having made no modifications to the system.\\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+The groups functionality may not be included until later stages of development.

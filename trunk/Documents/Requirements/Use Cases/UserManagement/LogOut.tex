@@ -1,0 +1,30 @@
+\section*{User Management - Log Out} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User is finished using the system and wants to log out. \\ \hline
+Actors & All users. \\ \hline
+Pre-conditions & The user is logged in. \\ \hline
+Success Post-conditions & The user is logged out of the system. \\ \hline
+Failure Post-conditions & The user is logged out of the system. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to log out. \\ \hline
+2 & System logs the user out. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+If the user is not logged in, the log in page will be displayed.
+
+\paragraph*{Notes} \
+
+The user is logged out of the system regardless of failure or success of the use case to ensure that their account is not left logged in after they press `Log out'.
+

@@ -1,0 +1,25 @@
+\section*{Group Management - Request to Join Group} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User requests to join a user group \\ \hline
+Actors & All users with write permissions \\ \hline
+Pre-conditions & The user is not already in the group they wish to join and the group exists. \\ \hline
+Success Post-conditions & The user invokes a request to join the group. \\ \hline
+Failure Post-conditions & The user does not invoke a request to join the group. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to join a group. \\ \hline
+2 & If the group is private, the system adds the user to an approval list, otherwise go to 3. \\ \hline
+3 & If the group is public, the system adds the user to the group member list. \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+The groups functionality may not be included until later stages of development.

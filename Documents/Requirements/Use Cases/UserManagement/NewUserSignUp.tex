@@ -1,0 +1,37 @@
+\section*{User Management - New User Sign Up} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & New User registers with the system. \\ \hline
+Actors & Unregistered users. \\ \hline
+Pre-conditions & Email address has not been used before to sign up. \\ \hline
+Success Post-conditions & Confirmation email sent to provided email address. \\ \hline
+Failure Post-conditions & Confirmation email not sent to provided email address. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to sign up to the system. \\ \hline
+2 & User enters valid email address. \\ \hline
+3 & User enters given and family names. \\ \hline
+4 & User confirms their details are correct. \\ \hline
+5 & System confirms that the information is valid. \\ \hline
+6 & System sends confirmation code to the provided \\
+  & email address and notifies the user to check their email inbox. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+2.a. & User has input an invalid email address. \\
+     & System raises errors when the user moves  \\
+  & onto the next field and goes back to 2 when they re-enter their email address. \\ \hline
+5.b. & User has input an email address that is already in use. \\
+     & System raises that an account for that email address  \\
+  & already exists and goes back to 2 with fields pre-populated. \\ \hline
+\end{tabular}

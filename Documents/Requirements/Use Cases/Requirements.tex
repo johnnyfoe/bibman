@@ -1,0 +1,79 @@
+\documentclass{l3proj}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{program}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{a4wide}
+
+\begin{document}
+
+\section*{Problem Definition \& Purpose of Project}
+BibTeX is a piece of reference and citation management software widely used in conjunction with the LaTeX typesetting tool.  Each reference, or `entry', is stored in a well-defined file format with a set of fields specific to the entry's type. It becomes cumbersome to maintain a collection of entries, particularly when there is the possibility for duplication of entries and entries' identifiers.  This problem is further amplified when groups of people are working on a document and need to be able to maintain a shared library of references.\\
+The purpose of the project is to address this problem by providing a web browser-driven tool that allows multiple users to work on sets of shared BibTeX records.
+
+\section*{Functional Requirements}
+The tool should provide management of BibTeX records, specifically:
+\begin{itemize}
+\item Add entry
+\item Edit entry
+\item View entries
+\item Delete entry
+\item Undo the deletion of an entry
+\item Perform a simple search on entries
+\item Perform an advanced search on multiple fields of entries
+\item Import entries from a file uploaded by a user
+\item Export entries to a file for download by a user
+\item Users should be able to group entries to assist with the organisation of citations.
+\item Items should expire (deleted items should be removed entirely) after a configurable period
+\end{itemize}
+
+\section*{Non-functional Requirements}
+The tool should adhere to the following non-functional requirements:
+\begin{itemize}
+\item Interaction with the system should take place through a web-based interface
+\item Entries should be stored in a central database
+\item The system should allow multiple users to collaborate on a collection of BibTeX entries.
+\item The system should authenticate users and allow various levels of access to users with different privileges.
+\item The system should be usable by the target audience, users of the LaTeX typsetting tool.
+\item The system should be able to handle concurrent access by users, including 
+\end{itemize}
+
+\include{Prioritisation}
+
+% Bibtex Record Management Use cases
+\include{BibtexRecordManagement/Add}
+\include{BibtexRecordManagement/Edit}
+\include{BibtexRecordManagement/Delete}
+\include{BibtexRecordManagement/UndoDeletion}
+\include{BibtexRecordManagement/AddClone}
+\include{BibtexRecordManagement/ReviewDuplicates}
+\include{BibtexRecordManagement/ReviewDuplicatePair}
+\include{BibtexRecordManagement/ImportBatch}
+\include{BibtexRecordManagement/ExportCurrentQueryResults}
+\include{BibtexRecordManagement/ExportAllEntries}
+
+% System Tools Use Cases
+\include{SystemTools/Search}
+\include{SystemTools/Help}
+
+
+% Group Support Use Cases
+\include{GroupSupport/CreateGroup}
+\include{GroupSupport/EditGroup}
+\include{GroupSupport/DisbandGroup}
+\include{GroupSupport/RequestToJoinGroup}
+\include{GroupSupport/ReviewGroupMembership}
+\include{GroupSupport/ReviewJoinRequests}
+
+
+% User Management Use Cases
+\include{UserManagement/AlterUserPermissions}
+\include{UserManagement/NewUserSignUp}
+\include{UserManagement/LogIn}
+\include{UserManagement/LogOut}
+\include{UserManagement/ManageUsers}
+\include{UserManagement/NewUserSignUp}
+\include{UserManagement/PasswordReset}
+
+\end{document}

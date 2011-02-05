@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{342A7FE2-4860-4B34-8EB0-8B8EDBBC42A3}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BibtexEntryManager</RootNamespace>
+    <AssemblyName>BibtexEntryManager</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\Resources\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\NHibernate-2.1.2.GA-bin\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\NHibernate-2.1.2.GA-bin\Required_For_LazyLoading\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq, Version=1.0.0.4000, Culture=neutral, PublicKeyToken=444cf6a87fdab271, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\NHibernate.Linq-1.0.0.GA-bin\NHibernate.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="PowerCollections">
+      <HintPath>..\..\Resources\PowerCollections\PowerCollections.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\..\Resources\NHibernate\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EntryController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Query.cs" />
+    <Compile Include="Error\ErrorMessages.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Compare.cs" />
+    <Compile Include="Helpers\FieldLength.cs" />
+    <Compile Include="Helpers\Parser.cs" />
+    <Compile Include="Helpers\UnknownEntryTypeException.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\EntryTypes\Journal.cs" />
+    <Compile Include="Models\Enums\Entry.cs" />
+    <Compile Include="Models\Enums\Field.cs" />
+    <Compile Include="Models\Collections\JournalCollection.cs" />
+    <Compile Include="Models\EntryTypes\Publication.cs" />
+    <Compile Include="Models\Enums\PublicationEvent.cs" />
+    <Compile Include="Helpers\PublicationFactory.cs" />
+    <Compile Include="Helpers\ObjectBuilder.cs" />
+    <Compile Include="Models\Exceptions\BibtexExceptions.cs" />
+    <Compile Include="Models\Grouping\PublicationGroup.cs" />
+    <Compile Include="Models\Mapping\ArticleMapping.cs" />
+    <Compile Include="Models\Mapping\BookMapping.cs" />
+    <Compile Include="Models\Mapping\BookLetMapping.cs" />
+    <Compile Include="Models\Mapping\ConferenceMapping.cs" />
+    <Compile Include="Models\Mapping\PublicationGroupMapping.cs" />
+    <Compile Include="Models\Mapping\UnpublishedMapping.cs" />
+    <Compile Include="Models\Mapping\TechReportMapping.cs" />
+    <Compile Include="Models\Mapping\ProceedingsMapping.cs" />
+    <Compile Include="Models\Mapping\PhdThesisMapping.cs" />
+    <Compile Include="Models\Mapping\MiscMapping.cs" />
+    <Compile Include="Models\Mapping\MastersThesisMapping.cs" />
+    <Compile Include="Models\Mapping\ManualMapping.cs" />
+    <Compile Include="Models\Mapping\InProceedingsMapping.cs" />
+    <Compile Include="Models\Mapping\InCollectionMapping.cs" />
+    <Compile Include="Models\Mapping\InBookMapping.cs" />
+    <Compile Include="Models\BibPersistenceModel.cs" />
+    <Compile Include="Data\Persistence.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchResults.svc.cs">
+      <DependentUpon>SearchResults.svc</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\AjaxManagementScript.js" />
+    <Content Include="Scripts\QuickCreateRedirect.js" />
+    <Content Include="Scripts\sorttable.js" />
+    <Content Include="SearchResults.svc" />
+    <Content Include="Views\Entry\CreatePublication.aspx" />
+    <Content Include="Views\Entry\Import.aspx" />
+    <Content Include="Views\Entry\Search.aspx" />
+    <Content Include="Views\Entry\Index.aspx" />
+    <Content Include="Views\Entry\UploadFile.aspx" />
+    <Content Include="Views\Shared\QuickCreateControl.ascx" />
+    <Content Include="Views\Shared\SearchControl.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53704</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

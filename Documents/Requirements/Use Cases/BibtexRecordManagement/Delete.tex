@@ -1,0 +1,37 @@
+\section*{BibTeX Entry Management - Delete Entry} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User deletes an existing BibTeX entry, removing it from the database \\ \hline
+Actors & All users (See Future Amendments) \\ \hline
+Pre-conditions & None. \\ \hline
+Success Post-conditions & The entry is deleted from the database \\ \hline
+Failure Post-conditions & The entry is left unmodified in the database in precisely the state \\
+ & it was in before the use case was initiated\\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User selects the BibTeX entry to delete \\ \hline
+2 & User presses `delete' \\ \hline
+3 & System displays message to confirm the user's intention to delete the entry \\ \hline
+4 & System confirms that the modification has been completed \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+3.a. & User does not want to continue. \\
+     & System does not carry out the deletion and goes back to the state before the \\
+ & use case was initiated. \\ \hline
+\end{tabular}
+
+\paragraph*{Future Amendments} \
+
+In a later iteration, permissions will be added so that some users have access to modify some entries. At this time, the use case will change.
+

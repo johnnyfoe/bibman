@@ -1,0 +1,33 @@
+\section*{BibTeX Entry Management - Export Current Query Results}
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User exports the BibTeX entries they can see \\ \hline
+Actors & All users (See  Future Amendments) \\ \hline
+Pre-conditions & The user has some results to export. \\ \hline
+Success Post-conditions & A file is downloaded by the user. \\ \hline
+Failure Post-conditions & No file is downloaded by the user. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User notifies the system that they wish to download a BibTeX file of the current results. \\ \hline
+2 & System displays a file export screen. \\ \hline
+3 & System generates the file from the current query data \\ \hline
+4 & User downloads the file. \\ \hline
+5 & User is redirected to the previous (results) page. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+No anticipated alternative flow.  Option for export will not be displayed if there are no current query results.
+
+\paragraph*{Future Amendments} \
+
+Initially, the system will only be able to handle .bib files. This will most likely be expanded in a later iteration.
+

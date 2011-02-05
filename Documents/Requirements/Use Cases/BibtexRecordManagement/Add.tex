@@ -1,0 +1,40 @@
+\section*{BibTeX Entry Management - Add Entry} % the name of the use case
+
+\paragraph*{Outline} \
+
+\begin{tabular}{ | l | l | }
+\hline
+Description & User adds a BibTeX entry to the database. \\ \hline
+Actors & All users with write permissions. \\ \hline
+Pre-conditions & None. \\ \hline
+Success Post-conditions & The entry is added to the database. \\ \hline
+Failure Post-conditions & The entry is not added to the database. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Main flow} \
+
+\begin{tabular}{ | l | l | } \hline
+1 & User indicates wish to add BibTeX entry. \\ \hline
+2 & User Chooses type of BibTeX entry. \\ \hline
+3 & System shows relevant fields for current type of entry. \\ \hline
+4 & User enters required and optional information for the entry. \\ \hline
+5 & User confirms the addition. \\ \hline
+6 & System confirms that the information is valid. \\ \hline
+7 & System adds the entry to the system and confirms that the addition has been completed. \\ \hline
+\end{tabular}
+
+
+\paragraph*{Alternative Flow} \
+
+\begin{tabular}{ | l | l | } \hline
+6.a. & User has input invalid data. \\
+     & System raises errors in data and goes back to 4. \\ \hline
+6.b. & User has input a cite key that already exists. \\
+     & System raises that the cite key already exists and goes back to 4. \\ \hline
+\end{tabular}
+
+\paragraph*{Notes} \
+
+At any point between 3 and 5, the user may change the type of BibTeX entry. Any information they have entered shall be transferred to the new entry's fields.
+

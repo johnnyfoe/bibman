@@ -26,14 +26,14 @@ namespace BibtexEntryManager
         {
             AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
-            DataPersistance.Prepare(); // sets up NHibernate mappings and database session.
+            DataPersistence.Prepare(); // sets up NHibernate mappings and database session.
             //InsertDefaultData();
         }
 
         private static void InsertDefaultData()
         {
             // Adds some default instances to each table.
-            DataPersistance.GetSession().Save(ObjectBuilder.BuildDefaultPublication());
+            DataPersistence.GetSession().Save(ObjectBuilder.BuildDefaultPublication());
 
         }
     }

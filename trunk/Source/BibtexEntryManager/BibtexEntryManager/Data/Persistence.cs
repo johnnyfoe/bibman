@@ -2,6 +2,7 @@
 using System.Linq;
 using BibtexEntryManager.Models;
 using BibtexEntryManager.Models.EntryTypes;
+using BibtexEntryManager.Models.Mapping;
 using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
@@ -9,23 +10,22 @@ using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Linq;
+using NHibernate.Tool.hbm2ddl;
 
 namespace BibtexEntryManager.Data
 {
-    public static class DataPersistance
+    public static class DataPersistence
     {
         private static Configuration _config;
 
         public const string ConnString =
             "Data Source=(local);Initial Catalog=Bibtex;Integrated Security=True;Pooling=False;";
 
-        private static SessionSource SessionSource { get; set; }
-
-        private static ISessionFactory TheSessionFactory { get; set; }
+        private static ISessionFactory SessionFactory { get; set; }
 
         public static ISession GetSession()
         {
-            return SessionSource.CreateSession();
+            return SessionFactory.OpenSession();
         }
 
         public static IList<Publication> GetAllPublications()
@@ -73,32 +73,36 @@ namespace BibtexEntryManager.Data
 
         public static void Prepare()
         {
-            TheSessionFactory = CreateSessionFactory();
-            SetupConfig();
-            var x = _config.Properties;
-            SessionSource = new SessionSource(x, new BibPersistenceModel());
+            _config = GetConfig().BuildConfiguration();
+            SessionFactory = _config.BuildSessionFactory();
         }
 
-        private static void SetupConfig()
+        public static FluentConfiguration GetConfig()
         {
-            if (_config == null)
-                _config = Fluently.Configure().Database(
-                        MsSqlConfiguration.MsSql2008.ConnectionString(
-                            c => c.Is(ConnString)))
-                            .BuildConfiguration();
-        }
-
-        private static ISessionFactory CreateSessionFactory()
-        {
-            var d = MsSqlConfiguration.MsSql2008.ConnectionString(c => c.Is(ConnString));
-
-            var p = new AutoPersistenceModel();
-            p.FindMapping<Publication>();
-
             return Fluently.Configure()
-               .Database(d)
-               .Mappings(m => m.AutoMappings.Add(p))
-               .BuildSessionFactory();
+                .Database(MsSqlConfiguration.MsSql2008
+                              .ConnectionString(c => c.Is(ConnString)).ShowSql)
+                .Mappings(m => m.AutoMappings.Add(CreatePublicationAutomappings()));
+            //.ExposeConfiguration(BuildSchema);
         }
+        private static void BuildSchema(Configuration config)
+        {
+            // this NHibernate tool takes a configuration (with mapping info in)
+            // and exports a database schema from it
+            new SchemaExport(config).Create(false, true);
+        }
+
+
+        static AutoPersistenceModel CreatePublicationAutomappings()
+        {
+            // This is the actual automapping - use AutoMap to start automapping,
+            // then pick one of the static methods to specify what to map (in this case
+            // all the classes in the assembly that contains Employee), and then either
+            // use the Setup and Where methods to restrict that behaviour, or (preferably)
+            // supply a configuration instance of your definition to control the automapper.
+            return AutoMap.AssemblyOf<Publication>(new BibtexAutomappingConfiguration())
+                .Conventions.Add<CascadeConvention>();
+        }
+
     }
 }

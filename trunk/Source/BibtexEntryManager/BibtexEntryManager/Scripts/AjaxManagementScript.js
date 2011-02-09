@@ -1,6 +1,6 @@
 ﻿// To be included with /Entry/Search.aspx
 function keysearch() {
-    var service = new SearchResults();
+    var service = new BibtexEntryManager.SearchResults();
     service.DoSearch(document.getElementById("searchString").value, onSuccess, null, null);
 }
 

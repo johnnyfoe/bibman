@@ -24,7 +24,7 @@ namespace BibtexEntryManager.Tests.Helpers
                 publicationCollection.Add(PublicationFactory.MakePublication(v));
             }
 
-            var defaultBookInstance = ObjectBuilder.BuildDefault<Book>();
+            var defaultBookInstance = ObjectBuilder.BuildDefaultPublication();
             defaultBookInstance.CiteKey = "JS2010";
             Assert.IsTrue(publicationCollection[0].Equals(defaultBookInstance));
         }

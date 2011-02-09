@@ -17,7 +17,10 @@
                 Entry Type
             </td>
             <td>
-                Author
+                Author 1
+            </td>
+            <td>
+                Author 2
             </td>
             <td>
                 Title

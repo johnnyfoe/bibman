@@ -10,7 +10,6 @@ using BibtexEntryManager.Models.Enums;
 //using BibtexEntryManager.Models.Grouping;
 using BibtexEntryManager.Models.Exceptions;
 using NHibernate.Linq;
-using Wintellect.PowerCollections;
 
 namespace BibtexEntryManager.Models.EntryTypes
 {
@@ -23,27 +22,28 @@ namespace BibtexEntryManager.Models.EntryTypes
 
     /* Publication class represents a publication or a BIBTEX entry */
     public class Publication
-    {
+    {   
+        #region Field Declaration
+
         public virtual int Id { get; set; }
+        
         [Required(ErrorMessage = ErrorMessages.CiteKeyRequired)]
         [DisplayName("Cite Key")]
         public virtual string CiteKey { get; set; }
         public virtual string Owner { get; set; }
-        //public virtual PublicationGroup PublicationGroup { get; set; }
-        public virtual Entry EntryType { get; set; }
-        //optional
-        public virtual string Abstract { get; set; }
-        // times of modification/creation/
 
-        // possible core fields
+        [DisplayName("Entry Type")]
+        public virtual Entry EntryType { get; set; }
+        public virtual string Abstract { get; set; }
+
         public virtual string Address { get; set; }
         public virtual string Annote { get; set; }
-        public virtual List<string> Authors { get; set; }
+        public virtual string Authors { get; set; }
         public virtual string Booktitle { get; set; }
         public virtual string Chapter { get; set; }
         public virtual string Crossref { get; set; }
         public virtual string Edition { get; set; }
-        public virtual List<string> Editors { get; set; }
+        public virtual string Editors { get; set; }
         public virtual string Howpublished { get; set; }
         public virtual string Institution { get; set; }
         public virtual string Journal { get; set; }
@@ -61,284 +61,15 @@ namespace BibtexEntryManager.Models.EntryTypes
         public virtual string Volume { get; set; }
         public virtual string Year { get; set; }
 
-        public Dictionary<String, String> UnknownFields { get; private set; }
+        //public virtual PublicationGroup PublicationGroup { get; set; }
+        // times of modification/creation/
+        //public Dictionary<String, String> UnknownFields { get; private set; }
 
-        #region Entry Field Usage
-        private static Dictionary<Entry, Dictionary<Field, bool>> EntryFieldUsage
-            = new Dictionary<Entry, Dictionary<Field, bool>>
-                  {
-                      {
-                          Entry.Article, new Dictionary<Field, bool>
-                                             {
-                                                 {Field.Author, true},
-                                                 {Field.Title, true},
-                                                 {Field.Journal, true},
-                                                 {Field.Year, true},
-                                                 {Field.TheKey, false},
-                                                 {Field.Volume, false},
-                                                 {Field.Number, false},
-                                                 {Field.Pages, false},
-                                                 {Field.Month, false},
-                                                 {Field.Note, false},
-                                                 {Field.Annote, false}
-                                             }
-                          },
-                      {
-                          Entry.Book, new Dictionary<Field, bool>
-                                          {
-                                              {Field.Author, true},
-                                              {Field.Title, true},
-                                              {Field.Publisher, true},
-                                              {Field.Key, false},
-                                              {Field.Volume, false},
-                                              {Field.Number, false},
-                                              {Field.Series, false},
-                                              {Field.Address, false},
-                                              {Field.Edition, false},
-                                              {Field.Month, false},
-                                              {Field.Note, false},
-                                              {Field.Annote, false}
-
-                                          }
-                          },
-                      {
-                          Entry.Booklet, new Dictionary<Field, bool>
-                                             {
-                                                 {Field.Title, true},
-                                                 {Field.Key, false},
-                                                 {Field.Author, false},
-                                                 {Field.Howpublished, false},
-                                                 {Field.Address, false},
-                                                 {Field.Month, false},
-                                                 {Field.Year, false},
-                                                 {Field.Note, false},
-                                                 {Field.Annote, false}
-                                             }
-                          },
-                      {
-                          Entry.Conference, new Dictionary<Field, bool>
-                                                {
-                                                    {Field.Author, true},
-                                                    {Field.Title, true},
-                                                    {Field.Crossref, false},
-                                                    {Field.Key, false},
-                                                    {Field.Booktitle, false},
-                                                    {Field.Pages, false},
-                                                    {Field.Year, false},
-                                                    {Field.Editor, false},
-                                                    {Field.Volume, false},
-                                                    {Field.Number, false},
-                                                    {Field.Series, false},
-                                                    {Field.Address, false},
-                                                    {Field.Month, false},
-                                                    {Field.Organization, false},
-                                                    {Field.Publisher, false},
-                                                    {Field.Note, false},
-                                                    {Field.Annote, false}
-                                                }
-                          },
-                      {
-                          Entry.Inbook, new Dictionary<Field, bool>
-                                            {
-                                                {Field.Author, true},
-                                                {Field.Title, true},
-                                                {Field.Chapter, true},
-                                                {Field.Publisher, true},
-                                                {Field.Year, true},
-                                                {Field.Key, false},
-                                                {Field.Volume, false},
-                                                {Field.Number, false},
-                                                {Field.Series, false},
-                                                {Field.Type, false},
-                                                {Field.Address, false},
-                                                {Field.Edition, false},
-                                                {Field.Month, false},
-                                                {Field.Pages, false},
-                                                {Field.Note, false},
-                                                {Field.Annote, false}
-                                            }
-                          },
-                      {
-                          Entry.Incollection, new Dictionary<Field, bool>
-                                                  {
-                                                      {Field.Author, true},
-                                                      {Field.Title, true},
-                                                      {Field.Chapter, true},
-                                                      {Field.Publisher, true},
-                                                      {Field.Year, true},
-                                                      {Field.Crossref, false},
-                                                      {Field.Key, false},
-                                                      {Field.Pages, false},
-                                                      {Field.Publisher, false},
-                                                      {Field.Year, false},
-                                                      {Field.Editor, false},
-                                                      {Field.Volume, false},
-                                                      {Field.Number, false},
-                                                      {Field.Series, false},
-                                                      {Field.Type, false},
-                                                      {Field.Chapter, false},
-                                                      {Field.Address, false},
-                                                      {Field.Edition, false},
-                                                      {Field.Month, false},
-                                                      {Field.Note, false},
-                                                      {Field.Annote, false}
-                                                  }
-                          },
-                      {
-                          Entry.Inproceedings, new Dictionary<Field, bool>
-                                                   {
-                                                       {Field.Author, true},
-                                                       {Field.Title, true},
-                                                       {Field.Chapter, true},
-                                                       {Field.Publisher, true},
-                                                       {Field.Year, true},
-                                                       {Field.Crossref, false},
-                                                       {Field.Key, false},
-                                                       {Field.Booktitle, false},
-                                                       {Field.Pages, false},
-                                                       {Field.Year, false},
-                                                       {Field.Editor, false},
-                                                       {Field.Volume, false},
-                                                       {Field.Number, false},
-                                                       {Field.Series, false},
-                                                       {Field.Address, false},
-                                                       {Field.Month, false},
-                                                       {Field.Organization, false},
-                                                       {Field.Publisher, false},
-                                                       {Field.Note, false},
-                                                       {Field.Annote, false}
-                                                   }
-                          },
-                      {
-                          Entry.Manual, new Dictionary<Field, bool>
-                                            {
-                                                {Field.Author, true},
-                                                {Field.Title, true},
-                                                {Field.Chapter, true},
-                                                {Field.Publisher, true},
-                                                {Field.Year, true},
-                                                {Field.Key, false},
-                                                {Field.Author, false},
-                                                {Field.Organization, false},
-                                                {Field.Address, false},
-                                                {Field.Edition, false},
-                                                {Field.Month, false},
-                                                {Field.Year, false},
-                                                {Field.Note, false},
-                                                {Field.Annote, false}
-                                            }
-                          },
-                      {
-                          Entry.Mastersthesis, new Dictionary<Field, bool>
-                                                   {
-                                                       {Field.Author, true},
-                                                       {Field.Title, true},
-                                                       {Field.Chapter, true},
-                                                       {Field.Publisher, true},
-                                                       {Field.Year, true},
-                                                       {Field.Key, false},
-                                                       {Field.Type, false},
-                                                       {Field.Address, false},
-                                                       {Field.Month, false},
-                                                       {Field.Note, false},
-                                                       {Field.Annote, false}
-                                                   }
-                          },
-                      {
-                          Entry.Misc, new Dictionary<Field, bool>
-                                          {
-                                              {Field.Author, true},
-                                              {Field.Title, true},
-                                              {Field.Chapter, true},
-                                              {Field.Publisher, true},
-                                              {Field.Year, true},
-                                              {Field.Key, false},
-                                              {Field.Author, false},
-                                              {Field.Title, false},
-                                              {Field.Howpublished, false},
-                                              {Field.Month, false},
-                                              {Field.Year, false},
-                                              {Field.Note, false},
-                                              {Field.Annote, false}
-                                          }
-                          },
-                      {
-                          Entry.Phdthesis, new Dictionary<Field, bool>
-                                               {
-                                                   {Field.Author, true},
-                                                   {Field.Title, true},
-                                                   {Field.Chapter, true},
-                                                   {Field.Publisher, true},
-                                                   {Field.Year, true},
-                                                   {Field.TheKey, false},
-                                                   {Field.Type, false},
-                                                   {Field.Address, false},
-                                                   {Field.Month, false},
-                                                   {Field.Note, false},
-                                                   {Field.Annote, false}
-                                               }
-                          },
-                      {
-                          Entry.Proceedings, new Dictionary<Field, bool>
-                                                 {
-                                                     {Field.Author, true},
-                                                     {Field.Title, true},
-                                                     {Field.Chapter, true},
-                                                     {Field.Publisher, true},
-                                                     {Field.Year, true},
-                                                     {Field.TheKey, false},
-                                                     {Field.Booktitle, false},
-                                                     {Field.Editor, false},
-                                                     {Field.Volume, false},
-                                                     {Field.Number, false},
-                                                     {Field.Series, false},
-                                                     {Field.Address, false},
-                                                     {Field.Month, false},
-                                                     {Field.Organization, false},
-                                                     {Field.Publisher, false},
-                                                     {Field.Note, false},
-                                                     {Field.Annote, false}
-                                                 }
-                          },
-                      {
-                          Entry.Techreport, new Dictionary<Field, bool>
-                                                {
-                                                    {Field.Author, true},
-                                                    {Field.Title, true},
-                                                    {Field.Chapter, true},
-                                                    {Field.Publisher, true},
-                                                    {Field.Year, true},
-                                                    {Field.Key, false},
-                                                    {Field.Type, false},
-                                                    {Field.Number, false},
-                                                    {Field.Address, false},
-                                                    {Field.Month, false},
-                                                    {Field.Note, false},
-                                                    {Field.Annote, false}
-                                                }
-                          },
-                      {
-                          Entry.Unpublished, new Dictionary<Field, bool>
-                                                 {
-                                                     {Field.Author, true},
-                                                     {Field.Title, true},
-                                                     {Field.Chapter, true},
-                                                     {Field.Publisher, true},
-                                                     {Field.Year, true},
-                                                     {Field.TheKey, false},
-                                                     {Field.Month, false},
-                                                     {Field.Year, false},
-                                                     {Field.Annote, false}
-                                                 }
-                          }
-                  };
         #endregion
 
         public Publication()
         {
-            Authors = new List<string>();
-            Editors = new List<string>();
-            UnknownFields = new Dictionary<String, String>();
+            //UnknownFields = new Dictionary<String, String>();
         }
 
         /// <summary>
@@ -347,7 +78,16 @@ namespace BibtexEntryManager.Models.EntryTypes
         /// <returns></returns>
         public virtual string ToHtmlTableRowNoLinks()
         {
-            return "<tr><td>" + CiteKey + "</td><td>" + EntryType + "</td><td>" + Authors[0] + "</td><td>" + Authors[1] +
+            string a1 = "";
+            string a2 = "";
+
+            // Separate authors/editors into fields a1 and a2
+            if (!String.IsNullOrEmpty(Authors))
+                SeparateAuthors(Authors, out a1, out a2);
+            else if (!String.IsNullOrEmpty(Editors))
+                SeparateAuthors(Editors, out a1, out a2);
+
+            return "<tr><td>" + CiteKey + "</td><td>" + EntryType + "</td><td>" + a1 + "</td><td>" + a2 +
                    "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
         }
 
@@ -357,165 +97,170 @@ namespace BibtexEntryManager.Models.EntryTypes
         /// <returns></returns>
         public virtual string ToHtmlTableRowWithLinks()
         {
-            return "<tr><td><a href=/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>TechReport</td><td>" + Authors[0] + "</td><td>" + Authors[1] + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
-        }
+            string a1 = "";
+            string a2 = "";
 
-        /// <summary>
-        /// Returns a html table as a string representing the Publication. Should include ALL details
-        /// </summary>
-        /// <returns></returns>
-        public virtual string ToHtmlTable()
-        {// todo - might want back in.
-            return "";
+            // Separate authors/editors into fields a1 and a2
+            if (!String.IsNullOrEmpty(Authors))
+                SeparateAuthors(Authors, out a1, out a2);
+            else if (!String.IsNullOrEmpty(Editors))
+                SeparateAuthors(Editors, out a1, out a2);
+
+            return "<tr><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
+                   "</td><td>" + a1 + "</td><td>" + a2 + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
         }
 
         public virtual string ToBibFormat()
         {
-            Dictionary<Field, bool> dict = EntryFieldUsage[EntryType];
-            string newLineIndent = "\r\n    ";
+            Dictionary<Field, bool> dict = PublicationFactory.EntryFieldUsage[EntryType];
+            const string newLineIndent = "\r\n    ";
 
             string retVal = "@" + EntryType + "{" + CiteKey + "," + newLineIndent;
-            if (dict[Field.Author])
+            bool auth;
+            if (dict.TryGetValue(Field.Author, out auth))
             {
-                retVal += "Author = {" + BibFormatAuthorsOrEditors(Authors) + "}," + newLineIndent;
+                //if (auth)
+                retVal += "Author = {" + Authors + "}," + newLineIndent;
             }
-            if (dict[Field.Address])
+            bool ddress;
+            if (dict.TryGetValue(Field.Address, out ddress))
             {
+                //if (ddress)
                 retVal += "Address = {" + Address + "}," + newLineIndent;
             }
-            if (dict[Field.Annote])
+            bool nnote;
+            if (dict.TryGetValue(Field.Annote, out nnote))
             {
+                //if (nnote)
                 retVal += "Annote = {" + Annote + "}," + newLineIndent;
             }
-            if (dict[Field.Booktitle])
+            bool ooktitle;
+            if (dict.TryGetValue(Field.Booktitle, out ooktitle))
             {
+                //if (ooktitle)
                 retVal += "Booktitle = {" + Booktitle + "}," + newLineIndent;
             }
-            if (dict[Field.Chapter])
+            bool hapter;
+            if (dict.TryGetValue(Field.Chapter, out hapter))
             {
+                //if (hapter)
                 retVal += "Chapter = {" + Chapter + "}," + newLineIndent;
             }
-            if (dict[Field.Crossref])
+            bool rossref;
+            if (dict.TryGetValue(Field.Crossref, out rossref))
             {
+                //if (rossref)
                 retVal += "Crossref = {" + Crossref + "}," + newLineIndent;
             }
-            if (dict[Field.Edition])
+            bool dition;
+            if (dict.TryGetValue(Field.Edition, out dition))
             {
+                //if (dition)
                 retVal += "Edition = {" + Edition + "}," + newLineIndent;
             }
-            if (dict[Field.Editor])
+            bool ditor;
+            if (dict.TryGetValue(Field.Editor, out ditor))
             {
-                retVal += "Editor = {" + BibFormatAuthorsOrEditors(Editors) + "}," + newLineIndent;
+                //if (ditor)
+                retVal += "Editor = {" + Editors + "}," + newLineIndent;
             }
-            if (dict[Field.Howpublished])
+            bool owpublished;
+            if (dict.TryGetValue(Field.Howpublished, out owpublished))
             {
+                //if (owpublished)
                 retVal += "Howpublished = {" + Howpublished + "}," + newLineIndent;
             }
-            if (dict[Field.Institution])
+            bool nstitution;
+            if (dict.TryGetValue(Field.Institution, out nstitution))
             {
+                //if (nstitution)
                 retVal += "Institution = {" + Institution + "}," + newLineIndent;
             }
-            if (dict[Field.TheKey])
+            bool heKey;
+            if (dict.TryGetValue(Field.TheKey, out heKey))
             {
+                //if (heKey)
                 retVal += "Key = {" + TheKey + "}," + newLineIndent;
             }
-            if (dict[Field.Month])
+            bool onth;
+            if (dict.TryGetValue(Field.Month, out onth))
             {
+                //if (onth)
                 retVal += "Month = {" + Month + "}," + newLineIndent;
             }
-            if (dict[Field.Note])
+            bool ote;
+            if (dict.TryGetValue(Field.Note, out ote))
             {
+                //if (ote)
                 retVal += "Note = {" + Note + "}," + newLineIndent;
             }
-            if (dict[Field.Number])
+            bool umber;
+            if (dict.TryGetValue(Field.Number, out umber))
             {
+                //if (umber)
                 retVal += "Number = {" + Number + "}," + newLineIndent;
             }
-            if (dict[Field.Organization])
+            bool rganization;
+            if (dict.TryGetValue(Field.Organization, out rganization))
             {
+                //if (rganization)
                 retVal += "Organization = {" + Organization + "}," + newLineIndent;
             }
-            if (dict[Field.Pages])
+            bool ages;
+            if (dict.TryGetValue(Field.Pages, out ages))
             {
+                //if (ages)
                 retVal += "Pages = {" + Pages + "}," + newLineIndent;
             }
-            if (dict[Field.Publisher])
+            bool ublisher;
+            if (dict.TryGetValue(Field.Publisher, out ublisher))
             {
+                //if (ublisher)
                 retVal += "Publisher = {" + Publisher + "}," + newLineIndent;
             }
-            if (dict[Field.School])
+            bool chool;
+            if (dict.TryGetValue(Field.School, out chool))
             {
+                //if (chool)
                 retVal += "School = {" + School + "}," + newLineIndent;
             }
-            if (dict[Field.Series])
+            bool eries;
+            if (dict.TryGetValue(Field.Series, out eries))
             {
+                //if (eries)
                 retVal += "Series = {" + Series + "}," + newLineIndent;
             }
-            if (dict[Field.Title])
+            bool itle;
+            if (dict.TryGetValue(Field.Title, out itle))
             {
+                //if (itle)
                 retVal += "Title = {" + Title + "}," + newLineIndent;
             }
-            if (dict[Field.Type])
+            bool ype;
+            if (dict.TryGetValue(Field.Type, out ype))
             {
+                //if (ype)
                 retVal += "Type = {" + Type + "}," + newLineIndent;
             }
-            if (dict[Field.Volume])
+            bool olume;
+            if (dict.TryGetValue(Field.Volume, out olume))
             {
+                //if (olume)
                 retVal += "Volume = {" + Volume + "}," + newLineIndent;
             }
-            if (dict[Field.Year])
+            bool ear;
+            if (dict.TryGetValue(Field.Year, out ear))
             {
-                retVal += "Year = {" + Year + "}," + newLineIndent;
+                //if (ear)
+                retVal += "Year = {" + Year + "}" + "\r\n";
             }
+            retVal += "}\r\n\r\n";
 
 
             return retVal;
         }
 
-        public static string BibFormatAuthorsOrEditors(List<string> set)
-        {
-            string s = set[0];
-            int c = 1;
-            while (c < set.Count)
-            {
-                s += " and " + set[c];
-                c++;
-            }
-            return s;
-        }
-
-        public static string HumanFormatAuthorsOrEditors(List<string> set)
-        {
-            if (set.Count == 0)
-                return "";
-
-            string s = set[0];
-            int c = 1;
-            int setCount = set.Count;
-            if (setCount == 1)
-                return s;
-            // else
-
-            while (c < setCount)
-            {
-                if (c != (setCount - 2))
-                {
-                    s += ", " + set[c];
-                }
-                else
-                {
-                    s += " and " + set[c];
-                }
-                c++;
-            }
-            return s;
-        }
-
-
-        /**Return true if and only if the id of that publication is same as the id of this publication
-	     * @param that Publication object
-	     * @return boolean*/
-        public new bool Equals(Object that)
+        public virtual new bool Equals(Object that)
         {
             if (that == null)
                 return false;
@@ -525,6 +270,8 @@ namespace BibtexEntryManager.Models.EntryTypes
             Publication t = (Publication)that;
 
             return (CiteKey == t.CiteKey &&
+                    Abstract == t.Abstract &&
+                    Owner == t.Owner &&
                     EntryType == t.EntryType &&
                     Address == t.Address &&
                     Annote == t.Annote &&
@@ -552,25 +299,24 @@ namespace BibtexEntryManager.Models.EntryTypes
                     Year == t.Year);
         }
 
-
         #region Database Interaction
 
-        public bool ExistsInDatabase()
+        public virtual bool ExistsInDatabase()
         {
-            return (from a in (DataPersistance.GetSession()).Linq<Publication>()
+            return (from a in (DataPersistence.GetSession()).Linq<Publication>()
                     where a.CiteKey.Equals(CiteKey)
                     select a).Count() != 0;
         }
 
-        public void UpdateInDatabase()
+        public virtual void UpdateInDatabase()
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
 
-            DataPersistance.GetSession().Update(this);
+            DataPersistence.GetSession().Update(this);
         }
 
-        public void SaveOrUpdateInDatabase()
+        public virtual void SaveOrUpdateInDatabase()
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
@@ -580,21 +326,22 @@ namespace BibtexEntryManager.Models.EntryTypes
             SaveToDatabase();
         }
 
-        public void SaveToDatabase()
+        public virtual void SaveToDatabase()
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
-
-            DataPersistance.GetSession().Save(this);
+            DataPersistence.GetSession().Persist(this);
         }
+
         #endregion
 
         #region Validity Checks
-        public bool IsValidEntry()
+
+        public virtual bool IsValidEntry()
         {
             if (String.IsNullOrEmpty(CiteKey))
                 return false;
-
+            
             if (EntryType == Entry.Article)
             {
                 return IsValidArticle();
@@ -655,7 +402,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidArticle()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -676,7 +423,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidBook()
         {
-            if (Authors.Count == 0 || Editors.Count == 0)
+            if (String.IsNullOrEmpty(Authors) && String.IsNullOrEmpty(Editors))
             {
                 return false;
             }
@@ -702,7 +449,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidConference()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -715,7 +462,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidInbook()
         {
-            if (Authors.Count == 0 || Editors.Count == 0)
+            if (String.IsNullOrEmpty(Authors) && String.IsNullOrEmpty(Editors))
             {
                 return false;
             }
@@ -736,7 +483,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidIncollection()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -753,7 +500,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidInproceedings()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -771,7 +518,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidMastersthesis()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -792,15 +539,12 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidMisc()
         {
-            return (!String.IsNullOrEmpty(TheKey) || !(Authors.Count == 0) ||
-                    !String.IsNullOrEmpty(Title) || !String.IsNullOrEmpty(Howpublished) ||
-                    !String.IsNullOrEmpty(Month) || !String.IsNullOrEmpty(Year) ||
-                    !String.IsNullOrEmpty(Note) || !String.IsNullOrEmpty(Annote));
+            return true; // if the item exists, it has at least one non-null/empty field
         }
 
         private bool IsValidPhdthesis()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -834,7 +578,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidTechreport()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -855,7 +599,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidUnpublished()
         {
-            if (Authors.Count == 0)
+            if (String.IsNullOrEmpty(Authors))
             {
                 return false;
             }
@@ -871,5 +615,34 @@ namespace BibtexEntryManager.Models.EntryTypes
         }
 
         #endregion
+
+        /* This author assumes that all authors/editors names will be separated by the 
+         * word 'and', with spaces either side */
+        public static void SeparateAuthors(string targ, out string a1, out string a2)
+        {
+            if (string.IsNullOrEmpty(targ))
+            {
+                a1 = "";
+                a2 = "";
+                return;
+            }
+
+            string[] split = targ.Split(new string[] { " and " }, StringSplitOptions.RemoveEmptyEntries);
+            if (split.Length < 1)
+            {
+                a1 = targ; // Sole author/editor must be stored in targ
+                a2 = "";
+                return;
+            }
+            if (split.Length < 2)
+            {
+                a1 = split[0];
+                a2 = "";
+                return;
+            }
+            a1 = split[0];
+            a2 = split[1];
+            return;
+        }
     }
 }

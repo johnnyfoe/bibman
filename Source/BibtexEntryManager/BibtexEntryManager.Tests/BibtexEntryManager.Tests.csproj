@@ -38,20 +38,20 @@
     </Reference>
     <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\Castle.Core.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.DynamicProxy2">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\Castle.DynamicProxy2.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\Castle.DynamicProxy2.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\Resources\NHibernate\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\log4net.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
@@ -61,14 +61,14 @@
     </Reference>
     <Reference Include="NHibernate, Version=3.0.0.2001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\NHibernate.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\fluentnhibernate-1.1\NHibernate.ByteCode.Castle.dll</HintPath>
+      <HintPath>..\..\Resources\fluentnhibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.Linq, Version=1.0.0.4000, Culture=neutral, PublicKeyToken=444cf6a87fdab271, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\NHibernate.Linq-1.0.0.GA-bin\NHibernate.Linq.dll</HintPath>
+      <HintPath>..\..\Resources\NHibernate.Linq-1.0.0.GA-bin\NHibernate.Linq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.7.10213, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,7 +102,7 @@
     </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.60.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\SQLite.NET\bin\x64\System.Data.SQLite.DLL</HintPath>
+      <HintPath>..\..\Resources\SQLite.NET\bin\x64\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Drawing">
       <Private>True</Private>

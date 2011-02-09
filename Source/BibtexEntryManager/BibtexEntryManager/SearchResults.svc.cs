@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using System.ServiceModel.Web;
-using System.Text;
 using BibtexEntryManager.Data;
 using BibtexEntryManager.Models.EntryTypes;
 
 namespace BibtexEntryManager
 {
-    [ServiceContract(Namespace = "")]
+    [ServiceContract(Namespace = "BibtexEntryManager")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class AjaxMethods
+    public class SearchResults
     {
         // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
         // To create an operation that returns XML,
@@ -23,7 +18,7 @@ namespace BibtexEntryManager
         [OperationContract]
         public string DoSearch(string searchString)
         {
-            return ConvertToResultsTbody(DataPersistance.GetAllPublicationsMatching(searchString));
+            return ConvertToResultsTbody(DataPersistence.GetAllPublicationsMatching(searchString));
         }
 
         // Add more operations here and mark them with [OperationContract]

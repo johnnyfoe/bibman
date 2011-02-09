@@ -4,12 +4,10 @@
 <asp:Content runat="server" ID="Title" ContentPlaceHolderID="TitleContent">
     Search Results</asp:Content>
 <asp:Content runat="server" ID="Scripts" ContentPlaceHolderID="ScriptsContent">
-    <%--<script src="../../Scripts/AjaxManagementScript.js" type="text/javascript"></script>--%>
-    
     <script type="text/javascript">
         // To be included with /Entry/Search.aspx
         function keysearch() {
-            var service = new SearchResults();
+            var service = new BibtexEntryManager.SearchResults();
             service.DoSearch(document.getElementById("searchString").value, onSuccess, null, null);
         }
 
@@ -19,17 +17,17 @@
         }</script>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
-<form id="searchform" runat="server">
+    <form id="searchform" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
         <Services>
-            <asp:ServiceReference Path="~/SearchResults.svc" />
+            <asp:ServiceReference Path="/SearchResults.svc" />
         </Services>
     </asp:ScriptManager>
     </form>
     <p>
-        Instant search box: <input id="searchString" type="text" onkeypress="return keysearch()" />
+        Instant search box:
+        <input id="searchString" type="text" onkeypress="return keysearch()" />
     </p>
-
     <table class="sortable">
         <thead>
             <tr>
@@ -40,7 +38,10 @@
                     Entry Type
                 </td>
                 <td>
-                    Author
+                    Author 1
+                </td>
+                <td>
+                    Author 2
                 </td>
                 <td>
                     Title
@@ -58,10 +59,9 @@
                         Writer.WriteLine(p.ToHtmlTableRowWithLinks() + "\r\n            ");
                     }
                 }
-%>
+            %>
         </tbody>
         <tfoot>
         </tfoot>
     </table>
-
 </asp:Content>

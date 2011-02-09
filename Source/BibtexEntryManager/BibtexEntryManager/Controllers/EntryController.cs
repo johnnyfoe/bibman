@@ -18,7 +18,7 @@ namespace BibtexEntryManager.Controllers
 
         public ActionResult Index()
         {
-            var p = DataPersistance.GetAllPublications();
+            var p = DataPersistence.GetAllPublications();
             return View(p);
         }
 
@@ -31,7 +31,7 @@ namespace BibtexEntryManager.Controllers
             var f = new byte[chrArray.Length];
             for (int i = 0; i < f.Length; i++)
             {
-                f[i] = (byte) chrArray[i];
+                f[i] = (byte)chrArray[i];
             }
             return File(f, "text/plain", p.CiteKey + ".bib");
         }
@@ -51,7 +51,7 @@ namespace BibtexEntryManager.Controllers
             {
                 return View();
             }
-            var res = DataPersistance.GetAllPublicationsMatching(searchVal);
+            var res = DataPersistence.GetAllPublicationsMatching(searchVal);
 
             return View(res);
 
@@ -64,7 +64,7 @@ namespace BibtexEntryManager.Controllers
                 return View();
             }
 
-            var res = DataPersistance.GetAllPublicationsMatching(s);
+            var res = DataPersistence.GetAllPublicationsMatching(s);
 
             return View(res);
 
@@ -73,7 +73,7 @@ namespace BibtexEntryManager.Controllers
         [Authorize]
         public FileResult DownloadAll()
         {
-            var allPubs = DataPersistance.GetAllPublications();
+            var allPubs = DataPersistence.GetAllPublications();
             var allPubsString = "";
             foreach (var pub in allPubs)
             {
@@ -87,7 +87,7 @@ namespace BibtexEntryManager.Controllers
             }
             Response.RedirectLocation = "~/Entry";
             Response.ContentType = "text/plain";
-            return File(f, "text/plain","AllBibEntries.bib");
+            return File(f, "text/plain", "AllBibEntries.bib");
         }
 
         #region File Import
@@ -151,20 +151,9 @@ namespace BibtexEntryManager.Controllers
             {
                 try
                 {
-                    if (l == null)
-                        continue;
-                    if (l.GetType() == typeof(Publication))
-                    {
-                        var art = ((Publication)l);
-                        art.SaveToDatabase();
-                        successCounter++;
-                    }
-                    else
-                    {
-                        ViewData["Message"] += "<br/><br/>" + l.CiteKey + " Failed because the type was not recognised";
-                        // type unknown!
-                        failureCounter++;
-                    }
+                    l.Owner = HttpContext.User.Identity.Name;
+                    l.SaveToDatabase();
+                    successCounter++;
                 }
                 catch (Exception e) // todo probably want to have a look at what exception to catch here...
                 {
@@ -201,7 +190,7 @@ namespace BibtexEntryManager.Controllers
         {
             if (id != null)
             {
-                var session = DataPersistance.GetSession();
+                var session = DataPersistence.GetSession();
                 var s = from b in session.Linq<Publication>()
                         where b.Id == id
                         select b;

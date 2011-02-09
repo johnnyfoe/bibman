@@ -1,6 +1,6 @@
 using System;
 
-namespace BibtexEntryManager.Models.EntryTypes
+namespace BibtexEntryManager.Models
 {
 
     public class Journal

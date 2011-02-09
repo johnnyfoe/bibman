@@ -1,4 +1,8 @@
-﻿using BibtexEntryManager.Models.EntryTypes;
+﻿using System;
+using BibtexEntryManager.Models.EntryTypes;
+using FluentNHibernate.Automapping;
+using FluentNHibernate.Conventions;
+using FluentNHibernate.Conventions.Instances;
 using FluentNHibernate.Mapping;
 
 namespace BibtexEntryManager.Models.Mapping
@@ -12,6 +16,7 @@ namespace BibtexEntryManager.Models.Mapping
             Id(c => c.Id).GeneratedBy.Identity();
             Map(c => c.CiteKey).Not.Nullable().Length(Helpers.FieldLength.CiteKeyLength);
             Map(c => c.Owner).Not.Nullable().Length(Helpers.FieldLength.OwnerLength);
+            Map(c => c.EntryType).Not.Nullable();
             Map(c => c.Abstract).Nullable().Length(Helpers.FieldLength.AbstractLength);
             // String fields
             Map(c => c.Address).Nullable().Length(Helpers.FieldLength.CiteKeyLength);
@@ -38,8 +43,36 @@ namespace BibtexEntryManager.Models.Mapping
             Map(c => c.Year).Nullable().Length(Helpers.FieldLength.CiteKeyLength);
 
             // List fields
-            HasManyToMany(c => c.Editors);
-            HasManyToMany(c => c.Authors);
+            HasManyToMany(c => c.Authors).AsList(a => a.Column("authorNameId")).Element("author");
+            HasMany(c => c.Editors).AsList(a => a.Column("editorNameId")).Element("editor").Cascade.All();
+
+            
+        }
+    }
+
+    public class BibtexAutomappingConfiguration : DefaultAutomappingConfiguration
+    {
+        public override bool ShouldMap(Type type)
+        {
+            return type.Namespace == "BibtexEntryManager.Models.EntryTypes";
+        }
+    }
+
+    public class CascadeConvention : IReferenceConvention, IHasManyConvention, IHasManyToManyConvention
+    {
+        public void Apply(IManyToOneInstance instance)
+        {
+            instance.Cascade.All();
+        }
+
+        public void Apply(IOneToManyCollectionInstance instance)
+        {
+            instance.Cascade.All();
+        }
+
+        public void Apply(IManyToManyCollectionInstance instance)
+        {
+            instance.Cascade.All();
         }
     }
 }

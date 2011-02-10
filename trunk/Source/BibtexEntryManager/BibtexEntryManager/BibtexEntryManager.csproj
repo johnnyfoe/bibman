@@ -76,7 +76,7 @@
       <HintPath>..\..\Resources\NHibernate-2.1.2.GA-bin\Required_Bins\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\..\Resources\Program Files (x86)\NHibernate-2.1.2.GA-bin\Required_For_LazyLoading\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
+      <HintPath>..\..\Resources\NHibernate-2.1.2.GA-bin\Required_For_LazyLoading\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.Linq, Version=1.0.0.4000, Culture=neutral, PublicKeyToken=444cf6a87fdab271, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -193,10 +193,13 @@
     <Content Include="Scripts\sorttable.js" />
     <Content Include="SearchResults.svc" />
     <Content Include="Views\Entry\Import.aspx" />
+    <Content Include="Views\Entry\ImportEntries.aspx" />
     <Content Include="Views\Entry\Search.aspx" />
     <Content Include="Views\Entry\Index.aspx" />
     <Content Include="Views\Entry\UploadFile.aspx" />
     <Content Include="Views\Entry\Publication.aspx" />
+    <Content Include="Views\Shared\ImportFromBibFile.ascx" />
+    <Content Include="Views\Shared\ImportFromBibFormat.ascx" />
     <Content Include="Views\Shared\QuickCreateControl.ascx" />
     <Content Include="Views\Shared\SearchControl.ascx" />
     <Content Include="Web.config">

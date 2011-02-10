@@ -15,7 +15,6 @@ namespace BibtexEntryManager.Controllers
     [HandleError]
     public class EntryController : Controller
     {
-
         public ActionResult Index()
         {
             var p = DataPersistence.GetAllPublications();
@@ -90,10 +89,65 @@ namespace BibtexEntryManager.Controllers
             return File(f, "text/plain", "AllBibEntries.bib");
         }
 
-        #region File Import
+        #region Entry Import
         [Authorize]
         public ActionResult Import()
         {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ImportEntries()
+        {
+            var f = Request.Form.AllKeys;
+
+            string requiredKey = "";
+
+            foreach (string s in f)
+            {
+                if (s.Contains("EntryTextBox"))
+                {
+                    // found key, get value and begin processing:
+                    requiredKey = s;
+                    break;
+                }
+            }
+            IEnumerable<Dictionary<string, string>> entries;
+            if (!String.IsNullOrEmpty(requiredKey))
+            {
+                entries = Parser.GetEntriesFrom(Request.Form[requiredKey]);
+            }
+            else
+            {
+                ViewData["data"] =
+                    "Error in form - 'EntryTextBox' field not found. (Will only ever see this if the form's field names change).";
+                return View();
+            }
+            IList<Publication> publications = new List<Publication>();
+            foreach (Dictionary<string, string> dictionary in entries)
+            {
+                publications.Add(PublicationFactory.MakePublication(dictionary));
+            }
+            var successCounter = 0;
+            var failureCounter = 0;
+            foreach (var l in publications)
+            {
+                try
+                {
+                    l.Owner = HttpContext.User.Identity.Name;
+                    l.SaveToDatabase();
+                    successCounter++;
+                }
+                catch (Exception e) // todo probably want to have a look at what exception to catch here...
+                {
+                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because of an exception:" + e.Message;
+                    failureCounter++;
+                }
+            }
+            ViewData["data"] += "Successfully added " + successCounter
+                                   + " items and failed to add " + failureCounter + " items.";
+
             return View();
         }
 

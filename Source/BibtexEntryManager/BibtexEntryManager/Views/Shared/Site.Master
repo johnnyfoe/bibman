@@ -28,7 +28,7 @@
                     <li>
                         <%: Html.ActionLink("List All Entries", "Index", "Entry")%></li>
                     <li>
-                        <%: Html.ActionLink("Import file","Import","Entry") %>
+                        <%: Html.ActionLink("Import Entries","Import","Entry") %>
                     </li>
                     <li>
                         <% Html.RenderPartial("SearchControl"); %></li>

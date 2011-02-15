@@ -168,6 +168,7 @@
     <Compile Include="Helpers\Parser.cs" />
     <Compile Include="Helpers\UnknownEntryTypeException.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BibPersistenceModel.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\Enums\Entry.cs" />
     <Compile Include="Models\Enums\Field.cs" />
@@ -178,9 +179,8 @@
     <Compile Include="Helpers\ObjectBuilder.cs" />
     <Compile Include="Models\Exceptions\BibtexExceptions.cs" />
     <Compile Include="Models\Grouping\PublicationGroup.cs" />
-    <Compile Include="Models\Mapping\PublicationMapping.cs" />
-    <Compile Include="Models\BibPersistenceModel.cs" />
     <Compile Include="Data\Persistence.cs" />
+    <Compile Include="Models\Mapping\PublicationMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchResults.svc.cs">
       <DependentUpon>SearchResults.svc</DependentUpon>
@@ -192,8 +192,11 @@
     <Content Include="Scripts\QuickCreateRedirect.js" />
     <Content Include="Scripts\sorttable.js" />
     <Content Include="SearchResults.svc" />
+    <Content Include="Views\Entry\DeletedEntries.aspx" />
+    <Content Include="Views\Entry\DeletePublication.aspx" />
     <Content Include="Views\Entry\Import.aspx" />
     <Content Include="Views\Entry\ImportEntries.aspx" />
+    <Content Include="Views\Entry\MarkAsDeletedResult.aspx" />
     <Content Include="Views\Entry\Search.aspx" />
     <Content Include="Views\Entry\Index.aspx" />
     <Content Include="Views\Entry\UploadFile.aspx" />

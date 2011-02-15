@@ -1,0 +1,11 @@
+David Manlove - guidance, assistance, resourcefulness, patience & expertise with Bibtex
+Gregg O'Malley - for introducing me and David to a different approach to concurrent access of entries
+Microsoft - in particular for their MSDNAA program, .NET, C#
+NUnit Community
+NHibernate Community
+stackoverflow community for their extensive knowledgebase and source of ideas
+Stuart Langridge of kryogenix.org for his javascript library 'sorttable' http://www.kryogenix.org/code/browser/sorttable/
+Thomas Anderson of the Amor Group for a pointer to using fluent nhibernate without which I wouldn't have been able to get my NHibernate solution off the ground
+Phil Haack for his blog post on custom validation in .NET - http://haacked.com/archive/2009/11/19/aspnetmvc2-custom-validation.aspx
+JetBrains' for their productivity plugin 'ReSharper'
+SCS (DCS) of Glasgow for leading me to believe that I know what I'm doing over the past 4 years!

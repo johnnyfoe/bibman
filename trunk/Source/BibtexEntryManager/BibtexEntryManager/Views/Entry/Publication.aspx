@@ -2,11 +2,11 @@
 
 <%@ Import Namespace="BibtexEntryManager.Models.Enums" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-<% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
-   <%: amendOrCreate %>
+    <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
+    <%: amendOrCreate %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
+    <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
     <h2>
         <% Writer.Write(amendOrCreate); %></h2>
     <% using (Html.BeginForm())
@@ -319,6 +319,11 @@
         </div>
         <p>
             <input type="submit" value="<%:amendOrCreate%>" />
+            <% if (Model != null)
+               {%>
+            | <a href="/Entry/DeletePublication/<%:Model.Id%>">Delete this item</a>
+            <%
+                }%>
         </p>
     </fieldset>
     <% } %>

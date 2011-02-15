@@ -8,6 +8,7 @@ using BibtexEntryManager.Data;
 using BibtexEntryManager.Error;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.EntryTypes;
+using BibtexEntryManager.Models.Exceptions;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager.Controllers
@@ -17,7 +18,7 @@ namespace BibtexEntryManager.Controllers
     {
         public ActionResult Index()
         {
-            var p = DataPersistence.GetAllPublications();
+            var p = DataPersistence.GetActivePublications();
             return View(p);
         }
 
@@ -35,6 +36,27 @@ namespace BibtexEntryManager.Controllers
             return File(f, "text/plain", p.CiteKey + ".bib");
         }
 
+        [Authorize]
+        public FileResult DownloadAll()
+        {
+            var allPubs = DataPersistence.GetActivePublications();
+            var allPubsString = "";
+            foreach (var pub in allPubs)
+            {
+                allPubsString += pub.ToBibFormat();
+            }
+
+            var f = new byte[allPubsString.Length];
+            for (int i = 0; i < f.Length; i++)
+            {
+                f[i] = (byte)allPubsString[i];
+            }
+            Response.RedirectLocation = "~/Entry";
+            Response.ContentType = "text/plain";
+            return File(f, "text/plain", "AllBibEntries.bib");
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult Search(FormCollection s)
         {
@@ -50,12 +72,13 @@ namespace BibtexEntryManager.Controllers
             {
                 return View();
             }
-            var res = DataPersistence.GetAllPublicationsMatching(searchVal);
+            var res = DataPersistence.GetActivePublicationsMatching(searchVal);
 
             return View(res);
 
         }
 
+        [Authorize]
         public ActionResult Search(string s)
         {
             if (String.IsNullOrEmpty(s))
@@ -63,30 +86,61 @@ namespace BibtexEntryManager.Controllers
                 return View();
             }
 
-            var res = DataPersistence.GetAllPublicationsMatching(s);
+            var res = DataPersistence.GetActivePublicationsMatching(s);
 
             return View(res);
 
         }
 
         [Authorize]
-        public FileResult DownloadAll()
+        public ActionResult DeletedEntries()
         {
-            var allPubs = DataPersistence.GetAllPublications();
-            var allPubsString = "";
-            foreach (var pub in allPubs)
-            {
-                allPubsString += pub.ToBibFormat();
-            }
+            IList<Publication> deletedEntries = DataPersistence.GetDeletedPublications();
 
-            var f = new byte[allPubsString.Length];
-            for (int i = 0; i < f.Length; i++)
+            return View(deletedEntries);
+        }
+
+        [Authorize]
+        public ActionResult CleanupDeletions()
+        {
+            DataPersistence.CleanupExpiredDeletedPublications();
+            return Redirect("/Entry/DeletedEntries");
+        }
+
+        [Authorize]
+        public ActionResult PurgeAll()
+        {
+            DataPersistence.CleanupAllDeletedPublications();
+            return Redirect("/Entry/DeletedEntries");
+        }
+
+        [Authorize]
+        public ActionResult DeletePublication(int id)
+        {
+            var pub = (from p in (DataPersistence.GetSession().Linq<Publication>())
+                      where p.Id == id
+                      select p);
+            if (pub.Count() < 1)
+                Redirect("/Entry/Publication");
+
+            return View(pub.First());
+        }
+
+        [Authorize]
+        public ActionResult MarkAsDeletedResult(int id)
+        {
+            try
             {
-                f[i] = (byte)allPubsString[i];
+
+                DataPersistence.DeletePublication(id);
+                ViewData["message"] = "success";
             }
-            Response.RedirectLocation = "~/Entry";
-            Response.ContentType = "text/plain";
-            return File(f, "text/plain", "AllBibEntries.bib");
+            catch (PublicationNotFoundException e)
+            {
+                ViewData["message"] = "failure";
+                ViewData["exception"] = e.Message;
+            }
+            return View();
         }
 
         #region Entry Import
@@ -136,7 +190,7 @@ namespace BibtexEntryManager.Controllers
                 try
                 {
                     l.Owner = HttpContext.User.Identity.Name;
-                    l.SaveToDatabase();
+                    l.SaveOrUpdateInDatabase();
                     successCounter++;
                 }
                 catch (Exception e) // todo probably want to have a look at what exception to catch here...
@@ -206,7 +260,7 @@ namespace BibtexEntryManager.Controllers
                 try
                 {
                     l.Owner = HttpContext.User.Identity.Name;
-                    l.SaveToDatabase();
+                    l.SaveOrUpdateInDatabase();
                     successCounter++;
                 }
                 catch (Exception e) // todo probably want to have a look at what exception to catch here...
@@ -252,7 +306,7 @@ namespace BibtexEntryManager.Controllers
                 {
                     return Redirect("/Entry/Publication");
                 }
-                var p = s.First(a => a.Id == id);
+                var p = s.First();
                 ViewData["ButtonText"] = "Amend";
                 return View(p);
             }

@@ -6,7 +6,8 @@
     <h2>
         List of Entries</h2>
     <p>
-        <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%></p>
+        <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%> |
+        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %></p>
     <table class="sortable">
     <thead>
         <tr>

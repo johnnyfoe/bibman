@@ -48,6 +48,7 @@ namespace BibtexEntryManager.Tests.Mapping
                 .CheckProperty(c => c.Pages, null)
                 .CheckProperty(c => c.Month, null)
                 .CheckProperty(c => c.TheKey, null)
+                .CheckProperty(c => c.DeletionTime, null)
                 .CheckProperty(c => c.Note, null)
                 .VerifyTheMappings();
         }

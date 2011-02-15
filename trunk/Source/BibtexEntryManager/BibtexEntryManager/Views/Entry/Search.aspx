@@ -27,6 +27,7 @@
     <p>
         Instant search box:
         <input id="searchString" type="text" onkeypress="return keysearch()" />
+        Wildcards '*' and '?' may be used in searches.
     </p>
     <table class="sortable">
         <thead>

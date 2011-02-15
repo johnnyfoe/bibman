@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using BibtexEntryManager.Data;
 using BibtexEntryManager.Models.EntryTypes;
+using BibtexEntryManager.Models.Enums;
 
 namespace BibtexEntryManager
 {
@@ -18,9 +20,20 @@ namespace BibtexEntryManager
         [OperationContract]
         public string DoSearch(string searchString)
         {
-            return ConvertToResultsTbody(DataPersistence.GetAllPublicationsMatching(searchString));
+            return ConvertToResultsTbody(DataPersistence.GetActivePublicationsMatching(searchString));
         }
 
+        [OperationContract]
+        public string GetFields(string entryType)
+        {
+            Entry entry;
+            if (!Entry.TryParse(entryType, true, out entry))
+                return "Incorrect entry type - error in programming. Provided value: " + entryType + " which was not found.";
+
+
+
+            return "Not yet implemented.";
+        }
         // Add more operations here and mark them with [OperationContract]
 
         private static string ConvertToResultsTbody(IEnumerable<Publication> s)

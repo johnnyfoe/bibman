@@ -9,6 +9,7 @@ using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.Enums;
 //using BibtexEntryManager.Models.Grouping;
 using BibtexEntryManager.Models.Exceptions;
+using NHibernate;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager.Models.EntryTypes
@@ -35,7 +36,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         [DisplayName("Entry Type")]
         public virtual Entry EntryType { get; set; }
         public virtual string Abstract { get; set; }
-
+        
         public virtual string Address { get; set; }
         public virtual string Annote { get; set; }
         public virtual string Authors { get; set; }
@@ -63,6 +64,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         //public virtual PublicationGroup PublicationGroup { get; set; }
         // times of modification/creation/
+        public virtual DateTime? DeletionTime { get; set; }
         //public Dictionary<String, String> UnknownFields { get; private set; }
 
         #endregion
@@ -308,12 +310,14 @@ namespace BibtexEntryManager.Models.EntryTypes
                     select a).Count() != 0;
         }
 
-        public virtual void UpdateInDatabase()
+        private void UpdateInDatabase()
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
-
-            DataPersistence.GetSession().Update(this);
+            ISession ses = DataPersistence.GetSession();
+            ses.Update(this);
+            ses.Flush();
+            ses.Close();
         }
 
         public virtual void SaveOrUpdateInDatabase()
@@ -323,10 +327,11 @@ namespace BibtexEntryManager.Models.EntryTypes
 
             if (ExistsInDatabase())
                 UpdateInDatabase();
-            SaveToDatabase();
+            else
+                SaveToDatabase();
         }
 
-        public virtual void SaveToDatabase()
+        private void SaveToDatabase()
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();

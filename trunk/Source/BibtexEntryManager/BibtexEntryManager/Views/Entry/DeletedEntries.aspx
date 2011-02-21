@@ -14,8 +14,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        List of Deleted Entries</h2>
+    <h2>List of Deleted Entries</h2>
     <p>
         <%: Html.ActionLink("Purge old entries", "CleanupDeletions","Entry") %> |
         <a href="javascript:purgeAll()">Purge ALL deleted entries</a>

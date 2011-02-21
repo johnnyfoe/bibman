@@ -147,7 +147,7 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             LogOnModel model = new LogOnModel()
             {
-                UserName = "someUser",
+                Email = "goodEmail",
                 Password = "goodPassword",
                 RememberMe = false
             };
@@ -170,7 +170,7 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             LogOnModel model = new LogOnModel()
             {
-                UserName = "someUser",
+                Email = "goodEmail",
                 Password = "goodPassword",
                 RememberMe = false
             };
@@ -192,7 +192,7 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             LogOnModel model = new LogOnModel()
             {
-                UserName = "someUser",
+                Email = "someUser",
                 Password = "goodPassword",
                 RememberMe = false
             };
@@ -214,7 +214,7 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             LogOnModel model = new LogOnModel()
             {
-                UserName = "someUser",
+                Email = "someUser",
                 Password = "badPassword",
                 RememberMe = false
             };
@@ -250,7 +250,6 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             RegisterModel model = new RegisterModel()
             {
-                UserName = "someUser",
                 Email = "goodEmail",
                 Password = "goodPassword",
                 ConfirmPassword = "goodPassword"
@@ -273,7 +272,6 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             RegisterModel model = new RegisterModel()
             {
-                UserName = "duplicateUser",
                 Email = "goodEmail",
                 Password = "goodPassword",
                 ConfirmPassword = "goodPassword"
@@ -297,7 +295,6 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             RegisterModel model = new RegisterModel()
             {
-                UserName = "someUser",
                 Email = "goodEmail",
                 Password = "goodPassword",
                 ConfirmPassword = "goodPassword"
@@ -337,7 +334,7 @@ namespace BibtexEntryManager.Tests.Controllers
             public void SignIn(string userName, bool createPersistentCookie)
             {
                 // verify that the arguments are what we expected
-                Assert.AreEqual("someUser", userName);
+                Assert.AreEqual("goodEmail", userName);
                 Assert.IsFalse(createPersistentCookie);
 
                 SignIn_WasCalled = true;
@@ -351,7 +348,7 @@ namespace BibtexEntryManager.Tests.Controllers
 
         private class MockHttpContext : HttpContextBase
         {
-            private readonly IPrincipal _user = new GenericPrincipal(new GenericIdentity("someUser"), null /* roles */);
+            private readonly IPrincipal _user = new GenericPrincipal(new GenericIdentity("goodEmail"), null /* roles */);
 
             public override IPrincipal User
             {
@@ -373,14 +370,14 @@ namespace BibtexEntryManager.Tests.Controllers
                 get { return 10; }
             }
 
-            public bool ValidateUser(string userName, string password)
+            public bool ValidateUser(string email, string password)
             {
-                return (userName == "someUser" && password == "goodPassword");
+                return (email == "goodEmail" && password == "goodPassword");
             }
 
-            public MembershipCreateStatus CreateUser(string userName, string password, string email)
+            public MembershipCreateStatus CreateUser(string email, string password)
             {
-                if (userName == "duplicateUser")
+                if (email == "duplicateUser")
                 {
                     return MembershipCreateStatus.DuplicateUserName;
                 }
@@ -392,9 +389,9 @@ namespace BibtexEntryManager.Tests.Controllers
                 return MembershipCreateStatus.Success;
             }
 
-            public bool ChangePassword(string userName, string oldPassword, string newPassword)
+            public bool ChangePassword(string email, string oldPassword, string newPassword)
             {
-                return (userName == "someUser" && oldPassword == "goodOldPassword" && newPassword == "goodNewPassword");
+                return (email == "goodEmail" && oldPassword == "goodOldPassword" && newPassword == "goodNewPassword");
             }
         }
 

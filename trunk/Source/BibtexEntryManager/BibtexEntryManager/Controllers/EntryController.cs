@@ -314,5 +314,39 @@ namespace BibtexEntryManager.Controllers
             return View();
         }
         #endregion
+
+        [Authorize]
+        public ActionResult SelectEntriesForDeletion()
+        {
+            IList<Publication> publications = DataPersistence.GetActivePublications();
+            return View(publications);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ConfirmDeleteEntries(FormCollection fc)
+        {
+            var keys = fc.AllKeys;
+            int[] ids = new int[keys.Length];
+            for (int i = 0; i < keys.Length; i++)
+            {
+                ids[i] = Int32.Parse(keys[i]);
+            }
+
+            IList<Publication> deletionList = (from pubs in DataPersistence.GetSession().Linq<Publication>()
+                                              where ids.Contains(pubs.Id)
+                                              select pubs).ToList();
+            return View(deletionList);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult DeleteEntries(IList<Publication> pubs)
+        {
+            DataPersistence.DeletePublications(pubs);
+
+            ViewData["DeletionResult"] = "Deletion of " + pubs.Count + " entries was a success.";
+            return Redirect("/Entry");
+        }
     }
 }

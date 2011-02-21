@@ -3,11 +3,12 @@
     List of Entries
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        List of Entries</h2>
+    <h2>List of Entries</h2>
+        <%: ViewData["DeletionResult"] %>
     <p>
         <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%> |
-        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %></p>
+        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %> | 
+        <%: Html.ActionLink("Delete Multiple Entries", "SelectEntriesForDeletion", "Entry") %></p>
     <table class="sortable">
     <thead>
         <tr>
@@ -38,4 +39,13 @@
            }%>
            </tbody>
     </table>
+    <% if (Model.Count > 15)
+       {%>
+    
+    <p>
+        <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%> |
+        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %> | 
+        <%: Html.ActionLink("Delete Multiple Entries", "SelectEntriesForDeletion", "Entry") %></p>
+        <%
+       }%>
 </asp:Content>

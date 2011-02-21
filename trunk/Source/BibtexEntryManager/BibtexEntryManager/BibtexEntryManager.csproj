@@ -189,18 +189,22 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\AjaxManagementScript.js" />
+    <Content Include="Scripts\ChangeEntryType.js" />
+    <Content Include="Scripts\DoPageLoad.js" />
     <Content Include="Scripts\QuickCreateRedirect.js" />
     <Content Include="Scripts\sorttable.js" />
     <Content Include="SearchResults.svc" />
+    <Content Include="Views\Entry\ConfirmDeleteEntries.aspx" />
     <Content Include="Views\Entry\DeletedEntries.aspx" />
     <Content Include="Views\Entry\DeletePublication.aspx" />
     <Content Include="Views\Entry\Import.aspx" />
     <Content Include="Views\Entry\ImportEntries.aspx" />
-    <Content Include="Views\Entry\MarkAsDeletedResult.aspx" />
-    <Content Include="Views\Entry\Search.aspx" />
     <Content Include="Views\Entry\Index.aspx" />
-    <Content Include="Views\Entry\UploadFile.aspx" />
+    <Content Include="Views\Entry\MarkAsDeletedResult.aspx" />
     <Content Include="Views\Entry\Publication.aspx" />
+    <Content Include="Views\Entry\Search.aspx" />
+    <Content Include="Views\Entry\SelectEntriesForDeletion.aspx" />
+    <Content Include="Views\Entry\UploadFile.aspx" />
     <Content Include="Views\Shared\ImportFromBibFile.ascx" />
     <Content Include="Views\Shared\ImportFromBibFormat.ascx" />
     <Content Include="Views\Shared\QuickCreateControl.ascx" />

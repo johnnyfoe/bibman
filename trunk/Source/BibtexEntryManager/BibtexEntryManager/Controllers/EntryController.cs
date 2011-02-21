@@ -277,7 +277,6 @@ namespace BibtexEntryManager.Controllers
 
         #endregion
 
-        #region Entry Creation Post Methods
         [HttpPost]
         [Authorize]
         public ActionResult Publication(Publication a)
@@ -290,7 +289,6 @@ namespace BibtexEntryManager.Controllers
             }
             return View(a);
         }
-        #endregion
 
         #region Entry Creation Pages
         [Authorize]

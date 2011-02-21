@@ -7,11 +7,11 @@
     <h2>Select Entries For Deletion</h2>
     
     <form action="/Entry/ConfirmDeleteEntries" method="post">
+    <input type="submit" value="Delete Selected Entries" /><br /><br />
     <table class="sortable">
         <thead>
             <tr>
                 <td>
-                <%--<input name="selectAllCheckBox" type="checkbox" onchange="return ToggleSelectAll()" />--%>
                 </td>
                 <td>
                     Cite Key
@@ -37,10 +37,11 @@
             <% foreach (var v in Model)
                {
                    Writer.WriteLine(v.ToHtmlTableRowWithCheckBoxes());
-               }%>
+               }
+            %>
         </tbody>
     </table>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Delete Selected Entries" />
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">

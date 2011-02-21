@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Web.Configuration;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Exceptions;
 using BibtexEntryManager.Models.Mapping;
@@ -32,6 +33,7 @@ namespace BibtexEntryManager.Data
         {
             var currentSession = GetSession();
             var a = from article in currentSession.Linq<Publication>()
+                    orderby article.CiteKey
                     where article.DeletionTime == null
                     select article;
             return a.ToList();
@@ -41,6 +43,7 @@ namespace BibtexEntryManager.Data
         {
             var currentSession = GetSession();
             var a = from r in currentSession.Linq<Publication>()
+                    orderby r.CiteKey
                     where r.DeletionTime != null
                     select r;
             return a.ToList();
@@ -118,11 +121,17 @@ namespace BibtexEntryManager.Data
 
         public static FluentConfiguration GetConfig()
         {
-            System.Configuration.Configuration rootWebConfig =
-                System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/");
             System.Configuration.ConnectionStringSettings cs;
-
-            if (rootWebConfig.ConnectionStrings.ConnectionStrings.Count > 0)
+            System.Configuration.Configuration rootWebConfig = null;
+            try
+            {
+                rootWebConfig = WebConfigurationManager.OpenWebConfiguration("/");
+            }
+            catch (Exception)
+            {
+                
+            }
+            if (rootWebConfig != null && rootWebConfig.ConnectionStrings.ConnectionStrings.Count > 0)
             {
                 cs = rootWebConfig.ConnectionStrings.ConnectionStrings["BibtexSettings"];
 

@@ -48,6 +48,8 @@ namespace BibtexEntryManager.Models.EntryTypes
         public virtual string Howpublished { get; set; }
         public virtual string Institution { get; set; }
         public virtual string Journal { get; set; }
+
+        [DisplayName("Key")]
         public virtual string TheKey { get; set; }
         public virtual string Month { get; set; }
         public virtual string Note { get; set; }
@@ -65,6 +67,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         //public virtual PublicationGroup PublicationGroup { get; set; }
         // times of modification/creation/
         public virtual DateTime? DeletionTime { get; set; }
+        public virtual DateTime? CreationTime { get; set; }
         //public Dictionary<String, String> UnknownFields { get; private set; }
 
         #endregion
@@ -108,7 +111,26 @@ namespace BibtexEntryManager.Models.EntryTypes
             else if (!String.IsNullOrEmpty(Editors))
                 SeparateAuthors(Editors, out a1, out a2);
 
-            return "<tr><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
+            return "<tr id=\"tr_" + Id + "\"><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
+                   "</td><td>" + a1 + "</td><td>" + a2 + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
+        }
+
+        /// <summary>
+        /// Returns a html row as a string representing the Publication. Should include only CiteKey, Author, Year and title with HTML links to the edit page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string ToHtmlTableRowWithCheckBoxes()
+        {
+            string a1 = "";
+            string a2 = "";
+
+            // Separate authors/editors into fields a1 and a2
+            if (!String.IsNullOrEmpty(Authors))
+                SeparateAuthors(Authors, out a1, out a2);
+            else if (!String.IsNullOrEmpty(Editors))
+                SeparateAuthors(Editors, out a1, out a2);
+
+            return "<tr><td><input type=\"checkbox\" name=\"" + Id + "\" /></td><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
                    "</td><td>" + a1 + "</td><td>" + a2 + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
         }
 
@@ -335,6 +357,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
+            this.CreationTime = DateTime.Now;
             DataPersistence.GetSession().Persist(this);
         }
 

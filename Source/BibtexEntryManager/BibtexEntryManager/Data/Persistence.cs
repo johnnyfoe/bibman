@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using BibtexEntryManager.Models;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Exceptions;
 using BibtexEntryManager.Models.Mapping;
-using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Linq;
-using NHibernate.Tool.hbm2ddl;
 
 namespace BibtexEntryManager.Data
 {
@@ -21,7 +18,7 @@ namespace BibtexEntryManager.Data
     {
         private static Configuration _config;
 
-        public static string ConnString =
+        private static string _connString =
             "Data Source=(local);Initial Catalog=Bibtex;Integrated Security=True;Pooling=False;";
 
         private static ISessionFactory SessionFactory { get; set; }
@@ -100,7 +97,7 @@ namespace BibtexEntryManager.Data
             return a.ToList();
         }
 
-        public static string PrepareSqlString(string s)
+        private static string PrepareSqlString(string s)
         {
             // check for % signs and replace with \%
             s = Regex.Replace(s, "%", "\\%");
@@ -130,23 +127,15 @@ namespace BibtexEntryManager.Data
                 cs = rootWebConfig.ConnectionStrings.ConnectionStrings["BibtexSettings"];
 
                 if (cs != null) // leaves ConnString as default unless the connection string is set
-                    ConnString = cs.ConnectionString;
+                    _connString = cs.ConnectionString;
             }
 
 
             return Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008
-                              .ConnectionString(c => c.Is(ConnString)).ShowSql)
+                              .ConnectionString(c => c.Is(_connString)).ShowSql)
                 .Mappings(m => m.AutoMappings.Add(CreatePublicationAutomappings()));
-            //.ExposeConfiguration(BuildSchema);
         }
-        private static void BuildSchema(Configuration config)
-        {
-            // this NHibernate tool takes a configuration (with mapping info in)
-            // and exports a database schema from it
-            new SchemaExport(config).Create(false, true);
-        }
-
 
         static AutoPersistenceModel CreatePublicationAutomappings()
         {
@@ -182,7 +171,7 @@ namespace BibtexEntryManager.Data
 
         public static void DeletePublication(int id)
         {
-            var pub = (from p in (DataPersistence.GetSession().Linq<Publication>())
+            var pub = (from p in (GetSession().Linq<Publication>())
                        where p.Id == id
                        select p).First();
             if (pub == null)
@@ -191,6 +180,18 @@ namespace BibtexEntryManager.Data
             }
             pub.DeletionTime = DateTime.Now;
             pub.SaveOrUpdateInDatabase();
+        }
+
+        public static void DeletePublications(IEnumerable<Publication> publications)
+        {
+            ISession ses = GetSession();
+            ses.BeginTransaction();
+            foreach (Publication pub in publications)
+            {
+                pub.DeletionTime = DateTime.Now;
+                ses.Update(pub);
+            }
+            ses.Transaction.Commit();
         }
 
         public static void CleanupAllDeletedPublications()

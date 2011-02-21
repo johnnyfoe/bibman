@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BibtexEntryManager.Models
 {
-
-    public class Testingclass
-    {
-        
-    }
 
     #region Models
     [PropertiesMustMatch("NewPassword", "ConfirmPassword", ErrorMessage = "The new password and confirmation password do not match.")]
@@ -40,8 +31,8 @@ namespace BibtexEntryManager.Models
     public class LogOnModel
     {
         [Required]
-        [DisplayName("User name")]
-        public string UserName { get; set; }
+        [DisplayName("Email Address")]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -56,12 +47,8 @@ namespace BibtexEntryManager.Models
     public class RegisterModel
     {
         [Required]
-        [DisplayName("User name")]
-        public string UserName { get; set; }
-
-        [Required]
         [DataType(DataType.EmailAddress)]
-        [DisplayName("Email address")]
+        [DisplayName("Email Address")]
         public string Email { get; set; }
 
         [Required]
@@ -87,9 +74,9 @@ namespace BibtexEntryManager.Models
     {
         int MinPasswordLength { get; }
 
-        bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string userName, string password, string email);
-        bool ChangePassword(string userName, string oldPassword, string newPassword);
+        bool ValidateUser(string email, string password);
+        MembershipCreateStatus CreateUser(string email, string password);
+        bool ChangePassword(string email, string oldPassword, string newPassword);
     }
 
     public class AccountMembershipService : IMembershipService
@@ -114,28 +101,27 @@ namespace BibtexEntryManager.Models
             }
         }
 
-        public bool ValidateUser(string userName, string password)
+        public bool ValidateUser(string email, string password)
         {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+            if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
             if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
 
-            return _provider.ValidateUser(userName, password);
+            return _provider.ValidateUser(email, password);
         }
 
-        public MembershipCreateStatus CreateUser(string userName, string password, string email)
+        public MembershipCreateStatus CreateUser(string email, string password)
         {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
-            if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
             if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
+            if (String.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
 
             MembershipCreateStatus status;
-            _provider.CreateUser(userName, password, email, null, null, true, null, out status);
+            _provider.CreateUser(email, password, null, null, null, true, null, out status);
             return status;
         }
 
-        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        public bool ChangePassword(string email, string oldPassword, string newPassword)
         {
-            if (String.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
+            if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
             if (String.IsNullOrEmpty(oldPassword)) throw new ArgumentException("Value cannot be null or empty.", "oldPassword");
             if (String.IsNullOrEmpty(newPassword)) throw new ArgumentException("Value cannot be null or empty.", "newPassword");
 
@@ -143,7 +129,7 @@ namespace BibtexEntryManager.Models
             // than return false in certain failure scenarios.
             try
             {
-                MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
+                MembershipUser currentUser = _provider.GetUser(email, true /* userIsOnline */);
                 return currentUser.ChangePassword(oldPassword, newPassword);
             }
             catch (ArgumentException)

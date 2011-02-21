@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using BibtexEntryManager.Data;
 using BibtexEntryManager.Models.EntryTypes;
-using BibtexEntryManager.Models.Enums;
+using NHibernate.Linq;
 
 namespace BibtexEntryManager
 {
@@ -24,15 +25,103 @@ namespace BibtexEntryManager
         }
 
         [OperationContract]
-        public string GetFields(string entryType)
+        public IList<int> GetDeletedPublications(string pageCreationTime)
         {
-            Entry entry;
-            if (!Entry.TryParse(entryType, true, out entry))
-                return "Incorrect entry type - error in programming. Provided value: " + entryType + " which was not found.";
+            try
+            {
+                DateTime d = DateTime.Parse(pageCreationTime);
 
+                var pubs = (from publications in DataPersistence.GetSession().Linq<Publication>()
+                            select publications).ToList();
+                pubs = pubs.Where(p => (p.DeletionTime.HasValue)).ToList();
 
+                IList<int> result = new List<int>();
+                foreach (Publication publication in pubs)
+                {
+                    if (publication.DeletionTime.Value.CompareTo(d) > 0)
+                        result.Add(publication.Id);
+                }
 
-            return "Not yet implemented.";
+                return result;
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
+        [OperationContract]
+        public IList<int> GetAmendedPublications(string pageCreationTime)
+        {
+            IList<int> result = new List<int>();
+            try
+            {
+                DateTime d = DateTime.Parse(pageCreationTime);
+
+                var pubs = (from publications in DataPersistence.GetSession().Linq<Publication>()
+                            select publications).ToList();
+                pubs = pubs.Where(p => (p.AmendmentTime.HasValue)).ToList();
+
+                foreach (Publication publication in pubs)
+                {
+                    if (publication.AmendmentTime.Value.CompareTo(d) > 0)
+                        result.Add(publication.Id);
+                }
+
+                return result;
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+        }
+
+        [OperationContract]
+        public IList<string> GetNewPublications(string pageCreationTime)
+        {
+            IList<string> retVal = new List<string>();
+            try
+            {
+                DateTime d = DateTime.Parse(pageCreationTime);
+
+                var pubs = (from publications in DataPersistence.GetSession().Linq<Publication>()
+                           select publications).ToList();
+
+                foreach (Publication publication in pubs)
+                {
+                    if (publication.CreationTime != null && publication.CreationTime.Value.CompareTo(d) > 0)
+                        retVal.Add(publication.FormatAsNewRow());
+                }
+                return retVal;
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
         // Add more operations here and mark them with [OperationContract]
 

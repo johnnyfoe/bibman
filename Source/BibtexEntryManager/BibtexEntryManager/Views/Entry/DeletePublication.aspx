@@ -1,110 +1,286 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<BibtexEntryManager.Models.EntryTypes.Publication>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	DeletePublication
+    DeletePublication
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2>Delete Publication</h2>
+    <h2>
+        Delete Publication</h2>
     <%if (Model != null)
       {%>
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>
+        Are you sure you want to delete this?</h3>
+        <a href="/Entry/MarkAsDeletedResult/<%:Model.Id %>">Yes (Delete)</a> |
+        <%:Html.ActionLink("No (back to list)", "Index")%>
     <fieldset>
         <legend>Fields</legend>
-        <div class="display-label">CiteKey</div>
-        <div class="display-field"><%:Model.CiteKey%></div>
-        
-        <div class="display-label">Abstract</div>
-        <div class="display-field"><%:Model.Abstract%></div>
-        
-        <div class="display-label">Address</div>
-        <div class="display-field"><%:Model.Address%></div>
-        
-        <div class="display-label">Annote</div>
-        <div class="display-field"><%:Model.Annote%></div>
-        
-        <div class="display-label">Authors</div>
-        <div class="display-field"><%:Model.Authors%></div>
-        
-        <div class="display-label">Booktitle</div>
-        <div class="display-field"><%:Model.Booktitle%></div>
-        
-        <div class="display-label">Chapter</div>
-        <div class="display-field"><%:Model.Chapter%></div>
-        
-        <div class="display-label">Crossref</div>
-        <div class="display-field"><%:Model.Crossref%></div>
-        
-        <div class="display-label">Edition</div>
-        <div class="display-field"><%:Model.Edition%></div>
-        
-        <div class="display-label">Editors</div>
-        <div class="display-field"><%:Model.Editors%></div>
-        
-        <div class="display-label">Howpublished</div>
-        <div class="display-field"><%:Model.Howpublished%></div>
-        
-        <div class="display-label">Institution</div>
-        <div class="display-field"><%:Model.Institution%></div>
-        
-        <div class="display-label">Journal</div>
-        <div class="display-field"><%:Model.Journal%></div>
-        
-        <div class="display-label">TheKey</div>
-        <div class="display-field"><%:Model.TheKey%></div>
-        
-        <div class="display-label">Month</div>
-        <div class="display-field"><%:Model.Month%></div>
-        
-        <div class="display-label">Note</div>
-        <div class="display-field"><%:Model.Note%></div>
-        
-        <div class="display-label">Number</div>
-        <div class="display-field"><%:Model.Number%></div>
-        
-        <div class="display-label">Organization</div>
-        <div class="display-field"><%:Model.Organization%></div>
-        
-        <div class="display-label">Pages</div>
-        <div class="display-field"><%:Model.Pages%></div>
-        
-        <div class="display-label">Publisher</div>
-        <div class="display-field"><%:Model.Publisher%></div>
-        
-        <div class="display-label">School</div>
-        <div class="display-field"><%:Model.School%></div>
-        
-        <div class="display-label">Series</div>
-        <div class="display-field"><%:Model.Series%></div>
-        
-        <div class="display-label">Title</div>
-        <div class="display-field"><%:Model.Title%></div>
-        
-        <div class="display-label">Type</div>
-        <div class="display-field"><%:Model.Type%></div>
-        
-        <div class="display-label">Volume</div>
-        <div class="display-field"><%:Model.Volume%></div>
-        
-        <div class="display-label">Year</div>
-        <div class="display-field"><%:Model.Year%></div>
-        
+        <div class="inputRow">
+            <div class="labelColumn">
+                CiteKey</div>
+            <div class="inputColumn">
+                <%:Model.CiteKey%></div>
+        </div>
+        <%
+            if (Model.Abstract != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Abstract</div>
+            <div class="inputColumn">
+                <%:Model.Abstract%></div>
+        </div>
+        <%
+            }
+          if (Model.Address != null)
+          {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Address</div>
+            <div class="inputColumn">
+                <%:Model.Address%></div>
+        </div>
+        <%
+            }
+            if (Model.Annote != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Annote</div>
+            <div class="inputColumn">
+                <%:Model.Annote%></div>
+        </div>
+        <%
+            }
+            if (Model.Authors != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Authors</div>
+            <div class="inputColumn">
+                <%:Model.Authors%></div>
+        </div>
+        <%
+            }
+            if (Model.Booktitle != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Booktitle</div>
+            <div class="inputColumn">
+                <%:Model.Booktitle%></div>
+        </div>
+        <%
+            }
+            if (Model.Chapter != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Chapter</div>
+            <div class="inputColumn">
+                <%:Model.Chapter%></div>
+        </div>
+        <%
+            }
+            if (Model.Crossref != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Crossref</div>
+            <div class="inputColumn">
+                <%:Model.Crossref%></div>
+        </div>
+        <%
+            }
+            if (Model.Edition != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Edition</div>
+            <div class="inputColumn">
+                <%:Model.Edition%></div>
+        </div>
+        <%
+            }
+            if (Model.Editors != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Editors</div>
+            <div class="inputColumn">
+                <%:Model.Editors%></div>
+        </div>
+        <%
+            }
+            if (Model.Howpublished != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Howpublished</div>
+            <div class="inputColumn">
+                <%:Model.Howpublished%></div>
+        </div>
+        <%
+            }
+            if (Model.Institution != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Institution</div>
+            <div class="inputColumn">
+                <%:Model.Institution%></div>
+        </div>
+        <%
+            }
+            if (Model.Journal != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Journal</div>
+            <div class="inputColumn">
+                <%:Model.Journal%></div>
+        </div>
+        <%
+            }
+            if (Model.TheKey != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Key</div>
+            <div class="inputColumn">
+                <%:Model.TheKey%></div>
+        </div>
+        <%
+            }
+            if (Model.Month != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Month</div>
+            <div class="inputColumn">
+                <%:Model.Month%></div>
+        </div>
+        <%
+            }
+            if (Model.Note != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Note</div>
+            <div class="inputColumn">
+                <%:Model.Note%></div>
+        </div>
+        <%
+            }
+            if (Model.Number != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Number</div>
+            <div class="inputColumn">
+                <%:Model.Number%></div>
+        </div>
+        <%
+            }
+            if (Model.Organization != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Organization</div>
+            <div class="inputColumn">
+                <%:Model.Organization%></div>
+        </div>
+        <%
+            }
+            if (Model.Pages != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Pages</div>
+            <div class="inputColumn">
+                <%:Model.Pages%></div>
+        </div>
+        <%
+            }
+            if (Model.Publisher != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Publisher</div>
+            <div class="inputColumn">
+                <%:Model.Publisher%></div>
+        </div>
+        <%
+            }
+            if (Model.School != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                School</div>
+            <div class="inputColumn">
+                <%:Model.School%></div>
+        </div>
+        <%
+            }
+            if (Model.Series != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Series</div>
+            <div class="inputColumn">
+                <%:Model.Series%></div>
+        </div>
+        <%
+            }
+            if (Model.Title != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Title</div>
+            <div class="inputColumn">
+                <%:Model.Title%></div>
+        </div>
+        <%
+            }
+            if (Model.Type != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Type</div>
+            <div class="inputColumn">
+                <%:Model.Type%></div>
+        </div>
+        <%
+            }
+            if (Model.Volume != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Volume</div>
+            <div class="inputColumn">
+                <%:Model.Volume%></div>
+        </div>
+        <%
+            }
+            if (Model.Year != null)
+            {%>
+        <div class="inputRow">
+            <div class="labelColumn">
+                Year</div>
+            <div class="inputColumn">
+                <%:Model.Year%></div>
+        </div>
+        <% } %>
     </fieldset>
-        <p>
-            <a href="/Entry/MarkAsDeletedResult/<%:Model.Id %>">Delete this item</a> | 
-		    <%:Html.ActionLink("Cancel (back to list)", "Index")%>
-        </p>
+    <p><a href="/Entry/MarkAsDeletedResult/<%:Model.Id %>">Yes (Delete)</a> |
+        <%:Html.ActionLink("No (back to list)", "Index")%>
+    </p>
     <%
         
-      }%>
-      <%else
-      {
-          Writer.Write("There was a problem with the Publication ID supplied - please refresh the previous page and ensure that it was not out of date");
-      }%><%:Html.ActionLink("Return to list of entries","Index","Entry") %>
-
+        }%>
+    <%else
+        {
+            Writer.Write("There was a problem with the Publication ID supplied - please refresh the previous page and ensure that it was not out of date");
+        }%>
 </asp:Content>
-
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
 </asp:Content>
-

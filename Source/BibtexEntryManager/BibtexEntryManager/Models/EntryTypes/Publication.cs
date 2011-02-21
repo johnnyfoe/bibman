@@ -67,6 +67,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         //public virtual PublicationGroup PublicationGroup { get; set; }
         // times of modification/creation/
         public virtual DateTime? DeletionTime { get; set; }
+        public virtual DateTime? AmendmentTime { get; set; }
         public virtual DateTime? CreationTime { get; set; }
         //public Dictionary<String, String> UnknownFields { get; private set; }
 
@@ -112,6 +113,25 @@ namespace BibtexEntryManager.Models.EntryTypes
                 SeparateAuthors(Editors, out a1, out a2);
 
             return "<tr id=\"tr_" + Id + "\"><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
+                   "</td><td>" + a1 + "</td><td>" + a2 + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
+        }
+
+        /// <summary>
+        /// Returns a html row as a string representing the Publication. Should include only CiteKey, Author, Year and title with HTML links to the edit page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string FormatAsNewRow()
+        {
+            string a1 = "";
+            string a2 = "";
+
+            // Separate authors/editors into fields a1 and a2
+            if (!String.IsNullOrEmpty(Authors))
+                SeparateAuthors(Authors, out a1, out a2);
+            else if (!String.IsNullOrEmpty(Editors))
+                SeparateAuthors(Editors, out a1, out a2);
+
+            return "<tr id=\"tr_" + Id + "\" class=\"NewPublication\"><td><a href=\"/Entry/Publication/" + Id + "\">" + CiteKey + "</a></td><td>" + EntryType +
                    "</td><td>" + a1 + "</td><td>" + a2 + "</td><td>" + Title + "</td><td>" + Year + "</td></tr>";
         }
 
@@ -328,7 +348,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         public virtual bool ExistsInDatabase()
         {
             return (from a in (DataPersistence.GetSession()).Linq<Publication>()
-                    where a.CiteKey.Equals(CiteKey)
+                    where a.Id == Id
                     select a).Count() != 0;
         }
 
@@ -336,6 +356,10 @@ namespace BibtexEntryManager.Models.EntryTypes
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
+            
+            if (DeletionTime == null)
+                AmendmentTime = DateTime.Now;
+
             ISession ses = DataPersistence.GetSession();
             ses.Update(this);
             ses.Flush();
@@ -357,7 +381,7 @@ namespace BibtexEntryManager.Models.EntryTypes
         {
             if (!IsValidEntry())
                 throw new InvalidEntryException();
-            this.CreationTime = DateTime.Now;
+            CreationTime = DateTime.Now;
             DataPersistence.GetSession().Persist(this);
         }
 
@@ -541,7 +565,7 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private bool IsValidManual()
         {
-            return String.IsNullOrEmpty(Title);
+            return !String.IsNullOrEmpty(Title);
         }
 
         private bool IsValidMastersthesis()

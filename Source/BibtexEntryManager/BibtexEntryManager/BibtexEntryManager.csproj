@@ -191,6 +191,7 @@
     <Content Include="Scripts\AjaxManagementScript.js" />
     <Content Include="Scripts\ChangeEntryType.js" />
     <Content Include="Scripts\DoPageLoad.js" />
+    <Content Include="Scripts\IndexAjaxManager.js" />
     <Content Include="Scripts\QuickCreateRedirect.js" />
     <Content Include="Scripts\sorttable.js" />
     <Content Include="SearchResults.svc" />

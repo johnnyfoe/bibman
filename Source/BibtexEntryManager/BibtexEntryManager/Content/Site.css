@@ -52,6 +52,7 @@ h1
     font-size: 2em;
     padding-bottom: 0;
     margin-bottom: 0;
+    color: White;
 }
 h2
 {
@@ -185,32 +186,32 @@ ul#menu li.selected a
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
-fieldset 
+fieldset
 {
     margin: 1em 0;
     padding: 1em;
     border: 1px solid #CCC;
 }
 
-fieldset p 
+fieldset p
 {
     margin: 2px 12px 10px 10px;
 }
 
-legend 
+legend
 {
     font-size: 1.1em;
     font-weight: 600;
     padding: 2px 4px 8px 4px;
 }
 
-input[type="text"] 
+input[type="text"]
 {
     width: 200px;
     border: 1px solid #CCC;
 }
 
-input[type="password"] 
+input[type="password"]
 {
     width: 200px;
     border: 1px solid #CCC;
@@ -219,40 +220,40 @@ input[type="password"]
 /* TABLE
 ----------------------------------------------------------*/
 
-table 
+table
 {
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
-  width:100%;
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-table td 
+table td
 {
-  padding: 5px;   
-  border: solid 1px #e8eef4;
+    padding: 5px;
+    border: solid 1px #e8eef4;
 }
 
 table th
 {
-  padding: 6px 5px;
-  text-align: left;
-  background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
+    padding: 6px 5px;
+    text-align: left;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
 }
 
 .table-headers
 {
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 table.results
 {
-    width:100%;
+    width: 100%;
 }
 
 table tr td
 {
-    border-color:Black;
+    border-color: Black;
     border: 1px;
 }
 
@@ -265,28 +266,28 @@ table tr td
 
 .error
 {
-    color:Red;
+    color: Red;
 }
 
 #menucontainer
 {
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 div#title
 {
-    display:block;
-    float:left;
-    text-align:left;
+    display: block;
+    float: left;
+    text-align: left;
 }
 
 #logindisplay
 {
-    font-size:1.1em;
-    display:block;
-    text-align:right;
-    margin:10px;
-    color:White;
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    color: White;
 }
 
 #logindisplay a:link
@@ -338,10 +339,7 @@ div#title
 
 /* Styles for editor and display helpers
 ----------------------------------------------------------*/
-.display-label,
-.editor-label,
-.display-field,
-.editor-field
+.display-label, .editor-label, .display-field, .editor-field
 {
     margin: 0.5em 0;
 }
@@ -365,29 +363,43 @@ div#title
 ----------------------------------------------------------*/
 .inputRow
 {
-     margin: 2px;
+    margin: 2px;
 }
 
 .labelColumn
 {
-    display:inline-table;
-    width:95px;
+    display: inline-table;
+    width: 95px;
 }
 
 .inputColumn
-{   
-    vertical-align:middle;
-    display:inline-table;
+{
+    vertical-align: middle;
+    display: inline-table;
 }
 
 .errorColumn
 {
-    display:inline-table;
+    display: inline-table;
 }
 /* Sortable tables */
-table.sortable thead {
-    background-color:#eee;
-    color:#666666;
+table.sortable thead
+{
+    background-color: #eee;
+    color: #666666;
     font-weight: bold;
     cursor: default;
+}
+
+tr.DeletedPublication
+{
+    background-color: #F7ADC0;
+}
+tr.AmendedPublication
+{
+    background-color: #F7F1AD;
+}
+tr.NewPublication
+{
+    background-color: #B8F7AD;
 }

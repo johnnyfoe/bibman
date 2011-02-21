@@ -8,11 +8,9 @@
     </title>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server" />
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-    <%--Not currently required - the quick create script doesn't work for the new model.
-    <script src="../../Scripts/QuickCreateRedirect.js" language="javascript" type="text/javascript"></script>--%>
     <script src="../../Scripts/sorttable.js" type="text/javascript"></script>
 </head>
-<body>
+<body onload="return DoPageLoad();">
     <div class="page">
         <div id="header">
             <div id="title">

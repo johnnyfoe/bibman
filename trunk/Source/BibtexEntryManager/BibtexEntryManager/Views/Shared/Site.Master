@@ -42,6 +42,7 @@
         <div id="ViewMenu" class="dropmenudiv_b">
             <%: Html.ActionLink("Search Entries","Search","Entry") %>
             <%: Html.ActionLink("View Active Entries","Index","Entry") %>
+            <%: Html.ActionLink("View Duplicates","ViewDuplicates","Entry") %>
             <%: Html.ActionLink("View Deleted Entries","DeletedEntries","Entry") %>
         </div>
         <div id="HelpMenu" class="dropmenudiv_b">

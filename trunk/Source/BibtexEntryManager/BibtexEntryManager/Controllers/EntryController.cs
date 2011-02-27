@@ -127,6 +127,22 @@ namespace BibtexEntryManager.Controllers
         }
 
         [Authorize]
+        public ActionResult ViewDuplicates()
+        {
+            IList<string> citekeys = DataPersistence.GetDuplicateCiteKeys();
+
+            return View(citekeys);
+        }
+
+        [Authorize]
+        public ActionResult ReviewDuplicates(string ck)
+        {
+            IList<Publication> duplicatesForCiteKey = DataPersistence.GetPublicationsWithCiteKey(ck);
+
+            return View(duplicatesForCiteKey);
+        }
+
+        [Authorize]
         public ActionResult MarkAsDeletedResult(int id)
         {
             try

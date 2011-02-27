@@ -38,8 +38,9 @@ namespace BibtexEntryManager
                 IList<int> result = new List<int>();
                 foreach (Publication publication in pubs)
                 {
-                    if (publication.DeletionTime.Value.CompareTo(d) > 0)
-                        result.Add(publication.Id);
+                    if (publication.DeletionTime != null)
+                        if (publication.DeletionTime.Value.CompareTo(d) > 0)
+                            result.Add(publication.Id);
                 }
 
                 return result;
@@ -72,8 +73,9 @@ namespace BibtexEntryManager
 
                 foreach (Publication publication in pubs)
                 {
-                    if (publication.AmendmentTime.Value.CompareTo(d) > 0)
-                        result.Add(publication.Id);
+                    if (publication.AmendmentTime != null)
+                        if (publication.AmendmentTime.Value.CompareTo(d) > 0)
+                            result.Add(publication.Id);
                 }
 
                 return result;
@@ -90,6 +92,20 @@ namespace BibtexEntryManager
             {
                 return null;
             }
+        }
+
+        [OperationContract]
+        public bool DeletePublication(int deletionId)
+        {
+            try
+            {
+                DataPersistence.DeletePublication(deletionId);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
         [OperationContract]

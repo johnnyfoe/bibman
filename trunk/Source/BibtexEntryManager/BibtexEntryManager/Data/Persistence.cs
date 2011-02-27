@@ -11,6 +11,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Criterion;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager.Data
@@ -225,6 +226,62 @@ namespace BibtexEntryManager.Data
                 ses.Delete(pub);
             }
             ses.Transaction.Commit();
+        }
+
+        public static IList<Publication> GetDuplicatePublications()
+        {
+            ISession ses = GetSession();
+
+            var t = (from pub in ses.Linq<Publication>()
+                     group pub by pub.CiteKey
+                         into pubGroup
+                         let count = pubGroup.Count()
+                         where count > 1
+                         select pubGroup.ToList());
+
+            return (IList<Publication>)t.ToList();
+        }
+
+        public static IList<string> GetDuplicateCiteKeys()
+        {
+            ISession ses = GetSession();
+            IList<string> retval = new List<string>();
+
+            //ISQLQuery getcitekeys = ses.CreateSQLQuery("SELECT CiteKey FROM [Bibtex].[dbo].[Publication] group by citekey having COUNT(citekey) > 1");
+
+            var activePublications = from pub in ses.Linq<Publication>()
+                                     where pub.DeletionTime == null
+                                     select pub;
+
+            var t = (from pub in activePublications
+                     group pub by pub.CiteKey
+                     into pubGroup
+                     where pubGroup.Count() > 1
+                     select new {CK = pubGroup.Key, Count = pubGroup.Count()});
+
+            
+
+
+
+            foreach (var group in t)
+            {
+                if (group.Count > 1)
+                    retval.Add(group.CK);
+            }
+
+            return retval;
+        }
+
+        public static IList<Publication> GetPublicationsWithCiteKey(string ck)
+        {
+            ISession ses = GetSession();
+
+            var res = from pubs in ses.Linq<Publication>()
+                      where pubs.CiteKey.Equals(ck) &&
+                            pubs.DeletionTime == null
+                      select pubs;
+
+            return res.ToList();
         }
     }
 }

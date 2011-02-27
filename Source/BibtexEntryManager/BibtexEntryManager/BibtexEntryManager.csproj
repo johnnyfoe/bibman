@@ -203,6 +203,8 @@
     <Content Include="Views\Entry\DeletedEntries.aspx" />
     <Content Include="Views\Entry\DeleteList.aspx" />
     <Content Include="Views\Entry\DeletePublication.aspx" />
+    <Content Include="Views\Entry\ReviewDuplicates.aspx" />
+    <Content Include="Views\Entry\ViewDuplicates.aspx" />
     <Content Include="Views\Entry\Import.aspx" />
     <Content Include="Views\Entry\ImportEntries.aspx" />
     <Content Include="Views\Entry\Index.aspx" />

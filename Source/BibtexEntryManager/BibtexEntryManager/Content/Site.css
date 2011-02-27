@@ -121,6 +121,7 @@ page width. Or, you can specify an exact pixel width. */
 
 #footer
 {
+    float: none;
     color: #999;
     padding: 10px 0;
     text-align: center;
@@ -184,7 +185,7 @@ ul#menu li.selected a
 }
 
 
-ul#menu li 
+ul#menu li
 {
     padding: 10px 20px;
     font-weight: bold;
@@ -414,4 +415,19 @@ tr.AmendedPublication
 tr.NewPublication
 {
     background-color: #B8F7AD;
+}
+#FieldSetOne
+{
+    float: left;
+    width: 49%;
+}
+#FieldSetTwo
+{
+    float: right;
+    width: 49%;
+}
+div#CompareTwoEntries
+{
+    overflow: auto;
+    width: 100%;
 }

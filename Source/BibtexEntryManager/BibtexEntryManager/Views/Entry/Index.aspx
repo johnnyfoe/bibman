@@ -18,12 +18,6 @@
             </Services>
         </asp:ScriptManager>
     <%: ViewData["DeletionResult"] %>
-    <p>
-        <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%>
-        |
-        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %>
-        |
-        <%: Html.ActionLink("Delete Multiple Entries", "SelectEntriesForDeletion", "Entry") %></p>
     <table class="sortable">
         <thead>
             <tr>
@@ -54,16 +48,6 @@
                }%>
         </tbody>
     </table>
-    <% if (Model.Count > 15)
-       {%>
-    <p>
-        <%: Html.ActionLink("Download All Entries (.bib)", "DownloadAll", "Entry")%>
-        |
-        <%: Html.ActionLink("View Deleted Entries", "DeletedEntries", "Entry") %>
-        |
-        <%: Html.ActionLink("Delete Multiple Entries", "SelectEntriesForDeletion", "Entry") %></p>
-    <%
-        }%>
     <input type="hidden" id="PageCreationTime" value="<%: DateTime.Now %>" />
     </form>
 </asp:Content>

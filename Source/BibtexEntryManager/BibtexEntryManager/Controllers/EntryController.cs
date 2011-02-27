@@ -131,13 +131,12 @@ namespace BibtexEntryManager.Controllers
         {
             try
             {
-
                 DataPersistence.DeletePublication(id);
                 ViewData["message"] = "success";
             }
             catch (PublicationNotFoundException e)
             {
-                ViewData["message"] = "failure";
+                ViewData["message"] = "failure - the publication was not found";
                 ViewData["exception"] = e.Message;
             }
             return View();
@@ -318,6 +317,43 @@ namespace BibtexEntryManager.Controllers
         {
             IList<Publication> publications = DataPersistence.GetActivePublications();
             return View(publications);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult DeleteList(FormCollection fc)
+        {
+            string s = fc["deleteList"];
+            var d = s.Split(' ');
+            IList<int> ints = new List<int>();
+            foreach (string s1 in d)
+            {
+                int val;
+                if (Int32.TryParse(s1, out val))
+                {
+                    ints.Add(val);
+                }
+            }
+
+            foreach (int i in ints)
+            {
+                DataPersistence.DeletePublication(i);
+            }
+
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult RestorePublication(int? id)
+        {
+            if (id == null)
+            {
+                return Redirect("/Entry/");
+            }
+            int notNullId = (int) id;
+            DataPersistence.RestorePublication(notNullId);
+            ViewData["message"] = "Item was restored successfully";
+            return Redirect("/Entry/Publication/" + notNullId);
         }
 
         [Authorize]

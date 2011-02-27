@@ -6,18 +6,35 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
-    <h2>
-        <% Writer.Write(amendOrCreate); %></h2>
+    <h2><%: amendOrCreate %></h2>
+
     <% using (Html.BeginForm())
        {%>
-    <%: Html.ValidationSummary(true) %>
-
+    <%:Html.ValidationSummary(true)%>
+    <p><%: ViewData["message"] %>
+    <%if (Model != null && Model.DeletionTime != null){%>This entry is currently marked as deleted. To restore it, press 'Restore this item' below.<br /><br /><%} %>
+        <input type="submit" value="<%:amendOrCreate%>" />
+        <%
+           if (Model != null)
+           {
+               if (Model.DeletionTime == null)
+               {%>
+        | <a href="/Entry/DeletePublication/<%:Model.Id%>">Delete this item</a>
+        <%
+               }
+               else
+               {%>
+        | <a href="/Entry/RestorePublication/<%:Model.Id%>">Restore this item</a>
+        <%
+}
+           }%>
+    </p>
     <div id="selectType" class="inputRow">
         <div class="labelColumn">
-            <%: Html.LabelFor(model => model.EntryType) %>
+            <%:Html.LabelFor(model => model.EntryType)%>
         </div>
         <div class="inputColumn">
-        <%: Html.HiddenFor(model => model.EntryType) %>
+            <%:Html.HiddenFor(model => model.EntryType)%>
             <select id="entrySelector" onchange="return ChangeEntryType()">
                 <option value="Article">Article</option>
                 <option value="Book">Book</option>
@@ -40,57 +57,57 @@
         <legend>Required Fields</legend>
         <div id="field_for_citekey" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.CiteKey) %>
+                <%:Html.LabelFor(model => model.CiteKey)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.CiteKey) %>
+                <%:Html.TextBoxFor(model => model.CiteKey)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.CiteKey) %>
+                <%:Html.ValidationMessageFor(model => model.CiteKey)%>
             </div>
         </div>
         <div id="field_for_authors" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Authors) %>
+                <%:Html.LabelFor(model => model.Authors)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Authors) %>
+                <%:Html.TextBoxFor(model => model.Authors)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Authors) %>
+                <%:Html.ValidationMessageFor(model => model.Authors)%>
             </div>
         </div>
         <div id="field_for_title" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Title) %>
+                <%:Html.LabelFor(model => model.Title)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Title) %>
+                <%:Html.TextBoxFor(model => model.Title)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Title) %>
+                <%:Html.ValidationMessageFor(model => model.Title)%>
             </div>
         </div>
         <div id="field_for_journal" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Journal) %>
+                <%:Html.LabelFor(model => model.Journal)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Journal) %>
+                <%:Html.TextBoxFor(model => model.Journal)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Journal) %>
+                <%:Html.ValidationMessageFor(model => model.Journal)%>
             </div>
         </div>
         <div id="field_for_year" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Year) %>
+                <%:Html.LabelFor(model => model.Year)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Year) %>
+                <%:Html.TextBoxFor(model => model.Year)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Year) %>
+                <%:Html.ValidationMessageFor(model => model.Year)%>
             </div>
         </div>
     </fieldset>
@@ -98,247 +115,257 @@
         <legend>Optional Fields</legend>
         <div id="field_for_thekey" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.TheKey) %>
+                <%:Html.LabelFor(model => model.TheKey)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.TheKey) %>
+                <%:Html.TextBoxFor(model => model.TheKey)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.TheKey) %>
+                <%:Html.ValidationMessageFor(model => model.TheKey)%>
             </div>
         </div>
         <div id="field_for_volume" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Volume) %>
+                <%:Html.LabelFor(model => model.Volume)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Volume) %>
+                <%:Html.TextBoxFor(model => model.Volume)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Volume) %>
+                <%:Html.ValidationMessageFor(model => model.Volume)%>
             </div>
         </div>
         <div id="field_for_number" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Number) %>
+                <%:Html.LabelFor(model => model.Number)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Number) %>
+                <%:Html.TextBoxFor(model => model.Number)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Number) %>
+                <%:Html.ValidationMessageFor(model => model.Number)%>
             </div>
         </div>
         <div id="field_for_pages" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Pages) %>
+                <%:Html.LabelFor(model => model.Pages)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Pages) %>
+                <%:Html.TextBoxFor(model => model.Pages)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Pages) %>
+                <%:Html.ValidationMessageFor(model => model.Pages)%>
             </div>
         </div>
         <div id="field_for_month" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Month) %>
+                <%:Html.LabelFor(model => model.Month)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Month) %>
+                <%:Html.TextBoxFor(model => model.Month)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Month) %>
+                <%:Html.ValidationMessageFor(model => model.Month)%>
             </div>
         </div>
         <div id="field_for_note" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Note) %>
+                <%:Html.LabelFor(model => model.Note)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Note) %>
+                <%:Html.TextBoxFor(model => model.Note)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Note) %>
+                <%:Html.ValidationMessageFor(model => model.Note)%>
             </div>
         </div>
         <div id="field_for_annote" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Annote) %>
+                <%:Html.LabelFor(model => model.Annote)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Annote) %>
+                <%:Html.TextBoxFor(model => model.Annote)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Annote) %>
+                <%:Html.ValidationMessageFor(model => model.Annote)%>
             </div>
         </div>
         <div id="field_for_abstract" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Abstract) %>
+                <%:Html.LabelFor(model => model.Abstract)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Abstract) %>
+                <%:Html.TextBoxFor(model => model.Abstract)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Abstract) %>
+                <%:Html.ValidationMessageFor(model => model.Abstract)%>
             </div>
         </div>
     </fieldset>
     <div id="hidingPlace" style="visibility: hidden; height: 0px;">
         <div id="field_for_address" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Address) %>
+                <%:Html.LabelFor(model => model.Address)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Address) %>
+                <%:Html.TextBoxFor(model => model.Address)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Address) %>
+                <%:Html.ValidationMessageFor(model => model.Address)%>
             </div>
         </div>
         <div id="field_for_booktitle" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Booktitle) %>
+                <%:Html.LabelFor(model => model.Booktitle)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Booktitle) %>
+                <%:Html.TextBoxFor(model => model.Booktitle)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Booktitle) %>
+                <%:Html.ValidationMessageFor(model => model.Booktitle)%>
             </div>
         </div>
         <div id="field_for_chapter" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Chapter) %>
+                <%:Html.LabelFor(model => model.Chapter)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Chapter) %>
+                <%:Html.TextBoxFor(model => model.Chapter)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Chapter) %>
+                <%:Html.ValidationMessageFor(model => model.Chapter)%>
             </div>
         </div>
         <div id="field_for_crossref" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Crossref) %>
+                <%:Html.LabelFor(model => model.Crossref)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Crossref) %>
+                <%:Html.TextBoxFor(model => model.Crossref)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Crossref) %>
+                <%:Html.ValidationMessageFor(model => model.Crossref)%>
             </div>
         </div>
         <div id="field_for_edition" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Edition) %>
+                <%:Html.LabelFor(model => model.Edition)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Edition) %>
+                <%:Html.TextBoxFor(model => model.Edition)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Edition) %>
+                <%:Html.ValidationMessageFor(model => model.Edition)%>
             </div>
         </div>
         <div id="field_for_editors" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Editors) %>
+                <%:Html.LabelFor(model => model.Editors)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Editors) %>
+                <%:Html.TextBoxFor(model => model.Editors)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Editors) %>
+                <%:Html.ValidationMessageFor(model => model.Editors)%>
             </div>
         </div>
         <div id="field_for_howpublished" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Howpublished) %>
+                <%:Html.LabelFor(model => model.Howpublished)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Howpublished) %>
+                <%:Html.TextBoxFor(model => model.Howpublished)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Howpublished) %>
+                <%:Html.ValidationMessageFor(model => model.Howpublished)%>
             </div>
         </div>
         <div id="field_for_institution" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Institution) %>
+                <%:Html.LabelFor(model => model.Institution)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Institution) %>
+                <%:Html.TextBoxFor(model => model.Institution)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Institution) %>
+                <%:Html.ValidationMessageFor(model => model.Institution)%>
             </div>
         </div>
         <div id="field_for_organisation" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Organization) %>
+                <%:Html.LabelFor(model => model.Organization)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Organization) %>
+                <%:Html.TextBoxFor(model => model.Organization)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Organization) %>
+                <%:Html.ValidationMessageFor(model => model.Organization)%>
             </div>
         </div>
         <div id="field_for_publisher" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Publisher) %>
+                <%:Html.LabelFor(model => model.Publisher)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Publisher) %>
+                <%:Html.TextBoxFor(model => model.Publisher)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Publisher) %>
+                <%:Html.ValidationMessageFor(model => model.Publisher)%>
             </div>
         </div>
         <div id="field_for_school" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.School) %>
+                <%:Html.LabelFor(model => model.School)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.School) %>
+                <%:Html.TextBoxFor(model => model.School)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.School) %>
+                <%:Html.ValidationMessageFor(model => model.School)%>
             </div>
         </div>
         <div id="field_for_series" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Series) %>
+                <%:Html.LabelFor(model => model.Series)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Series) %>
+                <%:Html.TextBoxFor(model => model.Series)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Series) %>
+                <%:Html.ValidationMessageFor(model => model.Series)%>
             </div>
         </div>
         <div id="field_for_type" class="inputRow">
             <div class="labelColumn">
-                <%: Html.LabelFor(model => model.Type) %>
+                <%:Html.LabelFor(model => model.Type)%>
             </div>
             <div class="inputColumn">
-                <%: Html.TextBoxFor(model => model.Type) %>
+                <%:Html.TextBoxFor(model => model.Type)%>
             </div>
             <div class="errorColumn">
-                <%: Html.ValidationMessageFor(model => model.Type) %>
+                <%:Html.ValidationMessageFor(model => model.Type)%>
             </div>
         </div>
     </div>
     <p>
         <input type="submit" value="<%:amendOrCreate%>" />
-        <% if (Model != null)
-           {%>
+        <%
+           if (Model != null)
+           {
+               if (Model.DeletionTime == null)
+               {%>
         | <a href="/Entry/DeletePublication/<%:Model.Id%>">Delete this item</a>
         <%
-            }%>
+               }
+               else
+               {%>
+        | <a href="/Entry/RestorePublication/<%:Model.Id%>">Restore this item</a>
+        <%
+}
+           }%>
     </p>
-    <% } %>
+    <%
+       }%>
     <div>
         <%: Html.ActionLink("Back to List", "Index") %>
     </div>

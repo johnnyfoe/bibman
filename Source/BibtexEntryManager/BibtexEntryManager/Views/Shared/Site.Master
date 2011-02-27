@@ -7,38 +7,58 @@
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
     <asp:ContentPlaceHolder ID="ScriptsContent" runat="server" />
+    <link href="../../Content/bluetabs.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/sorttable.js" type="text/javascript"></script>
+    <script src="../../Scripts/dropdowntabs.js" type="text/javascript">        /***********************************************        * Drop Down Tabs Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)        * This notice MUST stay intact for legal use
+        * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+        ***********************************************/    </script>
 </head>
 <body onload="return DoPageLoad();">
     <div class="page">
         <div id="header">
-            <div id="title">
-                <h1><%: Html.ActionLink("Bibtex Entry Manager", "Index", "Home")%></h1>
-            </div>
             <div id="logindisplay">
                 <% Html.RenderPartial("LogOnUserControl"); %>
             </div>
-            <div id="menucontainer">
-                <ul id="menu">
-                    <li>
-                        <%: Html.ActionLink("List All Entries", "Index", "Entry")%></li>
-                    <li>
-                        <%: Html.ActionLink("Import Entries","Import","Entry") %>
-                    </li>
-                    <li>
-                        <% Html.RenderPartial("SearchControl"); %></li>
-                    <li>
-                        <% Html.RenderPartial("QuickCreateControl"); %>
-                    </li>
-                </ul>
-            </div>
         </div>
+        <div id="bluemenu" class="bluetabs">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a rel="EditMenu">Edit</a></li>
+                <li><a rel="ViewMenu">View</a></li>
+                <li><a rel="FileMenu">Import/Export</a></li>
+                <li><a rel="HelpMenu">Help</a></li>
+            </ul>
+        </div>
+        <div id="FileMenu" class="dropmenudiv_b">
+            <%: Html.ActionLink("Upload File (Import)", "Import","Entry") %>
+            <%: Html.ActionLink("Download File (Export)", "DownloadAll", "Entry")%>
+        </div>
+        <div id="EditMenu" class="dropmenudiv_b">
+            <%: Html.ActionLink("Add","Publication","Entry") %>
+            <%: Html.ActionLink("Modify","Index","Entry") %>
+            <%: Html.ActionLink("Delete","SelectEntriesForDeletion","Entry") %>
+        </div>
+        <div id="ViewMenu" class="dropmenudiv_b">
+            <%: Html.ActionLink("Search Entries","Search","Entry") %>
+            <%: Html.ActionLink("View Active Entries","Index","Entry") %>
+            <%: Html.ActionLink("View Deleted Entries","DeletedEntries","Entry") %>
+        </div>
+        <div id="HelpMenu" class="dropmenudiv_b">
+            <%: Html.ActionLink("About","About","home") %>
+        </div>
+        <script type="text/javascript">
+            //SYNTAX: tabdropdown.init("menu_id", [integer OR "auto"])
+            tabdropdown.init("bluemenu")
+        </script>
         <div id="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             <div id="footer">
-                <p>Page rendered on <%: DateTime.Now.ToLongDateString() + " at " + DateTime.Now.ToShortTimeString() %>
-                <br />John Thow - Bibtex Entry Manager</p>
+                <p>
+                    Page rendered on
+                    <%: DateTime.Now.ToLongDateString() + " at " + DateTime.Now.ToShortTimeString() %>
+                    <br />
+                    John Thow - Bibtex Entry Manager</p>
             </div>
         </div>
     </div>

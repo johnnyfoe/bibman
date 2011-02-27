@@ -187,16 +187,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bluetabs.css" />
+    <Content Include="Content\images\bluetab.gif" />
+    <Content Include="Content\images\bluetabactive.gif" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\AjaxManagementScript.js" />
     <Content Include="Scripts\ChangeEntryType.js" />
     <Content Include="Scripts\DoPageLoad.js" />
+    <Content Include="Scripts\dropdowntabs.js" />
     <Content Include="Scripts\IndexAjaxManager.js" />
     <Content Include="Scripts\QuickCreateRedirect.js" />
     <Content Include="Scripts\sorttable.js" />
     <Content Include="SearchResults.svc" />
     <Content Include="Views\Entry\ConfirmDeleteEntries.aspx" />
     <Content Include="Views\Entry\DeletedEntries.aspx" />
+    <Content Include="Views\Entry\DeleteList.aspx" />
     <Content Include="Views\Entry\DeletePublication.aspx" />
     <Content Include="Views\Entry\Import.aspx" />
     <Content Include="Views\Entry\ImportEntries.aspx" />

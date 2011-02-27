@@ -26,7 +26,7 @@
     </form>
     <p>
         Instant search box:
-        <input id="searchString" type="text" onkeypress="return keysearch()" />
+        <input id="searchString" type="text" onkeyup="return keysearch()" />
         Wildcards '*' and '?' may be used in searches.
     </p>
     <table class="sortable">

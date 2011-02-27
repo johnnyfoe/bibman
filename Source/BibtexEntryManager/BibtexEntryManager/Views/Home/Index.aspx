@@ -9,9 +9,9 @@
     <%if (!Request.IsAuthenticated)
       {%><p>
           This is the home page for the bibtex entry manager. To begin using the site, please
-          <%:Html.ActionLink("log in if you have an existing account", "LogOn", "Account")%>
+          <%:Html.ActionLink("Log in if you have an existing account", "LogOn", "Account")%>
           or
-          <%:Html.ActionLink("register a new account", "Register", "Account")%></p>
+          <%:Html.ActionLink("Register a new account", "Register", "Account")%></p>
     <%
         }
       else

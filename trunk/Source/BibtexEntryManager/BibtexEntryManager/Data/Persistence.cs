@@ -191,6 +191,19 @@ namespace BibtexEntryManager.Data
             pub.SaveOrUpdateInDatabase();
         }
 
+        public static void RestorePublication(int id)
+        {
+            var pub = (from p in (GetSession().Linq<Publication>())
+                       where p.Id == id
+                       select p).First();
+            if (pub == null)
+            {
+                throw new PublicationNotFoundException(id);
+            }
+            pub.DeletionTime = null;
+            pub.SaveOrUpdateInDatabase();
+        }
+
         public static void DeletePublications(IEnumerable<Publication> publications)
         {
             ISession ses = GetSession();

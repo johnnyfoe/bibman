@@ -1,6 +1,7 @@
 <%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<System.Collections.Generic.IList<BibtexEntryManager.Models.EntryTypes.Publication>>"
     MasterPageFile="~/Views/Shared/Site.master" %>
 
+<%@ Import Namespace="BibtexEntryManager.Models.EntryTypes" %>
 <asp:Content runat="server" ID="Title" ContentPlaceHolderID="TitleContent">
 </asp:Content>
 <asp:Content runat="server" ID="Scripts" ContentPlaceHolderID="ScriptsContent">
@@ -8,10 +9,21 @@
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
     <h2>
         List of Entries</h2>
-    <form id="confirmDeleteForm" method="post" runat="server">
+    <form id="confirmDeleteForm" action="/Entry/DeleteList" method="post" runat="server">
     <p>
-        Are you sure you want to delete the entries below? <input type="submit" value="Yes" /> |
+        Are you sure you want to delete the entries below?
+        <input type="submit" value="Yes" />
+        |
         <%:Html.ActionLink("No - Cancel", "Index", "Entry")%></p>
+    <input type="hidden" id="deleteList" name="deleteList" value="
+    <%
+        string val = "";
+        foreach (Publication publication in Model)
+        {
+            val += " " + publication.Id;
+        }
+        Writer.Write(val);
+%>" />
     <table class="sortable">
         <thead>
             <tr>
@@ -45,7 +57,9 @@
     </table>
     <% if (Model.Count > 5)
        {%>
-    <p>Are you sure you want to delete the entries above? <input type="submit" value="Yes" />
+    <p>
+        Are you sure you want to delete the entries above?
+        <input type="submit" value="Yes" />
         |
         <%:Html.ActionLink("No - Cancel", "Index", "Entry")%></p>
     <%

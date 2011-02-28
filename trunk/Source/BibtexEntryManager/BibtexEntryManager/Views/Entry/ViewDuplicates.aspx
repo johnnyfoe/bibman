@@ -9,17 +9,20 @@
     <% 
         if (Model.Count > 0)
         {
+%>
+            <p>The following cite keys have duplicate entries assigned to them - please click on one of them to review them in turn.</p>
+            <p>
+            <%
             foreach (String ck in Model)
             {
-%>
-<p><%
-                Writer.Write("<a href=\"/Entry/ReviewDuplicates?ck=" + ck + "\">" + ck + "</a>");%></p>
-<%
-            }
+                Writer.Write("<a href=\"/Entry/ReviewDuplicates?ck=" + ck + "\">" + ck + "</a><br/>");%>
+            <%
+            }%>
+            </p><%
         }
         else
         {%>
-            <p>Congratulations - you have no duplicates!</p>
+            <p>There are no duplicates in the system. <%: Html.ActionLink("Return to list of all entries", "Index", "Entry") %></p>
      <% }%>
 </asp:Content>
 

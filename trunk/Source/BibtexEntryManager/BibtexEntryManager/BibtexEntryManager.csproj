@@ -191,6 +191,7 @@
     <Content Include="Content\images\bluetab.gif" />
     <Content Include="Content\images\bluetabactive.gif" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\AjaxDeletePublication.js" />
     <Content Include="Scripts\AjaxManagementScript.js" />
     <Content Include="Scripts\ChangeEntryType.js" />
     <Content Include="Scripts\DoPageLoad.js" />

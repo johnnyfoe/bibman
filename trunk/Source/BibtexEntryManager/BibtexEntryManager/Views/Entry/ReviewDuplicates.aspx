@@ -13,7 +13,7 @@
         <Services>
             <asp:ServiceReference Path="/SearchResults.svc" />
         </Services>
-        </asp:ScriptManager>
+    </asp:ScriptManager>
     <%if (Model.Count > 1)
       {
     %>
@@ -555,23 +555,17 @@
       else
       {%>
     <p>There are no longer duplicates for cite key
-        <%: Request.Params.Get("ck") %>!</p>
+        <%: Request.Params.Get("ck") %>! <%: Html.ActionLink("Return to view all duplicate cite keys","ViewDuplicates","Entry") %></p>
     <%
         }%>
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
-<script type="text/javascript">
-    function DeletePublication(target) {
-        var service = new BibtexEntryManager.SearchResults();
-        service.DeletePublication(target, deletionSuccess, null, null);
-        
-    }
-
-    function deletionSuccess() {
-        alert("Deleted item successfully");
-        window.location.reload(true);
-    }
-
-</script>
+    <script src="../../Scripts/AjaxDeletePublication.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function deletionSuccess() {
+            alert("Deleted item successfully");
+            window.location.reload(true);
+        }
+    </script>
 </asp:Content>

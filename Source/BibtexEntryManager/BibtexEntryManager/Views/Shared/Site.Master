@@ -35,7 +35,7 @@
             <%: Html.ActionLink("Download File (Export)", "DownloadAll", "Entry")%>
         </div>
         <div id="EditMenu" class="dropmenudiv_b">
-            <%: Html.ActionLink("Add","Publication","Entry") %>
+            <a href="/Entry/Publication">Add</a>
             <%: Html.ActionLink("Modify","Index","Entry") %>
             <%: Html.ActionLink("Delete","SelectEntriesForDeletion","Entry") %>
         </div>

@@ -39,6 +39,10 @@ function onNewPublicationsCheckSuccess(result) {
     if (result != null) {
         var tbodies = document.getElementsByTagName("tbody");
         var originalHTML = tbodies[0].innerHTML;
-        tbodies[0].innerHTML = result + originalHTML;
+        var finalString = "";
+        for (var k = 0; k < result.length; k++) {
+            finalString += result[k];
+        }
+        tbodies[0].innerHTML = finalString + originalHTML;
     }
 }

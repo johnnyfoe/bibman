@@ -4,8 +4,8 @@
     Home Page
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Welcome to the Bibtex Entry Manager</h2>
+    <h2>Welcome to the Bibtex Entry Manager</h2>
+    <noscript>The site requires that a javascript-enabled browser is used - please turn on javascript.</noscript>
     <%if (!Request.IsAuthenticated)
       {%><p>
           This is the home page for the bibtex entry manager. To begin using the site, please

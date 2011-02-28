@@ -8,9 +8,15 @@
         Delete Publication</h2>
     <%if (Model != null)
       {%>
-    <h3>
-        Are you sure you want to delete this?</h3>
-        <a href="/Entry/MarkAsDeletedResult/<%:Model.Id %>">Yes (Delete)</a> |
+    <h3>Are you sure you want to delete this entry?</h3>
+    <form runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="/SearchResults.svc" />
+        </Services>
+    </asp:ScriptManager>
+    </form>
+        <a href="javascript:DeletePublication(<%:Model.Id %>)">Yes (Delete)</a> |
         <%:Html.ActionLink("No (back to list)", "Index")%>
     <fieldset>
         <legend>Fields</legend>
@@ -271,7 +277,8 @@
         </div>
         <% } %>
     </fieldset>
-    <p><a href="/Entry/MarkAsDeletedResult/<%:Model.Id %>">Yes (Delete)</a> |
+    <p>
+        <a href="javascript:DeletePublication(<%:Model.Id %>)">Yes (Delete)</a> |
         <%:Html.ActionLink("No (back to list)", "Index")%>
     </p>
     <%
@@ -283,4 +290,11 @@
         }%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
+    <script src="../../Scripts/AjaxDeletePublication.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function deletionSuccess() {
+            alert("Deleted item successfully");
+            window.location = "/Entry";
+        }
+    </script>
 </asp:Content>

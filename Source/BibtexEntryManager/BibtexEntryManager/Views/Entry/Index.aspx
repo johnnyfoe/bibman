@@ -10,7 +10,8 @@
     <h2>
         List of Entries
     </h2>
-    <p>Items that have been added or deleted since the page was loaded will appear and be highlighted automatically</p>
+    <p>To modify or delete an existing entry, click the cite key. <br />
+    Items that have been added or deleted since the page was loaded will appear and be highlighted automatically</p>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             <Services>

@@ -7,5 +7,7 @@ stackoverflow community for their extensive knowledgebase and source of ideas
 Stuart Langridge of kryogenix.org for his javascript library 'sorttable' http://www.kryogenix.org/code/browser/sorttable/
 Thomas Anderson of the Amor Group for a pointer to using fluent nhibernate without which I wouldn't have been able to get my NHibernate solution off the ground
 Phil Haack for his blog post on custom validation in .NET - http://haacked.com/archive/2009/11/19/aspnetmvc2-custom-validation.aspx
-JetBrains' for their productivity plugin 'ReSharper'
+JetBrains for their productivity plugin 'ReSharper'
 SCS (DCS) of Glasgow for leading me to believe that I know what I'm doing over the past 4 years!
+Dynamic Drive DHTML code library (www.dynamicdrive.com) for the Drop Down Tabs Menu template
+Graham Mooney for his DIVine wisdom! :)

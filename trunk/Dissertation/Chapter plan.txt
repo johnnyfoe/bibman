@@ -1,0 +1,52 @@
+Chapter 1: Introduction
+    latex
+    bibtex
+    problem statement
+        management of bibtex files
+        collaboration
+        
+Chapter 2: Background survey
+    Examination criteria
+    previous projects
+        Highlights
+        Shortfalls
+    other management suites
+    
+Chapter 3: Requirements Engineering
+    stakeholders
+    requirements gathering tools
+    requirements capture tools
+    prioritisation
+    specification
+    
+Chapter 4: Design
+    technology selection
+        NHibernate (Fluent NHibernate)
+    architecture
+    web interface design
+    DB Design
+    
+Chapter 5: Implementation
+    Model View Controller
+    Reuse of code
+    concurrency
+    patterns
+    Discipline
+        Bug tracking
+        Continuous Integration
+        SVN/sourceforge
+        Testing
+        IDE/tools
+    
+Chapter 6: Testing and Evaluation
+    Testing
+        Unit testing
+        Acceptance test
+    Evaluation
+    
+Chapter 7: Conclusion
+    Summary
+    Suggestions for further work
+    
+    
+Appendices

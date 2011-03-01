@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using BibtexEntryManager.Data;
 using BibtexEntryManager.Models.EntryTypes;
+using NHibernate;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager
@@ -106,6 +107,61 @@ namespace BibtexEntryManager
                 return false;
             }
             return true;
+        }
+
+        [OperationContract]
+        public int HasPublicationChanged(string queryString)
+        {
+            var split = queryString.Split(' ');
+            int id = 0;
+            string pageCreationTime = "";
+            int count = 0;
+            foreach (string s in split)
+            {
+                if (!String.IsNullOrEmpty(s))
+                {
+                    if (count == 0)
+                    {
+                        pageCreationTime = s;
+                    }
+                    if (count == 1)
+                    {
+                        pageCreationTime += " " + s;
+                    }
+                    if (count == 2)
+                    {
+                        id = Int32.Parse(s);
+                    }
+                    count++;
+                }
+            }
+            if (id == -1)
+            {
+                return -1; // page is at creation stage, so does not exist in the db and cannot have changed.
+            }
+
+            ISession ses = DataPersistence.GetSession();
+            
+            DateTime d = DateTime.Parse(pageCreationTime);
+
+            var pub = (from p in ses.Linq<Publication>()
+                      where p.Id == id
+                      select p).First();
+
+            if (pub == null)
+            {
+                return -1; // means that the publication does not exist in the db and therefore cannot have changed
+            }
+            if (pub.DeletionTime > d)
+            {
+                return 1; // 1 signifies deletion since page load
+            }
+            if (pub.AmendmentTime > d)
+            {
+                return 2; // 2 signifies amendment since page load
+            }
+
+            return 0; // 0 signifies no change since page load
         }
 
         [OperationContract]

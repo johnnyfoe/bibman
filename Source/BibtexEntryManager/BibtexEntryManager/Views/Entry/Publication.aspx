@@ -7,9 +7,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
     <h2><%: amendOrCreate %></h2>
-
+    <p id="notificationOfUpdate"></p>
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Services>
+                <asp:ServiceReference Path="/SearchResults.svc" />
+            </Services>
+        </asp:ScriptManager>
+    </form>
     <% using (Html.BeginForm())
        {%>
+       
     <%:Html.ValidationSummary(true)%>
     <p><%: ViewData["message"] %>
     <%if (Model != null && Model.DeletionTime != null){%>This entry is currently marked as deleted. To restore it, press 'Restore this item' below.<br /><br /><%} %>
@@ -364,6 +372,7 @@
 }
            }%>
     </p>
+    <input type="hidden" id="PageCreationTime" value="<%: DateTime.Now %>" />
     <%
        }%>
     <div>
@@ -372,4 +381,9 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
     <script src="../../Scripts/ChangeEntryType.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function ItemId() { 
+            return <%:(Model != null) ? Model.Id : -1 %>;
+        }
+    </script>
 </asp:Content>

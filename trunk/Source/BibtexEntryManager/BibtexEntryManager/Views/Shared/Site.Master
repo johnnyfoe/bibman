@@ -24,10 +24,10 @@
         <div id="bluemenu" class="bluetabs">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a rel="EditMenu">Edit</a></li>
-                <li><a rel="ViewMenu">View</a></li>
-                <li><a rel="FileMenu">Import/Export</a></li>
-                <li><a rel="HelpMenu">Help</a></li>
+                <li><a href="/Entry" rel="EditMenu">Edit</a></li>
+                <li><a href="/Entry" rel="ViewMenu">View</a></li>
+                <li><a href="/Entry/Import" rel="FileMenu">Import/Export</a></li>
+                <li><a href="/Home/About" rel="HelpMenu">Help</a></li>
             </ul>
         </div>
         <div id="FileMenu" class="dropmenudiv_b">
@@ -35,9 +35,10 @@
             <%: Html.ActionLink("Download File (Export)", "DownloadAll", "Entry")%>
         </div>
         <div id="EditMenu" class="dropmenudiv_b">
-            <a href="/Entry/Publication">Add</a>
-            <%: Html.ActionLink("Modify","Index","Entry") %>
-            <%: Html.ActionLink("Delete","SelectEntriesForDeletion","Entry") %>
+            <a href="/Entry/Publication">Add entry</a>
+            <%: Html.ActionLink("Modify entry", "Index", "Entry")%>
+            <%: Html.ActionLink("Delete entry", "SelectEntriesForDeletion", "Entry")%>
+            <%: Html.ActionLink("Undelete entry", "DeletedEntries", "Entry")%>
         </div>
         <div id="ViewMenu" class="dropmenudiv_b">
             <%: Html.ActionLink("Search Entries","Search","Entry") %>

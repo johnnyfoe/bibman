@@ -12,7 +12,7 @@ namespace BibtexEntryManager.Tests.Mapping
     [TestFixture]
     public class MappingFixture : FixtureBase
     {
-        [Ignore("Sets up new database - skipping.")]
+        //[Ignore("Sets up new database - skipping.")]
         [Test]
         public void SetupDatabase()
         {

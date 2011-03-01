@@ -7,6 +7,6 @@
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>About</h2>
     <p>
-        Put content here.
+        Content can be put here about the project, links to more information about TeX, LaTeX &amp; Bibtex.
     </p>
 </asp:Content>

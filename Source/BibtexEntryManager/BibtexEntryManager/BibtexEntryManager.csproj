@@ -23,6 +23,25 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="ApplicationServices-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=%28local%29%3bInitial Catalog=BibtexAppSettings%3bIntegrated Security=True%3bPooling=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
+            <Source Path="obj\Debug\AutoScripts\ApplicationServices-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="BibtexSettings-Deployment" Order="2">
+          <Destination Path="" />
+          <Object Type="dbFullSql">
+            <PreSource Path="Data Source=%28local%29%3bInitial Catalog=Bibtex%3bIntegrated Security=True%3bPooling=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" />
+            <Source Path="obj\Debug\AutoScripts\BibtexSettings-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,6 +69,9 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">

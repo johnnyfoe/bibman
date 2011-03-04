@@ -1,0 +1,5 @@
+Windows server 2008 standard [Administrator password - 'Bibtex1']
+.NET framework 4
+SQL Server 2008 Developer edition
+	BibtexAppSettings
+	Bibtex

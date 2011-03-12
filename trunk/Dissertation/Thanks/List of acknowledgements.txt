@@ -1,13 +1,23 @@
-David Manlove - guidance, assistance, resourcefulness, patience & expertise with Bibtex
-Gregg O'Malley - for introducing me and David to a different approach to concurrent access of entries
-Microsoft - in particular for their MSDNAA program, .NET, C#
-NUnit Community
-NHibernate Community
-stackoverflow community for their extensive knowledgebase and source of ideas
-Stuart Langridge of kryogenix.org for his javascript library 'sorttable' http://www.kryogenix.org/code/browser/sorttable/
-Thomas Anderson of the Amor Group for a pointer to using fluent nhibernate without which I wouldn't have been able to get my NHibernate solution off the ground
-Phil Haack for his blog post on custom validation in .NET - http://haacked.com/archive/2009/11/19/aspnetmvc2-custom-validation.aspx
-JetBrains for their productivity plugin 'ReSharper'
-SCS (DCS) of Glasgow for leading me to believe that I know what I'm doing over the past 4 years!
-Dynamic Drive DHTML code library (www.dynamicdrive.com) for the Drop Down Tabs Menu template
-Graham Mooney for his DIVine wisdom! :)
+\section*{Personal Thanks}
+\begin{itemize}
+\item I'd like to wholeheartedly thank Dr David Manlove for his guidance, assistance \& expertise with the project area, as well as his patience \& dedication when it came to out-of-the-ordinary matters.
+\item Thanks to Gregg O'Malley for introducing me to a different approach to concurrent access to entries.
+\item Thanks to all of the volunteers who took part in my evaluation, as well as to Dr Colin Perkins for his assistance in organising the sessions in which the evaluations took place.
+\item I'd like to give Graham Mooney a mention for his DIV-ine wisdom when.
+\item Thomas Anderson of the Amor Group for a push in the right direction with NHibernate I had.
+\item Finally, I'd like to give a warm thank-you to all of the staff in the School (Department!) of Computing Science at the University of Glasgow who have had an input on my education over the past 4 years
+\end{itemize}
+\section*{Acknowledgements}
+I'd also like to mention some other parties who have (indirectly) had a positive impact on my project: \
+\begin{itemize} 
+\item Microsoft - in particular for their Academic Alliance (MSDNAA) programme, as well as for the .NET framework and the C\# programming language
+\item NUnit Community for their test framework
+\item NHibernate Community
+\item ThoughtWorks for making their Continuous Integration software open-source
+\item SourceForge for hosting the Subversion repository on which the project was hosted, along with bug tracking software
+\item The stackoverflow community for their extensive knowledgebase and source of ideas
+\item Stuart Langridge of kryogenix.org for his javascript library 'sorttable' http://www.kryogenix.org/code/browser/sorttable/
+\item Phil Haack for his blog post on custom validation in .NET - http://haacked.com/archive/2009/11/19/aspnetmvc2-custom-validation.aspx
+\item JetBrains for their productivity plugin 'ReSharper'
+\item Dynamic Drive DHTML code library (www.dynamicdrive.com) for the template on which I built my Drop Down Menu 
+\end{itemize}

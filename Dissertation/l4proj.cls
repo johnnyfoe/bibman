@@ -79,7 +79,7 @@ this declaration, but doing so would help future students.}
 \begin{tabular}{@{}llll}
       &                     &            &                     \\
       &                     &            &                     \\
-Name: & \rule{4.0cm}{0.5mm} & Signature: & \rule{4.5cm}{0.5mm} \\
+Name: & \textbf{John L. Thow} & Signature: & \rule{4.5cm}{0.5mm} \\
       &                     &            &                     \\
       &                     &            &                     \\
 \end{tabular}

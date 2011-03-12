@@ -4,20 +4,47 @@
 \usepackage{fancyvrb}
 \usepackage[final]{pdfpages}
 
+\newcommand{\BibTeX}{B{\sc ib}\TeX}
+\newcommand{\bibtex}{\BibTeX}
+\newcommand{\latex}{\LaTeX{} }
+\newcommand{\revisit}{\#\#\#}
 
 \begin{document}
-\title{Title of Project Placed Here}
-\author{Name Of Author}
-\date{February 22, 2011}
+\title{\bibtex{} Entry Manager}
+\author{John Lewis Thow [0701068]}
+\date{\today}
 \maketitle
 
 \begin{abstract}
-The purpose of this document is to suggest to students the layout of their final year project report. What
-you will see here is how to cite papers, books, reports and web sites; begin chapters, sections, and subsections; how
-to include the title page, and optionally how to include the educational consent form. But please note,
-this document is NOT a guideline on content or report structure or style. We would like to thank Gregg Hamilton for kindly giving us 
-his files to allow us to produce this template for you.
+Abstract for the project
 \end{abstract}
+
+%\chapter*{Thanks \& Acknowledgements}
+\newpage
+\section*{Personal Thanks}
+\begin{itemize}
+\item I'd like to wholeheartedly thank Dr David Manlove for his guidance, assistance \& expertise on this project, as well as his patience \& dedication when it came to other matters;
+\item Thanks to Gregg O'Malley for introducing me (\& David) to a different approach to concurrent access to entries;
+\item Thanks to all of the volunteers who took part in my evaluation, as well as to Dr Colin Perkins for his assistance in organising the sessions, during which some of the evaluations took place;
+\item I'd like to give Graham Mooney a mention for his DIV-ine tutorial;
+\item Thomas Anderson of the Amor Group;
+\item I'd like to thank my family, friends and classmates for all of their support;
+\item Finally, I'd like to give a very warm thank you to all of the staff in the School (Department!) of Computing Science at the University of Glasgow, both retired \& active who have had an input on my education over the past 4 years.
+\end{itemize}
+\section*{Acknowledgements}
+I'd also like to mention some other parties who have (perhaps indirectly) had a positive impact on the project: \
+\begin{itemize} 
+\item Microsoft - in particular for their Academic Alliance (MSDNAA) programme, as well as for the .NET framework and the C\# programming language;
+\item The NUnit Community for their test framework;
+\item The NHibernate Community;
+\item ThoughtWorks for making their Continuous Integration software open-source;
+\item SourceForge for hosting the Subversion repository on which the project was hosted, along with bug tracking software;
+\item The Stack Overflow community for their extensive knowledge base and source of ideas;
+\item kryogenix.org for their table sorting JavaScript library `sorttable';
+%\item Phil Haack for his blog post on custom validation in .NET;
+\item JetBrains for their Visual Studio productivity plug-in `ReSharper';
+\item The Dynamic Drive (DHTML) community.
+\end{itemize}
 
 \educationalconsent
 %
@@ -25,156 +52,372 @@ his files to allow us to produce this template for you.
 %      it may be entered in the CS Hall of Fame
 %
 \tableofcontents
-%==============================================================================
+%==========================================================
 \chapter{Introduction}
 \label{intro}
-The travel ling salesman problem, or TSP as it is commonly known, is a combinatorial optimisation problem where, given a number of cities and 
-distances from any one city to any other city, the goal is to find the shortest tour that visits all cities only once. Being an NP-complete 
-problem, no algorithm is known that is able to find the optimal solution within a feasible amount of time. The lack of an algorithm for finding 
-the optimal solution has resulted in many alternative heuristics and algorithms being described for providing a good approximation of the optimal 
-solution. In an educational setting, trying to introduce the concepts of some of these algorithms to students that may have never encountered 
-such algorithms before is not always a straightforward task.
+Discuss the intention of the intro \& its contents.
 
-\section{Aims}
-The aim of this project is to visualise a variety of algorithms operating upon TSP instances, creating an application for use as a t
-eaching aid by a lecturer to help students understand how each algorithm develops a solution. The TSP has certain properties that make 
-it a good candidate for attempting to visualise the algorithms operating upon it. The problem itself is relatively simple to represent 
-visually by plotting the coordinates of the cities to be visited, with edges connecting the cities to represent sections of a tour. 
-One way of trying to increase the ability of students to understand new algorithms is by providing them with visual representations of 
-steps or features of the algorithms. While still images could be used as visualisations, this is often not an optimal way of helping 
-others to understand the execution of an algorithm. Providing animations better allows for understanding of how algorithms progress 
-towards a solution, resulting in a more focused aim of this project being animations of algorithms operating upon TSP instances for 
-teaching purposes.
+\section{Preliminaries}
+\subsection{\TeX{}}
+In the words of its creator, \TeX{} is ``a [new] typesetting system intended for the creation of beautiful books---and especially for books that contain a lot of mathematics''\cite{DK84}.  Donald Knuth first created the \TeX{} program in 1978, the subsequent version of which makes up the core of the program that is used today\cite{TeXOrigin}.  The \TeX{} program is a set of primitive commands for basic typesetting and, allows users to create more complex commands in terms of others.  The use of all of the potential of \TeX{} requires that one has had considerable experience with programming techniques; it is as a result of this that the use of \TeX{} is left to typography and programming professionals\cite{KD95}.
 
-\section{Background}
-With the TSP being a popular problem, a large number of sample instances and optimal solutions exist in the form of the 
-TSPLIB library~\cite{TSPLIBsite}, which is a good source for being able to evaluate solutions generated by the algorithms against 
-optimal solutions. The amount of research into the TSP 
-as a combinatorial problem has even spawned a book devoted to the subject~\cite{TSPBook}, the authors of which also developed an application known 
-as Concorde~\cite{concordeSite}. Concorde is a program that is able to produce optimal solutions to TSP instances, solving 106 of the 110 TSPLIB 
-instances, the largest of which is a tour through 15,112 German cities.
+\subsection{\LaTeX}
+\latex was created by Leslie Lamport in 1985, to allow one to exploit the powerful features of \TeX{} without first having to familiarise oneself with programming techniques. \latex contains a range of commands written in terms of primitive \TeX{} commands, and provides a user with a set of higher-level commands for the production of complex documents.  It also allows for a separation of concerns between the information that is being presented from the formatting that has to be applied when publishing\cite{KD95}.
 
-Attempts to visualise algorithms for educational purposes have been undertaken many times before, such as the algorithm toolkit developed by 
-John Morris~\cite{algAnim}. This toolkit was essentially a framework into which new algorithms could be implemented, alongside visualisations, 
-aiding students in their understanding of the algorithms. This previous evidence of visualisations being successfully developed for learning 
-various algorithms suggests that using a similar approach to the visualisation of algorithms upon the TSP could result in a useful application 
-covering a comprehensive range of algorithms.
+\subsection{\bibtex}
+It is standard to find a bibliography at the end of a scientific publication; \latex provides an `environment'\footnote{An environment specifies an area of the document where the text is presented with different indentation, line width, typeface and so on\cite{KD95}}(called `\texttt{thebibliography}') which allows bibliographic references to be listed and stored in one area of a document\cite{KD95}.  The problem with this approach is that each document will have its own list of references which may lead to redundancy and inconsistency if an author has multiple publications on the same subject. \\
+\bibtex{} is an auxiliary program to \latex which provides the authors with the ability to store all of their bibliographic references in one or more files.  Each reference, or `entry', is uniquely identified by its cite key, which is used within a document where the reference is made \footnote{A reference to a citation is inserted by using the command \texttt{$\backslash$cite\{citeKey\}} in the body of the document, where `citeKey' is the identifier of the reference in one of the referenced bibliographic files}
 
-\section{Motivation}
-The major motivation of this project is in providing a tool to make teaching of a set of algorithms easier for both a lecturer to 
-present and for the students to understand. This provides the benefit of giving students something that they may interact with in order 
-to further increase and reinforce their knowledge of the algorithms. The TSP allows easy visualisation itself in its most basic state by 
-drawing a tour. This alone suggests a good possibility for being able to animate a great number of algorithms operating upon it, 
-providing a useful tool for teaching a large range of algorithms.
+The benefit of using \bibtex{} as a means of bibliography production is that a (well-managed) file set is easier to maintain than having sporadic files, each with individual collections of references.
 
+\section{Problem Statement, Aims \& Motivation}
+An author may have a vast number of bibliographic references, having built up a large amount of citations through years of work.  The task of managing this library of references is an issue in itself; authors might have clashing cite keys or entries that are recorded twice in the library. \\
 
-\section{Report Content}
-%List these as references to each section!
-The remainder of this report will discuss how producing a solution to the problem of visualising algorithms was undertaken.
+This problem of management of entries is exacerbated when multiple users collaborating on a piece of work need to share collections of entries.  With no management system in place, users have to find a way to consistently distribute files by email and other manual methods, as well as ensuring that there have been no clashing entries.
+
+\subsection{Aims}
+The main aim of this project is to try to come up with a solution to solve the aforementioned problems.  The project is also undertaken with some lesser, but still important, aims in mind, which are listed presently:
 \begin{itemize}
-\item Chapter~\ref{reqs} covers the detailed requirements of the project.
-\item Chapter~\ref{design} explains the design and implementation details of the project.
-\item Chapter~\ref{conclusion} details the overall results of the project.
+\item To develop a good understanding of the technologies used;
+\item to observe good software engineering practice during development and testing;
+\item \revisit
 \end{itemize}
 
-%==============================================================================
+%it will be important to evaluate both the usability and effectiveness of the product by   \bibtex{} entries for multiple users.
 
-\chapter{Requirements}
+\section{Outline of Report}
+%List these as references to each section!
+The remainder of this report will discuss how producing a solution to address the problem of managing \bibtex{} references was undertaken. 
+\begin{itemize}
+\item Chapter~\ref{backgrnd} provides some background information to the project and examines other work and projects that have been carried out to address the problem.
+\item Chapter~\ref{reqs} covers the detailed requirements of the project.
+\item Chapter~\ref{design} covers the design of the solution to the problem.
+\item Chapter~\ref{impl} covers the implementation of the project in detail.
+\item Chapter~\ref{testing} covers how the software product was tested.
+\item Chapter~\ref{eval} covers evaluations carried out on the project.
+\item Chapter~\ref{conclusion} concludes the report with a summary and provides the reader with some ideas for future work in the area.
+\end{itemize}
+
+%======================================================
+
+\chapter{Background Survey}
+\label{backgrnd}
+There have been many projects and programs created to try to tackle to complexities of managing \bibtex{} entries, some of which will be examined herein.  Firstly, some of the criteria for examinations are listed before discussing the examinations, followed by a summary of findings of the examinations to be kept in mind for the rest of the project.
+
+\section{Examination Criteria}
+The projects examined in this section will be judged on several factors, outlined below.\\
+Each assessment will examine how positive qualities are achieved, as well as how shortcomings are encountered, so that lessons can be learned from other products and problematic issues can be avoided.  It is advantageous at this point to mention that evaluations on the final product from this project will include an examination on the same points and questions in Chapter~\ref{eval}.
+\begin{itemize}
+	\item User Interface to the system
+	\begin{itemize}
+		\item How well laid out is the user interface? 
+		\item Is it consistent throughout use?
+		\item Is it cluttered and complicated or well spaced out and simple?
+		\item Is it intuitive to deduce how a user should perform an action and, where it is not, is it easy to get help?
+		\item Is it clear when an action has been performed?
+		\item Does it have a look and feel that is easy on the user's eyes?
+	\end{itemize}
+	\item Features of the system
+	\begin{itemize}
+		\item Does the system support multiple users? If so, how?
+		\item What expected \& basic functions are available for the user to perform? Are any missing? \footnote{`Basic' functions are defined to be Add, Edit, Delete, Import, Export and Search. These functions were designated `basic' after developing a general understanding of what a reference management system is expected to do at early project meetings with Dr Manlove.} % acceptable?
+		\item What further functions are available to the user? \footnote{`Further' functions are defined to be any function other than those mentioned in footnote 1 (Add, Edit, Delete, and so on...)}
+		\item What range of formats are available to import from and export to?
+		\item How well documented is the system?
+	\end{itemize}
+	\item Fault Tolerance/Robustness
+	\begin{itemize}	
+		\item How well does the program cope with poorly formatted entries?
+		\item How well does it cope with invalid user input?
+		\item Is the software free from visible errors and problems?
+	\end{itemize}
+\end{itemize}
+
+\section{Examinations}
+This section contains the examinations of several existing products, both public projects and previous projects undertaken by students in previous years at the University of Glasgow.  Examinations were performed on a laptop running Windows 7 Professional (64-bit edition).
+
+\subsection{\bibtex{} Entry Manager}
+The \bibtex{} Entry Manager was developed by Ravi Tez Kota (known as `Ravi'), an M.Sc. student at the University of Glasgow, under Dr Manlove's supervision in 2009.
+
+\subsubsection{Paradigm}
+Ravi's project is a web-based reference management system which consists of a database for storage of entries and a web front-end for users to interact with using a web browser.
+
+\subsubsection{Ease of set-up}
+In a nutshell, the server side of the product is not convenient to set-up.  The user must have an instance of MySql server running on the machine from which they'd like to serve pages; they must ensure that along with Apache Tomcat as a page rendering engine and server; and they must have a Java Runtime Environment (JRE) installed.  The installers for each of these products are easily obtainable and, for convenience, were included with the content of the product.  Following this, they must set up the database using a provided Structured Query Language (SQL) script and finally add the files in the `bibtex' directory to Apache Tomcat's content directory.  \\
+
+This may be a lengthy process, but it only has to be done once per instance of the system, which works in its favour. If the system were set up at a central location, many people could log on to the system at once by visiting a URL, which would give end-users a very simple method of access without involving them in the set up process (as intended with a web-based product).
+
+\subsubsection{Examination of product}
+After installation, the program is easy to navigate to; the user simply points their web browser to the Unique Resource Location (URL) and the initial page is loaded. The system supports different users by way of a registration and log-in process, authenticated with a user name (email address) and password combination.\\
+
+The sign-up and log-in pages are simple and consistent in terms of layout, but after logging in the look and feel of the site changes.  This is useful in terms of letting the user know that they are authenticated, but it means that one must re-acquaint oneself with the new layout before performing any actions.  Reducing this extra burden in terms of cognitive load would be advantageous in a new system.\\
+
+The product has two navigation areas which contain different sets of commands in different orders. 
+It was intended that the examiner would upload/open a file and perform further additions, modifications, deletions and searches across known entries from that initial file.  The lack of file import capability in Ravi's Bibtex Entry Manager was somewhat limiting to the consistency of the examination on this product. \\
+
+It is easy to deduce from the homepage what a user should click to add an entry to the system, though after an addition is performed, no message is shown to indicate success or failure of the operation.  It is clear that Nielsen's first heuristic\footnote{\label{nielsenH1} Nielsen's first heuristic says that the system should always keep users informed about what is going on. (Visibility of system status) \cite{NielsenHeuristics}} should be adhered to when designing future solutions to this problem 
+% don't think it is sufficient just to cite this web page, though they are listed here: http://www.useit.com/papers/heuristic/heuristic_list.html
+After a break of perhaps twenty minutes in the examination, the user returned and reloaded the home page of the project, only to find that an error had occurred (a NullPointerException was thrown).  The error was not dealt with in a user-friendly fashion and shows the product in an unprofessional light.  The lesson to be learned here is that the product should deal with errors in a professional manner and not show exceptions on screen to users.\\
+
+There is no provided `export' functionality, so items cannot be taken out of the system and used directly in the \bibtex{} environment without first reconstructing the entry.  This is quite inconvenient for a user; the lesson to be learned from this is that basic functionality should be provided to ensure that the system is useful to a user.
+The modification of an entry is relatively straightforward, although if a user wishes to change an entry's type after it has been saved to the database they will be disappointed, as the entry type is not a field that can be changed by any visible means without re-creating it in the database.\\
+
+Searching is a bit of a mystery with this product; it is difficult to deduce what state a search is in, given that there is no feedback to the user to say that a search is ongoing, complete, or otherwise.  This lack of feedback makes  for a confusing experience with search and adds to the call for future projects and solutions to adhere to Nielsen's first heuristic. Unfortunately, there is no visible help menu or area to the product to help to describe how any of the functions behave, which is something that would have been particularly helpful to assist with the search function\footnote{Again, Nielsen covers this in his list of heuristics.}. \\
+
+There is a provision for users to be able to switch to another database server from the one that they are using.  This might be helpful to some users but there is potential for unnecessary replication across multiple servers.  \\
+Entries can be categorised by users into different groups.  This involves creating a group with a name and a description, changing to the new group and then adding entries to the group by the method previously used.  This is a helpful feature for categorising entries that do not yet exist, but a limitation of the system is that entries cannot be transferred from one group to another, and it means that they cannot belong to more than one group at any time.\\
+
+The site allows users to access the same set of entries at the same time.  The issue that arises from this is that users may make changes to the same entry simultaneously.  Ravi's solution deals with the problem by locking an entry until the first user to access it saves any changes they have made, or exits the viewing window.  This is a neat solution and means that there can be no overlapping of interests when multiple people access the same entry.  An issue that arises from this method is that if one user (A) views an entry, then forgets to close the window, the entry is locked for a period of time.  When users B and C come to view it (perhaps with no intention of modifying it), they find that they cannot, leaving them blocked and potentially frustrated while the time period of user A's viewing expires.\\
+
+\subsection{BiblioScape}
+BiblioScape is a desktop-based bibliographic data and note collection suite produced by CG Information.  It was created with the aim to ``build first class bibliographic software for the 21st century''.  It contains many tools which shall not be included in this examination as they are deemed to be surplus to requirements for the scope of the current project.\footnote{The system includes a forum and task list, among other things.} The live demo system is not as up to date as its current counterpart (pictured on the website running on Windows 7), as the copyright notice at the foot of the home page dates back to 2002.
+\subsubsection{Paradigm}
+As part of the BiblioScape package, `BiblioWeb' was produced to ``address the needs of researchers in the age of the Internet''.  It is a web-based version of their desktop program and allows users to access it through internet and Intranet connections.
+\subsubsection{Ease of set-up}
+A live version of the product was used on the BiblioScape website\footnote{The live version of the website is hosted at http://support.biblioscape.com:8001/}, so no comment can be made on the set-up process.
+\subsubsection{Examination of product}
+BiblioWeb has a clean user interface, and boasts a consistent navigation area at the top, whether logged in or not.  Items in the menu at the top are spaced far enough apart that the interface feels uncluttered while also providing most of the basic options that a user expects of a reference management system, although edit, delete and export are not immediately apparent from the navigation bar. \\
+
+It has an intuitive interface and makes it quite clear where one should go next when performing tasks.  One cannot obtain a list of all entries in the system, which means that a user might be forced to recall all information about an entry rather than rely on recognition. \footnote{Nielsen specifies a heuristic guideline (his sixth out of ten) that a user's memory load should be minimised by making objects, actions and options visible.}\\
+
+BiblioWeb allows categorisation of references by use of folders, much like the grouping function in Ravi's project.  An advantage that BiblioWeb has over Ravi's project is that one can move many references at once from one categorisation to another, meaning that there is no need to delete an entry before reclassifying it.  It appears that references can only be in one folder at a time, which limits the flexibility of entries and perhaps allows redundancy in the database, where it could be avoided.\\
+
+Users' actions are clearly indicated when completed correctly, but the system falls down when given incorrect input.  An example of this is explained presently: text was supplied to the `year' field to see how the system behaved with a string supplied instead of an integer.  Rather than displaying a helpful error message on the interface, the system navigated to a plain white page and displayed the word `EXCEPTION', followed by what is presumably a database exception.  As was the case in Ravi's solution, the system did not handle errors and exceptions in a user-friendly way.  It is important to ensure that the system deals with problems in a professional and informative manner, so that a user can recover from their error.\\
+
+Perhaps its greatest asset that the BiblioWeb system has is its import function, which boasts an enormous list of text and file formats.  There are unfortunately not enough resources for this experiment to test all 201 of the formats.  It is safe to say that the system handles parsing of \bibtex{} entries well, but does not store the type as would be expected of a reference management package: rather than storing the reference type `Unpublished' as it was in the text, it stored `Personal Communication', which may not be absolutely accurate.\\
+
+The system's single greatest failure is that it does not support exports to \bibtex{} format, although it does export to BiblioScape tag file, EndNote, RIS and Unix Refer formats.  This limits the product from being used with the main intended package of the project, \bibtex.
+
+% one per product
+%\subsection{Product name}
+%\subsubsection{Paradigm}
+%\subsubsection{Ease of set-up}
+%\subsubsection{Examination of product}
+%content
+
+
+\section{Summary}
+Make it easy for a user to set up, where possible.
+
+provide feedback to users when actions have occurred 
+
+Keep errors under wraps where possible and deal with them neatly otherwise.
+
+groups: allow groups to change for existing entries and let entries change groups after initial storage
+
+Use a different method to control access to different entries in a way that does not impede the progress of other users.
+
+Keep pages consistent to reduce cognitive load on a user.
+
+Support \bibtex{} import and export.
+
+
+%==============================================
+
+\chapter{Requirements Engineering}
 \label{reqs}
-\section{Problem Analysis}
-To derive requirements for the application, requirements gathering was undertaken during project meetings to try and define the basic 
-expectations of the application.
+content
 
-The objective appeared to be in how to visualise algorithms that may take a large number of iterations to complete, showing them execute until 
-completion in a suitable time. However, the problem is that while doing this, the application must provide informative data in the animation 
-which could be easily picked up on by a viewer, such as a student, with little understanding of the algorithm, helping illustrate to them 
-what the algorithm is doing.
+\section{Stakeholders}
+Users of \bibtex, Supervisor \& student writing the project. Potentially students who undertake similar projects in the future, too.
 
-The basic visualisation requirements given for these algorithms were that the current tour should be visible along with its cost and 
-that the application should support altering of input parameters to see how modifying parameters changes the performance of algorithms. 
-Algorithm-specific features were to be identified and visualised in an appropriate manner that provided a representation of the 
-algorithm which students could benefit from as a learning aid.
+\section{Functional Requirements}
+The tool should provide management of BibTeX records, specifically:
+\begin{itemize}
+\item Add entry
+\item Edit entry
+\item View entries
+\item Delete entry
+\item Undo the deletion of an entry
+\item Perform a simple search on entries
+\item Perform an advanced search on multiple fields of entries
+\item Import entries from a file uploaded by a user
+\item Export entries to a file for download by a user
+\item Users should be able to group entries to assist with the organisation of citations.
+\item Items should expire (deleted items should be removed entirely) after a period of time.
+\end{itemize}
 
-\section{Proposed Solution}
-The proposed solution was to develop an application able to display animations of algorithms using the Java programming 
-language. As Java provides both a large set of class libraries, including extensive graphical user interface libraries which 
-support hardware rendering, this made it a perfect candidate for implementing a solution to the problem at hand. Java also has 
+\section{Non-Functional Requirements}
+The tool should adhere to the following non-functional requirements:
+\begin{itemize}
+\item Interaction with the system should take place through a web-based interface
+\item The server-side application is not required to be portable
+\item The client-side (web interface) should be accessible from major (*nix, Windows, Mac) operating systems under the three most widely-used browsers (Mozilla Firefox, Google Chrome, Microsoft Internet Explorer)
+\item Entries should be stored in a central database
+\item The system should allow multiple users to collaborate on a collection of BibTeX entries.
+\item The system should authenticate users and allow various levels of access to users with different privileges.
+\item The system should be usable by the target audience, users of the LaTeX typsetting tool.
+\item The system should be able to handle concurrent access by multiple users in such a way that it facilitates their collaboration on the centrally stored set of references.
+\end{itemize}
 
-%==============================================================================
+\section{Prioritisation}
 
-\chapter{Design and Implementation}
+
+%================================================
+
+\chapter{Design}
 \label{design}
 
-\section{High-Level Overview}
-The implementation of the system is based heavily upon a Model-View-Controller architecture. The model portion of the system provides 
-a collection of algorithms with methods allowing them to be run, giving the ability to integrate the algorithms into a range of front-ends. 
-This allows the user interface to be implemented independently of the algorithms, enabling a new interface to be placed on top of the algorithms 
-and negating the need to re-implement any of the underlying algorithms specifically for a new user interface. Java's Swing GUI classes 
-provide both the view and controller aspects of the architecture. The visualisation classes provide the view, while the control object classes, 
-such as \texttt{JButton}, combined with \texttt{ActionListener} classes provide the control over the application. Although Swing is used for 
-the front-end implementation in this project, the nature of the MVC architecture means that an interface developed in any language could be 
-used, as long as it is able to communicate with the Java methods defined by the algorithms.
+\section{System Architecture}
+Architecture of overall solution in VM deployment then perceived deployment for scalability. Perhaps an AOD describing secure areas etc.
 
-\subsection{Problem Instance Representation}
-To represent the problem instances, a \texttt{TSPInstance} class is used. This class represents a fully connected graph 
-of \texttt{AbstractCity} objects, where each city has a unique integer identifier, starting from 0, and can calculate the 
-distance from itself to every other city in the instance. As several different distance calculations are used within the 
-application, such as Eulerian distances, concrete classes extending \texttt{AbstractCity} must implement their own distance calculation function.
+\section{Web Interface Design}
+Fitts' Law - 2D
 
-While the distance calculations could be performed on-the-fly, this gives a high constant-time cost for executing the large amount 
-of distance calculations required by every algorithm. Since distances are represented as floating-point values by the application, 
-which are approximations of values, there is the chance that on-the-fly calculations could yield differing distances between the same 
-two cities. In the application, a distance matrix is used to store the distances between any two given cities, where the rows of the 
-matrix are distributed out to the subclasses of \texttt{AbstractCity} so that each city is able to know the distance from itself to 
-every other city. The use of a distance matrix ensures that there is a low constant-time cost for distance lookups, and that subsequent 
-distance lookups will always have yield the same value.
+\section{Class design}
 
+\section{DB Design Diagram}
+content
 
-% ----- Furthest insertion ----- %
-\subsection{Furthest Insertion}
-\subsubsection{Origins}
-Furthest insertion, proposed in~\cite{travelIBM}, attempts to overcome the na\"ivety of the nearest neighbour algorithm somewhat by trying to consider the solution as a whole in its construction. It constructs a tour upon the basis of accepting what may potentially be the worst moves first, getting rid of the costly paths early on and setting up a good structure for the overall solution to fit into, leaving the less costly paths for inclusion at a later point in the algorithm.
+%================================================
 
-Furthest insertion is used to quickly construct cheap tours for the TSP, often for passing into local search algorithms for further improvement.
+\chapter{Implementation}
+\label{impl}
+The implementation chapter covers the technologies, techniques and patterns applied to this project.  Many of the contents were encountered were encountered during a summer placement at a technology company in Glasgow between levels 3 and 4.  
 
-\subsubsection{Description}
-\label{fi_desc}
-%Complexity O(n^3)
-Furthest insertion begins by selecting the two cities that are furthest apart in the graph and joining these two cities in a tour. Following this, the distances from all unvisited cities in the graph to the cities currently on the tour are calculated, with the intention of finding the unvisited city whose minimum distance to a city on the tour is maximal. This unvisited city is then inserted in the tour in the position that will cause the minimum overall increase in the length of the tour. This process of selecting and incorporating cities is then repeated until a tour over all the cities in the graph is constructed. 
+\section{Technologies Used \& Discipline}
+This section examines the technologies used in the implementation of the project and the discipline that was adhered to during development.
 
-\subsubsection{Implementation}
-Furthest insertion in this project is implemented as described above.
+\subsection{Microsoft .NET}
+Why .NET?\\
+Outline what it is + what it provides\\
 
-\subsubsection{Visualisation}
-To visualise the furthest insertion algorithm the tour under construction is updated as each city is added to it. This allows a viewer to see how the tour develops as new cities are incorporated into its structure.
+\subsubsection{MVC 2}
+My understanding of how it handles requests, including clean URLs
 
 
-\subsubsection{Discussion}
-Although furthest insertion constructs a reasonable tour which is generally much shorter than a heuristic such as nearest neighbour will produce, it is still not immune to producing a tour with costly crossovers of edges.
+\subsection{NHibernate + Fluent NHibernate}
+NHibernate is a port of the Hibernate object/relational mapper to the .NET framework. In essence, this means that mapping from objects to relational tables is dealt with by NHibernate middleware which, once set up, allows a developer to concentrate on functionality rather than spending time writing SQL scripts, as the queries are generated by NHibernate and passed to the database.  \\
+
+The NHibernate software itself is highly valuable in terms of time-saving potential and has been used across thousands of successful projects\cite{NhUse}.  The only issue with using it in its raw form is that mappings for the project's classes have to be written in eXtensible Markup Language (XML) \revisit, which is prone to typographical errors which will not be found until runtime.  A better solution is to use the Fluent NHibernate extension, which provides developers with the ability to map the classes in code.  The major benefit of this scheme, aside from compile-time error checking, is that all code using is strongly-typed; combine this with a powerful Integrated Development Environment (IDE)\revisit and implementation for the data model can be quite rapid, particularly in the hands of a familiar developer.\\
+
+Another reason for using this technology was that it was used within the project on summer placement, but it was not encountered or worked with to any great extent.  \revisit Curiosity fuelled, the developer wanted to expand his knowledge in the technology in both breadth and depth by adopting these technologies within the project.
+
+\subsection{Subversion}
+Subversion (SVN) \revisit{} is a version control management system.  It is useful to be able to centralise the code repository and to be able to synchronise different workstations with the most up to date version of code and documents.  It was decided early in the project that a code repository would be used to mitigate risks involving hard drive or system corruption.  \\
+
+SVN was used to control different versions of the code.  It was originally hosted on the School of Computing Science network because it was accessible from outside the School's network of computers\footnote{access was facilitated by the School's Secure Shell (SSH) gateway, \texttt{sibu.dcs.gla.ac.uk}}, because there was sufficient storage space provided by the School and it had no financial cost.  As part of the effort to ensure good software engineering practice, Continuous Integration\footnote{See Section \ref{continuousIntegration} for an explanation of what it is and why it was used} (CI) was to be used with the project, again after encountering it while on summer placement.  Unfortunately, there were problems in configuring the CI software to access the SVN repository through the gateway.  As a result of this, on the 16\^{th} of November 2010, the code was switched to another free host, SourceForge; an open-source software project hosting provider.  Along with SVN repository hosting, SourceForge provides tools for management of software projects, including a bug tracking tool (See Section \ref{bugTracking}).  Crucially, the SourceForge repository was accessible by the CI software, allowing the CI process to take place.\\
+
+The SVN client in most cases was TortoiseSVN, as development was to take place on a windows environment.  AnkhSVN, a secondary client, was also used as it integrated with the IDE. \\
+The log from the SVN repository is included as an appendix\revisit; the repository can also be browsed on the SourceForge website at \texttt{http://bibman.svn.sourceforge.net/}
+
+\subsection{Bug Tracking}
+\label{bugTracking}
+Bug tracking is, as the name suggests, the tracing of the status of bugs that have been discovered in a system, used primarily to ensure that bugs which are found are dealt with or logged in a release.  It is another concept that was encountered while on summer industrial placement, and it struck the developer as an advantageous tool to utilise in this project.\\
+
+The bug tracker was used when a bug was encountered that was not going to be fixed at the time of the discovery; the developer wanted to apply the bug tracker intelligently so that it was always going to be a help, and not a hindrance to development.  Bugs that were found were created in the system and given a priority, marked initially as `open' to symbolise that they had not yet been dealt with.  When a bug had been dealt with and the developer had verified that it was no longer an issue, it was marked as `closed', and remained in the system for traceability, should a similar issue crop up.  As a rule of thumb, a comment was recorded to say firstly what the problem was, secondly what the fix was and thirdly which SVN check-in fixed the issue so that one did not need to trawl through logs in SVN to find the fix, should they need to revisit it.\\ \revisit - want to check wording of this paragraph when I'm not tired.
+
+The software used was BugTracker.NET -- a free, open-source, web-based bug tracker.  Having encountered this particular product and worked with it for three months, the developer thought it wise to stick to familiar ground and employ the same product.  The developer used hardware running at home to deploy BugTracker.NET and used it until a server failure in late January 2011.  As the hardware was no longer reliable to host the software, the decision was taken to switch bug tracking software to SourceForge's Bug tracker, which worked in a similar way.  Bugs from the old system (both open and closed) were transferred to the new site and remain there now for traceability and reference. \\
+
+\section{Development Environment}
+MS Visual Studio 2010\\
+SQL Server Management Studio 2008\\
+ReSharper - allows unit tests to be run from within IDE, refactoring options etc.\\
+TortoiseSVN
+
+\section{Reuse of Code}
+
+\section{Patterns}
+
+\section{Data Model}
+Discuss implementation of data model, implementation of database persistence.
+
+\subsection{Refactoring}
+
+\section{Controller}
+Discuss handling of requests
+
+\section{User Interface}
+
+\section{Concurrency}
+
+%================================================
+
+\chapter{Testing}
+\label{testing}
+
+\section{Unit Testing}
+NUnit - what, why, how
+
+\section{Continuous Integration}
+\label{continuousIntegration}
+CruiseControl.NET - what, why, how. Take from SE placement info to save time + effort
+
+\section{Bug Tracking}
 
 
-\section{Local Search Algorithms}
-Local search is a metaheuristic that can be used to iteratively improve upon an existing solution to an optimisation problem via minimising some evaluation function. In the case of the TSP the goal is to minimise the value of the distance required to visit all cities on a tour and return to the initial city.
+\section{Acceptance Test}
+content
 
-Local search is utilised in solving problems that can have multiple possible solutions, not necessarily all optimal. In order to operate, local search must be able to generate new solutions, which it can then apply its evaluation function to so as to determine the viability of each solution as a potential next solution to move to.
+%================================================
+\chapter{Evaluation}
+\label{eval}
+This chapter discusses the evaluations that were carried out on the project.  In particular, it discusses the ... \revisit \\
 
-A move generator is used to create a neighbourhood of solutions, via some modification to the current tour. Each of the solutions in this neighbourhood must have the cost function applied to them in turn, enabling the local search algorithm to move to the next solution state which is most favourable to the cost function.
+It was decided that any evaluation of the system would be short-sighted and ineffective without the assistance of people who had not been previously involved in development of the project, as an insider might not be able to provide a completely impartial examination of the system. \revisit
 
-Local search will then proceed in repeatedly generating neighbourhoods of solutions, evaluating them, and moving to the most favourable until some termination condition is reached. Termination conditions can be dependent upon bounds on iterations of the local search algorithm, time bounds, when a certain goal --- such as the cost of a tour --- has been reached or surpassed, or even when the local search hits a local minima and is unable to find any improving neighbours in its move generation phase.
+\section{General Approach}
+The evaluation took two forms: firstly, a basic usability evaluation, focussing on a single user's interactions with the system; and secondly, an extended evaluation, examining the positive points and shortcomings of the system when multiple users were working with the system.\\
+It was hoped that a sample of users external to the project, with various levels of knowledge of \bibtex \& \LaTeX, would participate in the study. The intention of sampling a range of users' views ensured that the evaluation would gain a fair set of opinions on the product for analysis, so that the evaluation had as wide a set of views on the product as possible. \\
 
-The wide range of local search methods and heuristics in existence has caused entire publications to be produced on the subject of local search alone~\cite{stochastic}.
+As the evaluation would involve other people, the `School of Computing Science Ethics Checklist'\footnote{The signed ethics checklist document is included as an appendix to this document.} was consulted to ensure that the intended evaluation was ethically sound and that it would not put participants at any greater risk than they encounter in their normal working lives.\\
 
-To generate a neighbourhood of solutions using this edge exchange method, all pairs of 2-opts within the tour must be generated and evaluated. This requires a neighbourhood of worst-case size $O(n^2)$ for a tour of size $n$.
+The evaluations had slightly different environments, which will be discussed within the relevant sections below.  The different evaluations are explained, and have their results included with each 
 
-When evaluating new tours generated via 2-opts, the cost of performing the actual 2-opt can take up to $O(n)$ time (in an array representation of the tour), followed by a cost calculation iterating over all edges in the tour, also bound by $O(n)$. However, a method requiring $O(1)$ time to evaluate the cost of a 2-opt on a tour can be used. We need only know two cities, $i$ and $j$, which are the ends of the path to be reversed by a 2-opt operation. In a symmetric TSP instance the reversed path will yield the same cost as the non-reversed path, so we need only calculate the cost of breaking the two existing edges and rejoining the paths with new edges. If $i_{prev}$ and $j_{next}$ are the predecessor and successor of $i$ and $j$, respectively, in the tour, we need only calculate the cost of breaking $dist(i_{prev},i)$ and $dist(j,j_{next})$, and rejoining with $dist(i_{prev},j)$ and $dist(i,j_{next})$. 
+\section{Basic Usability Evaluation}
+The basic usability evaluation is based around the points raised in the background survey (chapter \ref{backgrnd}).  Recall that the examination criteria in the background survey were centred around the user interface to the system, the features of the system and how fault tolerant \& robust the system was.\\
 
-2-opts are not the only way of generating neighbouring solutions. A range of other optimising operations exist, from 3-opts, involving the interchanging of 3 edges, to k-opts involving the interchanging of $k$ edges. A highly-optimised exchange heuristic is the Lin-Kernighan k-opt heuristic, which dynamically selects the number of edges to be interchanged in any optimising move~\cite{lkOpt}.
+\subsection{Environment}
+Laptop with mouse, connected to the internet.\\
+The participant sat at a desk on an adjustable-height chair in a well-lit, quiet room at a comfortable temperature.	Room 620 in the Boyd-Orr Building was the location for some of the experiments, while others took place \revisit \\
+Is this part necessary? Need to say why the environment was important - focus on task at hand, no discomfort while participating etc?
+
+\subsection{Execution}
+The following terminology is used consistently throughout this section: the `participant' means a volunteer who participated in an evaluation of the system and the `host' means the person who was running the evaluation; in all cases, the host was the developer of the system.\\
+Completed evaluations were structured as follows:
+\begin{enumerate}
+	\item The host presented the participant with introduction script;\footnote{Introduction and debrief scripts are included as appendices to this document}
+	\item The participant read introduction script;
+	\item The host asked the participant to verbally confirm that they agreed to take part in the evaluation;
+	\item The participant agreed to take part;
+	\item The participant was asked to familiarise themselves with the system by using the site for as long as they wished, and was encouraged to ask questions of the host;
+	\item The participant told the host that they were ready to proceed;
+	\item The host cleared the system and presented the participant with the task list\footnote{The task list is included as an appendix} and any points that the participant raised while performing tasks were noted by the host; % Should I mention that the URL for the import task was http://toms.acm.org/Volumes/V37.html?searchterm=bibtex
+	\item The participant told the host that they had completed the task list;
+	\item The host gave the participant a questionnaire, which they filled in. Notes taken by the host on the participant's behalf were given to them to remind them of things they had mentioned;
+	\item The participant gave the host the completed questionnaire, which was put into an opaque folder in a random order, to help preserve participants' anonymity;
+	\item The host gave the participant the debrief script;
+	\item The participant took a note of the email addresses provided and was given a final chance to ask questions during the evaluation;
+	\item The host thanked the participant for their time.
+\end{enumerate}
+
+While the participant was performing tasks, the host noted relevant points that the participant raised.  This was done in an attempt to help the participant to focus on the task at hand, rather than leaving the participant to recall the comments they made; it also allowed the host to gain a better insight into any difficulties encountered by the participant.
+
+\subsection{Results}
+Tabulate results from the evaluations and go on to analyse the results.
+
+\subsection{Analysis}
+Sample of users - some CS students targeted, Physics/Astronomy students, staff \& users who don't have academic knowledge - relevant point? why use them? Worth mentioning at all?
+
+\section{Extended Usability Evaluation}
+\subsection{Environment}
+\subsection{Execution}
+\subsection{Results}
+\subsection{Analysis}
+
+\section{Summary of Evaluations}
+
+\subsection{Potential Improvements to Evaluations}
+
+
+%================================================
 
 \chapter{Conclusion}
 \label{conclusion}
-The aim of this project was to create an application that could be used as a teaching aid for introducing students to new algorithms, focusing on local search algorithms in particular. An application was produced that provides animations for a range of algorithms, with an evaluation of the animations conducted by participants who were believed to have some understanding of the algorithms.
 
-The results of the evaluation suggest that, overall, the project was successful in helping enhance or reinforce an understanding of the algorithms through the use of animations and that the application would be suitable for use in a teaching situation. This satisfies the main aim of the project in producing an teaching tool to aid in understanding of the algorithms. The application that was produced should enable students learning the algorithms for the first time to build up a good understanding through visualisations of a comprehensive collection of algorithms from the 3 classes of algorithms implemented.
+\section{Summary}
+
+\section{Suggestions for Further Work}
 
 \bibliographystyle{plain}
 \bibliography{l4proj}

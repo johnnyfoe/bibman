@@ -13,6 +13,26 @@
     <script src="../../Scripts/dropdowntabs.js" type="text/javascript">        /***********************************************        * Drop Down Tabs Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)        * This notice MUST stay intact for legal use
         * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
         ***********************************************/    </script>
+    <script type="text/javascript">
+        function BeginSearch() {
+            window.location = <% Writer.Write("\"" + Parent.ResolveUrl("~/Entry/Search") + "\""); %> + "?s=" + document.getElementById("searchvalue").value;
+        }
+
+        function CheckForReturn(e) {
+            var keycode;
+            if (window.event) {
+                keycode = window.event.keyCode;
+            }
+            else if (e) {
+                keycode = e.which;
+            }
+
+            if (keycode == 13)
+            {
+                BeginSearch();
+            }
+        }
+    </script>
 </head>
 <body onload="return DoPageLoad();">
     <div class="page">
@@ -23,26 +43,32 @@
         </div>
         <div id="bluemenu" class="bluetabs">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/Entry" rel="EditMenu">Edit</a></li>
-                <li><a href="/Entry" rel="ViewMenu">View</a></li>
-                <li><a href="/Entry/Import" rel="FileMenu">Import/Export</a></li>
-                <li><a href="/Home/About" rel="HelpMenu">Help</a></li>
+                <li>
+                    <%: Html.ActionLink("Home","Index","Home") %></li>
+                <li><a class="menu" rel="EditMenu">Edit</a></li>
+                <li><a class="menu" rel="ViewMenu">View</a></li>
+                <li><a class="menu" rel="FileMenu">Import/Export</a></li>
+                <li><a class="menu" rel="HelpMenu">Help</a></li>
             </ul>
+            <div class="search">
+                <input type="text" id="searchvalue" onkeypress="return CheckForReturn(event)"/>
+                <input type="button" value="Search" onclick="return BeginSearch()" />
+            </div>
         </div>
         <div id="FileMenu" class="dropmenudiv_b">
             <%: Html.ActionLink("Upload File (Import)", "Import","Entry") %>
             <%: Html.ActionLink("Download File (Export)", "DownloadAll", "Entry")%>
         </div>
         <div id="EditMenu" class="dropmenudiv_b">
-            <a href="/Entry/Publication">Add entry</a>
+            <%-- Has to be static url rather than calculated because it reuses the current ID if it has one --%>
+            <a href="../Entry/Publication">Add entry</a>
             <%: Html.ActionLink("Modify entry", "Index", "Entry")%>
             <%: Html.ActionLink("Delete entry", "SelectEntriesForDeletion", "Entry")%>
-            <%: Html.ActionLink("Undelete entry", "DeletedEntries", "Entry")%>
+            <%: Html.ActionLink("Restore entry", "DeletedEntries", "Entry")%>
         </div>
         <div id="ViewMenu" class="dropmenudiv_b">
-            <%: Html.ActionLink("Search Entries","Search","Entry") %>
-            <%: Html.ActionLink("View Active Entries","Index","Entry") %>
+            <%--<%: Html.ActionLink("Search Entries","Search","Entry") %>--%>
+            <%: Html.ActionLink("View Entries","Index","Entry") %>
             <%: Html.ActionLink("View Duplicates","ViewDuplicates","Entry") %>
             <%: Html.ActionLink("View Deleted Entries","DeletedEntries","Entry") %>
         </div>

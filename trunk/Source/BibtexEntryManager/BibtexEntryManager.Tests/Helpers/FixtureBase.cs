@@ -1,12 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using BibtexEntryManager.Data;
-using BibtexEntryManager.Models;
-using BibtexEntryManager.Models.EntryTypes;
-using FluentNHibernate;
-using FluentNHibernate.Automapping;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
+﻿using BibtexEntryManager.Data;
 using NHibernate;
 using NHibernate.Cfg;
 using NUnit.Framework;

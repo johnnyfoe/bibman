@@ -1,11 +1,36 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<BibtexEntryManager.Models.EntryTypes.Publication>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
+    <% 
+        string amendOrCreate = "Create Entry";
+        if (Model != null)
+        {
+            if (Model.Id != 0) // if it is 0, it is a return page because there is an error
+            {
+                amendOrCreate = "Amend Entry";
+            }
+        }
+    %>
     <%: amendOrCreate %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <% string amendOrCreate = (Model == null) ? "Create Entry" : "Amend Entry";%>
+    <%
+        string amendOrCreate = "Create Entry";
+        bool existingEntry = false;
+        bool deletedEntry = false;
+        if (Model != null)
+        {
+            if (Model.Id != 0) // if it is 0, it is a return page because there is an error
+            {
+                amendOrCreate = "Amend Entry";
+                existingEntry = true;
+            }
+            if (Model.DeletionTime != null)
+            {
+                deletedEntry = true;
+            }
+        }
+        %>
     <h2><%: amendOrCreate %></h2>
     <p id="notificationOfUpdate"></p>
     <form runat="server">
@@ -23,19 +48,22 @@
     <%if (Model != null && Model.DeletionTime != null){%>This entry is currently marked as deleted. To restore it, press 'Restore this item' below.<br /><br /><%} %>
         <input type="submit" value="<%:amendOrCreate%>" />
         <%
+           string deleteOrRestore = ""; // default no link - assume creating.
            if (Model != null)
            {
-               if (Model.DeletionTime == null)
-               {%>
-        | <a href="/Entry/DeletePublication/<%:Model.Id%>">Delete this item</a>
-        <%
+               // if the entry exists and has not been marked as deleted, offer option to delete it.
+               if (!deletedEntry && existingEntry)
+               {
+                   deleteOrRestore = "| <a href=\"../DeletePublication/" + Model.Id + "\">Delete this item</a>";
                }
-               else
-               {%>
-        | <a href="/Entry/RestorePublication/<%:Model.Id%>">Restore this item</a>
-        <%
-}
-           }%>
+               // if the entry exists and has been marked as deleted, offer option to restore it.
+               else if (deletedEntry && existingEntry)
+               {
+                   deleteOrRestore = "| <a href=\"../RestorePublication/" + Model.Id + "\">Restore this item</a>";
+               }
+           }
+           Writer.Write(deleteOrRestore);%>
+
     </p>
     <div id="selectType" class="inputRow">
         <div class="labelColumn">
@@ -170,7 +198,21 @@
                 <%:Html.LabelFor(model => model.Month)%>
             </div>
             <div class="inputColumn">
-                <%:Html.TextBoxFor(model => model.Month)%>
+                <%:Html.HiddenFor(model => model.Month)%>
+                <select id="monthSelector" onchange="return ChangeMonth()"><option value=""></option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
             </div>
             <div class="errorColumn">
                 <%:Html.ValidationMessageFor(model => model.Month)%>
@@ -203,7 +245,7 @@
                 <%:Html.LabelFor(model => model.Abstract)%>
             </div>
             <div class="inputColumn">
-                <%:Html.TextBoxFor(model => model.Abstract)%>
+            <%:Html.TextAreaFor(model => model.Abstract) %>
             </div>
             <div class="errorColumn">
                 <%:Html.ValidationMessageFor(model => model.Abstract)%>
@@ -357,20 +399,7 @@
     </div>
     <p>
         <input type="submit" value="<%:amendOrCreate%>" />
-        <%
-           if (Model != null)
-           {
-               if (Model.DeletionTime == null)
-               {%>
-        | <a href="/Entry/DeletePublication/<%:Model.Id%>">Delete this item</a>
-        <%
-               }
-               else
-               {%>
-        | <a href="/Entry/RestorePublication/<%:Model.Id%>">Restore this item</a>
-        <%
-}
-           }%>
+        <% Writer.Write(deleteOrRestore); %>
     </p>
     <input type="hidden" id="PageCreationTime" value="<%: DateTime.Now %>" />
     <%
@@ -383,7 +412,7 @@
     <script src="../../Scripts/ChangeEntryType.js" type="text/javascript"></script>
     <script type="text/javascript">
         function ItemId() { 
-            return <%:(Model != null) ? Model.Id : -1 %>;
+            return <%:(Model != null) ? ((Model.CreationTime == null) ? -1 : Model.Id) : -1 %>;
         }
     </script>
 </asp:Content>

@@ -23,48 +23,79 @@ namespace BibtexEntryManager.Models.EntryTypes
 
     /* Publication class represents a publication or a BIBTEX entry */
     public class Publication
-    {   
+    {
         #region Field Declaration
 
         public virtual int Id { get; set; }
-        
-        [Required(ErrorMessage = ErrorMessages.CiteKeyRequired)]
+
+        [Required(ErrorMessage = ErrorMessages.CiteKeyIsRequired)]
         [DisplayName("Cite Key")]
+        [RegularExpression("[^,]*", ErrorMessage = "Cite Keys cannot contain commas")]
+        [StringLength(30)]
         public virtual string CiteKey { get; set; }
         public virtual string Owner { get; set; }
 
         [DisplayName("Entry Type")]
         public virtual Entry EntryType { get; set; }
+        [StringLength(1500)]
         public virtual string Abstract { get; set; }
-        
+
+        [StringLength(255)]
         public virtual string Address { get; set; }
+        [StringLength(255)]
         public virtual string Annote { get; set; }
+        [StringLength(255)]
         public virtual string Authors { get; set; }
+
+        [DisplayName("Book Title")]
+        [StringLength(255)]
         public virtual string Booktitle { get; set; }
+        [StringLength(255)]
         public virtual string Chapter { get; set; }
+        [DisplayName("Cross Reference")]
+        [StringLength(255)]
         public virtual string Crossref { get; set; }
+        [StringLength(255)]
         public virtual string Edition { get; set; }
+        [StringLength(255)]
         public virtual string Editors { get; set; }
+        [DisplayName("How Published")]
+        [StringLength(255)]
         public virtual string Howpublished { get; set; }
+        [StringLength(255)]
         public virtual string Institution { get; set; }
+        [StringLength(255)]
         public virtual string Journal { get; set; }
 
         [DisplayName("Key")]
         public virtual string TheKey { get; set; }
+        [StringLength(255)]
         public virtual string Month { get; set; }
+        [StringLength(255)]
         public virtual string Note { get; set; }
+        [StringLength(255)]
         public virtual string Number { get; set; }
+
+        [DisplayName("Organisation")]
+        [StringLength(255)]
         public virtual string Organization { get; set; }
+        [StringLength(255)]
         public virtual string Pages { get; set; }
+        [StringLength(255)]
         public virtual string Publisher { get; set; }
+        [StringLength(255)]
         public virtual string School { get; set; }
+        [StringLength(255)]
         public virtual string Series { get; set; }
+        [StringLength(255)]
         public virtual string Title { get; set; }
+        [StringLength(255)]
         public virtual string Type { get; set; }
+        [StringLength(255)]
         public virtual string Volume { get; set; }
+        [RegularExpression("[0-9][0-9][0-9][0-9]", ErrorMessage = "The year must be a four-digit number")]
         public virtual string Year { get; set; }
 
-        //public virtual PublicationGroup PublicationGroup { get; set; }
         // times of modification/creation/
         public virtual DateTime? DeletionTime { get; set; }
         public virtual DateTime? AmendmentTime { get; set; }
@@ -157,148 +188,147 @@ namespace BibtexEntryManager.Models.EntryTypes
         public virtual string ToBibFormat()
         {
             Dictionary<Field, bool> dict = PublicationFactory.EntryFieldUsage[EntryType];
-            const string newLineIndent = "\r\n    ";
-
-            string retVal = "@" + EntryType + "{" + CiteKey + "," + newLineIndent;
+            const string commaNewlineIndent = ",\r\n  ";
+            string retVal = "@" + EntryType + "{" + CiteKey;
             bool auth;
-            if (dict.TryGetValue(Field.Author, out auth))
+            if (dict.TryGetValue(Field.Author, out auth) && !String.IsNullOrEmpty(Authors))
             {
                 //if (auth)
-                retVal += "Author = {" + Authors + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Author = {" + Authors + "}";
             }
             bool ddress;
-            if (dict.TryGetValue(Field.Address, out ddress))
+            if (dict.TryGetValue(Field.Address, out ddress) && !String.IsNullOrEmpty(Address))
             {
                 //if (ddress)
-                retVal += "Address = {" + Address + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Address = {" + Address + "}";
             }
             bool nnote;
-            if (dict.TryGetValue(Field.Annote, out nnote))
+            if (dict.TryGetValue(Field.Annote, out nnote) && !String.IsNullOrEmpty(Annote))
             {
                 //if (nnote)
-                retVal += "Annote = {" + Annote + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Annote = {" + Annote + "}";
             }
             bool ooktitle;
-            if (dict.TryGetValue(Field.Booktitle, out ooktitle))
+            if (dict.TryGetValue(Field.Booktitle, out ooktitle) && !String.IsNullOrEmpty(Booktitle))
             {
                 //if (ooktitle)
-                retVal += "Booktitle = {" + Booktitle + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Booktitle = {" + Booktitle + "}";
             }
             bool hapter;
-            if (dict.TryGetValue(Field.Chapter, out hapter))
+            if (dict.TryGetValue(Field.Chapter, out hapter) && !String.IsNullOrEmpty(Chapter))
             {
                 //if (hapter)
-                retVal += "Chapter = {" + Chapter + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Chapter = {" + Chapter + "}";
             }
             bool rossref;
-            if (dict.TryGetValue(Field.Crossref, out rossref))
+            if (dict.TryGetValue(Field.Crossref, out rossref) && !String.IsNullOrEmpty(Crossref))
             {
                 //if (rossref)
-                retVal += "Crossref = {" + Crossref + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Crossref = {" + Crossref + "}";
             }
             bool dition;
-            if (dict.TryGetValue(Field.Edition, out dition))
+            if (dict.TryGetValue(Field.Edition, out dition) && !String.IsNullOrEmpty(Edition))
             {
                 //if (dition)
-                retVal += "Edition = {" + Edition + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Edition = {" + Edition + "}";
             }
             bool ditor;
-            if (dict.TryGetValue(Field.Editor, out ditor))
+            if (dict.TryGetValue(Field.Editor, out ditor) && !String.IsNullOrEmpty(Editors))
             {
                 //if (ditor)
-                retVal += "Editor = {" + Editors + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Editor = {" + Editors + "}";
             }
             bool owpublished;
-            if (dict.TryGetValue(Field.Howpublished, out owpublished))
+            if (dict.TryGetValue(Field.Howpublished, out owpublished) && !String.IsNullOrEmpty(Howpublished))
             {
                 //if (owpublished)
-                retVal += "Howpublished = {" + Howpublished + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Howpublished = {" + Howpublished + "}";
             }
             bool nstitution;
-            if (dict.TryGetValue(Field.Institution, out nstitution))
+            if (dict.TryGetValue(Field.Institution, out nstitution) && !String.IsNullOrEmpty(Institution))
             {
                 //if (nstitution)
-                retVal += "Institution = {" + Institution + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Institution = {" + Institution + "}";
             }
             bool heKey;
-            if (dict.TryGetValue(Field.TheKey, out heKey))
+            if (dict.TryGetValue(Field.TheKey, out heKey) && !String.IsNullOrEmpty(TheKey))
             {
                 //if (heKey)
-                retVal += "Key = {" + TheKey + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Key = {" + TheKey + "}";
             }
             bool onth;
-            if (dict.TryGetValue(Field.Month, out onth))
+            if (dict.TryGetValue(Field.Month, out onth) && !String.IsNullOrEmpty(Month))
             {
                 //if (onth)
-                retVal += "Month = {" + Month + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Month = {" + Month + "}";
             }
             bool ote;
-            if (dict.TryGetValue(Field.Note, out ote))
+            if (dict.TryGetValue(Field.Note, out ote) && !String.IsNullOrEmpty(Note))
             {
                 //if (ote)
-                retVal += "Note = {" + Note + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Note = {" + Note + "}";
             }
             bool umber;
-            if (dict.TryGetValue(Field.Number, out umber))
+            if (dict.TryGetValue(Field.Number, out umber) && !String.IsNullOrEmpty(Number))
             {
                 //if (umber)
-                retVal += "Number = {" + Number + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Number = {" + Number + "}";
             }
             bool rganization;
-            if (dict.TryGetValue(Field.Organization, out rganization))
+            if (dict.TryGetValue(Field.Organization, out rganization) && !String.IsNullOrEmpty(Organization))
             {
                 //if (rganization)
-                retVal += "Organization = {" + Organization + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Organization = {" + Organization + "}";
             }
             bool ages;
-            if (dict.TryGetValue(Field.Pages, out ages))
+            if (dict.TryGetValue(Field.Pages, out ages) && !String.IsNullOrEmpty(Pages))
             {
                 //if (ages)
-                retVal += "Pages = {" + Pages + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Pages = {" + Pages + "}";
             }
             bool ublisher;
-            if (dict.TryGetValue(Field.Publisher, out ublisher))
+            if (dict.TryGetValue(Field.Publisher, out ublisher) && !String.IsNullOrEmpty(Publisher))
             {
                 //if (ublisher)
-                retVal += "Publisher = {" + Publisher + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Publisher = {" + Publisher + "}";
             }
             bool chool;
-            if (dict.TryGetValue(Field.School, out chool))
+            if (dict.TryGetValue(Field.School, out chool) && !String.IsNullOrEmpty(School))
             {
                 //if (chool)
-                retVal += "School = {" + School + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "School = {" + School + "}";
             }
             bool eries;
-            if (dict.TryGetValue(Field.Series, out eries))
+            if (dict.TryGetValue(Field.Series, out eries) && !String.IsNullOrEmpty(Series))
             {
                 //if (eries)
-                retVal += "Series = {" + Series + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Series = {" + Series + "}";
             }
             bool itle;
-            if (dict.TryGetValue(Field.Title, out itle))
+            if (dict.TryGetValue(Field.Title, out itle) && !String.IsNullOrEmpty(Title))
             {
                 //if (itle)
-                retVal += "Title = {" + Title + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Title = {" + Title + "}";
             }
             bool ype;
-            if (dict.TryGetValue(Field.Type, out ype))
+            if (dict.TryGetValue(Field.Type, out ype) && !String.IsNullOrEmpty(Type))
             {
                 //if (ype)
-                retVal += "Type = {" + Type + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Type = {" + Type + "}";
             }
             bool olume;
-            if (dict.TryGetValue(Field.Volume, out olume))
+            if (dict.TryGetValue(Field.Volume, out olume) && !String.IsNullOrEmpty(Volume))
             {
                 //if (olume)
-                retVal += "Volume = {" + Volume + "}," + newLineIndent;
+                retVal += commaNewlineIndent + "Volume = {" + Volume + "}";
             }
             bool ear;
-            if (dict.TryGetValue(Field.Year, out ear))
+            if (dict.TryGetValue(Field.Year, out ear) && !String.IsNullOrEmpty(Year))
             {
                 //if (ear)
-                retVal += "Year = {" + Year + "}" + "\r\n";
+                retVal += commaNewlineIndent + "Year = {" + Year + "}";
             }
-            retVal += "}\r\n\r\n";
+            retVal += "\r\n}\r\n\r\n";
 
 
             return retVal;
@@ -354,9 +384,6 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private void UpdateInDatabase()
         {
-            if (!IsValidEntry())
-                throw new InvalidEntryException();
-            
             if (DeletionTime == null)
                 AmendmentTime = DateTime.Now;
 
@@ -368,8 +395,9 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         public virtual void SaveOrUpdateInDatabase()
         {
-            if (!IsValidEntry())
-                throw new InvalidEntryException();
+            Dictionary<string, string> dict = IsValidEntry();
+            if (dict.Count != 0)
+                throw new InvalidEntryException(dict);
 
             if (ExistsInDatabase())
                 UpdateInDatabase();
@@ -379,77 +407,74 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private void SaveToDatabase()
         {
-            if (!IsValidEntry())
-                throw new InvalidEntryException();
             CreationTime = DateTime.Now;
             DataPersistence.GetSession().Persist(this);
         }
 
         #endregion
 
-        #region Validity Checks
+        #region Validity Checks - Boolean
 
-        public virtual bool IsValidEntry()
+        public virtual bool IsValidEntryBoolean()
         {
             if (String.IsNullOrEmpty(CiteKey))
                 return false;
-            
+
             if (EntryType == Entry.Article)
             {
                 return IsValidArticle();
             }
-            else if (EntryType == Entry.Book)
+            if (EntryType == Entry.Book)
             {
                 return IsValidBook();
             }
-            else if (EntryType == Entry.Booklet)
+            if (EntryType == Entry.Booklet)
             {
                 return IsValidBooklet();
             }
-            else if (EntryType == Entry.Conference)
+            if (EntryType == Entry.Conference)
             {
                 return IsValidConference();
             }
-            else if (EntryType == Entry.Inbook)
+            if (EntryType == Entry.Inbook)
             {
                 return IsValidInbook();
             }
-            else if (EntryType == Entry.Incollection)
+            if (EntryType == Entry.Incollection)
             {
                 return IsValidIncollection();
             }
-            else if (EntryType == Entry.Inproceedings)
+            if (EntryType == Entry.Inproceedings)
             {
                 return IsValidInproceedings();
             }
-            else if (EntryType == Entry.Manual)
+            if (EntryType == Entry.Manual)
             {
                 return IsValidManual();
             }
-            else if (EntryType == Entry.Mastersthesis)
+            if (EntryType == Entry.Mastersthesis)
             {
                 return IsValidMastersthesis();
             }
-            else if (EntryType == Entry.Misc)
+            if (EntryType == Entry.Misc)
             {
                 return IsValidMisc();
             }
-            else if (EntryType == Entry.Phdthesis)
+            if (EntryType == Entry.Phdthesis)
             {
                 return IsValidPhdthesis();
             }
-            else if (EntryType == Entry.Proceedings)
+            if (EntryType == Entry.Proceedings)
             {
                 return IsValidProceedings();
             }
-            else if (EntryType == Entry.Techreport)
+            if (EntryType == Entry.Techreport)
             {
                 return IsValidTechreport();
             }
-            else
-            {
-                return IsValidUnpublished();
-            }
+            // else
+            return IsValidUnpublished();
+            
         }
 
         private bool IsValidArticle()
@@ -664,6 +689,287 @@ namespace BibtexEntryManager.Models.EntryTypes
                 return false;
             }
             return true;
+        }
+
+        #endregion
+
+        #region Validity Checks - Dictionaries returned
+
+        public virtual Dictionary<string, string> IsValidEntry()
+        {
+            Dictionary<string,string> dict = new Dictionary<string, string>();
+            if (String.IsNullOrEmpty(CiteKey)) 
+                dict.Add("CiteKey", ErrorMessages.CiteKeyIsRequired);
+
+            if (EntryType == Entry.Article)
+            {
+                return IsValidArticle(dict);
+            }
+            if (EntryType == Entry.Book)
+            {
+                return IsValidBook(dict);
+            }
+            if (EntryType == Entry.Booklet)
+            {
+                return IsValidBooklet(dict);
+            }
+            if (EntryType == Entry.Conference)
+            {
+                return IsValidConference(dict);
+            }
+            if (EntryType == Entry.Inbook)
+            {
+                return IsValidInbook(dict);
+            }
+            if (EntryType == Entry.Incollection)
+            {
+                return IsValidIncollection(dict);
+            }
+            if (EntryType == Entry.Inproceedings)
+            {
+                return IsValidInproceedings(dict);
+            }
+            if (EntryType == Entry.Manual)
+            {
+                return IsValidManual(dict);
+            }
+            if (EntryType == Entry.Mastersthesis)
+            {
+                return IsValidMastersthesis(dict);
+            }
+            if (EntryType == Entry.Misc)
+            {
+                return IsValidMisc(dict);
+            }
+            if (EntryType == Entry.Phdthesis)
+            {
+                return IsValidPhdthesis(dict);
+            }
+            if (EntryType == Entry.Proceedings)
+            {
+                return IsValidProceedings(dict);
+            }
+            if (EntryType == Entry.Techreport)
+            {
+                return IsValidTechreport(dict);
+            }
+            // else
+            return IsValidUnpublished(dict);
+        }
+
+        private Dictionary<string, string> IsValidArticle(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Journal))
+            {
+                dict.Add("Journal", ErrorMessages.JournalIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidBook(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors) && String.IsNullOrEmpty(Editors))
+            {
+                dict.Add("Authors", "Either Authors or Editors must not be empty");
+                dict.Add("Editors", "Either Authors or Editors must not be empty");
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Publisher))
+            {
+                dict.Add("Publisher", ErrorMessages.PublisherIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidBooklet(Dictionary<string, string> dict)
+        {
+            dict.Add("Title", ErrorMessages.TitleIsRequired);
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidConference(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidInbook(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors) && String.IsNullOrEmpty(Editors))
+            {
+                dict.Add("Authors", "Either Authors or Editors must not be empty");
+                dict.Add("Editors", "Either Authors or Editors must not be empty");
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Chapter))
+            {
+                dict.Add("Chapter", ErrorMessages.ChapterIsRequired);
+            }
+            if (String.IsNullOrEmpty(Publisher))
+            {
+                dict.Add("Publisher", ErrorMessages.PublisherIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidIncollection(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Booktitle))
+            {
+                dict.Add("Booktitle", ErrorMessages.BooktitleIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidInproceedings(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidManual(Dictionary<string, string> dict) { dict.Add("Title", ErrorMessages.TitleIsRequired); return dict; }
+
+        private Dictionary<string, string> IsValidMastersthesis(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(School))
+            {
+                dict.Add("School", ErrorMessages.SchoolIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidMisc(Dictionary<string, string> dict) { return dict; } // if the item exists, it has at least one non-null/empty field}
+
+        private Dictionary<string, string> IsValidPhdthesis(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(School))
+            {
+                dict.Add("School", ErrorMessages.SchoolIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidProceedings(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidTechreport(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Institution))
+            {
+                dict.Add("Institution", ErrorMessages.InstitutionIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
+            return dict;
+        }
+
+        private Dictionary<string, string> IsValidUnpublished(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Authors))
+            {
+                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
+            }
+            if (String.IsNullOrEmpty(Title))
+            {
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Note))
+            {
+                dict.Add("Note", ErrorMessages.NoteIsRequired);
+            }
+            return dict;
         }
 
         #endregion

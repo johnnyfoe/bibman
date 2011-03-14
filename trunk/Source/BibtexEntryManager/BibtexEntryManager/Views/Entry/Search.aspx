@@ -5,15 +5,25 @@
     Search Results</asp:Content>
 <asp:Content runat="server" ID="Scripts" ContentPlaceHolderID="ScriptsContent">
     <script type="text/javascript">
-        // To be included with /Entry/Search.aspx
+        // To be included with ./Search.aspx
         function keysearch() {
             var service = new BibtexEntryManager.SearchResults();
-            service.DoSearch(document.getElementById("searchString").value, onSuccess, null, null);
+            service.DoSearchRaw(document.getElementById("searchString").value, onSuccess, null, null);
         }
 
         function onSuccess(result) {
-            document.getElementById("results").innerHTML = result;
-            sorttable.makeSortable(document.getElementsByTagName("table")[0]);
+            document.getElementById("searchCount").innerHTML = (result != null) ? result.length + " result" + ((result.length != 1) ? "s" : "") : "";
+            if (result.length > 0) {
+                var s = "";
+                for (var i = 0; i < result.length; i++) {
+                    s += result[i];
+                }
+                document.getElementById("results").innerHTML = s;
+                sorttable.makeSortable(document.getElementsByTagName("table")[0]);
+            }
+            else {
+                document.getElementById("results").innerHTML = "<tr><td>There are no results.</td></tr>";
+            }
         }</script>
 </asp:Content>
 <asp:Content runat="server" ID="Main" ContentPlaceHolderID="MainContent">
@@ -25,13 +35,33 @@
     </asp:ScriptManager>
     </form>
     <p>
+        Typing here will perform an instant search across all fields in the database. <br />
+        Wildcards '*' and '?' may be used in searches, for example, 'mat*' will return results which have the string 'mat' followed by any series of characters.<br />
         Instant search box:
-        <input id="searchString" type="text" onkeyup="return keysearch()" />
-        Wildcards '*' and '?' may be used in searches.
-    </p>
+        <input id="searchString" type="text" onkeyup="return keysearch()" value="<% Writer.Write(ViewData["searchterm"]); %>"/> <span id="searchCount">
+        <%
+            string res;
+            if (Model != null)
+            {
+                if (Model.Count > 0)
+                {
+                    res = Model.Count + " result" + ((Model.Count > 1) ? "s" : "") + " for ";
+                }
+                else
+                {
+                    res = "No results for ";
+                }
+                res += ViewData["searchterm"];
+            }
+            else
+            {
+                res = "Enter a query";
+            }
+            Writer.Write(res);
+        %></span></p>
     <table class="sortable">
         <thead>
-            <tr>
+            <tr title="Click to sort">
                 <td>
                     Cite Key
                 </td>
@@ -59,6 +89,10 @@
                     {
                         Writer.WriteLine(p.ToHtmlTableRowWithLinks() + "\r\n            ");
                     }
+                }
+                else
+                {
+                    Writer.WriteLine("<tr><td>Enter a term to begin a search</td></tr>");
                 }
             %>
         </tbody>

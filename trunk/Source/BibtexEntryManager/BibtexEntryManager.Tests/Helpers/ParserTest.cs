@@ -15,7 +15,8 @@ namespace BibtexEntryManager.Tests.Helpers
         public void TestGetEntriesFrom()
         {
             var data = File.OpenText(TestFilePath + "DefaultBook.bib").ReadToEnd();
-            var coll = Parser.GetEntriesFrom(data);
+            string s = "";
+            var coll = Parser.GetEntriesFrom(data, out s);
 
             var publicationCollection = new List<Publication>();
 

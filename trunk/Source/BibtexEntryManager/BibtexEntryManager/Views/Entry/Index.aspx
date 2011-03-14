@@ -11,7 +11,7 @@
         List of Entries
     </h2>
     <p>To modify or delete an existing entry, click the cite key. <br />
-    Items that have been added or deleted since the page was loaded will appear and be highlighted automatically</p>
+    Items that have been added, modified or deleted since the page was loaded will appear and be highlighted appropriately.</p>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server">
             <Services>
@@ -19,9 +19,12 @@
             </Services>
         </asp:ScriptManager>
     <%: ViewData["DeletionResult"] %>
+    <%if (Model.Count == 0)
+      {%><p>There are currently no entries in the database. Import or add entries by choosing from the menu above.</p> <%
+      }%>
     <table class="sortable">
         <thead>
-            <tr>
+            <tr title="Click to sort">
                 <td>
                     Cite Key
                 </td>

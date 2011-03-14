@@ -180,7 +180,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Data\Query.cs" />
     <Compile Include="Error\ErrorMessages.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,6 +190,7 @@
     <Compile Include="Helpers\UnknownEntryTypeException.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BibPersistenceModel.cs" />
+    <Compile Include="Models\EntryTypes\Tag.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Models\Enums\Entry.cs" />
     <Compile Include="Models\Enums\Field.cs" />

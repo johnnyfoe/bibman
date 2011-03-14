@@ -1,5 +1,6 @@
 function DoPageLoad() {
     document.getElementById("entrySelector").value = document.getElementById("EntryType").value;
+    document.getElementById("monthSelector").value = document.getElementById("Month").value;
     ChangeEntryType();
 
     if (ItemId() != -1) {
@@ -42,6 +43,11 @@ function onModificationCheckSuccess(result) {
                     ItemId() + "\" target=\"_blank\">here</a> to see it in a new tab/window.";
         return;
     }
+}
+
+function ChangeMonth() {
+    var month = document.getElementById("monthSelector").value;
+    document.getElementById("Month").value = month;
 }
 
 function ChangeEntryType() {

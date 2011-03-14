@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Enums;
-using BibtexEntryManager.Models.Exceptions;
 
 namespace BibtexEntryManager.Helpers
 {
     public static class ObjectBuilder
     {
-        private const int    CurrentId = 0;
-        private const string StaticJournal = "JournalName";
-        private const string DefaultOwner = "Mark White";
-        private const string CkPrefix = "JS2010";
-
         public static Publication BuildDefaultPublication()
         {
             return NewDefaultPublication();
@@ -71,7 +65,7 @@ namespace BibtexEntryManager.Helpers
                    institution,
                    journal,
                    key,
-                   month,
+                   m,
                    note,
                    number,
                    organization,
@@ -98,7 +92,7 @@ namespace BibtexEntryManager.Helpers
             oneEntry.TryGetValue("institution", out institution);
             oneEntry.TryGetValue("journal", out journal);
             oneEntry.TryGetValue("key", out key);
-            oneEntry.TryGetValue("month", out month);
+            oneEntry.TryGetValue("month", out m);
             oneEntry.TryGetValue("note", out note);
             oneEntry.TryGetValue("number", out number);
             oneEntry.TryGetValue("organization", out organization);
@@ -110,6 +104,59 @@ namespace BibtexEntryManager.Helpers
             oneEntry.TryGetValue("type", out type);
             oneEntry.TryGetValue("volume", out volume);
             oneEntry.TryGetValue("year", out year);
+            if (!string.IsNullOrEmpty(m))
+            {
+                m = m.Substring(0, 3).ToLower();
+
+                if (m.Equals("jan"))
+                {
+                    m = "January";
+                }
+                else if (m.Equals("feb"))
+                {
+                    m = "February";
+                }
+                else if (m.Equals("mar"))
+                {
+                    m = "March";
+                }
+                else if (m.Equals("apr"))
+                {
+                    m = "April";
+                }
+                else if (m.Equals("may"))
+                {
+                    m = "May";
+                }
+                else if (m.Equals("jun"))
+                {
+                    m = "June";
+                }
+                else if (m.Equals("jul"))
+                {
+                    m = "July";
+                }
+                else if (m.Equals("aug"))
+                {
+                    m = "August";
+                }
+                else if (m.Equals("sep"))
+                {
+                    m = "September";
+                }
+                else if (m.Equals("oct"))
+                {
+                    m = "October";
+                }
+                else if (m.Equals("nov"))
+                {
+                    m = "November";
+                }
+                else if (m.Equals("dec"))
+                {
+                    m = "December";
+                }
+            }
 
 
             Publication p = new Publication
@@ -129,7 +176,7 @@ namespace BibtexEntryManager.Helpers
                                     Institution = institution,
                                     Journal = journal,
                                     TheKey = key,
-                                    Month = month,
+                                    Month = m,
                                     Note = note,
                                     Number = number,
                                     Organization = organization,

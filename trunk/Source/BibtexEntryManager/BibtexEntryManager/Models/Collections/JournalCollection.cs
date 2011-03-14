@@ -27,6 +27,10 @@ namespace BibtexEntryManager.Models.Collections
             return new Journal("", "");
             
         }
+        public static void Clear()
+        {
+            journals.Clear();
+        }
 
         public static ICollection<Journal> getAllJournals()
         {

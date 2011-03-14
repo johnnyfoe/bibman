@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BibtexEntryManager.Models.Exceptions
 {
@@ -26,14 +27,21 @@ namespace BibtexEntryManager.Models.Exceptions
 
     public class InvalidEntryException : Exception
     {
-
-    }
-    public class InvalidPublicationException : Exception
-    {
-        private string KeyNotFoundMessage { get; set; }
-        public InvalidPublicationException(string k)
+        public Dictionary<string, string> ErrorDictionary { get; set; }
+        
+        public InvalidEntryException(Dictionary<string,string> dict)
         {
-            KeyNotFoundMessage = k;
+            ErrorDictionary = dict;
+        }
+
+        public new string ToString()
+        {
+            string retVal = "";
+            foreach (KeyValuePair<string, string> keyValuePair in ErrorDictionary)
+            {
+                retVal += keyValuePair.Value + "\r\n";
+            }
+            return retVal;
         }
 
     }

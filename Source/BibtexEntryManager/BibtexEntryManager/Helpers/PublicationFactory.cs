@@ -70,16 +70,9 @@ namespace BibtexEntryManager.Helpers
                 // set e to the entry type, currently stored as a string.
                 Enum.TryParse(oneEntry[Field.Entrytype.ToString()], true, out e);
 
-                try
-                {
-                    // Create a publication object depending upon the entry type
-                    return ObjectBuilder.NewPublicationFrom(e, oneEntry);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.StackTrace);
-                    return null;
-                }
+                
+                // Create a publication object depending upon the entry type
+                return ObjectBuilder.NewPublicationFrom(e, oneEntry);
             }
 	    }
 

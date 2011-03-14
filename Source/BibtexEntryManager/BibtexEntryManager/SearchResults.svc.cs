@@ -26,6 +26,18 @@ namespace BibtexEntryManager
         }
 
         [OperationContract]
+        public IList<string> DoSearchRaw(string searchString)
+        {
+            IList<string> retVal = new List<string>();
+            var s = DataPersistence.GetActivePublicationsMatching(searchString);
+            foreach (var v in s)
+            {
+                retVal.Add(v.ToHtmlTableRowWithLinks());
+            }
+
+            return retVal;
+        }
+        [OperationContract]
         public IList<int> GetDeletedPublications(string pageCreationTime)
         {
             try
@@ -144,10 +156,13 @@ namespace BibtexEntryManager
             
             DateTime d = DateTime.Parse(pageCreationTime);
 
-            var pub = (from p in ses.Linq<Publication>()
-                      where p.Id == id
-                      select p).First();
-
+            Publication pub = null;
+            if (id > 0)
+            {
+                pub = (from p in ses.Linq<Publication>()
+                       where p.Id == id
+                       select p).First();
+            }
             if (pub == null)
             {
                 return -1; // means that the publication does not exist in the db and therefore cannot have changed

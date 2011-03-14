@@ -10,7 +10,7 @@
     <input type="submit" value="Delete Selected Entries" /><br /><br />
     <table class="sortable">
         <thead>
-            <tr>
+            <tr title="Click to sort">
                 <td>
                 </td>
                 <td>

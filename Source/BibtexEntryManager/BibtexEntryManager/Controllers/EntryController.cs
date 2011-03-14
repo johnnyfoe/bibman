@@ -73,7 +73,6 @@ namespace BibtexEntryManager.Controllers
                 return View();
             }
             var res = DataPersistence.GetActivePublicationsMatching(searchVal);
-
             return View(res);
 
         }
@@ -87,6 +86,8 @@ namespace BibtexEntryManager.Controllers
             }
 
             var res = DataPersistence.GetActivePublicationsMatching(s);
+
+            ViewData["searchterm"] = s;
 
             return View(res);
 
@@ -183,9 +184,10 @@ namespace BibtexEntryManager.Controllers
                 }
             }
             IEnumerable<Dictionary<string, string>> entries;
+            string errorString;
             if (!String.IsNullOrEmpty(requiredKey))
             {
-                entries = Parser.GetEntriesFrom(Request.Form[requiredKey]);
+                entries = Parser.GetEntriesFrom(Request.Form[requiredKey], out errorString);
             }
             else
             {
@@ -196,7 +198,9 @@ namespace BibtexEntryManager.Controllers
             IList<Publication> publications = new List<Publication>();
             foreach (Dictionary<string, string> dictionary in entries)
             {
-                publications.Add(PublicationFactory.MakePublication(dictionary));
+                var p = PublicationFactory.MakePublication(dictionary);
+                if (p != null)
+                    publications.Add(p);
             }
             var successCounter = 0;
             var failureCounter = 0;
@@ -208,9 +212,14 @@ namespace BibtexEntryManager.Controllers
                     l.SaveOrUpdateInDatabase();
                     successCounter++;
                 }
+                catch(InvalidEntryException e)
+                {
+                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because the entry was invalid: " +
+                                        e.ToString();
+                }
                 catch (Exception e) // todo probably want to have a look at what exception to catch here...
                 {
-                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because of an exception:" + e.Message;
+                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because of an exception: " + e.Message;
                     failureCounter++;
                 }
             }
@@ -261,12 +270,21 @@ namespace BibtexEntryManager.Controllers
             {
                 fileContent.Append((char)b);
             }
-
-            var k = Parser.GetEntriesFrom(fileContent.ToString());
+            string errorString;
+            var k = Parser.GetEntriesFrom(fileContent.ToString(), out errorString);
             var publicationCollection = new List<Publication>();
             foreach (var l in k)
             {
-                publicationCollection.Add(PublicationFactory.MakePublication(l));
+                try
+                {
+                    var p = PublicationFactory.MakePublication(l);
+                    if (p != null)
+                        publicationCollection.Add(p);
+                }
+                catch (Exception e)
+                {
+                    errorString += "<br/><br/>" + e + "<br/><br/>";
+                }
             }
             var successCounter = 0;
             var failureCounter = 0;
@@ -277,6 +295,11 @@ namespace BibtexEntryManager.Controllers
                     l.Owner = HttpContext.User.Identity.Name;
                     l.SaveOrUpdateInDatabase();
                     successCounter++;
+                }
+                catch (InvalidEntryException e)
+                {
+                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because the entry was invalid: " +
+                                        e.ToString();
                 }
                 catch (Exception e) // todo probably want to have a look at what exception to catch here...
                 {
@@ -296,11 +319,32 @@ namespace BibtexEntryManager.Controllers
         [Authorize]
         public ActionResult Publication(Publication a)
         {
-            if (ModelState.IsValid)
+
+            Dictionary<string, string> errors = a.IsValidEntry();
+            var matchingCiteKeys = (from pubs in DataPersistence.GetSession().Linq<Publication>()
+                                    where pubs.CiteKey.Equals(a.CiteKey)
+                                    select pubs);
+            int ckCount = matchingCiteKeys.Count();
+            if (ckCount > 0)
+            {
+                string linkToOther = "";// "<a href=\"Publication/" + matchingCiteKeys.First().Id + "\" target=\"_blank\">Click here to open the clash in a new window</a>";
+                const string ckKey = "CiteKey";
+                if (errors.ContainsKey(ckKey))
+                {
+                    errors[ckKey] += ". " + ErrorMessages.CiteKeyNotUnique + " " + linkToOther;
+                }
+                errors.Add(ckKey, ErrorMessages.CiteKeyNotUnique + " " + linkToOther);
+            }
+            // there are no errors if this is the case)
+            if (errors.Count == 0)
             {
                 a.Owner = HttpContext.User.Identity.Name;
                 a.SaveOrUpdateInDatabase();
                 return Redirect("/Entry");
+            }
+            foreach (KeyValuePair<string, string> kvp in errors)
+            {
+                ModelState.AddModelError(kvp.Key, kvp.Value);
             }
             return View(a);
         }

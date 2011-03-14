@@ -21,7 +21,7 @@
     </p>
     <table class="sortable">
         <thead>
-            <tr>
+            <tr title="Click to sort">
                 <td>
                     Cite Key
                 </td>

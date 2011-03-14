@@ -431,3 +431,17 @@ div#CompareTwoEntries
     overflow: auto;
     width: 100%;
 }
+a.menu
+{
+    cursor: default;
+}
+
+#searchCount
+{
+    font-weight:bold;
+}
+
+#searchvalue
+{
+    width:100px;
+}

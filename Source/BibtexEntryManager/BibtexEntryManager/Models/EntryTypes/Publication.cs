@@ -250,6 +250,12 @@ namespace BibtexEntryManager.Models.EntryTypes
                 //if (nstitution)
                 retVal += commaNewlineIndent + "Institution = {" + Institution + "}";
             }
+            bool ournal;
+            if (dict.TryGetValue(Field.Journal, out ournal) && !String.IsNullOrEmpty(Journal))
+            {
+                //if (ournal)
+                retVal += commaNewlineIndent + "Journal = {" + Journal + "}";
+            }
             bool heKey;
             if (dict.TryGetValue(Field.TheKey, out heKey) && !String.IsNullOrEmpty(TheKey))
             {
@@ -875,7 +881,12 @@ namespace BibtexEntryManager.Models.EntryTypes
             return dict;
         }
 
-        private Dictionary<string, string> IsValidManual(Dictionary<string, string> dict) { dict.Add("Title", ErrorMessages.TitleIsRequired); return dict; }
+        private Dictionary<string, string> IsValidManual(Dictionary<string, string> dict)
+        {
+            if (String.IsNullOrEmpty(Title))
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
+            return dict;
+        }
 
         private Dictionary<string, string> IsValidMastersthesis(Dictionary<string, string> dict)
         {

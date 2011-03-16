@@ -72,20 +72,7 @@ namespace BibtexEntryManager.Helpers
                         // Create journals
                         if (entryType.Equals("string"))
                         {
-                            // Delete the entry type
-                            str.Remove(0, IndexOf(str, '{') + 1);
-
-                            // Get the key
-                            var key = SubString(str, 0, IndexOf(str, '=')).ToString().Trim();
-
-                            // Get the value
-                            var value = SubString(str, IndexOf(str, '=') + 1, IndexOf(str, '}')).ToString().Trim();
-
-                            // Remove extra brackets and spaces
-                            value = value.Substring(1, value.Length - 1).Trim();
-
-                            // Add to journal collection
-                            JournalCollection.addJournal(key, new Journal(key, value));
+                            errorString += "Sorry, but the system cannot yet handle 'string' entries. Please revise your file accordingly\r\n";
 
                             // Go to next entry
                             continue;

@@ -28,13 +28,13 @@ cyCur=552
 cyMin=10
 
 [Frame0_Col0]
-cxCur=612
+cxCur=614
 cxMin=10
 
 [Frame0_View0,0]
-Cursor.row=46
-Cursor.column=0
-TopSubLine=34
+Cursor.row=370
+Cursor.column=106
+TopSubLine=665
 
 [Frame1]
 Columns=1
@@ -61,7 +61,7 @@ cxCur=1135
 cxMin=10
 
 [Frame1_View0,0]
-Cursor.row=27
-Cursor.column=15
-TopSubLine=20
+Cursor.row=107
+Cursor.column=0
+TopSubLine=99
 

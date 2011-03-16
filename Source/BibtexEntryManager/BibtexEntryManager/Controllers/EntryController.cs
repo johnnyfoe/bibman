@@ -224,7 +224,8 @@ namespace BibtexEntryManager.Controllers
                 }
             }
             ViewData["data"] += "Successfully added " + successCounter
-                                   + " items and failed to add " + failureCounter + " items.";
+                                   + " items and failed to add " + failureCounter + " items."+
+                                   ((errorString.Length==0)?"":"The parser encountered some errors: " + errorString);
 
             return View();
         }

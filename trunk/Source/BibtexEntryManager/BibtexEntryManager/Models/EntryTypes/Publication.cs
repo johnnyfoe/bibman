@@ -355,12 +355,14 @@ namespace BibtexEntryManager.Models.EntryTypes
                     EntryType == t.EntryType &&
                     Address == t.Address &&
                     Annote == t.Annote &&
-                    (Authors.Equals(t.Authors)) &&
+                    Authors == t.Authors &&
+                    //(Authors.Equals(t.Authors)) &&
                     Booktitle == t.Booktitle &&
                     Chapter == t.Chapter &&
                     Crossref == t.Crossref &&
                     Edition == t.Edition &&
-                    (Editors.Equals(t.Editors)) &&
+                    Editors == t.Editors &&
+                    //(Editors.Equals(t.Editors)) &&
                     Howpublished == t.Howpublished &&
                     Institution == t.Institution &&
                     Journal == t.Journal &&

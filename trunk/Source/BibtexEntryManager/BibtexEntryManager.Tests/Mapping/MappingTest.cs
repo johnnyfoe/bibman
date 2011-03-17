@@ -1,18 +1,15 @@
-﻿using BibtexEntryManager.Helpers;
-using BibtexEntryManager.Models.EntryTypes;
+﻿using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Tests.Helpers;
 using FluentNHibernate.Testing;
-using NHibernate.Linq;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
-using System.Linq;
 
 namespace BibtexEntryManager.Tests.Mapping
 {
     [TestFixture]
     public class MappingFixture : FixtureBase
     {
-        //[Ignore("Sets up new database - skipping.")]
+        [Ignore("Sets up new database - skipping.")]
         [Test]
         public void SetupDatabase()
         {
@@ -20,19 +17,6 @@ namespace BibtexEntryManager.Tests.Mapping
                 .SetOutputFile(@"..\\out.sql")
                 .Create(false, true);
         }
-        [Ignore("Issue with NHibernate, not sure what's going on but it can't find the .dll")]
-        [Test]
-        public void TestSavePublication()
-        {
-            var art = ObjectBuilder.BuildDefaultPublication();
-            Session.Save(art);
-            var a = (from b in Session.Linq<Publication>()
-                    where art.CiteKey == b.CiteKey
-                    select b).First();
-            Assert.IsNotNull(a);
-            Session.Delete(art);
-        }
-
 
         [Test]
         public void CanMapArticle()

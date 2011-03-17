@@ -271,7 +271,7 @@ namespace BibtexEntryManager.Tests.Controllers
             AccountController controller = GetAccountController();
             RegisterModel model = new RegisterModel()
             {
-                Email = "goodEmail",
+                Email = "duplicateUser",
                 Password = "goodPassword",
                 ConfirmPassword = "goodPassword"
             };

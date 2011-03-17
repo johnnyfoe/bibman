@@ -10,37 +10,53 @@ namespace BibtexEntryManager.Helpers
         {
             return NewDefaultPublication();
         }
+
         private static Publication NewDefaultPublication()
         {
             Publication p = new Publication
-                    {
-                        Abstract = "random abstract",
-                        Owner = "johnny",
-                        Address = "Address",
-                        Annote = "Annote",
-                        Authors = "Author",
-                        Booktitle = "Booktitle",
-                        Chapter = "Chapter",
-                        Crossref = "Crossref",
-                        Edition = "Edition",
-                        Editors = "Editor",
-                        Howpublished = "Howpublished",
-                        Institution = "Institution",
-                        Journal = "Journal",
-                        TheKey = "Key",
-                        Month = "Month",
-                        Note = "Note",
-                        Number = "Number",
-                        Organization = "Organization",
-                        Pages = "Pages",
-                        Publisher = "Publisher",
-                        School = "School",
-                        Series = "Series",
-                        Title = "Title",
-                        Type = "Type",
-                        Volume = "Volume",
-                        Year = "Year"
-                    };
+            {
+                Abstract = "random abstract",
+                Owner = "johnny",
+                Address = "Address",
+                Annote = "Annote",
+                Authors = "John Smith",
+                Booktitle = "Booktitle",
+                Chapter = "Chapter",
+                Crossref = "Crossref",
+                Edition = "Edition",
+                Editors = "Editor",
+                Howpublished = "Howpublished",
+                Institution = "Institution",
+                Journal = "Journal",
+                TheKey = "Key",
+                Month = "Month",
+                Note = "Note",
+                Number = "Number",
+                Organization = "Organization",
+                Pages = "Pages",
+                Publisher = "Publisher",
+                School = "School",
+                Series = "Series",
+                Title = "Title",
+                Type = "Type",
+                Volume = "Volume",
+                Year = "Year"
+            };
+            return p;
+        }
+
+        public static Publication NewDefaultBook()
+        {
+            Publication p = new Publication
+            {
+                CiteKey = "JS2010",
+                Owner = "johnny",
+                Authors = "John Smith",
+                EntryType = Entry.Book,
+                Title = "A thorough investigation book",
+                Publisher = "Publisher",
+                Year = "2010"
+            };
             return p;
         }
         public static Publication NewPublicationFrom(Entry e, Dictionary<string, string> oneEntry)

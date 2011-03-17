@@ -17,6 +17,7 @@
     <%if (Model.Count > 1)
       {
     %>
+    <p>There are <%: Model.Count %> duplicates for this cite key</p>
     <div id="CompareTwoEntries">
         <%
             Publication pubOne = Model[0];

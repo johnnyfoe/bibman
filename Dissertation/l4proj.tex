@@ -5,7 +5,7 @@
 \usepackage[final]{pdfpages}
 \usepackage[acronym,toc]{glossaries}
 %\usepackage[toc]{glossaries}
-
+\newcommand{\tex}{\TeX}
 \newcommand{\BibTeX}{B{\sc ib}\TeX}
 \newcommand{\bibtex}{\BibTeX}
 \newcommand{\latex}{\LaTeX{} }
@@ -22,19 +22,23 @@
 \newglossaryentry{sample}{name={sample}, description={a sample glossary entry}}
 % ==========================================
 % 	Acronyms 				
-% 				  key  		displayed		Full string
+% 				  key  		displayed		Full stringaod
 \newacronym{ajax}		{AJAX}			{Asynchronous JavaScript And XML}
+\newacronym{aod}		{AOD}				{Architecture Overview Diagram}
 \newacronym{asp}		{ASP}				{Active Server Pages}
 \newacronym{case}		{CASE}			{Computer-Aided Software Engineering}
 \newacronym{ci}			{CI}				{Continuous Integration}
+\newacronym{css}		{CSS}				{Cascading Style Sheet}
 \newacronym{html}		{HTML}			{HyperText Markup Language}
 \newacronym{http}		{HTTP}			{HyperText Transfer Protocol}
+\newacronym{id}			{ID}				{Identifier}
 \newacronym{ide}		{IDE}				{Integrated Development Environment}
 \newacronym{jre}		{JRE}				{Java Runtime Environment}
 \newacronym{msdnaa}	{MSDNAA}		{Microsoft Developer Network Academic Alliance}
 \newacronym{msss}		{MSSQL}			{Microsoft SQL Server}
 \newacronym{msvs}		{MSVS}			{Microsoft Visual Studio}
 \newacronym{mvc}		{MVC}				{Model View Controller}
+\newacronym{oo}			{OO}				{Object-Oriented}
 \newacronym{sql}		{SQL}				{Structured Query Language}
 \newacronym{ssh}		{SSH}				{Secure Shell}
 \newacronym{svn}		{SVN}				{Subversion}
@@ -115,22 +119,22 @@ Discuss the intention of the intro \& its contents.
 
 \section{Preliminaries}
 \subsection{\TeX{}}
-In the words of its creator, \TeX{} is ``a [new] typesetting system intended for the creation of beautiful books---and especially for books that contain a lot of mathematics''\cite{DK84}.  The \TeX{} program is a set of primitive commands for basic typesetting, and also allows users to create more complex commands in terms of simpler ones.  Donald Knuth created the \TeX{} program in 1978, a subsequent version of which makes up the core of the program that is used today\cite{TeXOrigin}.  The use of \TeX{} to its potential requires that one has had considerable experience with programming techniques; it is as a result of this that the use of \TeX{} on its own is left to typography and programming professionals\cite{KD95}.
+In the words of its creator, \TeX{} is ``a [new] typesetting system intended for the creation of beautiful books---and especially for books that contain a lot of mathematics'' \cite{DK84}.  The \TeX{} program is a set of primitive commands for basic typesetting, and also allows users to create more complex commands in terms of simpler ones.  Donald Knuth created the \TeX{} program in 1978, a subsequent version of which makes up the core of the program that is used today \cite{TeXOrigin}.  The use of \TeX{} to its potential requires that one has had considerable experience with programming techniques; it is as a result of this that the use of \TeX{} on its own is left to typography and programming professionals \cite{KD95}.
 
 \subsection{\LaTeX}
-\latex was created by Leslie Lamport in 1985, to allow one to exploit the powerful features of \TeX{} without first having to familiarise oneself with programming techniques. \latex contains a range of commands written in terms of primitive \TeX{} commands, providing users with a set of higher-level commands for the production of complex documents.  It also allows for a separation of concerns between the information that is being presented from the formatting that has to be applied when publishing\cite{KD95}.
+\latex was created by Leslie Lamport in 1985, to allow one to exploit the powerful features of \TeX{} without first having to familiarise oneself with programming techniques. \latex contains a range of commands written in terms of primitive \TeX{} commands, providing users with a set of higher-level commands for the production of complex documents.  It also allows for a separation of concerns between the information that is being presented from the formatting that has to be applied when publishing \cite{KD95}.
 
 \subsection{\bibtex}
-It is standard to find a bibliography at the end of a scientific publication. \latex provides an `environment'\footnote{An environment is used to specify an area of a document where the text has to be presented with different indentation, line width, typeface and so on\cite{KD95}.  The environment used by \latex is called `\texttt{thebibliography}'.} which allows bibliographic references to be listed and stored in one area of a document\cite{KD95}, but this approach requires that each document has its own list of references, which may lead to redundancy and inconsistency if, for example, an author has multiple publications on the same subject. 
+It is standard to find a bibliography at the end of a scientific publication. \latex provides an `environment'\footnote{An environment is used to specify an area of a document where the text has to be presented with different indentation, line width, typeface and so on \cite{KD95}.  The environment used by \latex is called `\texttt{thebibliography}'.} which allows bibliographic references to be listed and stored in one area of a document \cite{KD95}, but this approach requires that each document has its own list of references, which may lead to redundancy and inconsistency if, for example, an author has multiple publications on the same subject. 
 
 \bibtex{} is an auxiliary program to \latex which provides the authors with the ability to store all of their bibliographic references in one or more files.  Each reference, or `entry', is uniquely identified by its cite key, which is used within a document where the reference is made.\footnote{A reference to a citation is inserted by using the \latex command \texttt{$\backslash$cite\{citeKey\}} in the body of the document, where `citeKey' is the identifier of the reference in one of the referenced bibliographic files}
 
 The benefit of using \bibtex{} as a means of bibliography production is that a file set is easier to maintain than having sporadic files, each with individual collections of references, as one file can be re-used for all publications.
 
 \section{Problem Statement, Aims \& Motivation}
-An author may have a vast number of bibliographic references, having built up a large amount of citations through years of work.  The task of managing this library of references is an issue in itself; authors might have clashing cite keys or entries that are recorded twice in the library, for example.
+An author may have a vast number of bibliographic references, through having making a large amount of citations over years of work.  The task of managing this library of references is an issue in itself; authors might have clashing cite keys or entries that are recorded twice in the library, for example.  It is also highly important to ensure that field names are not misspelled --- especially when a field is optional, as misspelling a field name results in it being ignored without warning \cite{OP88}.
 
-This problem of management of entries is exacerbated when multiple users collaborating on a piece of work need to share collections of entries: with no management system in place, users have to find a way to consistently distribute files by email and other manual methods, as well as ensuring that there have been no clashing entries.
+The problem of managing entries is exacerbated when multiple users collaborating on a piece of work need to share collections of entries: with no management system in place, users have to find a way to consistently distribute files by email and other manual methods, as well as ensuring that there have been no clashing entries.
 
 The main aim of this project is to try to come up with a solution to solve the aforementioned problems.  The project is also undertaken with some lesser, but still important, aims in mind, which are listed presently:
 \begin{itemize}
@@ -202,13 +206,13 @@ Each assessment will examine how positive qualities are achieved, as well as how
 This section contains the examinations of several existing products, both public projects and previous projects undertaken by students in previous years at the University of Glasgow.  Examinations were performed on a laptop running Windows 7 Professional (64-bit edition).
 
 \subsection{\bibtex{} Entry Manager}
-The \bibtex{} Entry Manager was developed by Ravi Tez Kota (known as `Ravi'), an M.Sc. student at the University of Glasgow, under Dr Manlove's supervision in 2009.
+The \bibtex{} Entry Manager was developed by Ravi Tez Kota (known as `Ravi'), an M.Sc. student at the University of Glasgow, under Dr Manlove's supervision in 2010.
 
 \subsubsection{Paradigm}
 Ravi's project is a web-based reference management system which consists of a database for storage of entries and a web front-end for users to interact with using a web browser.
 
 \subsubsection{Ease of set-up}
-In a nutshell, the server side of the product is not convenient to set-up.  The user must have an instance of MySql server running on the machine from which they'd like to serve pages; they must ensure that along with Apache Tomcat as a page rendering engine and server; and they must have a Java Runtime Environment (JRE) installed.  The installers for each of these products were included with the content of the product, though that did not greatly reduce the effort required to set them up.  Following set-up of components, the user must set up the database using a provided \gls{sql} script and finally add the files in the `bibtex' directory to Apache Tomcat's content directory.  
+In a nutshell, the server side of the product is not convenient to set-up.  The user must have an instance of MySql server running on the machine from which they'd like to serve pages; they must ensure that Apache Tomcat is installed as a page rendering server; and they must have a Java Runtime Environment (JRE) installed.  The installers for each of these products were included with the content of the product, though that did not greatly reduce the effort required to set them up.  Following set-up of components, the user must set up the database using a provided \gls{sql} script and finally add the files in the `bibtex' directory to Apache Tomcat's content directory.  
 
 This may be a lengthy process, but it only has to be done once per instance of the system, which works in its favour. If the system were set up at a central location, many people could log on to the system at once by visiting a \gls{url}, which would give end-users a very simple method of access without involving them in the set up process (as intended with a web-based product).
 
@@ -236,19 +240,19 @@ Entries can be categorised by users into different groups.  This involves creati
 The site allows users to access the same set of entries at the same time.  The issue that arises from this is that users may make changes to the same entry simultaneously.  Ravi's solution deals with the problem by locking an entry until the first user to access it saves any changes they have made, or exits the viewing window.  This is a neat solution and means that there can be no overlapping of interests when multiple people access the same entry.  An issue that arises from this method is that if one user (A) views an entry, then forgets to close the window, the entry is locked for a period of time.  When users B and C come to view it (perhaps with no intention of modifying it), they find that they cannot, leaving them unable to work and potentially frustrated while the time period of user A's viewing expires or they leave the window.
 
 \subsection{BiblioScape}
-BiblioScape is a desktop-based bibliographic data and note collection suite produced by CG Information.  It was created with the aim to ``build first class bibliographic software for the 21st century''.  It contains many tools which shall not be included in this examination as they are deemed to be surplus to requirements for the scope of the current project.\footnote{The system includes a forum and task list, among other things.} The live demo system is not as up to date as its current desktop counterpart (pictured on the website running on Windows 7), as the copyright notice at the foot of the home page dates back to 2002, where Windows 7 was released to the public in 2009\cite{Win7Release}.
+BiblioScape is a desktop-based bibliographic data and note collection suite produced by CG Information.  It was created with the aim to ``build first class bibliographic software for the 21st century''.  It contains many tools which shall not be included in this examination as they are deemed to be surplus to requirements for the scope of the current project.\footnote{The system includes a forum and task list, among other things.} The live demo system is not as up to date as its current desktop counterpart (pictured on the website running on Windows 7), as the copyright notice at the foot of the home page dates back to 2002, where Windows 7 was released to the public in 2009 \cite{Win7Release}.
 \subsubsection{Paradigm}
-As part of the BiblioScape package, `BiblioWeb' was produced to ``address the needs of researchers in the age of the Internet''\cite{BiblioWebWhy}.  It is a web-based version of their desktop program and allows users to access it through internet and Intranet connections.
+As part of the BiblioScape package, `BiblioWeb' was produced to ``address the needs of researchers in the age of the Internet'' \cite{BiblioWebWhy}.  It is a web-based version of their desktop program and allows users to access it through internet and Intranet connections.
 \subsubsection{Ease of set-up}
 A live version of the product was used on the BiblioScape website\footnote{The live version of the website is hosted at http://support.biblioscape.com:8001/}, so no comment can be made on the set-up process.
 \subsubsection{Examination of product}
 BiblioWeb has a clean \gls{ui}, and boasts a consistent navigation area at the top, whether a user is logged in or not.  Items in the menu at the top are spaced far enough apart that the interface feels uncluttered while also providing most of the basic options that a user expects of a reference management system, although edit, delete and export are not immediately apparent from the navigation bar. 
 
-It has an intuitive interface and makes it quite clear where one should go next when performing tasks.  One cannot obtain a list of all entries in the system, which means that a user might be forced to recall all information about an entry rather than rely on recognition; Nielsen\cite{NielsenHeuristics} specifies a heuristic guideline (his sixth out of ten) that a user's memory load should be minimised by making objects, actions and options visible.
+It has an intuitive interface and makes it quite clear where one should go next when performing tasks.  One cannot obtain a list of all entries in the system, which means that a user might be forced to recall all information about an entry rather than rely on recognition; Nielsen \cite{NielsenHeuristics} specifies a heuristic guideline (his sixth out of ten) that a user's memory load should be minimised by making objects, actions and options visible.
 
 BiblioWeb allows categorisation of references by use of folders, much like the grouping function in Ravi's project.  Some advantages that BiblioWeb's grouping method has over Ravi's project include firstly that one can move many references at once from one categorisation to another, and secondly there is no need to delete an entry before reclassifying it.  It does appear, however, that references can only be in one folder at a time, which limits the flexibility of entries and perhaps allows redundancy in the database, where it could have been avoided by allowing an entry to belong to more than one category.
 
-Users' actions are clearly indicated when they are completed successfully, but the system falls down when incorrect input is supplied.  An example of this is explained presently: text was supplied to the `year' field to see how the system behaved with a string supplied instead of an integer.  Rather than displaying a helpful error message on the interface, the system navigated to a plain white page and displayed the word `EXCEPTION', followed by what is presumably a database exception.  As was the case in Ravi's solution, the system did not handle errors and exceptions in a user-friendly way.  It is important to ensure that the system deals with problems in a professional and informative manner, so that a user can recover from their error --- something that Nielsen covers in his list of heuristics\cite{NielsenHeuristics}.
+Users' actions are clearly indicated when they are completed successfully, but the system falls down when incorrect input is supplied.  An example of this is explained presently: text was supplied to the `year' field to see how the system behaved with a string supplied instead of an integer.  Rather than displaying a helpful error message on the interface, the system navigated to a plain white page and displayed the word `EXCEPTION', followed by what is presumably a database exception.  As was the case in Ravi's solution, the system did not handle errors and exceptions in a user-friendly way.  It is important to ensure that the system deals with problems in a professional and informative manner, so that a user can recover from their error --- something that Nielsen covers in his list of heuristics \cite{NielsenHeuristics}.
 
 Perhaps the greatest asset of the BiblioWeb system has is its import function which boasts an enormous list of text and file formats.  There are unfortunately not enough resources for this experiment to test all 201 of the formats, but it is safe to say that the system handles parsing of \bibtex{} entries well.  The system does not store the entries' types as would be expected of a \bibtex{} reference management package: rather than storing the reference type `Unpublished' as it was in the \bibtex{} file, it stored `Personal Communication', which is not accurate to the \bibtex{} format, and subsequently leaves the terminology open to misinterpretation by a user.
 
@@ -271,7 +275,7 @@ It does not appear that multi-user access is supported by the program; there is 
 
 The consistent menu is complimented by a consistent table area where currently loaded entries are displayed.  It is clear when there are no entries, as the area is greyed out slightly and the presence of entries in the system is also clear, thanks to the display of each entry as a row in the table.  An entry is selected by clicking on it, though it does not encourage a user to click by appearing to be clickable  \revisit HCI affordance notes.
 
-The program does deal with correct input successfully, does not have any difficulty parsing correctly formatted files and gives clear feedback for successful cases; the problem arises when there is incorrect user input or an erroneous file is passed to the system.  An example of this is described presently: when adding or modifying an entry, it is possible to submit and save an entry without the `required' fields left incomplete.  This would not be such a problem if the interface had some way of marking invalid entries, but entries can be stored and exported to a file with no warning to the user that any invalid entry was encountered; a problem that has the potential to cause errors and problems when the exported file is used with \bibtex{}.
+The program does deal with correct input successfully, does not have any difficulty parsing correctly formatted files and gives clear feedback for successful cases; the problem arises when there is incorrect user input or an erroneous file is passed to the system.  An example of this is described presently: when adding or modifying an entry, it is possible to submit and save an entry with some of the `required' fields left incomplete.  This would not be such a problem if the interface had some way of marking invalid entries, but entries can be stored and exported to a file with no warning to the user that any invalid entry was encountered; a problem that has the potential to cause errors and problems when the exported file is used with \bibtex{}.
 
 
 
@@ -352,24 +356,58 @@ The tool should adhere to the following non-functional requirements:
 \label{design}
 
 \section{System Architecture}
-Architecture of overall solution in VM deployment then perceived deployment for scalability. Perhaps an AOD describing secure areas etc.
+Architecture of overall solution in VM deployment then perceived deployment for scalability. Perhaps an \gls{aod} describing secure areas etc.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.45]
+			{images/ArchitectureOverviewDiagram.png}
+		\caption{Architecture Overview Diagram}
+		\label{fig:aod}
+	\end{center}
+\end{figure}
 
 \section{Web Interface Design}
+\label{uiDesign}
+The interface design was conceptualised around the idea of a clean, consistent and intuitive interface.  It was important to ensure that Fitts' Law, the observation that the smaller a target is, the harder it is for a human to point at and act upon accurately \cite{fitts} (particularly in the 2-dimensional space of a screen \cite{fitts2d}), was taken into consideration, and a common sense approach was used when deciding how large or small clickable items should be.
+
 Fitts' Law - 2D, clean, intuitive. Changes, suggestions from evaluators, 
 
 \section{Class design}
-First version (V0.34 - Columbia)
-Table per entry type:
-why
-what was wrong with it
+This section discusses the class designs for the different versions of the program, named after NASA Space Shuttle orbiters in chronological order of when they entered service.
 
-Second version onwards (V1.0 - Challenger)
-Single table for all entry types:
-why
-what improved?
- - faster search
- - IDs all in one place - less complicated - don't need to kow what an entry's type is before searching it
- - 
+An \gls{oo} approach was taken with the project, as the entries that were to be saved mapped well to the concept of an object, and because the C\# language is a natively \gls{oo} language. \revisit - is this information required or relevant? % Relevant? Required?
+
+\subsection{First model version (V0.34 - Columbia)}
+The approach of the first model version was heavily based on the successful approach of Mitesh Furia; it was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.
+
+The initial class design consisted of one class per entry type.  The main focus behind this approach, aside from following Mitesh's successful approach, was to take advantage of a feature of the .NET Framework called Attributes, which can be used effectively for validation.  Attributes provide the ability to associate extra information with each member variable of a class; as an example, the `required' attribute can be used to enforce the requirement to include data in a field for it to be valid.  This approach worked well for this version of the model, boasting excellent robustness to poor or erroneous user input as well as excellent feedback to users through the provision of error messages assigned by the required attribute.  Optional fields were included as normal member variables, and did not need to have attributes, aside from where their member variable name lacked spaces, resulting in poor display on the interface.  An example of a member variable name lacking spaces is the field `howpublished': it is more readable and therefore more user friendly when the field is displayed as `how published' 
+Each entry type was a subclass of the abstract superclass `Publication', which contained fields common to all entry types, namely: Id, an int identifier; Cite Key, a string intended to be unique to an entry, though not necessarily in the database\revisit --- might need to mention allowance of duplicate entries here; Owner, the username of the user who created the entry in the first instance; along with Abstract, a string field which was to be optional to all entries.
+
+As the class was designated `abstract', the enforcement of rules associated with the concept were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a string representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
+
+Each entry type class was used directly by NHibernate and mapped by way of a Mapping class \revisit - this is implementation detail. Possibly going into too much information here, along with the discussion of the source code!
+
+An examination of the source code\footnote{If one inspects the code for the \gls{svn} tag entitled V0.34\_Colombia, one will find that the `Publication' class contains a line commented out containing a member variable entitled (and of type) `PublicationGroup'.  This approach was not followed up, as discussed} reveals early intentions to include `PublicationGroup' as a field within Publication.  PublicationGroup was intended to be a recursively-defined structure, to allow a group to be categorised as part of a tree-based structure.  This approach was abandoned following advice from Gregg O'Malley, following his experience of trying to use very similar structures previously; his suggestion to follow a tag-based approach was noted but not acted upon until late stages of the project (see below in section \ref{designDiscovery}).
+
+The major problem with this approach was that when it was mapped to the database by NHibernate, it resulted in one table per entry type --- 14 entry type tables in total.  The number of tables was not the biggest problem: the issue lay in the assignment of identifiers to each row and the storage of entries.  To know where to find an entry without performing a search, the system would have had to know which entry type the entry was, along with what the identifier of the entry was, as each of the entries was a weak entity.  Due to the lack of database-level guarantee that a publication's id was a unique identifier for an entry, a large refactoring took place to move all fields to one top-level table, `Publication', as discussed in section \ref{designChallenger}.
+%what was wrong with it
+
+\subsection{Second model: V1.0 - Challenger}
+\label{designChallenger}
+Challenger\\
+Single table for all entry types:\\
+why\\
+what improved?\\
+ - faster search\\
+ - IDs all in one place - less complicated - don't need to kow what an entry's type is before searching it\\
+
+\subsection{Third (proposed) model: V2.0 - Discovery}
+\label{designDiscovery}
+Discovery was intended to add a feature called `tagging' to the system.  \\
+Specifically, this was to involve a many-to-many mapping from Publication to Tag
+
 
 \section{DB Design Diagram}
 content
@@ -384,9 +422,9 @@ The implementation chapter covers the technologies, techniques and patterns appl
 This section examines the technologies used in the implementation of the project and the discipline that was adhered to during development.
 
 \subsection{Microsoft .NET Framework under C\#}
-The Microsoft .NET framework is a platform for development, deployment and running of web services and applications\cite{whatIsDotNet}. This project took advantage of a particular strain of .NET, \gls{asp}.NET \gls{mvc} 2.  
+The Microsoft .NET framework is a platform for development, deployment and running of web services and applications \cite{whatIsDotNet}. This project took advantage of a particular strain of .NET, \gls{asp}.NET \gls{mvc} 2.  
 
-Microsoft's .NET framework was used as a result of encountering the technology during the summer placement.  The developer saw the opportunity of learning more about and working with the framework when the project was successfully assigned to him.  Given that one of the aims of the summer placement was to learn .NET development, and that this aim was not achieved\cite{summerPlacementReport}, the developer chose to maximise exposure to the technology by working with it for the duration of the project, and adding an aim to learn the framework to the project goals.  It may appear that this was a short-sighted decision, but there are many other benefits to using this technology, including:
+Microsoft's .NET framework was used as a result of encountering the technology during the summer placement.  The developer saw the opportunity of learning more about and working with the framework when the project was successfully assigned to him.  Given that one of the aims of the summer placement was to learn .NET development, and that this aim was not achieved \cite{summerPlacementReport}, the developer chose to maximise exposure to the technology by working with it for the duration of the project, and adding an aim to learn the framework to the project goals.  It may appear that this was a short-sighted decision, but there are many other benefits to using this technology, including:
 \begin{itemize}
 	\item There is an active developer community on the web\footnote{The community's forums can be found at \url{http://www.asp.net/community} and a large proportion of active users of the Stack Overflow community focus on C\# and .NET topics --- 3 of the top 8 tags are directly related to the project's domain --- \url{http://stackoverflow.com/tags} (by observation)}, so issues pertaining to development using the framework can be solved by turning to this well-grounded knowledge base;
 	\item The \gls{mvc} aspect of the project, if strictly adhered to by the developer, provides great separation of concerns between the place that information is stored, manipulated and viewed;
@@ -395,9 +433,13 @@ Microsoft's .NET framework was used as a result of encountering the technology d
 \end{itemize}
 
 \subsection{NHibernate \& Fluent NHibernate}
+\label{nhibernate}
 NHibernate is a port of the Hibernate object/relational mapper to the .NET framework. In essence, it provides mapping from objects to relational tables, which allows a developer to concentrate on functionality and usability rather than spending time writing \gls{sql} scripts. Queries are generated by NHibernate middleware and passed to the database which, after execution, accumulates any results into objects directly manipulable by C\# code. 
 
-The NHibernate software itself is highly valuable in terms of time-saving potential and has been used across thousands of successful projects\cite{NhUse}.  The only issue with using it in its raw form is that mappings from the project's classes to relational entities have to be written in \gls{xml}, a language prone to errors often left unnoticed until runtime.  A better solution is to use the Fluent NHibernate extension, which provides developers with the ability to map the classes in code.  The major benefit of this scheme, aside from compile-time error checking, is that all code using is strongly-typed; combine this with the powerful \gls{msvs} \gls{ide}, and implementation for the data model can be quite rapid --- particularly when in the hands of an experienced developer.
+An example of how this technology helps and works is described presently: Let's assume that a series of valid entries have been created in the database and that a user has issued a request to view the details for one of them, with the \gls{id} 3. \revisit - complete this section.
+
+
+The NHibernate software itself is highly valuable in terms of time-saving potential and has been used across thousands of successful projects \cite{NhUse}.  The only issue with using it in its raw form is that mappings from the project's classes to relational entities have to be written in \gls{xml}, a language prone to errors often left unnoticed until runtime.  A better solution is to use the Fluent NHibernate extension, which provides developers with the ability to map the classes in code.  The major benefit of this scheme, aside from compile-time error checking, is that all code using is strongly-typed; combine this with the powerful \gls{msvs} \gls{ide}, and implementation for the data model can be quite rapid --- particularly when in the hands of an experienced developer.
 
 Another reason for using this technology was that it was used within the summer placement, but it was not encountered or worked with to any great extent.  \revisit Curiosity fuelled, the developer wanted to expand his knowledge in the technology in both breadth and depth by adopting these technologies within the project.
 
@@ -405,9 +447,9 @@ There was a risk, when employing this technology, that unfamiliarity would lead 
 
 \subsection{Subversion}
 \label{svn}
-\gls{svn} is a centrally-stored version control system which records every change ever made to the files and directories in the file repository\cite{CFP04c1}.  It is useful to be able to centralise the code repository and to be able to synchronise different workstations with the most up to date version of code and documents.  It was decided early in the project that a code repository would be used to mitigate the risk of fire, flood, theft, and hard drive or system corruption by hosting the repository in a different physical location to the main work environment.  
+\gls{svn} is a centrally-stored version control system which records every change ever made to the files and directories in the file repository \cite{CFP04c1}.  It is useful to be able to centralise the code repository and to be able to synchronise different workstations with the most up to date version of code and documents.  It was decided early in the project that a code repository would be used to mitigate the risk of fire, flood, theft, and hard drive or system corruption by hosting the repository in a different physical location to the main work environment.  
 
-\gls{svn} was used to control different versions of the code and to take snapshots of the project in the form of \gls{svntag}s\cite{CFP04c4}.  It was originally hosted on the School of Computing Science network because it was accessible from outside the School's network of computers\footnote{access was facilitated by the School's \gls{ssh} gateway, \texttt{sibu.dcs.gla.ac.uk}}, because there was sufficient storage space provided by the School and it had no financial cost.  As part of the effort to ensure good software engineering practice, \gls{ci}\footnote{See Section \ref{continuousIntegration} for an explanation of what it is and why it was used} was to be used with the project, again after encountering it while on summer placement.  Unfortunately, there were problems in configuring the  \gls{ci}  software to access the \gls{svn} repository through the gateway; as a result of this, on the 16\^{th} of November 2010, the repository was moved to another free host, SourceForge, an open-source software project hosting provider.  Along with \gls{svn} repository hosting, SourceForge provides tools for management of software projects, including a bug tracking tool (see Section \ref{bugTracking}).  Crucially, the SourceForge repository was accessible by the \gls{ci} software, allowing the \gls{ci} process to take place.
+\gls{svn} was used to control different versions of the code and to take snapshots of the project in the form of \gls{svntag}s \cite{CFP04c4}.  It was originally hosted on the School of Computing Science network because it was accessible from outside the School's network of computers\footnote{access was facilitated by the School's \gls{ssh} gateway, \texttt{sibu.dcs.gla.ac.uk}}, because there was sufficient storage space provided by the School and it had no financial cost.  As part of the effort to ensure good software engineering practice, \gls{ci}\footnote{See Section \ref{continuousIntegration} for an explanation of what it is and why it was used} was to be used with the project, again after encountering it while on summer placement.  Unfortunately, there were problems in configuring the  \gls{ci}  software to access the \gls{svn} repository through the gateway; as a result of this, on the 16\^{th} of November 2010, the repository was moved to another free host, SourceForge, an open-source software project hosting provider.  Along with \gls{svn} repository hosting, SourceForge provides tools for management of software projects, including a bug tracking tool (see Section \ref{bugTracking}).  Crucially, the SourceForge repository was accessible by the \gls{ci} software, allowing the \gls{ci} process to take place.
 
 The \gls{svn} client in most cases was TortoiseSVN, as development was to take place on a windows environment.  AnkhSVN, a secondary client, was also used as it integrated with the \gls{msvs} \gls{ide}. 
 
@@ -430,13 +472,28 @@ The database product used was \gls{msss} 2008 Developer Edition, again provided 
 
 ReSharper is a productivity plug-in for \gls{msvs}.  It provides code inspections, code analysis, one-click unit test runs, project-level refactorings and many more assistive features. A licence for the product was bought during the summer placement and was used extensively throughout the development of the software article.
 
-Python IDLE and Notepad++ were used to manipulate code quickly and effectively: Python IDLE for its scripting functionality and Notepad++ for its excellent search and replace by regular expression function.
+Python IDLE and Notepad++ were used to manipulate code quickly and effectively: Python IDLE for its scripting functionality and Notepad++ for its macro capabilities and excellent search and replace by regular expression function.
 
 TortoiseSVN and AnkhSVN were both used as discussed in section \ref{svn}.
 
 \section{Reuse of Code}
+\label{codeReuse}
+ADV:
+Code reuse within project \\
+Code reuse from other projects \\
+ - pre tested
+ - see somerville for more info.
 
+Benefits of code reuse:
+\begin{itemize}
+	\item the reduction of maintenance overheads of having to test the same code in multiple places
+	\item 
+\end{itemize} 
 
+Disadv/risks:
+	bugs may exist if not widely used or well tested
+	code may be less readable if not familiar with it
+	
 
 \section{Patterns}
 
@@ -449,16 +506,68 @@ The application is heavily based on the \gls{mvc} architecture.  The data model 
 
 \section{Data Model}
 Discuss implementation of data model, implementation of database persistence.
+The data model, as mentioned in section \ref{nhibernate}, is implemented using NHibernate.  
+Discuss fields in publication table. Mention creation/modification/deletion times and what they are used for
+ID field vs cite key
+owner
+
 
 \subsection{Refactoring}
 changes to model from 0.34 to 1.0
 
+
+
 \section{Controller}
+Home controller
+Account Controller
+Entry controller:
+ - Same page for add and amend
+ - discuss import
+ - 
 Discuss handling of requests
 
-\section{User Interface}
+\section{View}
 \glsreset{ui}
 
+The consistency sought in the design of the product (see section \ref{uiDesign}) of the site is a result of careful consideration of what should be consistent across all pages, as highlighted in figure \ref{fig:pageLayout}:
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.5]
+			{images/PageLayout.png}
+		\caption{Annotation of a page}
+		\label{fig:pageLayout}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			{images/LogOff.png}
+		\caption{The log on area when a user is logged in (swapped out for area 2 in figure \ref{fig:pageLayout})}
+		\label{fig:logOff}
+	\end{center}
+\end{figure}
+
+\begin{enumerate}
+	\item Firstly, there is a menu area which appears on every page within the site, with the same options at each appearance.  This gives the user a single point of reference to aid navigation of the website \revisit - cite someone
+	\item The log on area appears in one of two forms across all pages of the application: a user is either browsing anonymously, or is logged in.  It is clear which of these two states the user's session is in thanks to the clear representation of the words `Log On' (depicted in figure \ref{fig:pageLayout}) and a welcome message with the current user's email address (as depicted in figure \ref{fig:logOff})
+	\item After feedback from a user during the basic evaluation (see Chapter \ref{eval}) the interface was updated to include a search area on all pages.  The provision of this area allows a user to efficiently search the system's database for a string and, by making it a consistent feature, gives another concrete point of reference across all pages.
+	\item Each and every page contains a bold header indicating the title of the page.  The presence of a title on each page gives a user another concrete and consistent place to glance in order to gain an insight into what they previously clicked on, as well as giving confirmation that their previous action was successful.
+	\item The fifth item highlighted in this image provides some extra, arguably unnecessary information.  The main idea behind including this page render time area is to provide extra feedback: it lets a user know that page has finished loading, that it has been completed successfully and it reassures a user that the page is up to date.
+\end{enumerate}
+
+This consistency was implemented using a feature in \gls{asp}.NET called Master Pages.  As the name suggests, the developer creates a master page with the main layout of the website, within which sit containers which are filled by individual pages.  This approach centralises the code for the pages, the advantages and disadvantages of this are discussed in section \ref{codeReuse}. \revisit revisit fluency.
+
+The colour choice of the interface was a decision which was postponed until later in the project, so that the bulk of the development work could be carried out before aesthetics were considered.  The colour scheme seen in the project is heavily based on the default style for projects created in \gls{msvs} 2010; it soon became apparent that the default style had many strong qualities that could be used 
+
+\section{Web Service}
+Delete by AJAX
+
+'what is new'
+'what is amended'
+'what is deleted'
 \section{Concurrency}
 
 %================================================

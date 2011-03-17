@@ -326,7 +326,7 @@ namespace BibtexEntryManager.Controllers
                                     where pubs.CiteKey.Equals(a.CiteKey)
                                     select pubs);
             int ckCount = matchingCiteKeys.Count();
-            if (ckCount > 0)
+            if (ckCount > 0 && a.Id == 0)
             {
                 string linkToOther = "";// "<a href=\"Publication/" + matchingCiteKeys.First().Id + "\" target=\"_blank\">Click here to open the clash in a new window</a>";
                 const string ckKey = "CiteKey";

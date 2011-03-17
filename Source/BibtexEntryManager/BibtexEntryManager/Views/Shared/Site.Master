@@ -61,7 +61,7 @@
         </div>
         <div id="EditMenu" class="dropmenudiv_b">
             <%-- Has to be static url rather than calculated because it reuses the current ID if it has one --%>
-            <a href="../Entry/Publication">Add entry</a>
+            <a href="/Entry/Publication">Add entry</a>
             <%: Html.ActionLink("Modify entry", "Index", "Entry")%>
             <%: Html.ActionLink("Delete entry", "SelectEntriesForDeletion", "Entry")%>
             <%: Html.ActionLink("Restore entry", "DeletedEntries", "Entry")%>

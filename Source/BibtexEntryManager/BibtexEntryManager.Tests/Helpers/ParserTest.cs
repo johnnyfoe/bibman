@@ -6,7 +6,6 @@ using NUnit.Framework;
 
 namespace BibtexEntryManager.Tests.Helpers
 {
-    [Ignore("The test fails at the moment because of the inability to fake a http context")]
     [TestFixture]
     public class ParserTest
     {
@@ -22,11 +21,13 @@ namespace BibtexEntryManager.Tests.Helpers
 
             foreach (var v in coll)
             {
-                publicationCollection.Add(PublicationFactory.MakePublication(v));
+                Publication p = PublicationFactory.MakePublication(v);
+                p.Owner = "johnny";
+                publicationCollection.Add(p);
             }
 
-            var defaultBookInstance = ObjectBuilder.BuildDefaultPublication();
-            defaultBookInstance.CiteKey = "JS2010";
+            var defaultBookInstance = ObjectBuilder.NewDefaultBook();
+
             Assert.IsTrue(publicationCollection[0].Equals(defaultBookInstance));
         }
     }

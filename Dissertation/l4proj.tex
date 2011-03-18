@@ -26,6 +26,7 @@
 \newacronym{ajax}		{AJAX}			{Asynchronous JavaScript And XML}
 \newacronym{aod}		{AOD}				{Architecture Overview Diagram}
 \newacronym{asp}		{ASP}				{Active Server Pages}
+\newacronym{bat}		{BAT}				{Batch File}
 \newacronym{case}		{CASE}			{Computer-Aided Software Engineering}
 \newacronym{ci}			{CI}				{Continuous Integration}
 \newacronym{css}		{CSS}				{Cascading Style Sheet}
@@ -50,7 +51,8 @@
 % ==========================================
 % 	Glossary terms
 % 				  			key  	  Name						 Explanation
-\newglossaryentry{svntag}	{name={SVN Tag}, description={A snapshot of a project in time, saved with a human-readable name}}
+\newglossaryentry{svntag}	{name={SVN Tag}, 	description={A snapshot of a project in time, saved with a human-readable name}}
+\newglossaryentry{unix}		{name = {UNIX},		description={An open-source operating system}}
 
 
 % ==========================================
@@ -363,7 +365,18 @@ Architecture of overall solution in VM deployment then perceived deployment for 
 		\includegraphics
 			[scale=0.45]
 			{images/ArchitectureOverviewDiagram.png}
-		\caption{Architecture Overview Diagram}
+		\caption{High Level Architecture Overview Diagram}
+		\label{fig:aod}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.45]
+			{images/ComponentDiagram.png}
+		\caption{Diagram showing component level items}
 		\label{fig:aod}
 	\end{center}
 \end{figure}
@@ -447,9 +460,9 @@ There was a risk, when employing this technology, that unfamiliarity would lead 
 
 \subsection{Subversion}
 \label{svn}
-\gls{svn} is a centrally-stored version control system which records every change ever made to the files and directories in the file repository \cite{CFP04c1}.  It is useful to be able to centralise the code repository and to be able to synchronise different workstations with the most up to date version of code and documents.  It was decided early in the project that a code repository would be used to mitigate the risk of fire, flood, theft, and hard drive or system corruption by hosting the repository in a different physical location to the main work environment.  
+\gls{svn} is a centrally-stored version control system which records every change ever made to the files and directories in the file repository \cite{CFP04c1}.  It is useful to be able to centralise the code repository and to be able to synchronise different workstations with the most up to date version of code and documents, as well as allowing the logging and comparison of different versions of the code.  Each time information is updated in the repository, it is said to have a new revision -- a process also known as `committing' changes.  It was decided early in the project that a repository would be used to mitigate the risk of fire, flood, theft, and hard drive corruption by hosting the repository in a different physical location to the main work environment, the developer's laptop.  
 
-\gls{svn} was used to control different versions of the code and to take snapshots of the project in the form of \gls{svntag}s \cite{CFP04c4}.  It was originally hosted on the School of Computing Science network because it was accessible from outside the School's network of computers\footnote{access was facilitated by the School's \gls{ssh} gateway, \texttt{sibu.dcs.gla.ac.uk}}, because there was sufficient storage space provided by the School and it had no financial cost.  As part of the effort to ensure good software engineering practice, \gls{ci}\footnote{See Section \ref{continuousIntegration} for an explanation of what it is and why it was used} was to be used with the project, again after encountering it while on summer placement.  Unfortunately, there were problems in configuring the  \gls{ci}  software to access the \gls{svn} repository through the gateway; as a result of this, on the 16\^{th} of November 2010, the repository was moved to another free host, SourceForge, an open-source software project hosting provider.  Along with \gls{svn} repository hosting, SourceForge provides tools for management of software projects, including a bug tracking tool (see Section \ref{bugTracking}).  Crucially, the SourceForge repository was accessible by the \gls{ci} software, allowing the \gls{ci} process to take place.
+\gls{svn} was used to control different versions of the code and to take snapshots of the project in the form of \gls{svntag}s \cite{CFP04c4}, as well as normal revisions.  It was originally hosted on the School of Computing Science network because it was accessible from outside the School's network of computers\footnote{access was facilitated by the School's \gls{ssh} gateway, \texttt{sibu.dcs.gla.ac.uk}}, because there was sufficient storage space provided by the School and it had no financial cost.  As part of the effort to ensure good software engineering practice, \gls{ci}\footnote{See Section \ref{continuousIntegration} for an explanation of what it is and why it was used} was to be used with the project, again after encountering it while on summer placement.  Unfortunately, there were problems in configuring the  \gls{ci}  software to access the \gls{svn} repository through the gateway; as a result of this, on the 16\^{th} of November 2010, the repository was moved to another free host, SourceForge, an open-source software project hosting provider.  Along with \gls{svn} repository hosting, SourceForge provides tools for management of software projects, including a bug tracking tool (see Section \ref{bugTracking}).  Crucially, the SourceForge repository was accessible by the \gls{ci} software, allowing the \gls{ci} process to take place.
 
 The \gls{svn} client in most cases was TortoiseSVN, as development was to take place on a windows environment.  AnkhSVN, a secondary client, was also used as it integrated with the \gls{msvs} \gls{ide}. 
 
@@ -464,6 +477,7 @@ The bug tracker was used when a bug was encountered that was not going to be fix
 The software used was BugTracker.NET -- a free, open-source, web-based bug tracker.  Having encountered this particular product and worked with it for three months, the developer thought it wise to stick to familiar ground and employ the same product.  The developer used hardware running at home to deploy BugTracker.NET and used it until a server failure in late January 2011.  As the hardware was no longer reliable to host the software, the decision was taken to switch bug tracking software to SourceForge's Bug tracker, which worked in a similar way.  Bugs from the old system (both open and closed) were transferred to the new site and remain there now for traceability and reference. \\
 
 \section{Development Environment}
+\label{deveEnv}
 Most development took place on the developer's laptop, a MacBook Pro dual-booted with Windows 7 Professional.  Development also took place on a second developer machine when the laptop was unavailable.
 
 The main development environment was Microsoft's Visual Studio Professional 2010 (\gls{msvs}), provided by the School's \gls{msdnaa} agreement.  This was the same environment used while on summer placement, so the developer was familiar with the tools in the \gls{ide}.
@@ -505,7 +519,7 @@ The application is heavily based on the \gls{mvc} architecture.  The data model 
 
 
 \section{Data Model}
-Discuss implementation of data model, implementation of database persistence.
+Discuss implementation of data model, implementation of database persistence. centralised persistance information - single section of code + benefits.
 The data model, as mentioned in section \ref{nhibernate}, is implemented using NHibernate.  
 Discuss fields in publication table. Mention creation/modification/deletion times and what they are used for
 ID field vs cite key
@@ -514,7 +528,6 @@ owner
 
 \subsection{Refactoring}
 changes to model from 0.34 to 1.0
-
 
 
 \section{Controller}
@@ -526,9 +539,20 @@ Entry controller:
  - 
 Discuss handling of requests
 
+
+\section{Web Service}
+Delete by AJAX\\
+search\\
+'what is new'\\
+'what is amended'\\
+'what is deleted'\\
+
+
+
+
 \section{View}
 \glsreset{ui}
-
+\subsection{Consistency}
 The consistency sought in the design of the product (see section \ref{uiDesign}) of the site is a result of careful consideration of what should be consistent across all pages, as highlighted in figure \ref{fig:pageLayout}:
 
 \begin{figure}
@@ -562,25 +586,46 @@ This consistency was implemented using a feature in \gls{asp}.NET called Master 
 
 The colour choice of the interface was a decision which was postponed until later in the project, so that the bulk of the development work could be carried out before aesthetics were considered.  The colour scheme seen in the project is heavily based on the default style for projects created in \gls{msvs} 2010; it soon became apparent that the default style had many strong qualities that could be used 
 
-\section{Web Service}
-Delete by AJAX
-
-'what is new'
-'what is amended'
-'what is deleted'
 \section{Concurrency}
 
 %================================================
 
 \chapter{Testing}
 \label{testing}
+Dijkstra is often quoted as saying ``testing can only prove that errors are present, not that they are absent'' \cite{dijkstra}. This is true, but it is also the case that effective validation of a software product increases the confidence that a software product acts as it is supposed to.  This section of the dissertation is intended to convey information about the testing of the application, to increase the reader's confidence in the in the system and to convey information about the software engineering practice that was applied during testing.
 
 \section{Unit Testing}
-NUnit - what, why, how
+A unit test is a test on a unit of code in isolation: a comparison of the actual result of an operation with its expected output \cite{unitTesting}.  A series of unit tests can (and should) be run frequently to ensure that changes to code have not resulted in the development of problems elsewhere.  A unit test comprises of four main areas of execution:
+\begin{itemize}
+	\item Set up -- the set up phase ensures that any prerequisites for the test are set up before the test begins, for example a session with a database;
+	\item Act -- the phase where the unit of work under test is executed on the target object(s);
+	\item Assert -- the comparison between the expected result and the actual result.  If the two do not match for a test (or an unexpected exception is thrown) it is said to have failed the test and if expected and actual results are the same, it is said to have passed;
+	\item Tear down -- after each and every test, a tear down must occur.  Often, this is just a case of allowing the garbage collector to deal with unused objects, but sometimes connections to databases, file sessions and other connections must be closed.
+\end{itemize}
+
+% NUnit - what, why, how.
+NUnit is an open source unit testing framework for the .NET languages, originally ported from the unit testing framework for Java, JUnit \cite{nUnitHome}.  NUnit 2.5.7 is used within the project and was the most up-to-date version at the beginning of project development (released in August of 2010 \cite{nUnitRelease}).  
+
+NUnit allows unit tests to be written as methods in a class, which can be run inside or outside the \gls{msvs} \gls{ide}, through ReSharper (see section \ref{devEnv}), which allows one-click running of unit tests and sets of unit tests.
 
 \section{Continuous Integration}
 \label{continuousIntegration}
-CruiseControl.NET - what, why, how. Take from SE placement info to save time + effort
+Continuous Integration is a technique which minimises the risk of bugs cropping up between \gls{svn} revisions.  It works by automatically performing a build then running all unit tests each time a revision is committed to the repository, meaning that if issues arise between versions, they are noticed early and can be dealt with as and when they crop up.  There are several stages in setting up this process, as laid out by Martin Fowler in his paper on Continuous Integration \cite{fowlerCI}.  The important points are outlined below, but for the full picture (an approach particularly aimed at teams of developers), see Fowler's article:
+\begin{enumerate}
+	\item A single source repository must be used.  This was achieved as laid out in section \ref{svn};
+	\item The build must be automated.  This was achieved by bundling a command into a \gls{bat} script, which can in turn be run from the command line or the Windows Explorer interface.  This script used Microsoft's \texttt{msbuild} program, which uses an \gls{xml} file to organise how a build should take place, much like the way a \texttt{makefile} can be used in \gls{unix}-based operating systems;
+	\item The build must be self-testing: tests are included as part of the \gls{xml} file mentioned in the previous step, which means that when the \gls{bat} file is run, all of the tests associated with the solution are executed on the freshly built executable.  This means that any bugs that crop up since the last build can be found and dealt with early, saving development and maintenance time later on;
+	\item Every commit should build the mainline on an integration machine. In essence, this point is trying to ensure that the build and the test for the \gls{ci} cycle take place on a separate machine from the main development environment, ensuring that the project is not dependent on files left on the developer's machine --- in effect, this means that the \gls{ci} software must run on another computer.  This was achieved by using separate hardware from the developer machine, running \gls{ci} software called CruiseControl.NET (discussed below).  
+	\item The developer is notified as soon as the build has finished, by way of a pop-up in the notification area of their computer.  Any issues can be fixed as soon as they arise, rather than being discovered further down the development line.
+\end{enumerate}
+
+CruiseControl.NET is an open-source program from Fowler's employer, ThoughtWorks, which acts as a monitor to the repository: it automatically checks-out code each time a commit takes place, builds the project and then runs all unit tests, before outputting the result of the build to both a web page and the CruiseControl Notification Tray client. \revisit - include screenshot of both
+
+The \gls{ci} cycle is primarily intended for teams of developers. \gls{ci} leads to a `Test Early. Test Often. Test Automatically.' attitude --- it drives the developer to find find bugs now, which helps to avoid users finding bugs later \cite{pragmaticProgrammer}. Risks associated with deferred integration (integration after a long time or large numbers of changes, antonymous to continuous integration), which include .
+
+
+
+CruiseControl.NET - what, why, how. Take from SE placement info to save time + effort \cite{fowlerCI}
 
 \begin{figure}
 	\begin{center}
@@ -596,7 +641,7 @@ CruiseControl.NET - what, why, how. Take from SE placement info to save time + e
 
 
 \section{Acceptance Test}
-content
+For the project to pass the acceptance test, all unit tests associated with the project must pass.  By the end of the project, there were \revisit unit tests, all of which passed.
 
 %================================================
 \chapter{Evaluation}
@@ -650,6 +695,7 @@ Tabulate results from the evaluations and go on to analyse the results.
 Sample of users - some CS students targeted, Physics/Astronomy students, staff \& users who don't have academic knowledge - relevant point? why use them? Worth mentioning at all?
 
 \section{Extended Usability Evaluation}
+
 \subsection{Environment}
 \subsection{Execution}
 \subsection{Results}

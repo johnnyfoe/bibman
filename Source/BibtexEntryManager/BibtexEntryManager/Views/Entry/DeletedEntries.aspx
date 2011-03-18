@@ -15,9 +15,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>List of Deleted Entries</h2>
-    <p>
-        <%: Html.ActionLink("Purge old entries", "CleanupDeletions","Entry") %> |
-        <a href="javascript:purgeAll()">Purge ALL deleted entries</a>
+    <p>Old entries are entries which have been deleted for longer than 60 seconds (evaluation time - full system would allow adjustment of this time)<br />
+    To restore an entry (undelete it) click on its cite key<br /><br />
+        <%: Html.ActionLink("Permenantly remove old entries", "CleanupDeletions", "Entry")%> |
+        <a href="javascript:purgeAll()">Permenantly remove ALL deleted entries</a>
     </p>
     <table class="sortable">
         <thead>
@@ -53,8 +54,8 @@
        {
     %>
     <p>
-        <%: Html.ActionLink("Purge old entries", "CleanupDeletions", "Entry")%> |
-        <a href="javascript:purgeAll()">Purge ALL deleted entries</a>
+        <%: Html.ActionLink("Permenantly remove old entries", "CleanupDeletions", "Entry")%> |
+        <a href="javascript:purgeAll()">Permenantly remove ALL deleted entries</a>
     </p>
     <%
         } %>

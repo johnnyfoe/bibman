@@ -337,11 +337,11 @@ namespace BibtexEntryManager.Controllers
                 errors.Add(ckKey, ErrorMessages.CiteKeyNotUnique + " " + linkToOther);
             }
             // there are no errors if this is the case)
-            if (errors.Count == 0)
+            if (errors.Count == 0 && ModelState.IsValid)
             {
                 a.Owner = HttpContext.User.Identity.Name;
                 a.SaveOrUpdateInDatabase();
-                return Redirect("/Entry");
+                return Redirect("~/Entry");
             }
             foreach (KeyValuePair<string, string> kvp in errors)
             {

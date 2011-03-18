@@ -3,7 +3,7 @@
 }
 
 function timeUpdateContent() {
-    var t = setTimeout("UpdateContent()", 10000);
+    var t = setTimeout("UpdateContent()", 3000);
 }
 
 function UpdateContent() {
@@ -16,7 +16,7 @@ function UpdateContent() {
     var currentDate = new Date();
 
     document.getElementById('PageCreationTime').value = currentDate.toGMTString();
-    timeUpdateContent(); // poll server every 10 seconds
+    timeUpdateContent(); // poll server every 3 seconds
 }
 
 function onAmendmentCheckSuccess(result) {

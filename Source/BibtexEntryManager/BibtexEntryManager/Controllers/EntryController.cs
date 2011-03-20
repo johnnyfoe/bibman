@@ -9,6 +9,7 @@ using BibtexEntryManager.Error;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Exceptions;
+using NHibernate.Exceptions;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager.Controllers
@@ -214,18 +215,24 @@ namespace BibtexEntryManager.Controllers
                 }
                 catch(InvalidEntryException e)
                 {
-                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because the entry was invalid: " +
-                                        e.ToString();
+                    ViewData["data"] += l.CiteKey + " Failed because the entry was invalid: " +
+                                        e.ToString() + "<br/><br/>";
+                    failureCounter++;
                 }
-                catch (Exception e) // todo probably want to have a look at what exception to catch here...
+                catch (GenericADOException e)
                 {
-                    ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because of an exception: " + e.Message;
+                    ViewData["data"] += l.CiteKey + " Failed because the entry could not be inserted. Check that the fields' lengths do not exceed 255 characters (1500 for 'abstract')" + "<br/><br/>";
+                    failureCounter++;
+                }
+                catch (Exception e)
+                {
+                    ViewData["data"] += l.CiteKey + " Failed because of an unexpected exception: " + e.Message + "<br/><br/>";
                     failureCounter++;
                 }
             }
             ViewData["data"] += "Successfully added " + successCounter
                                    + " items and failed to add " + failureCounter + " items."+
-                                   ((errorString.Length==0)?"":"The parser encountered some errors: " + errorString);
+                                   ((errorString.Length == 0) ? "" : "The parser encountered some errors: " + errorString) + "<br/><br/>";
 
             return View();
         }

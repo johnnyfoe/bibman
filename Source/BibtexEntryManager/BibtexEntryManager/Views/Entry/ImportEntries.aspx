@@ -7,5 +7,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2>Import Entries Result</h2>
-    <p><%: ViewData["data"] %></p>
+    <p><%
+           Writer.Write(ViewData["data"]);%></p>
 </asp:Content>

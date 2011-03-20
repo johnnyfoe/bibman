@@ -177,12 +177,12 @@ namespace BibtexEntryManager.Helpers
                                                   {
                                                       {Field.Author, true},
                                                       {Field.Title, true},
+                                                      {Field.Publisher, true},
                                                       {Field.Booktitle, true},
+                                                      {Field.Year, true},
                                                       {Field.Crossref, false},
                                                       {Field.Key, false},
                                                       {Field.Pages, false},
-                                                      {Field.Publisher, false},
-                                                      {Field.Year, false},
                                                       {Field.Editor, false},
                                                       {Field.Volume, false},
                                                       {Field.Number, false},
@@ -201,11 +201,12 @@ namespace BibtexEntryManager.Helpers
                                                    {
                                                        {Field.Author, true},
                                                        {Field.Title, true},
+                                                       {Field.Booktitle, true},
+                                                       {Field.Publisher, true},
+                                                       {Field.Year, true},
                                                        {Field.Crossref, false},
                                                        {Field.Key, false},
-                                                       {Field.Booktitle, false},
                                                        {Field.Pages, false},
-                                                       {Field.Year, false},
                                                        {Field.Editor, false},
                                                        {Field.Volume, false},
                                                        {Field.Number, false},
@@ -213,7 +214,6 @@ namespace BibtexEntryManager.Helpers
                                                        {Field.Address, false},
                                                        {Field.Month, false},
                                                        {Field.Organization, false},
-                                                       {Field.Publisher, false},
                                                        {Field.Note, false},
                                                        {Field.Annote, false}
                                                    }

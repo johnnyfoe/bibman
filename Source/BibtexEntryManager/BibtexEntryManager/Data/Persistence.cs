@@ -11,7 +11,6 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.Criterion;
 using NHibernate.Linq;
 
 namespace BibtexEntryManager.Data
@@ -50,21 +49,6 @@ namespace BibtexEntryManager.Data
             return a.ToList();
         }
 
-        //public static IList<Publication> GetDuplicates()
-        //{
-        //    ISession session = GetSession();
-
-        //    var a = ((from p in session.Linq<Publication>()
-        //             group p by p.CiteKey
-        //             into dups
-        //             let count = dups.Count()
-        //             where count > 1
-        //             select dups).AsQueryable());
-
-
-
-        //}
-
         public static IList<Publication> GetActivePublicationsMatching(string s)
         {
             s = PrepareSqlString(s);
@@ -72,7 +56,8 @@ namespace BibtexEntryManager.Data
 
             var a = from pub in currentSession.Linq<Publication>()
                     where pub.DeletionTime == null &&
-                          (pub.Address.Contains(s) ||
+                          (pub.CiteKey.Contains(s) ||
+                          pub.Address.Contains(s) ||
                           pub.Annote.Contains(s) ||
                           pub.Authors.Contains(s) ||
                           pub.Booktitle.Contains(s) ||
@@ -246,8 +231,6 @@ namespace BibtexEntryManager.Data
         {
             ISession ses = GetSession();
             IList<string> retval = new List<string>();
-
-            //ISQLQuery getcitekeys = ses.CreateSQLQuery("SELECT CiteKey FROM [Bibtex].[dbo].[Publication] group by citekey having COUNT(citekey) > 1");
 
             var activePublications = from pub in ses.Linq<Publication>()
                                      where pub.DeletionTime == null

@@ -7,7 +7,6 @@ using BibtexEntryManager.Data;
 using BibtexEntryManager.Error;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.Enums;
-//using BibtexEntryManager.Models.Grouping;
 using BibtexEntryManager.Models.Exceptions;
 using NHibernate;
 using NHibernate.Linq;
@@ -356,13 +355,11 @@ namespace BibtexEntryManager.Models.EntryTypes
                     Address == t.Address &&
                     Annote == t.Annote &&
                     Authors == t.Authors &&
-                    //(Authors.Equals(t.Authors)) &&
                     Booktitle == t.Booktitle &&
                     Chapter == t.Chapter &&
                     Crossref == t.Crossref &&
                     Edition == t.Edition &&
                     Editors == t.Editors &&
-                    //(Editors.Equals(t.Editors)) &&
                     Howpublished == t.Howpublished &&
                     Institution == t.Institution &&
                     Journal == t.Journal &&
@@ -593,6 +590,14 @@ namespace BibtexEntryManager.Models.EntryTypes
             {
                 return false;
             }
+            if (String.IsNullOrEmpty(Year))
+            {
+                return false;
+            }
+            if (String.IsNullOrEmpty(Booktitle))
+            {
+                return false;
+            }
             return true;
         }
 
@@ -810,21 +815,15 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private Dictionary<string, string> IsValidBooklet(Dictionary<string, string> dict)
         {
-            dict.Add("Title", ErrorMessages.TitleIsRequired);
+            if (String.IsNullOrEmpty(Title))
+                dict.Add("Title", ErrorMessages.TitleIsRequired);
             return dict;
         }
 
         private Dictionary<string, string> IsValidConference(Dictionary<string, string> dict)
         {
-            if (String.IsNullOrEmpty(Authors))
-            {
-                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
-            }
-            if (String.IsNullOrEmpty(Title))
-            {
-                dict.Add("Title", ErrorMessages.TitleIsRequired);
-            }
-            return dict;
+            // Requirements are the same as inproceedings
+            return IsValidInproceedings(dict);
         }
 
         private Dictionary<string, string> IsValidInbook(Dictionary<string, string> dict)
@@ -863,9 +862,17 @@ namespace BibtexEntryManager.Models.EntryTypes
             {
                 dict.Add("Title", ErrorMessages.TitleIsRequired);
             }
+            if (String.IsNullOrEmpty(Publisher))
+            {
+                dict.Add("Publisher", ErrorMessages.PublisherIsRequired);
+            }
             if (String.IsNullOrEmpty(Booktitle))
             {
                 dict.Add("Booktitle", ErrorMessages.BooktitleIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
             }
             return dict;
         }
@@ -880,6 +887,14 @@ namespace BibtexEntryManager.Models.EntryTypes
             {
                 dict.Add("Title", ErrorMessages.TitleIsRequired);
             }
+            if (String.IsNullOrEmpty(Publisher))
+            {
+                dict.Add("Publisher", ErrorMessages.PublisherIsRequired);
+            }
+            if (String.IsNullOrEmpty(Year))
+            {
+                dict.Add("Year", ErrorMessages.YearIsRequired);
+            }
             return dict;
         }
 
@@ -892,26 +907,15 @@ namespace BibtexEntryManager.Models.EntryTypes
 
         private Dictionary<string, string> IsValidMastersthesis(Dictionary<string, string> dict)
         {
-            if (String.IsNullOrEmpty(Authors))
-            {
-                dict.Add("Authors", ErrorMessages.AuthorsIsRequired);
-            }
-            if (String.IsNullOrEmpty(Title))
-            {
-                dict.Add("Title", ErrorMessages.TitleIsRequired);
-            }
-            if (String.IsNullOrEmpty(School))
-            {
-                dict.Add("School", ErrorMessages.SchoolIsRequired);
-            }
-            if (String.IsNullOrEmpty(Year))
-            {
-                dict.Add("Year", ErrorMessages.YearIsRequired);
-            }
-            return dict;
+            // Same as for PhdThesis
+            return IsValidPhdthesis(dict);
         }
 
-        private Dictionary<string, string> IsValidMisc(Dictionary<string, string> dict) { return dict; } // if the item exists, it has at least one non-null/empty field}
+        private Dictionary<string, string> IsValidMisc(Dictionary<string, string> dict)
+        {
+            // if the item exists, it has at least one non-null/empty field - no action required.
+            return dict;
+        }
 
         private Dictionary<string, string> IsValidPhdthesis(Dictionary<string, string> dict)
         {

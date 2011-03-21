@@ -1,0 +1,104 @@
+\chapter{Design}
+\label{design}
+
+\section{System Architecture}
+Architecture of overall solution in VM deployment then perceived deployment for scalability. Perhaps an \gls{aod} describing secure areas etc.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.45]
+			{images/ArchitectureOverviewDiagram.png}
+		\caption{High Level Architecture Overview Diagram}
+		\label{fig:aod}
+	\end{center}
+\end{figure}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.45]
+			{images/DataFlow.png}
+		\caption{Diagram showing high-level data flow between components}
+		\label{fig:dataFlow}
+	\end{center}
+\end{figure}
+
+\section{Web Interface Design}
+\label{uiDesign}
+The interface design was conceptualised around the idea of a clean, consistent and intuitive interface.  It was important to ensure that Fitts' Law, the observation that the smaller a target is, the harder it is for a human to point at and act upon accurately \cite{fitts} (particularly in the 2-dimensional space of a screen \cite{fitts2d}), was taken into consideration, and a common sense approach was used when deciding how large or small clickable items should be.
+
+Fitts' Law - 2D, clean, intuitive. Changes, suggestions from evaluators, 
+
+\section{Class design}
+This section discusses the class designs for the different versions of the program, named after NASA Space Shuttle orbiters in chronological order of when they entered service.
+
+An \gls{oo} approach was taken with the project, as the entries that were to be saved mapped well to the concept of an object, and because the C\# language is a natively \gls{oo} language. \revisit - is this information required or relevant? % Relevant? Required?
+
+% reset mvc acronym.
+\glsreset{mvc}
+\subsection{Model View Controller}
+The application's design is heavily based on the \gls{mvc} architecture.  The data model and database interaction are all taken care of in core classes, namely the \texttt{DataPersistence} and \texttt{Publication} classes.
+
+\subsection{First model version (V0.34 - Columbia)}
+The approach of the first model version was heavily based on the successful approach of Mitesh Furia; it was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.
+
+The initial class design consisted of one class per entry type (see figure \ref{fig:ColumbiaClassDesign}.  The main focus behind this approach, aside from following Mitesh's successful approach, was to take advantage of a feature of the .\gls{net} Framework called Attributes, which can be used effectively for validation.  Attributes provide the ability to associate extra information with each member variable of a class; as an example, the `required' attribute can be used to enforce the requirement to include data in a field for it to be valid.  This approach worked well for this version of the model, boasting excellent robustness to poor or erroneous user input as well as excellent feedback to users through the provision of error messages assigned by the required attribute.  Optional fields were included as member variables, and took advantage of the `DisplayName' attribute. The .\gls{net} framework allows automatic generation of labels for web pages, so when a member name doesn't have spaces it results in poor display on the interface.  An example of a member variable name lacking spaces is the field `howpublished': it is more readable and therefore more user friendly when the field is displayed as `how published', which is achieved as shown in figure \ref{fig:displayName}.
+
+\begin{figure}
+	\begin{center}
+			\lstset{language=CSharp} 
+			\begin{lstlisting}
+  // The attribute
+  [DisplayName("Book Title")]
+  // The member name with no spaces
+  public virtual string Booktitle { get; set; }
+			\end{lstlisting}
+		\includegraphics{images/displayNameOnInterface.png}
+		\caption{Using a field name attribute to display a field name differently}
+		\label{fig:displayName}
+	\end{center}
+\end{figure}
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics
+			[scale=0.6]
+			{images/ColumbiaClassDiagram.png}
+		\caption{UML Class Diagram of the Columbia Model}
+		\label{fig:ColumbiaClassDesign}
+	\end{center}
+\end{figure}
+
+Each entry type was a subclass of the abstract superclass `Publication', which contained fields common to all entry types, namely: Id, an int identifier; Cite Key, a string intended to be unique to an entry, but not usable as an identifier in the database, allowing duplicate entries to exist in the system; Owner, the username of the user who created the entry in the first instance; along with Abstract, a string field which was to be optional to all entries.
+
+As the class was designated `abstract', the enforcement of rules associated with the concept were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a string representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
+
+Each entry type class was used directly by NHibernate and mapped by way of a Mapping class \revisit - this is implementation detail. Possibly going into too much information here, along with the discussion of the source code!
+
+An examination of the source code\footnote{If one inspects the code for the \gls{svn} tag entitled V0.34\_Colombia, one will find that the `Publication' class contains a line commented out containing a member variable entitled (and of type) `PublicationGroup'.  This approach was not followed up, as discussed} reveals early intentions to include `PublicationGroup' as a field within Publication.  PublicationGroup was intended to be a recursively-defined structure, to allow a group to be categorised as part of a tree-based structure.  This approach was abandoned following advice from Gregg O'Malley, following his experience of trying to use very similar structures previously; his suggestion to follow a tag-based approach was noted but not acted upon until late stages of the project (see below in section \ref{designDiscovery}).
+
+The major problem with this approach was that when it was mapped to the database by NHibernate, it resulted in one table per entry type --- 14 entry type tables in total.  The number of tables was not the biggest problem: the issue lay in the assignment of identifiers to each row and the storage of entries.  To know where to find an entry without performing a search, the system would have had to know which entry type the entry was, along with what the identifier of the entry was, as each of the entries was a weak entity.  Due to the lack of database-level guarantee that a publication's id was a unique identifier for an entry, a large refactoring took place to move all fields to one top-level table, `Publication', as discussed in section \ref{designChallenger}.
+%what was wrong with it
+
+\subsection{Second model: V1.0 - Challenger}
+\label{designChallenger}
+\revisit --- to do remainder of Design.
+
+Columbia's design presented a few problems for development and performance on the system.  
+Challenger\\
+Single table for all entry types:\\
+why\\
+what improved?\\
+ - faster search\\
+ - IDs all in one place - less complicated - don't need to kow what an entry's type is before searching it\\
+
+\subsection{Third (proposed) model: V2.0 - Discovery}
+\label{designDiscovery}
+Discovery was intended to add a feature called `tagging' to the system.  \\
+Specifically, this was to involve a many-to-many mapping from Publication to Tag
+
+
+\section{DB Design Diagram}
+content

@@ -1,0 +1,70 @@
+\chapter{Requirements Engineering}
+\label{reqs}
+Therequirements engineering chapter gives a vision of what the project aims to provide and to whom: it identifies stakeholders in the project and analyses their areas of interest, before providing a list of functional and non-functional requirements, including a prioritisation of stakeholders and requirements.
+
+\section{Stakeholders}
+A stakeholder is a person or group of people who have an interest in the resulting software from this project.  Several (groups of) stakeholders of the project were identified: 
+
+\revisit --- are there any other interests that have been missed?
+
+\begin{enumerate}
+	\item Users of \bibtex{} are the intended audience of the software product created by this project, particularly academics and other technical authors --- they are therefore stakeholders in the project.  Their main interests in the product lie in how usable the product is and the accuracy and validity of its outputs;
+	\item As an author, the project supervisor's interests are a superset of the first group's interests, and also include ensuring that the student under supervision develops as an individual;
+	\item The student developing the project is interested in furthering technical and professional expertise, as well as providing a product which surpasses expectations of the project supervisor and other stakeholders;
+	\item Students who undertake this project in the future may be interested in the positive qualities of and the lessons learned by this project.
+\end{enumerate}
+
+\subsection*{Prioritisation}
+The stakeholders are listed in order of priority, with justification for their positioning:
+\begin{enumerate}
+	\item Stakeholders 2 and 3 hold the highest priority as they are directly involved with the development of the project and have the most to gain if the project is successful. \revisit Wording.
+	\item Stakeholder group 1 hold the second highest priority; potential users must be consulted when evaluating the product
+	\item Stakeholder group 4 may have some interest in the way that the project was constructed, what it achieved, as well as lessons that were learned and mistakes to be avoided.  Their concerns are of a lesser importance, though they should still be considered.
+\end{enumerate}
+
+\section{Functional Requirements}
+\label{funcReq}
+A functional requirement is a task that the software must allow a user to perform.  The tool should provide management of \bibtex{} records, and should specifically allow users to:
+\begin{enumerate}
+\item Add an entry;
+\item Edit an entry;
+\item View entries;
+\item Delete an entry;
+\item Undo the deletion of an entry;
+\item Perform a simple search on entries;
+\item Perform an advanced search on multiple fields of entries;
+\item Import entries from a file uploaded by a user;
+\item Export entries to a file for download by a user;
+\item Users should be able to group entries to assist with the organisation of citations;
+\item Items should expire (deleted items should be removed entirely) after a period of time;
+\item Users should be able to review and manage duplicate\footnote{A pair of duplicate entries have matching cite keys.} entries.
+\end{enumerate}
+
+\section{Non-Functional Requirements}
+\label{nfReq}
+A non-functional requirement is a rule that the software must adhere to, but is not a specific action that a user can perform.  The tool should adhere to the following non-functional requirements:
+\begin{enumerate}
+\item Interaction with the system should take place through a web-based interface;
+\item The server-side application is not required to be portable;
+\item The client-side (web interface) should be accessible from major (*nix, Windows, Mac) operating systems under the three most widely-used browsers (Mozilla Firefox, Google Chrome, Microsoft Internet Explorer) \cite{w3cBrowserStats};
+\item Entries should be stored in a central database;
+\item The system should allow multiple users to collaborate on a collection of \bibtex{} entries;
+\item The system should be usable by the target audience, users of the \LaTeX{} typsetting tool;
+\item The system should authenticate users;
+\item The system should allow various levels of access to users with different
+privileges;
+\item The system should be able to handle concurrent access by multiple users in such a way that it facilitates their collaboration on the centrally stored set of references;
+\item Only valid entries\footnote{To say that an entry is `valid' means that it has all of its required fields populated} should be stored by the system;
+\end{enumerate}
+
+\section{Prioritisation}
+The functional requirements laid out in section \ref{funcReq} are prioritised (highest first) as follows:
+\begin{enumerate}
+	\item Items 1, 2, 3, 4, 6, 8 and 9 have the highest priority and are defined as the `Basic' functionality that must be implemented in the project;
+	\item Items 5, 7, 10, 11 and 12 hold a lower priority than the items in (1) and will be implemented if time permits.
+\end{enumerate}
+
+It is important to point out at this point that the system must adhere to the non-functional requirements laid out in section \ref{nfReq}, all of which are high priority with the exception of item 7.
+
+\section{Summary}
+The software artefact must adhere to the requirements set out in this chapter.  Prioritised requirements have been set out and should be tackled in order of necessity. \revisit --- extend summary.

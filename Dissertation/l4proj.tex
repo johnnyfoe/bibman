@@ -12,7 +12,7 @@
 \newcommand{\bibtex}{\BibTeX}
 \newcommand{\latex}{\LaTeX{} }
 \newcommand{\revisit}{\#\#\#}
-
+\newcommand{\cs}{C\#}
 \makeindex
 \makeglossaries
 
@@ -34,11 +34,14 @@
 \newacronym{ci}			{CI}				{Continuous Integration}
 \newacronym{clr}		{CLR}				{Common Language Runtime}
 \newacronym{css}		{CSS}				{Cascading Style Sheet}
+\newacronym{fnh}		{FNH}				{Fluent NHibernate}
 \newacronym{html}		{HTML}			{HyperText Markup Language}
 \newacronym{http}		{HTTP}			{HyperText Transfer Protocol}
 \newacronym{id}			{ID}				{Identifier}
 \newacronym{ide}		{IDE}				{Integrated Development Environment}
 \newacronym{jre}		{JRE}				{Java Runtime Environment}
+\newacronym{js}			{JS}				{JavaScript}
+\newacronym{json}		{JSON}			{JavaScript Object Notation}
 \newacronym{jvm}		{JVM}				{Java Virtual Machine}
 \newacronym{linq}		{LINQ}			{Language Integrated Query}
 \newacronym{msdnaa}	{MSDNAA}		{Microsoft Developer Network Academic Alliance}
@@ -50,6 +53,7 @@
 \newacronym{ssh}		{SSH}				{Secure Shell}
 \newacronym{svn}		{SVN}				{Subversion}
 \newacronym{ui}			{UI}				{User Interface}
+\newacronym{uml}		{UML}				{Unified Modelling Language}
 \newacronym{uri}		{URI}				{Uniform Resource Identifier}
 \newacronym{url}		{URL}				{Uniform Resource Locator}
 \newacronym{xml}		{XML}				{eXtensible Markup Language}
@@ -60,7 +64,8 @@
 \newglossaryentry{svntag}	{name={SVN Tag}, 									description={A snapshot of a project in time, saved with a human-readable name}}
 \newglossaryentry{unix}		{name = {UNIX},										description={An open-source operating system}}
 \newglossaryentry{net}		{name = {NET},										description={An application development framework by Microsoft}}
-\newglossaryentry{contInt}{name = {Continuous Integration},	description={A technique which integrates all changes }}
+\newglossaryentry{contInt}{name = {Continuous Integration},	description={A technique which runs all tests after each change to a solution's code repository.}}
+\newglossaryentry{vm}{name = {Virtual Machine},							description={Hardware emulator: allows running of a system as if it were on its own machine where it is actually running as a process on machine}}
 
 
 % ==========================================
@@ -191,7 +196,7 @@ First use: \glspl{xml}. Second use: \glspl{xml}.\glsreset{xml}
 \section*{Acknowledgements}
 I'd also like to mention some other parties who have (perhaps indirectly) had a positive impact on the project: \
 \begin{itemize} 
-\item Microsoft - in particular for their Academic Alliance (MSDNAA) programme, as well as for the .\gls{net} framework and the C\# programming language;
+\item Microsoft - in particular for their Academic Alliance (MSDNAA) programme, as well as for the .\gls{net} framework and the \cs programming language;
 \item The NUnit Community for their test framework;
 \item The NHibernate Community;
 \item ThoughtWorks for making their Continuous Integration software open-source;

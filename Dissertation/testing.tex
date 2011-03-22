@@ -4,12 +4,12 @@ Dijkstra is often quoted as saying ``testing can only prove that errors are pres
 
 \section{Unit Testing}
 A unit test is a test on a unit of code in isolation: a comparison of the actual result of an operation with its expected output \cite{unitTesting}.  A series of unit tests can (and should) be run frequently to ensure that changes to code have not resulted in the development of problems elsewhere.  A unit test comprises of four main areas of execution:
-\begin{itemize}
+\begin{enumerate}
 	\item Set up -- the set up phase ensures that any prerequisites for the test are set up before the test begins, for example a session with a database;
 	\item Act -- the phase where the unit of work under test is executed on the target object(s);
 	\item Assert -- the comparison between the expected result and the actual result.  If the two do not match for a test (or an unexpected exception is thrown) it is said to have failed the test and if expected and actual results are the same, it is said to have passed;
 	\item Tear down -- after each and every test, a tear down must occur.  Often, this is just a case of allowing the garbage collector to deal with unused objects, but sometimes connections to databases, file sessions and other connections must be closed.
-\end{itemize}
+\end{enumerate}
 
 % NUnit - what, why, how.
 NUnit is an open source unit testing framework for the .\gls{net} languages, originally ported from the unit testing framework for Java, JUnit \cite{nUnitHome}.  NUnit 2.5.7 is used within the project and was the most up-to-date version at the beginning of project development (released in August of 2010 \cite{nUnitRelease}).  
@@ -46,7 +46,12 @@ CruiseControl.NET - what, why, how. Take from SE placement info to save time + e
 \end{figure}
 
 \section{Bug Tracking}
+\label{bugTracking}
+Bug tracking is, as the name suggests, the tracing of the status of bugs that have been discovered in a system, used primarily to ensure that bugs which are found are dealt with or logged in a release.  It is another concept that was encountered while on summer industrial placement, and it struck the developer as an advantageous \gls{case} tool to utilise in this project.
 
+The bug tracker was used when a bug was encountered that was not going to be fixed at the time of the discovery; the developer wanted to apply use of the bug tracker intelligently so that it was always going to be a help, and not a bureaucratic hindrance to development.  Bugs that were found were created in the system and given a priority, marked initially as `open' to symbolise that they had not yet been dealt with.  When a bug had been dealt with and the developer had verified that it was no longer an issue, it was marked as `closed', and remained in the system for traceability, should a similar issue crop up.  As a rule of thumb, a comment was recorded to say firstly what the problem was, secondly what the fix was and thirdly which \gls{svn} (see section \ref{svn}) check-in fixed the issue so that one did not need to trawl through logs in \gls{svn} to find the fix, should they need to revisit it.\\ \revisit - want to check wording of this paragraph when I'm not tired.
+
+The software used was BugTracker.NET -- a free, open-source, web-based bug tracker.  Having encountered this particular product and worked with it for three months, the developer thought it wise to stick to familiar ground and employ the same product.  The developer used hardware running at home to deploy BugTracker.NET and used it until a server failure in late January 2011.  As the hardware was no longer reliable to host the software, the decision was taken to switch bug tracking software to SourceForge's Bug tracker, which worked in a similar way.  Bugs from the old system (both open and closed) were transferred to the new site and remain there now for traceability and reference.
 
 \section{Acceptance Test}
 For the project to pass the acceptance test, all unit tests associated with the project must pass.  By the end of the project, there were \revisit unit tests, all of which passed.

@@ -1,6 +1,6 @@
 \chapter{Requirements Engineering}
 \label{reqs}
-Therequirements engineering chapter gives a vision of what the project aims to provide and to whom: it identifies stakeholders in the project and analyses their areas of interest, before providing a list of functional and non-functional requirements, including a prioritisation of stakeholders and requirements.
+The requirements engineering chapter gives a vision of what the project aims to provide and to whom: it identifies stakeholders in the project and analyses their areas of interest, before providing a list of functional and non-functional requirements, including a prioritisation of stakeholders and requirements.
 
 \section{Stakeholders}
 A stakeholder is a person or group of people who have an interest in the resulting software from this project.  Several (groups of) stakeholders of the project were identified: 
@@ -19,12 +19,12 @@ The stakeholders are listed in order of priority, with justification for their p
 \begin{enumerate}
 	\item Stakeholders 2 and 3 hold the highest priority as they are directly involved with the development of the project and have the most to gain if the project is successful. \revisit Wording.
 	\item Stakeholder group 1 hold the second highest priority; potential users must be consulted when evaluating the product
-	\item Stakeholder group 4 may have some interest in the way that the project was constructed, what it achieved, as well as lessons that were learned and mistakes to be avoided.  Their concerns are of a lesser importance, though they should still be considered.
+	\item Stakeholder group 4 may have some interest in the way that the product was constructed, what it achieved, as well as lessons that were learned and mistakes to be avoided.  Their concerns are of a lesser importance, though they should still be considered.
 \end{enumerate}
 
 \section{Functional Requirements}
 \label{funcReq}
-A functional requirement is a task that the software must allow a user to perform.  The tool should provide management of \bibtex{} records, and should specifically allow users to:
+A functional requirement is a task that the software must allow a user to perform.  The tool should provide management of \bibtex{} records, and should specifically allow users to perform the following actions.  A more extensive description of these actions can be found in the use cases appendix:
 \begin{enumerate}
 \item Add an entry;
 \item Edit an entry;
@@ -42,10 +42,9 @@ A functional requirement is a task that the software must allow a user to perfor
 
 \section{Non-Functional Requirements}
 \label{nfReq}
-A non-functional requirement is a rule that the software must adhere to, but is not a specific action that a user can perform.  The tool should adhere to the following non-functional requirements:
+A non-functional requirement is describes a principle that the software must adhere to, but is not a specific action that a user can perform.  The tool should adhere to the following non-functional requirements:
 \begin{enumerate}
 \item Interaction with the system should take place through a web-based interface;
-\item The server-side application is not required to be portable;
 \item The client-side (web interface) should be accessible from major (*nix, Windows, Mac) operating systems under the three most widely-used browsers (Mozilla Firefox, Google Chrome, Microsoft Internet Explorer) \cite{w3cBrowserStats};
 \item Entries should be stored in a central database;
 \item The system should allow multiple users to collaborate on a collection of \bibtex{} entries;
@@ -54,7 +53,7 @@ A non-functional requirement is a rule that the software must adhere to, but is 
 \item The system should allow various levels of access to users with different
 privileges;
 \item The system should be able to handle concurrent access by multiple users in such a way that it facilitates their collaboration on the centrally stored set of references;
-\item Only valid entries\footnote{To say that an entry is `valid' means that it has all of its required fields populated} should be stored by the system;
+\item Only valid entries\footnote{To say that an entry is `valid' means that it has all of its required fields populated with data in the expected format --- for example, a year should be given in 4 digits.} should be stored by the system;
 \end{enumerate}
 
 \section{Prioritisation}
@@ -64,7 +63,9 @@ The functional requirements laid out in section \ref{funcReq} are prioritised (h
 	\item Items 5, 7, 10, 11 and 12 hold a lower priority than the items in (1) and will be implemented if time permits.
 \end{enumerate}
 
-It is important to point out at this point that the system must adhere to the non-functional requirements laid out in section \ref{nfReq}, all of which are high priority with the exception of item 7.
+It is important to clarify that the system must adhere to the non-functional requirements laid out in section \ref{nfReq}, all of which are high priority with the exception of items 6 and 7. \revisit
 
 \section{Summary}
-The software artefact must adhere to the requirements set out in this chapter.  Prioritised requirements have been set out and should be tackled in order of necessity. \revisit --- extend summary.
+The software artefact must adhere to the requirements set out in this chapter.  Prioritised requirements have been set out and should be tackled in order of importance. 
+
+\revisit --- extend summary.

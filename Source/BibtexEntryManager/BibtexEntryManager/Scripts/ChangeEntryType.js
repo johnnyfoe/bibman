@@ -26,19 +26,19 @@ function onModificationCheckSuccess(result) {
 
     if (result == 0) {
         // continue checking for modifications if there was no change (set the timer for another 10 seconds)
-        var t = setTimeout("CheckForModifications()", 10000);
+        var t = setTimeout("CheckForModifications()", 3000);
         return;
     }
     if (result == 1) {
         document.getElementById("notificationOfUpdate").innerHTML =
-                    "A user has deleted this entry - refresh the page to" +
+                    "A user has deleted this entry - refresh the page to " +
                     "see their changes or click <a href=\"/Entry/Publication/" +
                     ItemId() + "\" target=\"_blank\">here</a> to see it in a new tab/window.";
         return;
     }
     if (result == 2) {
         document.getElementById("notificationOfUpdate").innerHTML =
-                    "A user has updated this entry - refresh the page to" +
+                    "A user has updated this entry - refresh the page to " +
                     "see their changes or click <a href=\"/Entry/Publication/" +
                     ItemId() + "\" target=\"_blank\">here</a> to see it in a new tab/window.";
         return;

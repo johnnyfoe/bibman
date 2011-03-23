@@ -51,9 +51,14 @@ namespace BibtexEntryManager.Data
 
         public static IList<Publication> GetActivePublicationsMatching(string s)
         {
+            // prepare the SQL string - escape SQL wildcards 
+            //         and replace * and ? characters
             s = PrepareSqlString(s);
+            
+            // Get a session with the database
             var currentSession = GetSession();
 
+            // Put together the search query in LINQ and execute it
             var a = from pub in currentSession.Linq<Publication>()
                     where pub.DeletionTime == null &&
                           (pub.CiteKey.Contains(s) ||
@@ -83,11 +88,15 @@ namespace BibtexEntryManager.Data
                           pub.Year.Contains(s))
                     select pub;
 
+            // convert the results to a list and return them
             return a.ToList();
         }
 
         private static string PrepareSqlString(string s)
         {
+            // escapes SQL wildcards and inserts SQL wildcards in
+            // place of characters * and ?
+
             // check for % signs and replace with \%
             s = Regex.Replace(s, "%", "\\%");
             // Check for * signs and replace with %

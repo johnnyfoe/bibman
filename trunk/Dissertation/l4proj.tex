@@ -13,6 +13,7 @@
 \newcommand{\latex}{\LaTeX{} }
 \newcommand{\revisit}{\#\#\#}
 \newcommand{\cs}{C\#}
+\newcommand{\naive}{na\"{\i}ve}
 \makeindex
 \makeglossaries
 
@@ -67,39 +68,6 @@
 \newglossaryentry{contInt}{name = {Continuous Integration},	description={A technique which runs all tests after each change to a solution's code repository.}}
 \newglossaryentry{vm}{name = {Virtual Machine},							description={Hardware emulator: allows running of a system as if it were on its own machine where it is actually running as a process on machine}}
 
-
-% ==========================================
-% ==========================================
-
-%\lstdefinelanguage{CSharp}
-%{
-% morecomment = [l]{//}, 
-% morecomment = [l]{///},
-% morecomment = [s]{/*}{*/},
-% morestring=[b]", 
-% sensitive = true,
-% morekeywords = {abstract,  event,  new,  struct,
-%   as,  explicit,  null,  switch,
-%   base,  extern,  object,  this,
-%   bool,  false,  operator,  throw,
-%   break,  finally,  out,  true,
-%   byte,  fixed,  override,  try,
-%   case,  float,  params,  typeof,
-%   catch,  for,  private,  uint,
-%   char,  foreach,  protected,  ulong,
-%   checked,  goto,  public,  unchecked,
-%   class,  if,  readonly,  unsafe,
-%   const,  implicit,  ref,  ushort,
-%   continue,  in,  return,  using,
-%   decimal,  int,  sbyte,  virtual,
-%   default,  interface,  sealed,  volatile,
-%   delegate,  internal,  short,  void,
-%   do,  is,  sizeof,  while,
-%   double,  lock,  stackalloc,   
-%   else,  long,  static,   
-%   enum,  namespace,  string}
-%}   
-
 \lstdefinelanguage{CSharp}
 {
  sensitive=true,
@@ -127,8 +95,6 @@
  morestring=[b]",
  morestring=[b]',
 }
-
-
 \lstset{
  backgroundcolor=\color[rgb]{0.95, 0.95, 0.95},
  tabsize=2,
@@ -154,57 +120,48 @@
  commentstyle=\color[rgb]{0.133,0.545,0.133},
  stringstyle=\color[rgb]{0.639,0.082,0.082},
 }
-
-
-
 % ==========================================
 % ==========================================
 
 \begin{document}
 \title{\bibtex{} Entry Manager}
+%\subtitle{A Software Solution for Management of \bibtex{} References}
 \author{John Lewis Thow [0701068]}
 \date{\today}
 \maketitle
 
-
-
+% old:
+%This dissertation discusses a software solution implemented in \cs{} under the Microsoft.NET application framework to address some of the problems associated with management of \bibtex{} entries by a group of authors collaborating on a one or more pieces of work.
 
 \begin{abstract}
-Abstract for the project\\\\
+Authors of \latex documents often maintain lists of bibliographic references stored in \bibtex{} format.  The management of these lists can pose several problems to an author which, when multiple authors collaborate on a paper and need to share a set of references, exacerbates the management problem. 
 
-\revisit
-A \gls{sample} entry and \gls{xml}. Second use: \gls{xml}.
+To deal with this problem, authors would value a method of maintaining and managing \bibtex{} records in a collaborative way.  Two previous projects undertaken by students in the School of Computing Science at the University of Glasgow, resulted in a viable desktop solution and a web-based solution, both of which laid the foundations that this project is built on.
 
-Plurals: \glspl{sample}. Reset acronym\glsreset{xml}.
-First use: \glspl{xml}. Second use: \glspl{xml}.\glsreset{xml}
+The dissertation identifies some of the problems involved with management of \bibtex{} entries; examines some of the previous attempts at solutions to the problems; discusses the requirements, design and technical implementation of the solution; and goes on to describe and discuss a set evaluations and tests to examine the success of the software solution produced.
+
+The author of the software and the dissertation aimed to produce a usable, useful and stable software system by following disciplined software engineering methods that addressed the identified needs of collaborating authors.
+
+The software solution produced was found to be a success,  which was measured by statistical analysis of evaluation participants' responses to a questionnaire.  All participants reacted positively to questions on the usability of the software solution and further development of the solution was encouraged by some users' suggestions for areas of further work.  These areas of further development, along with some areas conceived by the author and supervisor of this dissertation, are included in the discussion of future work in the conclusion section.
+
+The software solution was mostly limited by the length of the academic year; some of the shortcomings of the solution include a \naive{} approach to authentication of users during registration, a perhaps over-simplified search engine and a \naive{} take on security.  These, among other shortcomings, are discussed in the final chapter of the dissertation.
 
 \end{abstract}
 
 
 %\chapter*{Thanks and Acknowledgements}
 \newpage
-\section*{Personal Thanks}
-\begin{itemize}
-\item I'd like to wholeheartedly thank Dr David Manlove for his guidance, assistance and expertise on this project, as well as his patience and dedication when it came to other matters;
-\item Thanks to Gregg O'Malley for introducing me (and David) to a different approach to concurrent access to entries;
-\item Thanks to all of the volunteers who took part in my evaluation, as well as to Dr Colin Perkins for his assistance in organising the sessions, during which some of the evaluations took place;
-\item I'd like to give Graham Mooney a mention for his DIV-ine tutorial;
-\item Thomas Anderson of the Amor Group;
-\item I'd like to thank my family, friends and classmates for all of their support;
-\item Finally, I'd like to give a very warm thank you to all of the staff in the School (Department!) of Computing Science at the University of Glasgow, both retired and active who have had an input on my education over the past 4 years.
-\end{itemize}
 \section*{Acknowledgements}
-I'd also like to mention some other parties who have (perhaps indirectly) had a positive impact on the project: \
-\begin{itemize} 
-\item Microsoft - in particular for their Academic Alliance (MSDNAA) programme, as well as for the .\gls{net} framework and the \cs programming language;
-\item The NUnit Community for their test framework;
-\item The NHibernate Community;
-\item ThoughtWorks for making their Continuous Integration software open-source;
-\item SourceForge for hosting the Subversion repository on which the project was hosted, along with bug tracking software;
-\item The Stack Overflow community for their extensive knowledge base and source of ideas;
-\item kryogenix.org for their table sorting JavaScript library `sorttable';
-\item JetBrains for their Visual Studio productivity plug-in `ReSharper';
-\item The Dynamic Drive (DHTML) community.
+I owe a debt of gratitude to the following individuals for the support they gave me while designing, developing and evaluating the software solution and while preparing this dissertation:
+\begin{itemize}
+\item Dr David Manlove of the University of Glasgow;
+\item Mr Gregg O'Malley of the University of Glasgow;
+\item Dr Colin Perkins of the University of Glasgow;
+\item Mr Graham Mooney of Cisco Systems;
+\item Mr Thomas Anderson of the Amor Group;
+\item My family, friends and classmates;
+\item All of the volunteers who took part in my evaluation;
+\item The staff in the School (Department!) of Computing Science at the University of Glasgow, both retired and active who have had an input on my education over the past 4 years.
 \end{itemize}
 
 \educationalconsent

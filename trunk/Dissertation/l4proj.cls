@@ -11,6 +11,7 @@
 2009/01/09 Colin Perkins <csp@dcs.gla.ac.uk>.%
 2009/09/16 Modified by Tim Storer <tws@dcs.gla.ac.uk> to support non pdf modes.%
 2011/02/15 Modified by Gregg Hamilton <hamiltgr@dcs.gla.ac.uk> for use in final year projects.%
+2011/03/22 Modified by John Thow <0701068t@student.gla.ac.uk> to allow subtitle insertion (on line 42)
 ]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
@@ -38,6 +39,7 @@
   \Large
   \vskip 8em%
   {\LARGE \@title \par}%
+  {\Large A Software Solution for the Management of B{\sc ib}\TeX{}  References \par}%
   \vskip 3em%
   \large
   \lineskip .75em%
@@ -76,11 +78,11 @@ University of Glasgow students and to be distributed in an electronic
 format.  \textbf{Please note that you are under no obligation to sign 
 this declaration, but doing so would help future students.}
 
-\begin{tabular}{@{}llll}
-      &                     &            &                     \\
-      &                     &            &                     \\
-Name: & \textbf{John L. Thow} & Signature: & \rule{4.5cm}{0.5mm} \\
-      &                     &            &                     \\
-      &                     &            &                     \\
+\begin{tabular}{@{}llllll}
+      &                     &            &                     & \\
+      &                     &            &                     & \\
+Name: & \textbf{John L. Thow} & Signature: & \rule{4.5cm}{0.5mm} & Date: \rule{3cm}{0.5mm} \\
+      &                     &            &                     & \\
+      &                     &            &                     & \\
 \end{tabular}
 }

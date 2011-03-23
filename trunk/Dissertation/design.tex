@@ -1,7 +1,7 @@
 \chapter{Design}
 \label{design}
 
-The design section sets out to outline the way in which the solution was built, including modelling of the problem, 
+The design section sets out to outline the way in which the solution was built, including modelling of the problem with the requirements from the previous chapter in mind. 
 
 \section{System Architecture}
 Non-functional requirement 1 states that interaction with the system should take place through a web-based interface.  This requirement fits well with the client-server model: a set of clients that call on the services offered by a server (or set of servers), facilitated by a network \cite{sommerville}.  The approach taken by the solution is illustrated in figure \ref{fig:aod}.
@@ -37,7 +37,7 @@ Fitts' Law - 2D, clean, intuitive. Changes, suggestions from evaluators,
 \section{Class design}
 This section discusses the class designs as they evolved over different versions of the program, as well as reasons for changes.  The versions are named after NASA Space Shuttle orbiters in chronological order of when they entered service.
 
-An \gls{oo} approach was taken with the project, as the entries that were to be saved mapped well to the concept of an object, and because the \cs language is a natively \gls{oo} language.  The \cs language is discussed in more detail in section \ref{csharpDiscussion}.
+An \gls{oo} approach was taken with the project, as the entries that were to be saved mapped well to the concept of an object, and because the \cs{} language is a natively \gls{oo} language.  The \cs{} language is discussed in more detail in section \ref{csharpDiscussion}.
 
 % reset mvc acronym.
 \glsreset{mvc}
@@ -46,7 +46,7 @@ The application's design is heavily based on the \gls{mvc} architecture.  The da
 
 \subsection{First model version (V0.34 - Columbia)}
 \label{columbia}
-The approach of the first model version was heavily based on the successful approach of Mitesh Furia; it was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.  This approach did not survive the entirety of the project; as development progressed, it became apparent that the design would need to be refactored and streamlined, as discussed in section \ref{designChallenger}.  The main surviving item from Mitesh's solution was the file parser, which was modified to suit the \cs language (from Java) and to provide further feedback to users.
+The approach of the first model version was heavily based on the successful approach of Mitesh Furia; it was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.  This approach did not survive the entirety of the project; as development progressed, it became apparent that the design would need to be refactored and streamlined, as discussed in section \ref{designChallenger}.  The main surviving item from Mitesh's solution was the file parser, which was modified to suit the \cs{} language (from Java) and to provide further feedback to users.
 
 The initial class design consisted of one class per entry type (see figure \ref{fig:ColumbiaClassDesign} --- an example list of which fields are required and which are optional are shown in figure~\ref{fig:ArticleFields}).  The main focus behind this approach, aside from following Mitesh's successful approach, was to take advantage of a feature of the .\gls{net} Framework called Attributes, which can be used effectively for validation.  Attributes provide the ability to associate extra information with each member variable of a class; as an example, the `required' attribute can be used to enforce the requirement to include data in a field for it to be valid.  This approach worked well for this version of the model, boasting excellent robustness to poor or erroneous user input as well as excellent feedback to users through the provision of error messages assigned by the required attribute.  Optional fields were included as member variables, and took advantage of the `DisplayName' attribute. The .\gls{net} framework allows automatic generation of labels for web pages, so when a member name doesn't have spaces it results in poor display on the interface.  An example of a member variable name lacking spaces is the field `howpublished': it is more readable and therefore more user friendly when the field is displayed as `how published', which is achieved as shown in figure \ref{fig:displayName}.
 

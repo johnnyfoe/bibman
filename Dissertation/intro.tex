@@ -5,45 +5,45 @@ The introduction spells out some preliminary information and aims of the project
 
 \section{Preliminaries}
 \subsection{\TeX{}}
-In the words of its creator, \TeX{} is ``a [new] typesetting system intended for the creation of beautiful books---and especially for books that contain a lot of mathematics'' \cite{DK84}.  The \TeX{} program is a set of primitive commands for basic typesetting, and also allows users to create more complex commands in terms of simpler ones.  Donald Knuth created the \TeX{} program in 1978, a subsequent version of which makes up the core of the program that is used today \cite{TeXOrigin}.  The use of \TeX{} to its potential requires that one has had considerable experience with programming techniques; it is as a result of this that the use of \TeX{} on its own is left to typography and programming professionals \cite{KD95}.
+In the words of its creator, \TeX{} is ``a [new] typesetting system intended for the creation of beautiful books---and especially for books that contain a lot of mathematics'' \cite{DK84}.  The \TeX{} program is a set of primitive commands for basic typesetting; it also allows users to create more complex commands in terms of simpler ones.  Donald Knuth created the \TeX{} program in 1978 and a subsequent version of it makes up the core of the program that is used today \cite{TeXOrigin}.  To realise the full potential of \TeX, users require considerable experience with programming techniques.  As a result, the use of \TeX{} on its own is limited to typography and programming professionals \cite{KD95}.
 
 \subsection{\LaTeX}
-\latex was created by Leslie Lamport in 1985, to allow one to exploit the powerful features of \TeX{} without first having to familiarise oneself with programming techniques. \latex contains a range of commands written in terms of primitive \TeX{} commands, providing users with a set of higher-level commands for the production of complex documents.  It also allows for a separation of concerns between the information that is being presented from the formatting that has to be applied when publishing \cite{KD95}.
+To allow non-experts to exploit the most powerful features of \TeX{} without first having to familiarise themselves with programming techniques, \latex was created by Leslie Lamport in 1985. \latex contains a range of commands written in terms of primitive \TeX{} commands, providing users with a set of higher-level commands for the production of complex documents.  It also allows for a separation of concerns between the information that is being presented from the formatting that has to be applied when publishing \cite{KD95}.
 
-\subsection{\bibtex}
 It is standard to find a bibliography at the end of a scientific publication. \latex provides an `environment'\footnote{An environment is used to specify an area of a document where the text has to be presented with different indentation, line width, typeface and so on \cite{KD95}.  The environment used by \latex is called `\texttt{thebibliography}'.} which allows bibliographic references to be listed and stored in one area of a document \cite{KD95}, but this approach requires that each document has its own list of references, which may lead to redundancy and inconsistency if, for example, an author has multiple publications on the same subject. 
 
+\subsection{\bibtex}
 \bibtex{} is an auxiliary program to \latex which provides the authors with the ability to store all of their bibliographic references in one or more files.  Each reference, or `entry', is uniquely identified by its cite key, which is used within a document where the reference is made.\footnote{A reference to a citation is inserted by using the \latex command \texttt{$\backslash$cite\{citeKey\}} in the body of the document, where `citeKey' is the identifier of the reference in one of the referenced bibliographic files}
 
 The benefit of using \bibtex{} as a means of bibliography production is that a file set is easier to maintain than having sporadic files, each with individual collections of references, as one file can be re-used for all publications.
 
 \section{Problem Statement, Aims and Motivation}
-An author may have a vast number of bibliographic references, through having making a large amount of citations over years of work.  The task of managing this library of references is an issue in itself; authors might have clashing cite keys or entries that are recorded twice in the library, for example.  It is also highly important to ensure that field names are not misspelled --- especially when a field is optional, as misspelling a field name results in it being ignored without warning \cite{OP88}.
+An author is likely to amass a vast number of bibliographic references, through having to make a large number of citations over years of work.  The task of managing this library of references is an issue in itself.  For example, authors might have clashing cite keys or entries that are recorded twice in the library.  It is also crucially important to ensure that field names are not misspelled --- especially when a field is optional, as this results in it being ignored without warning \cite{OP88}.
 
-The problem of managing entries is exacerbated when multiple users collaborating on a piece of work need to share collections of entries: with no management system in place, users have to find a way to consistently distribute files by email and other manual methods, as well as ensuring that there have been no clashing entries.  This includes ensuring that a user can add, edit, delete, import and export their entries.
+The problem of managing entries is exacerbated when multiple users that are collaborating on a piece of work need to share collections of entries: with no management system in place, users have to find a way to consistently and unerringly distribute files by email and other manual methods, while ensuring that there have been no clashing entries.  This includes ensuring that a user can add, edit, delete, import and export their entries to and from the collection.
 
-\revisit --- Not sure what else to add to this section --- \revisit
+An anecdotal example of the \bibtex{} file management problem exists within the School of Computing Science at the University of Glasgow: the Matching group frequently collaborated on papers and maintained a single list of references, entitled \texttt{matching.bib}.  Distribution of this file was performed manually by email after changes were made to the list by any of the members of the Matching group; it was an understandably error-prone and clumsy method of distribution of the references.
 
-The main aim of this project is to try to come up with a solution to solve the aforementioned problems.  The project is also undertaken with some lesser, but still important, aims in mind, which are listed presently:
+The main aim of this project is to identify a solution to solve the problems defined and described above.  The author was motivated towards this project because the problem is one that interests him and finding a solution would offer practical benefits.  Exploring the subject would also enable him to:
 \begin{enumerate}
-\item develop a good understanding of the technologies used;
-\item observe good software engineering practice during development and testing;
-\item develop professional attitude and strategy for dealing with project matters;
-\item produce a user-friendly system;
-\item ensure that the system is robust and reliable (as far as programming is concerned)
+	\item Develop a good understanding of the technologies used;
+	\item Observe good software engineering practice during development and testing;
+	\item Develop professional attitude and strategy for dealing with project matters;
+	\item Produce a user-friendly system;
+	\item Ensure that the system is robust and reliable (as far as programming is concerned);
 \end{enumerate}
 
 %it will be important to evaluate both the usability and effectiveness of the product by   \bibtex{} entries for multiple users.
 
 \section{Outline of Report}
 %List these as references to each section!
-The remainder of this report will discuss how producing a solution to address the problem of managing \bibtex{} references was undertaken. 
+This report will discuss how the author analysed problems that are commonly encountered with managing \bibtex{} references and identify ways of overcoming them.  The report is structured as follows: 
 \begin{enumerate}
-\item Chapter~\ref{backgrnd} provides some background information to the project and examines other work and projects that have been carried out to address the problem.
-\item Chapter~\ref{reqs} covers the detailed requirements of the project.
-\item Chapter~\ref{design} covers the design of the solution to the problem.
-\item Chapter~\ref{impl} covers the implementation of the project in detail.
-\item Chapter~\ref{testing} covers how the software product was tested.
-\item Chapter~\ref{eval} covers evaluations carried out on the project.
-\item Chapter~\ref{conclusion} concludes the report with a summary and provides the reader with some ideas for future work in the area.
+	\item Chapter~\ref{backgrnd} provides some background information to the project and examines other work and projects that have been carried out to address the problem.
+	\item Chapter~\ref{reqs} covers the detailed requirements of the project.
+	\item Chapter~\ref{design} covers the design of the solution to the problem.
+	\item Chapter~\ref{impl} covers the implementation of the project in detail.
+	\item Chapter~\ref{testing} covers how the software product was tested.
+	\item Chapter~\ref{eval} covers evaluations carried out on the project.
+	\item Chapter~\ref{conclusion} summarises the report and provides the reader with some ideas for future work in the area.
 \end{enumerate}

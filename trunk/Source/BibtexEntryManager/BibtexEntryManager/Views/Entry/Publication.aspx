@@ -409,10 +409,18 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptsContent" runat="server">
+ <% var theId = -1;
+     if (Model != null)
+     {
+         if (Model.Id != 0)
+         {
+             theId = Model.Id;
+         }
+     } %>
     <script src="../../Scripts/ChangeEntryType.js" type="text/javascript"></script>
     <script type="text/javascript">
         function ItemId() { 
-            return <%:(Model != null) ? ((Model.CreationTime == null) ? -1 : Model.Id) : -1 %>;
+            return <%: theId %>;
         }
     </script>
 </asp:Content>

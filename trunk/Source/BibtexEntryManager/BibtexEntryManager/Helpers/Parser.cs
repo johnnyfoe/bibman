@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using BibtexEntryManager.Models;
-using BibtexEntryManager.Models.Collections;
 using BibtexEntryManager.Models.Enums;
 
 namespace BibtexEntryManager.Helpers
@@ -69,7 +67,7 @@ namespace BibtexEntryManager.Helpers
                         // Extract entry type
                         entryType = SubString(str, 0, IndexOf(str, '{')).ToString().Trim().ToLower();
 
-                        // Create journals
+                        // Cannot deal with @String
                         if (entryType.Equals("string"))
                         {
                             errorString += "Sorry, but the system cannot yet handle 'string' entries. Please revise your file accordingly\r\n";

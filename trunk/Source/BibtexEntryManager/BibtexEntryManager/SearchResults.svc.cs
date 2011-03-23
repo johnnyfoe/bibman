@@ -14,11 +14,6 @@ namespace BibtexEntryManager
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class SearchResults
     {
-        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
-        // To create an operation that returns XML,
-        //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
-        //     and include the following line in the operation body:
-        //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
         [OperationContract]
         public string DoSearch(string searchString)
         {
@@ -37,21 +32,26 @@ namespace BibtexEntryManager
 
             return retVal;
         }
+
         [OperationContract]
         public IList<int> GetDeletedPublications(string pageCreationTime)
         {
             try
             {
+                // Parse the given creation time into a DateTime object
                 DateTime d = DateTime.Parse(pageCreationTime);
 
+                // Get deleted entries into a list
                 var pubs = (from publications in DataPersistence.GetSession().Linq<Publication>()
                             select publications).ToList();
                 pubs = pubs.Where(p => (p.DeletionTime.HasValue)).ToList();
 
+                // create the list of results
                 IList<int> result = new List<int>();
                 foreach (Publication publication in pubs)
                 {
                     if (publication.DeletionTime != null)
+                        // if the deletion time is newer than DateTime d, add it to the return list.
                         if (publication.DeletionTime.Value.CompareTo(d) > 0)
                             result.Add(publication.Id);
                 }
@@ -78,15 +78,19 @@ namespace BibtexEntryManager
             IList<int> result = new List<int>();
             try
             {
+                // Parse the given creation time into a DateTime object
                 DateTime d = DateTime.Parse(pageCreationTime);
 
+                // Get amended entries into a list
                 var pubs = (from publications in DataPersistence.GetSession().Linq<Publication>()
                             select publications).ToList();
                 pubs = pubs.Where(p => (p.AmendmentTime.HasValue)).ToList();
 
+                // create the list of results
                 foreach (Publication publication in pubs)
                 {
                     if (publication.AmendmentTime != null)
+                        // if the amendment time is newer than DateTime d, add it to the return list.
                         if (publication.AmendmentTime.Value.CompareTo(d) > 0)
                             result.Add(publication.Id);
                 }
@@ -210,8 +214,7 @@ namespace BibtexEntryManager
                 return null;
             }
         }
-        // Add more operations here and mark them with [OperationContract]
-
+       
         private static string ConvertToResultsTbody(IEnumerable<Publication> s)
         {
             string retVal = "";

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using BibtexEntryManager.Models;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Enums;
 

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using BibtexEntryManager.Data;
-using BibtexEntryManager.Error;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Exceptions;
@@ -219,7 +218,7 @@ namespace BibtexEntryManager.Controllers
                                         e.ToString() + "<br/><br/>";
                     failureCounter++;
                 }
-                catch (GenericADOException e)
+                catch (GenericADOException)
                 {
                     ViewData["data"] += l.CiteKey + " Failed because the entry could not be inserted. Check that the fields' lengths do not exceed 255 characters (1500 for 'abstract')" + "<br/><br/>";
                     failureCounter++;
@@ -308,8 +307,14 @@ namespace BibtexEntryManager.Controllers
                 {
                     ViewData["data"] += "<br/><br/>" + l.CiteKey + " Failed because the entry was invalid: " +
                                         e.ToString();
+                    failureCounter++;
                 }
-                catch (Exception e) // todo probably want to have a look at what exception to catch here...
+                catch (GenericADOException)
+                {
+                    ViewData["data"] += l.CiteKey + " Failed because the entry could not be inserted. Check that the fields' lengths do not exceed 255 characters (1500 for 'abstract')" + "<br/><br/>";
+                    failureCounter++;
+                }
+                catch (Exception e)
                 {
                     ViewData["Message"] += "<br/><br/>" + l.CiteKey + " Failed because of an exception:" + e.Message;
                     failureCounter++;

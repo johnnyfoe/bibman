@@ -180,11 +180,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Error\ErrorMessages.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Compare.cs" />
+    <Compile Include="Helpers\ErrorMessages.cs" />
     <Compile Include="Helpers\FieldLength.cs" />
     <Compile Include="Helpers\Parser.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -193,7 +193,6 @@
     <Compile Include="Models\Enums\Entry.cs" />
     <Compile Include="Models\Enums\Field.cs" />
     <Compile Include="Models\EntryTypes\Publication.cs" />
-    <Compile Include="Models\Enums\PublicationEvent.cs" />
     <Compile Include="Helpers\PublicationFactory.cs" />
     <Compile Include="Helpers\ObjectBuilder.cs" />
     <Compile Include="Models\Exceptions\BibtexExceptions.cs" />
@@ -268,6 +267,9 @@
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Error\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,4 +1,4 @@
-﻿namespace BibtexEntryManager.Error
+﻿namespace BibtexEntryManager.Helpers
 {
     public static class ErrorMessages
     {

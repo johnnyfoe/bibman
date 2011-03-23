@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using BibtexEntryManager.Data;
-using BibtexEntryManager.Error;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.Enums;
 using BibtexEntryManager.Models.Exceptions;
@@ -99,13 +98,12 @@ namespace BibtexEntryManager.Models.EntryTypes
         public virtual DateTime? DeletionTime { get; set; }
         public virtual DateTime? AmendmentTime { get; set; }
         public virtual DateTime? CreationTime { get; set; }
-        //public Dictionary<String, String> UnknownFields { get; private set; }
 
         #endregion
 
         public Publication()
         {
-            //UnknownFields = new Dictionary<String, String>();
+
         }
 
         /// <summary>
@@ -1002,7 +1000,7 @@ namespace BibtexEntryManager.Models.EntryTypes
                 return;
             }
 
-            string[] split = targ.Split(new string[] { " and " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] split = targ.Split(new [] { " and " }, StringSplitOptions.RemoveEmptyEntries);
             if (split.Length < 1)
             {
                 a1 = targ; // Sole author/editor must be stored in targ

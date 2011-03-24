@@ -1,16 +1,19 @@
 \chapter{Implementation}
 \label{impl}
-The implementation chapter covers the technologies, techniques and patterns applied to this project.  Many of the contents were encountered were encountered during a summer placement at a technology company in Glasgow between levels 3 and 4.  
+The implementation chapter covers the technologies, techniques and patterns applied to this project.  Many of the contents were encountered during a summer placement at a technology company in Glasgow between levels 3 and 4.  
 
 \section{Technologies Used and Discipline Applied}
 This section examines the technologies used in the implementation of the project and the discipline that was adhered to during development.
 
 \subsection{Microsoft .NET Framework}
-The Microsoft .\gls{net} framework is a platform for development, deployment and running of web services and applications \cite{whatIsDotNet}.  It provides a \gls{clr}, similar to the \gls{jvm} in Java.  This project took advantage of \gls{asp}.\gls{net} \gls{mvc} 2.  
+The Microsoft \gls{net} framework is a platform for development, deployment and running of web services and applications \cite{whatIsDotNet}.  It provides a \gls{clr}, similar to the \gls{jvm} in Java.  This project took advantage of \gls{asp}\gls{net} \gls{mvc} 2.  
 
-Microsoft's .\gls{net} framework was used as a result of encountering the technology during the summer placement.  The developer saw the opportunity of learning more about and working with the framework when the project was successfully assigned to him.  Given that one of the aims of the summer placement was to learn .\gls{net} development, and that this aim was not completely achieved \cite{summerPlacementReport}, the developer chose to maximise exposure to the technology by working with it for the duration of the project, and by adding the aim of learning the framework to the project goals.  It may appear that the choice of this framework was a short-sighted decision, but there are many other benefits to using this technology, including:
+The developer opted to use the Microsoft \gls{net} framework after encountering the technology during summer placement.   
+The developer saw this project as an opportunity to learn more about the framework.  
+This enabled him to rectify an omission of the summer placement.  Namely, that, on that occasion, the developer did not learn as much about the technology as he would have wished \cite{summerPlacementReport}
+To maximise exposure to the technology, the developer chose to work with it for the duration of the project.  The aim of learning about the framework was also added to the project goals. To some, the choice of this framework may appear short-sighted.  The developer would argue, however, that the technology offers numerous benefits.  These include but are not limited to: 
 \begin{enumerate}
-	\item There is an active developer community on the web\footnote{The community's forums can be found at \url{http://www.asp.net/community} and a large proportion of active users of the Stack Overflow community focus on \cs{} and .\gls{net} topics --- 3 of the top 8 tags are directly related to the project's domain --- \url{http://stackoverflow.com/tags} (by observation)}, so issues pertaining to development using the framework can be solved by turning to this well-grounded knowledge base;
+	\item There is an active developer community on the web\footnote{The community's forums can be found at \url{http://www.asp.net/community} and a large proportion of active users of the Stack Overflow community focus on \cs{} and \gls{net} topics --- 3 of the top 8 tags are directly related to the project's domain --- \url{http://stackoverflow.com/tags} (by observation)}, so issues pertaining to development using the framework can be solved by turning to this well-grounded knowledge base;
 	\item The \gls{mvc} aspect of the project, if strictly adhered to by the developer, provides great separation of concerns between the place that information is stored, manipulated and viewed;
 	\item The framework allows for portability to other client machines with very little in the way of model adjustment. For example, if a requirement for a mobile or tablet application developed, it would simply be a case of adding the functionality for that device, rather than having to reimplement the model for a particular piece of hardware.
 	\item Applications can be deployed, with some adjustments, on Linux machines using the Mono (open source) software platform \revisit - awaiting help from Gregg
@@ -19,15 +22,15 @@ Microsoft's .\gls{net} framework was used as a result of encountering the techno
 \glsreset{oo}
 \subsection{\cs}
 \label{csharpDiscussion}
-\cs{} is an \gls{oo}, garbage-collected programming language which has roots in the C family of languages.  It is a standardised language (ECMA-334 and ISO/IEC 23270) with compilers available for unix based systems (using the `Mono' compiler) and Windows systems (using Microsoft's \cs{} compiler for the .\gls{net} Framework) operating systems, which both conform to the ECMA and ISO/IEC standards \cite{monoStandardised} \cite{csPL}.
+\cs{} is an \gls{oo}, garbage-collected programming language which has roots in the C family of languages.  It is a standardised language (ECMA-334 and ISO/IEC 23270) with compilers available for unix based systems (using the `Mono' compiler) and Windows systems (using Microsoft's \cs{} compiler for the \gls{net} Framework) operating systems, which both conform to the ECMA and ISO/IEC standards \cite{monoStandardised} \cite{csPL}.
 
-\cs{} was used over the other .\gls{net} languages (of which there are at least 30) \cite{csUnleashed} because the developer wanted to become familiar with the language having encountered it and used it while on summer placement.
+\cs{} was used over the other \gls{net} languages (of which there are at least 30) \cite{csUnleashed} because the developer wanted to become familiar with the language having encountered it and used it while on summer placement.
 
 \subsection{NHibernate and Fluent NHibernate}
 \label{nhibernate}
-NHibernate is a port of the Hibernate object/relational mapper to the .\gls{net} framework. In essence, it provides mapping from objects to relational tables, which allows a developer to concentrate on functionality and usability rather than spending time writing \gls{sql} scripts. Queries are generated by NHibernate middleware and passed to the database which, after execution, accumulates any results into objects directly manipulable by \cs{} code. 
+NHibernate is a port of the Hibernate object/relational mapper to the \gls{net} framework. In essence, it provides mapping from objects to relational tables, which allows a developer to concentrate on functionality and usability rather than spending time writing \gls{sql} scripts. Queries are generated by NHibernate middleware and passed to the database which, after execution, accumulates any results into objects directly manipulable by \cs{} code. 
 
-An example of how this technology helps and works is described presently: Let's assume that a series of valid entries have been created in the database and that a user has issued a request to view the details for one of them, with the \gls{id} 3.  Sample code to fetch the publication associated with this Id and return it as a usable object is shown in figure \ref{fig:fetchPubCode}.
+An example of how this technology helps and works is described presently: Let's assume that a series of valid entries have been created in the database and that a user has issued a request to view the details for one of them, with the \gls{id} 3.  Sample code to fetch the \texttt{Publication} associated with this Id and return it as a usable object is shown in Figure \ref{fig:fetchPubCode}.
 
 \begin{figure}
 	\begin{center}
@@ -54,7 +57,7 @@ An example of how this technology helps and works is described presently: Let's 
 	\end{center}
 \end{figure}
 
-The code in figure \ref{fig:fetchPubCode} returns the publication for manipulation in code; recording changes made to the entry after manipulation (or saving an entry for the first time) is very simple, as shown in figure \ref{fig:storePublication}.
+The code in Figure \ref{fig:fetchPubCode} returns the publication for manipulation in code; recording changes made to the entry after manipulation (or saving an entry for the first time) is very simple, as shown in Figure \ref{fig:storePublication}.
 
 \begin{figure}
 	\begin{center}
@@ -69,14 +72,14 @@ The code in figure \ref{fig:fetchPubCode} returns the publication for manipulati
 	\end{center}
 \end{figure}
 
-The NHibernate software itself is highly valuable in terms of time-saving potential and has been used across thousands of successful projects \cite{NhUse}.  The only issue with using it in its raw form is that mappings from the project's classes to relational entities have to be written in \gls{xml}, a language prone to errors often left unnoticed until runtime.  A better solution is to use the \gls{fnh} extension, which provides developers with the ability to map the classes in code.  The major benefit of this scheme, aside from compile-time error checking, is that all code using is strongly-typed; combine this with the powerful \gls{msvs} \gls{ide}, and implementation for the data model can be quite rapid --- particularly when in the hands of an experienced developer.
+The NHibernate software itself is highly valuable in terms of time-saving potential and has been used across thousands of successful projects \cite{NhUse}.  The only issue with using it in its raw form is that mappings from the project's classes to relational entities have to be written in \gls{xml}, a language prone to errors often left unnoticed until runtime.  A better solution is to use the \gls{fnh} extension, which provides developers with the ability to map the classes in code.  The major benefit of this scheme, aside from compile-time error checking, is that all code using is strongly-typed; combine this with the powerful \gls{msvs} \gls{ide}, and implementation of the data model can be quite rapid --- particularly when in the hands of an experienced developer.
 
-Another reason for using this technology was that it was used within the summer placement, but it was not encountered or worked with to any great extent.  The developer wanted to expand his knowledge in the technology in both breadth and depth by adopting these technologies within the project.
+Another reason for using the NHibernate technology was that it was encountered within the summer placement, but it was not worked with to any great extent.  The developer wanted to expand his knowledge in the technology in both breadth and depth by adopting these technologies within the project.
 
-There was a risk, when employing this technology, that unfamiliarity would lead to hindrance rather than benefit by employing it.  Before automatic generation of database scripts for interactions can take place, \gls{fnh} has to be instructed what to map and how to map it.  This was not something that the developer had encountered before; the risk was that learning how to map the classes to entities correctly would take too much time and have an impact on the progress of the project.  To mitigate the impact of the risk, a deadline was agreed between the developer and the supervisor: if, by the final day of term in semester 1, the mappings were not working correctly, then NHibernate as a data solution would be abandoned and standard \gls{sql} queries would be used.  As it turned out, the mappings were finalised on the afternoon of the deadline, so NHibernate use went ahead.  The aforementioned benefits of NHibernate were noticed during development, and some experience was gained in the implementation and use of object/relational mapping in practice.
+There was a risk, by deciding to use this technology, that unfamiliarity would lead to hindrance rather than benefit by employing it.  Before automatic generation of database scripts for interactions can take place, \gls{fnh} has to be instructed what to map and how to map it.  This was not something that the developer had encountered before; the risk was that learning how to map the classes to entities correctly would take too much time and have an impact on the progress of the project.  To mitigate the impact of the risk, a deadline was agreed between the developer and the supervisor: if, by the final day of term in semester 1, the mappings were not working correctly, then NHibernate as a data solution would be abandoned and standard \gls{sql} queries would be used.  As it turned out, the mappings were finalised on the afternoon of the deadline, so NHibernate use went ahead.  The aforementioned benefits of NHibernate were noticed during development, and some experience was gained in the implementation and use of object/relational mapping in practice.
 
 As the project progressed and the developer became more familiar with \gls{fnh}, it was discovered that the extension can `Automap' classes: something that would have been quite helpful in the lead up to the end of semester 1 NHibernate risk-mitigation deadline.
-The code to take advantage of the automap feature is listed in figure~\ref{fig:fnhCode}:
+The code to take advantage of the automap feature is listed in Figure \ref{fig:fnhCode}:
 
 \revisit
 
@@ -103,21 +106,21 @@ ReSharper is a productivity plug-in for \gls{msvs}.  It provides code inspection
 
 Python IDLE and Notepad++ were used to manipulate code quickly and effectively: Python IDLE for its scripting functionality and Notepad++ for its macro capabilities and excellent search and replace by regular expression function.
 
-TortoiseSVN and AnkhSVN were both used as discussed in section \ref{svn}.
+TortoiseSVN and AnkhSVN were both used as discussed in Section \ref{svn}.
 
 \section{Code Reuse}
 \label{codeReuse}
-Code reuse from previous projects during this product's development was intended to be maximised, as laid out in section \ref{columbia}.  The benefits of this include that time can be saved by reusing successful approaches and code that has been previously used (and therefore tested through use) is less likely to contain large flaws and bugs.
+Code reuse from previous projects during this product's development was intended to be maximised, as laid out in Section \ref{columbia}.  The benefits of this include that time can be saved by reusing successful approaches and code that has been previously used (and therefore tested through use) is less likely to contain large flaws and bugs.
 
 The only component that was reused from previous projects in the final deployment version was Mitesh's \bibtex{} file parser;  initially, the code was simply ported from Java to \cs, but as the project progressed, it became apparent that there was a rather important problem with it: the way that errors were dealt with was not user-friendly, which meant that errors could not be recovered from.  This risk emerged through use of the system and was not a problem identified at early stages of the project and had to be dealt with as it progressed.
 
-The string libraries for \cs{} and Java do not match completely.  Some of the Java methods had to be implemented in \cs{} code to simplify the transition, namely:
+The \texttt{string} libraries for \cs{} and Java do not match completely.  Some of the Java methods had to be implemented in \cs{} code to simplify the transition, namely:
 \begin{enumerate}
-	\item Java's String.equalsIgnoreCase() method does not have an equivalent in \cs, which was addressed by adding a class named `Compare' with the method implemented in \cs;
-	\item Java's StringBuilder library was not a good match with \cs's StringBuilder library; the subString, indexOf and lastIndexOf methods do not exist, and were as a result implemented as static methods in \cs{} in the parser class.
+	\item Java's \texttt{String.equalsIgnoreCase()} method does not have an equivalent in \cs, which was addressed by adding a class named \texttt{Compare} with the method implemented in \cs;
+	\item Java's \texttt{StringBuilder} library was not a good match with \cs's \texttt{StringBuilder} library; the \texttt{subString}, \texttt{indexOf} and \texttt{lastIndexOf} methods do not exist, and were as a result implemented as static methods in \cs{} in the \texttt{Parser} class.
 \end{enumerate}
 
-The parser does not deal with some \bibtex{} format features, specifically:
+The \texttt{Parser} does not deal with some \bibtex{} format features, specifically:
 \begin{enumerate}
 	\item the `\#' character (used as a concatenation operator) is future work for the parser;
 	\item it is not currently possible to use `@string' variables;
@@ -128,23 +131,97 @@ The parser does not deal with some \bibtex{} format features, specifically:
 
 \section{Data Model}
 \label{dataModel}
-The design of the data model is discussed heavily in chapter \ref{design} and a \gls{uml} model of the final approach taken can be found in figure~\ref{fig:ChallengerClassDiagram}.
+The design of the data model is discussed heavily in Chapter \ref{design} and a \gls{uml} model of the final approach taken can be found in Figure \ref{fig:ChallengerClassDiagram}.
 
-The data model is implemented in two parts: firstly, the class model of the Publication structure; and secondly through the use of NHibernate (see section \ref{nhibernate}) for storage.
+The data model is implemented in two parts: firstly, the class model of the \texttt{Publication} structure; and secondly through the use of NHibernate (see Section \ref{nhibernate}) for storage.
+
+\revisit\revisit\revisit\revisit\revisit
+The Id field of the \texttt{Publication} class is managed by the identity flag that can be applied in the schema of \gls{msss} tables.  This means that Ids are enforced and managed at database level, which removes the need for the code to manage it.
+
+The cite key of each entry must conform to the \bibtex{} format.  In particular, it cannot contain any commas.  This rule is enforced by use of a regular expression guarding the member variable, as shown in Figure \ref{fig:ckGuard}.  If a comma is found in the field, the error message shown in Figure \ref{fig:ckGuard} is returned to the user, to aid them in correcting the problem.
+
+\begin{figure}
+	\begin{center}
+			\lstset{language=CSharp} 
+			\begin{lstlisting}
+	[Required(ErrorMessage = ErrorMessages.CiteKeyIsRequired)]
+	[DisplayName("Cite Key")]
+	[RegularExpression("[^,]*", ErrorMessage = "Cite Keys cannot contain commas")]
+	[StringLength(30)]
+	public virtual string CiteKey { get; set; }
+			\end{lstlisting}
+		\caption{Code to guard against commas in the cite key field}
+		\label{fig:ckGuard}
+	\end{center}
+\end{figure}
+
+Due to the semantics of the `year' field of a an entry, the data that is stored must be numerical value of length 4.  This is covered in the same way that cite key validation takes place: by regular expression, as shown in Figure \ref{fig:yearGuard}.
+
+\begin{figure}
+	\begin{center}
+			\lstset{language=CSharp} 
+			\begin{lstlisting}
+  [RegularExpression("[0-9][0-9][0-9][0-9]", ErrorMessage = "The year must be a four-digit number")]
+  public virtual string Year { get; set; }
+			\end{lstlisting}
+		\caption{Code to ensure 4 digit values in the `year' field}
+		\label{fig:yearGuard}
+	\end{center}
+\end{figure}
+
 
 
 Discuss implementation of data model, implementation of database persistence. centralised persistence information - single section of code + benefits.
-The data model, as mentioned in section \ref{nhibernate}, is implemented using NHibernate.  
+The data model, as mentioned in Section \ref{nhibernate}, is implemented using NHibernate.  
 Discuss fields in publication table. Mention creation/modification/deletion times and what they are used for
 ID field vs cite key
 owner
+\revisit\revisit\revisit\revisit\revisit\revisit
+
+An item is marked as deleted if its DeletionTime member field has a non-null value.  This is a standard adopted throughout the system: any entry which has a null value for its DeletionTime is regarded as an active entry in the system; conversely, an entry which is marked as deleted is subject to the expiry time of 60 seconds (a preliminary value used in the system), after which it may be deleted in the classic sense of the word.  This allows users to restore entries which have been deleted in case there has been a mistake in its removal.  All deleted entries  in the system can be viewed by accessing the `View Deleted Entries' option in the `View' section of the menu area.
+
+\section{Controller}
+The system's web requests and responses are managed by controllers, which are run by the web server.  When a request is received, the applicable method in the appropriate controller is invoked.  The controller then performs some logic to accumulate information, which is then passed to a vie before being returned to the client in a \gls{http} response.
+
+There are three controllers in the system, each of which deal with a different area of the system:
+\begin{enumerate}
+	\item The `home' controller deals with the home page and the `About' page.  It is used to serve the landing page and acts as a placeholder for the `help' which is future work for the project;
+	\item The `account' controller deals user accounts.  In particular, it allows user to log on, log off, register an account and manage their password;
+	\item The bulk of logic of the system is implemented in the `entry' controller.
+\end{enumerate}
 
 
-An item is marked as deleted if its DeletionTime has a non-null value.  This is a standard adopted throughout the system: any entry which has a null value for its DeletionTime is regarded as an active entry in the system; conversely, an entry which is marked as deleted is subject to the expiry time of 60 seconds (a preliminary value used in the system), after which it may be deleted in the classic sense of the word.  This allows users to restore entries which have been deleted in case there has been a mistake in its removal.  All deleted entries  in the system can be viewed by accessing the `View Deleted Entries' option in the `View' section of the menu area.
+\subsection{Import}
+Entry import is supported in two ways: firstly by importing from a file and secondly by direct input from a user.
 
-\section{Search}
+Each of these approaches follows one main thread of execution:
+\begin{enumerate}
+	\item The body of the information is extracted from the request;
+	\item The \bibtex{} formatted text from the request is passed to the \texttt{Parser}, which builds a collection of dictionaries containing the information on each entry;
+	\item Each item in the collection is passed to the \texttt{PublicationFactory}, which returns a publication made from each dictionary;
+	\item The resulting \texttt{Publication} objects are in turn checked for validity and saved to the database. Any failures or errors with entries are recorded and passed back in a message to the user.
+\end{enumerate}
+
+The validity check is facilitated by a method in the Publication class which returns a dictionary of error messages indexed by field name.  
+
+The \texttt{Parser} that is used to convert the raw text into dictionary is a port from Mitesh Furia's Java project (the third project examined in Chapter~\ref{backgrnd}).  The reuse of the \texttt{Parser} is discussed in Section~\ref{codeReuse}.
+
+Non-functional requirement 9 (see Chapter~\ref{reqs}) is enforced in the import function by rejecting entries that are invalid.  Users are given feedback depending on the result of validity check on the created object
+
+\subsection{Export}
+The export command takes advantage of the code written in the \texttt{Publication} class, which converts the object into a complete formatted \bibtex{} entry string.  
+
+
+
+
+ - Same page for add and amend
+ - discuss import
+ - 
+Discuss handling of requests
+
+\subsection{Search}
 \label{searchCore}
-The search is facilitated by the DataPersistence class, by way of the GetActivePublicationsMatching(searchString) method.  
+The search is facilitated by the \texttt{DataPersistence} class, by way of the \texttt{GetActivePublicationsMatching(searchString)} method.  
 
 \begin{enumerate}
 	\item Firstly, the string is prepared for the database, to allow for wildcards;
@@ -153,7 +230,7 @@ The search is facilitated by the DataPersistence class, by way of the GetActiveP
 \end{enumerate}
 
 Users search by strings, which can include the wildcards '*' for any sequence of characters and '?' for any single character.
-This is facilitated by the method entitled \texttt{PrepareSqlString} in the \texttt{DataPersistence} class as shown in figure \ref{fig:SQLsearchEscape}.
+This is facilitated by the method entitled \texttt{PrepareSqlString} in the \texttt{DataPersistence} class as shown in Figure \ref{fig:SQLsearchEscape}.
 
 \begin{figure}
 	\begin{center}
@@ -180,7 +257,7 @@ This is facilitated by the method entitled \texttt{PrepareSqlString} in the \tex
 	\end{center}
 \end{figure}
 
-The search is performed by the method in the DataPersistence class entitled GetActivePublicationsMatching(string s), which can be seen in figure \ref{fig:PerformSearch}.  This code snippet is a good example of how the strongly-typed, \gls{oo} queries (benefits of NHibernate mentioned in \ref{nhibernate}) are used effectively and efficiently.  They are written in \gls{linq}, a language which addresses the needs of developers by enabling support directly in the programming language \cite{csUnleashed}.
+The search is performed by the method in the \texttt{DataPersistence} class entitled \texttt{GetActivePublicationsMatching(string s)}, which can be seen in Figure \ref{fig:PerformSearch}.  This code snippet is a good example of how the strongly-typed, \gls{oo} queries (benefits of NHibernate mentioned in \ref{nhibernate}) are used effectively and efficiently.  They are written in \gls{linq}, a language which addresses the needs of developers by enabling support directly in the programming language \cite{csUnleashed}.
 
 \begin{figure}
 	\begin{center}
@@ -234,26 +311,19 @@ The search is performed by the method in the DataPersistence class entitled GetA
 	\end{center}
 \end{figure}
 
-\section{Controller}
-Home controller
-Account Controller
-Entry controller:
- - Same page for add and amend
- - discuss import
- - 
-Discuss handling of requests
+
 
 
 \section{Web Service}
-The project has several areas which are performed by \gls{ajax} interactions with the system.  These interactions are handled by a web service entitled `SearchResults'. It was initially intended to handle only the instant search result collation; refactoring was attempted to rename the service to a more representative name, but there were too many issues with the name change, hence the slightly misleading name.
+The project has several areas which are performed by \gls{ajax} interactions with the system.  These interactions are handled by a web service entitled \texttt{SearchResults}. It was initially intended to handle only the instant search result collation; refactoring was attempted to rename the service to a more representative name, but there were too many issues with the name change, hence the slightly misleading name.
 
-The instant search function is supported by a web service which accepts a search string, performs a search on the database by reusing the search method discussed in section~\ref{searchCore}, and returns the results in \gls{json} array, for the client-side code (\gls{js}) to deal with.  
+The instant search function is supported by a web service which accepts a search string, performs a search on the database by reusing the search method discussed in Section~\ref{searchCore}, and returns the results in a \gls{json} array, for the client-side code (\gls{js}) to deal with.  
 
-Delete functionality and duplicate reduction functionality are both provided by \gls{ajax} requests by calls to the DeletePublication(int id) method of the web service.  It again reuses the DataPersistence class's method of the same name to mark an entry in the system as deleted, before returning the result to the client.
+Delete functionality and duplicate reduction functionality are both provided by \gls{ajax} requests by calls to the \texttt{DeletePublication(int id)} method of the web service.  It again reuses the \texttt{DataPersistence} class's method of the same name to mark an entry in the system as deleted, before returning the result to the client.
 
-A deleted entry (see section~\ref{dataModel} for the model's definition of `deleted') is timestamped with the time of its deletion, which can be used to determine entries which have been deleted since a given time by comparing the given time with the deletion time. 
+A deleted entry (see Section~\ref{dataModel} for the model's definition of `deleted') is timestamped with the time of its deletion, which can be used to determine entries which have been deleted since a given time by comparing the given time with the deletion time. 
 
-The web services provides a behind-the-scenes ability to find out what entries have been deleted since a given time.  This core code which performs the result accumulation is shown in figure \ref{fig:getDeletedPublicationsWS}; some of the code, particularly exception-handling clauses, is excluded here for brevity.
+The web services provides a behind-the-scenes ability to find out what entries have been deleted since a given time.  This core code which performs the result accumulation is shown in Figure \ref{fig:getDeletedPublicationsWS}; some of the code, particularly exception-handling clauses, is excluded here for brevity.
 
 \begin{figure}
 	\begin{center}
@@ -288,12 +358,12 @@ This approach is used to facilitate concurrent access by notification that items
 
 Similarly to the way deleted entries' times are tracked, the amendment and creation times of an entry is tracked by a field entitled `AmendmentTime' and `CreationTime' respectively.  A list of recently-amended or created entries can be accumulated by the same algorithm as for deleted entries.
 
-The use of these web services in the concurrent access aspect of the system is discussed fully in section~\ref{concurrency}.
+The use of these web services in the concurrent access aspect of the system is discussed fully in Section~\ref{concurrency}.
 
 \section{View}
 \glsreset{ui}
 \subsection{Consistency}
-The consistency sought in the design of the product (see section \ref{uiDesign}) of the site is a result of careful consideration of what should be consistent across all pages, as highlighted in figure \ref{fig:pageLayout}, which has certain features annotated numerically as follows:
+The consistency sought in the design of the product (see Section \ref{uiDesign}) of the site is a result of careful consideration of what should be consistent across all pages, as highlighted in Figure \ref{fig:pageLayout}, which has certain features annotated numerically as follows:
 
 \begin{figure}
 	\begin{center}
@@ -309,20 +379,20 @@ The consistency sought in the design of the product (see section \ref{uiDesign})
 	\begin{center}
 		\includegraphics
 			{images/LogOff.png}
-		\caption{The log on area when a user is logged in (swapped out for area 2 in figure \ref{fig:pageLayout})}
+		\caption{The log on area when a user is logged in (swapped out for area 2 in Figure \ref{fig:pageLayout})}
 		\label{fig:logOff}
 	\end{center}
 \end{figure}
 
 \begin{enumerate}
 	\item Firstly, there is a menu area which appears on every page within the site, with the same options at each appearance.  This gives the user a single point of reference to aid navigation of the website \revisit - cite someone
-	\item The log on area appears in one of two forms across all pages of the application: a user is either browsing anonymously, or is logged in.  It is clear which of these two states the user's session is in thanks to the clear representation of the words `Log On' (depicted in figure \ref{fig:pageLayout}) and a welcome message with the current user's email address (as depicted in figure \ref{fig:logOff})
+	\item The log on area appears in one of two forms across all pages of the application: a user is either browsing anonymously, or is logged in.  It is clear which of these two states the user's session is in thanks to the clear representation of the words `Log On' (depicted in Figure \ref{fig:pageLayout}) and a welcome message with the current user's email address (as depicted in Figure \ref{fig:logOff})
 	\item After feedback from a user during the basic evaluation (see Chapter \ref{eval}) the interface was updated to include a search area on all pages.  The provision of this area allows a user to efficiently search the system's database for a string and, by making it a consistent feature, gives another concrete point of reference across all pages.
 	\item Each and every page contains a bold header indicating the title of the page.  The presence of a title on each page gives a user another concrete and consistent place to glance in order to gain an insight into what they previously clicked on, as well as giving confirmation that their previous action was successful.
 	\item The fifth item highlighted in this image provides some extra, arguably unnecessary information.  The main idea behind including this page render time area is to provide extra feedback: it lets a user know that page has finished loading, that it has been completed successfully and it reassures a user that the page is up to date.
 \end{enumerate}
 
-This consistency was implemented using a feature in \gls{asp}.\gls{net} called Master Pages.  As the name suggests, the developer creates a master page with the main layout of the website, within which sit containers which are filled by individual pages.  This approach centralises the code for the pages, the advantages and disadvantages of this are discussed in section \ref{codeReuse}. \revisit revisit fluency.
+This consistency was implemented using a feature in \gls{asp}\gls{net} called Master Pages.  As the name suggests, the developer creates a master page with the main layout of the website, within which sit containers which are filled by individual pages.  This approach centralises the code for the pages, the advantages and disadvantages of this are discussed in Section \ref{codeReuse}. \revisit revisit fluency.
 
 The colour choice of the interface was a decision which was postponed until later in the project, so that the bulk of the development work could be carried out before aesthetics were considered.  The colour scheme seen in the project is heavily based on the default style for projects created in \gls{msvs} 2010; it soon became apparent that the default style had many strong qualities that could be used 
 

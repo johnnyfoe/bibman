@@ -45,7 +45,7 @@ An \gls{oo} approach was taken with the project, as the entries that were to be 
 		\includegraphics
 			[scale=0.45]
 			{images/OverallClassDiagram.png}
-		\caption{UML Class Diagram of the whole solution}
+		\caption{UML Class Diagram showing all classes}
 		\label{fig:OverallClassDiagram}
 	\end{center}
 \end{figure}
@@ -99,21 +99,12 @@ The initial class design consisted of one class per entry type (see Figure \ref{
 
 Each entry type was a subclass of the abstract superclass \texttt{Publication}, which contained fields common to all entry types, namely: Id, an int identifier; CiteKey, a string intended to be unique to an entry, but not usable as an identifier in the database, allowing duplicate entries to exist in the system; Owner, the username of the user who created the entry in the first instance; along with Abstract, a string field which was to be optional to all entries.
 
-As the class was designated `abstract', the enforcement of rules associated with the concept were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a string representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
+As the class was designated `abstract', the enforcement of rules associated with the concept\footnote{Designating a class `abstract' means that an instance of it cannot be directly created, but an inheriting concrete (antonym of abstract) can be instantiated.} were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a string representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
 
-\revisit - this is implementation detail. Possibly going into too much information here, along with the discussion of the source code!
-
-Each entry type class was used directly by NHibernate and mapped by way of a Mapping class 
-
-\revisit - this is implementation detail. Possibly going into too much information here, along with the discussion of the source code!
-
-An examination of the source code\footnote{If one inspects the code for the \gls{svn} tag entitled V0.34\_Colombia, one will find that the \texttt{Publication} class contains a line commented out containing a member variable entitled (and of type) \texttt{PublicationGroup}.  This approach was not followed up, as discussed} reveals early intentions to include \texttt{PublicationGroup} as a field within \texttt{Publication}.  \texttt{PublicationGroup} was intended to be a recursively-defined structure, to allow a group to be categorised as part of a tree-based structure.  This approach was abandoned following advice from Gregg O'Malley, following his experience of trying to use very similar structures previously; his suggestion to follow a tag-based approach was noted but not acted upon until late stages of the project (see below in Section \ref{designDiscovery}).
-
-The major problem with this approach was that when it was mapped to the database by NHibernate, it resulted in one table per entry type --- 14 entry type tables in total.  The number of tables that resulted was not the greatest issue with this approach: the most important issue lay in the assignment of identifiers to each row and the storage of entries.  To be able to know where to find an entry without first performing a search, the system had to know which entry type the entry was, along with what the identifier of the entry was, as each of the entries was a weak entity.  Due to the lack of database-level guarantee that a \texttt{Publication}'s id was a unique identifier for an entry, a large refactoring took place to move all fields to one top-level table, \texttt{Publication}, as discussed in Section \ref{designChallenger}.
 
 \subsection{Second model: V1.0 - Challenger}
 \label{designChallenger}
-The Challenger model was the model adopted in the final version of the product.  This is the model that is discussed during the implementation chapter (Chapter~\ref{impl}).
+The Challenger model was the model adopted in the final (deployed) version of the product.  This is the model that is discussed during the implementation chapter (Chapter~\ref{impl}).
 
 Columbia's design presented a few problems for development and performance on the system, as was discovered after implementation:
 \begin{enumerate}

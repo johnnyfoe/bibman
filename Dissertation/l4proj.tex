@@ -30,7 +30,7 @@
 \newacronym{ajax}		{AJAX}			{Asynchronous JavaScript And XML}
 \newacronym{aod}		{AOD}				{Architecture Overview Diagram}
 \newacronym{asp}		{ASP}				{Active Server Pages}
-\newacronym{bat}		{BAT}				{Batch File}
+\newacronym{bat}		{.BAT}				{Batch File}
 \newacronym{case}		{CASE}			{Computer-Aided Software Engineering}
 \newacronym{ci}			{CI}				{Continuous Integration}
 \newacronym{clr}		{CLR}				{Common Language Runtime}
@@ -64,7 +64,7 @@
 % 				  			key  	  Name						 									Explanation
 \newglossaryentry{svntag}	{name={SVN Tag}, 									description={A snapshot of a project in time, saved with a human-readable name}}
 \newglossaryentry{unix}		{name = {UNIX},										description={An open-source operating system}}
-\newglossaryentry{net}		{name = {NET},										description={An application development framework by Microsoft}}
+\newglossaryentry{net}		{name = {.NET},										description={An application development framework by Microsoft}}
 \newglossaryentry{contInt}{name = {Continuous Integration},	description={A technique which runs all tests after each change to a solution's code repository.}}
 \newglossaryentry{vm}{name = {Virtual Machine},							description={Hardware emulator: allows running of a system as if it were on its own machine where it is actually running as a process on machine}}
 
@@ -134,18 +134,19 @@
 %This dissertation discusses a software solution implemented in \cs{} under the Microsoft.NET application framework to address some of the problems associated with management of \bibtex{} entries by a group of authors collaborating on a one or more pieces of work.
 
 \begin{abstract}
-Authors of \latex documents often maintain lists of bibliographic references stored in \bibtex{} format.  The management of these lists can pose several problems to an author which, when multiple authors collaborate on a paper and need to share a set of references, exacerbates the management problem. 
+Authors of \latex documents often maintain lists of bibliographic references stored in \bibtex{} format.  The management of such lists can pose several problems to authors. These are often exacerbated because multiple authors frequently have to share a set of references; for example, when they are developing a paper collaboratively.
 
-To deal with this problem, authors would value a method of maintaining and managing \bibtex{} records in a collaborative way.  Two previous projects undertaken by students in the School of Computing Science at the University of Glasgow, resulted in a viable desktop solution and a web-based solution, both of which laid the foundations that this project is built on.
+Authors would thus value and benefit from a system of maintaining and managing \bibtex{} records that overcame these problems particularly if it enabled them to maintain and manage the records in a collaborative way. 
 
-The dissertation identifies some of the problems involved with management of \bibtex{} entries; examines some of the previous attempts at solutions to the problems; discusses the requirements, design and technical implementation of the solution; and goes on to describe and discuss a set evaluations and tests to examine the success of the software solution produced.
+Two previous projects undertaken by students in the School of Computing Science at the University of Glasgow resulted in a desktop solution and a web-based solution that, overcame some of the problems; both of the studies provide the foundation on which this project is built.
 
-The author of the software and the dissertation aimed to produce a usable, useful and stable software system by following disciplined software engineering methods that addressed the identified needs of collaborating authors.
+The dissertation identifies some of the problems that continue to hamper the effective management of \bibtex{} entries.  It examines some of the previous attempts to resolve them, discusses the requirements that any improved solution should meet and describes how such a solution was designed and technically implemented.  The dissertation goes on to describe and discuss a set of evaluations and tests to determine the success of the software solution produced.
 
-The software solution produced was found to be a success,  which was measured by statistical analysis of evaluation participants' responses to a questionnaire.  All participants reacted positively to questions on the usability of the software solution and further development of the solution was encouraged by some users' suggestions for areas of further work.  These areas of further development, along with some areas conceived by the author and supervisor of this dissertation, are included in the discussion of future work in the conclusion section.
+The author aimed to produce a usable, useful and stable software system that addressed the identified needs of collaborating authors while following disciplined software engineering methods.
 
-The software solution was mostly limited by the length of the academic year; some of the shortcomings of the solution include a \naive{} approach to authentication of users during registration, a perhaps over-simplified search engine and a \naive{} take on security.  These, among other shortcomings, are discussed in the final chapter of the dissertation.
+The software solution produced was found to be a success –-- an outcome determined by statistical analysis of evaluation participants' responses to a questionnaire.  The measurements derived from this showed that all participants reacted positively to questions on the usability of the software solution.  Moreover, they encouraged further development of the solution and even suggested specific areas of further work.   These areas of further development, along with some areas conceived by the author and supervisor of this dissertation, are included in the discussion of future work in the conclusion section.
 
+The fidelity of the software solution proposed was limited by the length of the academic year.  Some of the shortcomings of the solution include sub-optimal authentication during registration and over-simplification of the search engine and security protocol. These and other residual issues are discussed in the final chapter.
 \end{abstract}
 
 
@@ -170,23 +171,22 @@ I owe a debt of gratitude to the following individuals for the support they gave
 % 			and your project is graded an A then
 %      	it may be entered in the CS Hall of Fame
 
-
-
-
-
-
-
-
-
 \tableofcontents
-
+\glsresetall{}
 \include{intro}
+\glsresetall{}
 \include{background}
+\glsresetall{}
 \include{requirements}
+\glsresetall{}
 \include{design}
+\glsresetall{}
 \include{implementation}
+\glsresetall{}
 \include{testing}
+\glsresetall{}
 \include{evaluation}
+\glsresetall{}
 \include{conclusion}
 
 \appendix

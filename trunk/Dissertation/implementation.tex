@@ -6,16 +6,16 @@ The implementation chapter covers the technologies, techniques and patterns appl
 This section examines the technologies used in the implementation of the project and the discipline that was adhered to during development.
 
 \subsection{Microsoft .NET Framework}
-The Microsoft \gls{net} framework is a platform for development, deployment and running of web services and applications \cite{whatIsDotNet}.  It provides a \gls{clr}, similar to the \gls{jvm} in Java.  This project took advantage of \gls{asp}\gls{net} \gls{mvc} 2.  
+The Microsoft \gls{net} framework is a platform for development, deployment and running of web services and applications \cite{whatIsDotNet}.  It provides a \gls{clr}, similar to the \gls{jvm}.  This project took advantage of \gls{asp}\gls{net} \gls{mvc} 2.  
 
 The developer opted to use the Microsoft \gls{net} framework after encountering the technology during summer placement.   
 The developer saw this project as an opportunity to learn more about the framework.  
-This enabled him to rectify an omission of the summer placement.  Namely, that, on that occasion, the developer did not learn as much about the technology as he would have wished \cite{summerPlacementReport}
+This enabled him to rectify an omission of the summer placement.  Namely, on that occasion, the developer did not learn as much about the technology as he would have wished \cite{summerPlacementReport}.
 To maximise exposure to the technology, the developer chose to work with it for the duration of the project.  The aim of learning about the framework was also added to the project goals. To some, the choice of this framework may appear short-sighted.  The developer would argue, however, that the technology offers numerous benefits.  These include but are not limited to: 
 \begin{enumerate}
 	\item There is an active developer community on the web\footnote{The community's forums can be found at \url{http://www.asp.net/community} and a large proportion of active users of the Stack Overflow community focus on \cs{} and \gls{net} topics --- 3 of the top 8 tags are directly related to the project's domain --- \url{http://stackoverflow.com/tags} (by observation)}, so issues pertaining to development using the framework can be solved by turning to this well-grounded knowledge base;
 	\item The \gls{mvc} aspect of the project, if strictly adhered to by the developer, provides great separation of concerns between the place that information is stored, manipulated and viewed;
-	\item The framework allows for portability to other client machines with very little in the way of model adjustment. For example, if a requirement for a mobile or tablet application developed, it would simply be a case of adding the functionality for that device, rather than having to reimplement the model for a particular piece of hardware.
+	\item The framework allows for portability to other client machines with very little in the way of model adjustment. For example, if a requirement for a mobile or tablet application developed, it would simply be a case of adding the functionality for that device, rather than having to reimplement the model for a particular piece of hardware;
 	\item Applications can be deployed, with some adjustments, on Linux machines using the Mono (open source) software platform.  Due to time constraints, the Mono platform was not explored, but it is worth alerting the reader to its presence.
 \end{enumerate}
 
@@ -109,7 +109,7 @@ Some of the code to take advantage of \gls{fnh}'s \texttt{Automap} feature is li
 \label{codeReuse}
 Code reuse from previous projects during this product's development was intended to be maximised, as laid out in Section \ref{columbia}.  The benefits of this include that time can be saved by reusing successful approaches and code that has been previously used (and therefore tested through use) is less likely to contain large flaws and bugs.
 
-The only component that was reused from previous projects in the final deployment version was Mitesh's \bibtex{} file parser;  initially, the code was simply ported from Java to \cs, but as the project progressed, it became apparent that there was a rather important problem with it: the way that errors were dealt with was not user-friendly, which meant that errors could not be recovered from.  This risk emerged through use of the system and was not a problem identified at early stages of the project and had to be dealt with as it progressed.
+The only component that was reused from previous projects in the final deployment version was Mitesh's \bibtex{} file parser.  Initially, the code was simply ported from Java to \cs, but as the project progressed, it became apparent that there were some rather important problems with it.  The problems included that errors were dealt with in a way that was not user-friendly, which meant that users could not recover from errors.  This risk emerged through use of the system and was not a problem identified at early stages of the project, so had to be dealt with at later stages.
 
 The \texttt{string} libraries for \cs{} and Java do not match completely.  Some of the Java methods had to be implemented in \cs{} code to simplify the transition, namely:
 \begin{enumerate}
@@ -183,12 +183,12 @@ All \texttt{string} fields in the \texttt{Publication} class are subject to maxi
 	\end{center}
 \end{figure}
 
-An item is marked as deleted if its DeletionTime member field has a non-null value.  This is a standard adopted throughout the system: any entry which has a null value for its DeletionTime is regarded as an active entry in the system; conversely, an entry which is marked as deleted is subject to the expiry time of 60 seconds (a preliminary value used in the system), after which it may be deleted in the classic sense of the word.  This allows users to restore entries which have been deleted in case there has been a mistake in its removal.  All deleted entries in the system can be viewed by accessing the `View Deleted Entries' option in the `View' section of the menu area.
+An item is marked as deleted if its DeletionTime member field has a non-null value.  This is a standard adopted throughout the system.  Any entry which has a null value for its DeletionTime is regarded as an active entry in the system.  Conversely, an entry which is marked as deleted is subject to the expiry time of 60 seconds (a preliminary value used in the system).  After this time, it may be deleted permenantly.  This allows users to restore entries which have been deleted in case there has been a mistake in its removal.  All deleted entries in the system can be viewed by accessing the `View Deleted Entries' option in the `View' section of the menu area.
 
 \subsection{Columbia Model}
 The design of the Columbia Model was discussed in Section~\ref{columbia}.  It was a large part of the implementation of the software solution produced and is discussed presently.
 
-Each of the entry type classes was used by NHibernate and mapped by way of a \texttt{Mapping} class.  There was one mapping class corresponding to each entry type class.  An example mapping is provided for the \texttt{Article} class in figure \ref{fig:articleMappingCode} and the same approach was taken for each of the other classes.  The other thirteen classes are not discussed because there is no technical difference in the code, there are only differences in semantics.
+Each of the entry type classes was used by NHibernate and mapped by way of a \texttt{Mapping} class.  There was one mapping class corresponding to each entry type class.  An example mapping is provided for the \texttt{Article} class in Figure \ref{fig:articleMappingCode} and the same approach was taken for each of the other classes.  The other thirteen classes are not discussed because there is no technical difference in the code, there are only differences in semantics.
 
 \begin{figure}
 	\begin{center}
@@ -234,8 +234,8 @@ The system's web requests and responses are managed by controllers, which are ru
 
 There are three controllers in the system, each of which deal with a different area of the system:
 \begin{enumerate}
-	\item The `home' controller deals with the home page and the `About' page.  It is used to serve the landing page and acts as a place holder for the `help' functionality which is future work for the project;
-	\item The `account' controller deals user accounts.  In particular, it allows user to log on, log off, register an account and manage their password.  The account models are modified from the template provided by Microsoft to use email addresses instead of usernames.  As there was no great focus on security, the template account models were used and left unexplored;
+	\item The `Home' controller deals with the Home page and the `About' page.  It is used to serve the landing page and acts as a place holder for the `Help' functionality which is future work for the project;
+	\item The `Account' controller deals user accounts.  In particular, it allows user to log on, log off, register an account and manage their password.  The account models have been modified from the template provided by Microsoft to use email addresses instead of usernames for log-in.  As there was no great focus on security, the template account models were used and left unexplored;
 	\item The `entry' controller deals with the management of \bibtex{} entries.  Most of the logic in the system is implemented in this controller, which is discussed below.
 \end{enumerate}
 

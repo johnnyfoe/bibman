@@ -11,7 +11,7 @@ The products that are examined are:
 
 \section{Examination Criteria}
 \label{examCriteria}
-Each assessment will examine how the positive features of each product are achieved. This will be balanced by identifying shortcomings encountered.  Lessons can thus be learned from the other products and problematic issues can be avoided.  The examination criteria defined in this chapter will also be used in Chapter~\ref{eval} to evaluate the final product that emerges from this project.
+Each assessment will examine how the positive features of each product are achieved. This will be balanced by identifying shortcomings encountered.  Lessons can thus be learned from the other products and problematic issues can be avoided.  The examination criteria defined in this chapter will also be used in Chapter \ref{eval} to evaluate the final product that emerges from this project.
 
 The three products examined in this section will be judged against the following criteria:
 \begin{enumerate}
@@ -20,15 +20,15 @@ The three products examined in this section will be judged against the following
 		\item How well laid out is the \gls{ui}? 
 		\item Is it consistent throughout use?
 		\item Is it cluttered and complicated or well spaced out and simple?
-		\item Is it intuitive to deduce how a user should perform an action and, where it is not, is it easy to get help?
+		\item Is it intuitive to deduce how a user should perform an action? Where it is not intuitive, is it easy to get help?
 		\item Is it clear when an action has been performed?
 		\item Does it have a look and feel that is easy on the user's eyes?
 	\end{enumerate}
 	\item Features of the system:
 	\begin{enumerate}
 		\item Does the system support multiple users? If so, how?
-		\item What expected and basic\footnote{`Basic' functions are defined to be Add, Edit, Delete, Import, Export and Search. These functions were designated `basic' after developing a general understanding of what a reference management system is expected to do at early project meetings with Dr Manlove.} functions are available for the user to perform? Are any missing?  % acceptable?
-		\item What further\footnote{`Further' functions are defined to be any function other than those mentioned in footnote 1 (Add, Edit, Delete, and so on.)} functions are available to the user? 
+		\item What expected and basic\footnote{`Basic' functions are defined to be Add, Edit, Delete, Import, Export and Search. These functions were designated `basic' after developing a general understanding of what a reference management system is expected to do at early project meetings with Dr Manlove.} functions are available for the user to perform? Are any missing?
+		\item What further\footnote{`Further' functions are defined to be any function other than those mentioned in footnote 1: Add, Edit, Delete, and so on.} functions are available to the user? 
 		\item What range of formats are available to import from and export to?
 		\item How well documented is the system?
 	\end{enumerate}
@@ -49,16 +49,13 @@ The \bibtex{} Entry Manager was developed by Ravi Tez Kota, an M.Sc. student at 
 \subsubsection{Paradigm}
 The product is a web-based reference management system which consists of a database and a web front-end for users to interact with using a web browser.
 
-\subsubsection{Ease of set-up}
+\subsubsection{Ease of set up}
 In short, the examination found that the server side of the product is not convenient to set-up.  The user must have an instance of MySql server running on the machine from which they would like to serve pages. Moreover, they must ensure that Apache Tomcat is installed as a page rendering server and they must have a \gls{jre} installed.  The installers for each of these products were included with the content of the product, though that did not greatly reduce the effort required to set them up.  Following set-up of software components, the user must set up the database using a provided \gls{sql} script and finally add the `bibtex' directory to Apache Tomcat's content directory.  
 
 This may be a lengthy process, but it has the benefit of only having to be done once per instance of the system, which works in its favour. If the system were set up at a central location, many people could log on to the system at once by visiting a \gls{url}, which would give end-users a very simple method of access without involving them in the set up process (as is intended with a web-based product).
 
 \subsubsection{Examination of product}
 After installation, users can easily navigate to the program by simply pointing their web browser to the \gls{url} and the initial page is loaded. The system supports different users by way of a registration and log-in process, authenticated with a user name (email address) and password.
-
-The sign-up and log-in pages are simple and consistent in terms of layout. After logging in, however, the look and feel of the site changes (see Figure \ref{fig:RaviLoginScreen} and Figure \ref{fig:RaviListScreen}).  This is useful in terms of letting the user know that they are authenticated but it means that they must re-acquaint themselves with the new layout before performing any actions.  Reducing this extra burden in terms of cognitive load would be advantageous in a new system.
-
 
 \begin{figure}
 	\begin{center}
@@ -69,6 +66,8 @@ The sign-up and log-in pages are simple and consistent in terms of layout. After
 		\label{fig:RaviLoginScreen}
 	\end{center}
 \end{figure}
+
+The sign-up and log-in pages are simple and consistent in terms of layout. After logging in, however, the look and feel of the site changes (see Figure \ref{fig:RaviLoginScreen} and Figure \ref{fig:RaviListScreen}).  This is useful in terms of letting the user know that they are authenticated but it means that they must re-acquaint themselves with the new layout before performing any actions.  Reducing this extra burden in terms of cognitive load would be advantageous in a new system.
 
 \begin{figure}
 	\begin{center}
@@ -81,11 +80,11 @@ The sign-up and log-in pages are simple and consistent in terms of layout. After
 \end{figure}
 
 The product has two navigation areas which contain different sets of commands in different orders, and changes across different pages. This can leave the user slightly overwhelmed and confused; consistency across pages would have defended against this issue and should be sought in the solution that is produced. 
-In setting out to perform this background research, it was intended that the examiner would upload/open a file and perform further additions, modifications, deletions and searches across known entries from that initial file.  The lack of file import capability in the product limited the consistency of the examination on this product, and was a significant shortcoming of the product. 
+In setting out to perform this background research, it was intended that the examiner would upload or open a file and perform further additions, modifications, deletions and searches across known entries from that initial file.  The lack of file import capability in the product limited the consistency of the examination on this product, and was a significant shortcoming of the product. 
 
-It is easy to deduce from the homepage what a user should click to add an entry to the system, though after an addition is performed, no message is shown to indicate success or failure of the operation.  It is clear that Nielsen's first heuristic \cite{NielsenHeuristics}\footnote{\label{nielsenH1} Nielsen's first heuristic says that the system should always keep users informed about what is going on. (Visibility of system status)} should be adhered to when designing future solutions to this problem.% don't think it is sufficient just to cite this web page, though they are listed here: http://www.useit.com/papers/heuristic/heuristic_list.html
+It is easy to deduce from the homepage what a user should click to add an entry to the system, though after an addition is performed, no message is shown to indicate success or failure of the operation.  It is clear that Nielsen's first heuristic \cite{NielsenHeuristics} \footnote{Nielsen's first heuristic says that the system should always keep users informed about what is going on. (Visibility of system status)} should be adhered to when designing future solutions to this problem.
 
-After a break of perhaps twenty minutes in the examination, the user returned and reloaded the home page of the project, only to find that an error had occurred (a NullPointerException was thrown, resulting in a \gls{http} 500 error).  The error was not dealt with in a user-friendly fashion and reflects badly on the product.  The lesson to be learned here is that the product should deal with errors in a professional manner and not show exceptions on screen to users.
+After a break of perhaps twenty minutes in the examination, the user returned and reloaded the home page of the project, only to find that an error had occurred (a \texttt{NullPointerException} was thrown, resulting in a \gls{http} 500 error).  The error was not dealt with in a user-friendly fashion and reflects badly on the product.  The lesson to be learned here is that the product should deal with errors in a professional manner and not show exceptions on screen to users.
 
 There is no `export' functionality so items cannot be taken out of the system and used directly in the \bibtex{} environment without first reconstructing the entry.  This is quite inconvenient for a user; the lesson to be learned from this is that basic functionality should be provided to ensure that the system is useful to a user.
 The modification of an entry is relatively straightforward.  However, if a user wishes to change an entry's type after it has been saved to the database, they will be disappointed because the entry type is not a field that can be changed by any visible means without re-creating it in the database: users should be able to change an entry's type at any point after creation.
@@ -94,7 +93,7 @@ Another adverse feature of this product is its search capability.  It is difficu
 
 There is a provision for users to be able to switch to another database server from the one that they are using.  This might be helpful to some users, but there is potential for unnecessary replication across multiple servers.  It is also unclear from the user interface what database engines and schemas are supported by the system; this should be covered by a user manual or help system.
 
-Entries can be categorised by users into different groups and also allows a user to choose between groups currently in view (see Figure~\ref{fig:ChangeGroupScreen} for an example).  This involves creating a group with a name and a description, changing to the new group and then adding entries to the group by the method previously used.  This is a helpful feature for categorising entries that do not yet exist, but a limitation of the system is that entries cannot be transferred from one group to another, and it means that they cannot belong to more than one group at any time.  Any future system implementing a grouping capability should allow entries to belong to many groups and should allow modification at any stage after addition to the set of entries, rather than restricting the flexibility of the system by failing to provide the functionality to make these changes.
+Entries can be categorised by users into different groups and also allows a user to choose between groups currently in view (see Figure \ref{fig:ChangeGroupScreen} for an example).  This involves creating a group with a name and a description, changing to the new group and then adding entries to the group by the method previously used.  This is a helpful feature for categorising entries that do not yet exist, but a limitation of the system is that entries cannot be transferred from one group to another, and it means that they cannot belong to more than one group at any time.  Any future system implementing a grouping capability should allow entries to belong to many groups and should allow modification at any stage after addition to the set of entries, rather than restricting the flexibility of the system by failing to provide the functionality to make these changes.
 
 \begin{figure}
 	\begin{center}
@@ -106,7 +105,7 @@ Entries can be categorised by users into different groups and also allows a user
 	\end{center}
 \end{figure}
 
-The site allows users to access the same set of entries at the same time.  An issue that arises from this is that users may make changes to the same entry simultaneously, which could leave the entries in an inconsistent or incorrect state.  The solution deals with the problem by locking an entry until the first user to access it saves any changes they have made, or exits the viewing window.  This solution means that there can be absolutely no overlapping of interests when multiple people access the same entry.  An issue that arises from this method, however, is that if one user (user A) views an entry, then forgets to close the window, the entry is locked for a period of time.  When users B and C come to view it (perhaps with no intention of modifying it), they find that they cannot access it (see Figure \ref{fig:RaviEditing}, leaving them unable to work and potentially frustrated while user A's time period of user A's viewing expires.  The system works on a pessimistic concurrency approach --- one that works on the assumption that clashes occur frequently --- and utilises a solution similar to the `locking' version control strategy.  This pessimistic strategy might not be optimal for the application and other approaches should be examined for future systems.
+The site allows users to access the same set of entries at the same time.  An issue that arises from this is that users may make changes to the same entry simultaneously, which could leave the entries in an inconsistent or incorrect state.  The solution deals with the problem by locking an entry until the first user to access it saves any changes they have made, or exits the viewing window.  This solution means that there can be absolutely no overlapping of interests when multiple people access the same entry.  An issue that arises from this method, however, is that if one user (user A) views an entry, then forgets to close the window, the entry is locked for a period of time.  When users B and C come to view it (perhaps with no intention of modifying it), they find that they cannot access it (see Figure \ref{fig:RaviEditing}), leaving them unable to work and potentially frustrated while user A's time period of user A's viewing expires.  The system works on a pessimistic concurrency approach --- one that works on the assumption that clashes occur frequently --- and utilises a solution similar to the `locking' version control strategy.  This pessimistic strategy might not be optimal for the application and other approaches should be examined for future systems.
 
 \begin{figure}
 	\begin{center}
@@ -149,7 +148,7 @@ BiblioWeb has a clean \gls{ui}, and boasts a consistent navigation area at the t
 	\end{center}
 \end{figure}
 
-Another positive feature of BiblioWeb is that it has an intuitive interface and makes clear where one should go next when performing tasks.  On the other hand, one cannot obtain a list of all entries in the system, which means that a user might be forced to recall all information about an entry rather than rely on recognition; Nielsen \cite{NielsenHeuristics} specifies a heuristic guideline (his sixth out of ten) that a user's memory load should be minimised by making objects, actions and options visible.
+Another positive feature of BiblioWeb is that it has an intuitive interface and makes clear where one should go next when performing tasks.  On the other hand, one cannot obtain a list of all entries in the system.  This means that a user might be forced to recall information about an entry rather than rely on recognition; Nielsen \cite{NielsenHeuristics} specifies a heuristic guideline (his sixth out of ten) that a user's memory load should be minimised by making objects, actions and options visible.
 
 BiblioWeb allows categorisation of references by use of folders (see Figure \ref{fig:BiblioScapeFolderView}), much like the grouping function in the first project.  Some advantages that BiblioWeb's grouping method has over the first project's method include firstly that one can move many references at once from one categorisation to another, and secondly there is no need to delete an entry before reclassifying it.  It does appear, however, that references can only be in one folder at a time, which limits the flexibility of entries and perhaps allows redundancy in the database, where it could have been avoided by allowing an entry to belong to more than one category. 
 
@@ -163,7 +162,7 @@ BiblioWeb allows categorisation of references by use of folders (see Figure \ref
 	\end{center}
 \end{figure}
 
-Users' actions are clearly indicated when they are completed successfully, but the system falls down when incorrect input is supplied.  An example of this is explained presently: text was supplied to the `year' field to see how the system behaved with a string supplied instead of an integer.  Rather than displaying a helpful error message on the interface, the system navigated to a plain white page and displayed the word `EXCEPTION', followed by what was assumed to be a database exception.  As was the case in the first solution, the system did not handle errors and exceptions in a user-friendly way.  It is important to ensure that the system deals with problems in a professional and informative manner, so that a user can recover from their error --- something that Nielsen covers in his list of heuristics \cite{NielsenHeuristics}.
+Users' actions are clearly indicated when they are completed successfully, but the system falls down when incorrect input is supplied.  An example of this is explained presently: text was supplied to the `year' field to see how the system behaved with a \texttt{string} supplied instead of an integer.  Rather than displaying a helpful error message on the interface, the system navigated to a plain white page and displayed the word `EXCEPTION', followed by what was assumed to be a database exception.  As was the case in the first solution, the system did not handle errors and exceptions in a user-friendly way.  It is important to ensure that the system deals with problems in a professional and informative manner, so that a user can recover from their error --- something that Nielsen covers in his list of heuristics \cite{NielsenHeuristics}.
 
 Perhaps the greatest asset of the BiblioWeb system has is its import function which boasts an enormous list of text and file formats, as can be seen in Figure \ref{fig:BiblioScapeImportScreen}.  There are unfortunately not enough resources for this experiment to test all 201 of the formats, but it is safe to say that the system handles parsing of \bibtex{} entries well.  The system does not store the entries' types as would be expected of a \bibtex{} reference management package: rather than storing the reference type `Unpublished' as it was in the \bibtex{} file, it stored `Personal Communication', which is not accurate to the \bibtex{} format, and subsequently leaves the terminology open to misinterpretation by a user.
 
@@ -205,7 +204,7 @@ The consistent menu is complemented by a consistent table area where currently l
 	\end{center}
 \end{figure}
 
-There is no option to log in as a user, but there is an option in the `tools' menu to choose a database, as shown in Figure \ref{fig:MiteshDatabaseScreen}.  This was assumed to be an implementation of multi-user access, but, as there was no user manual or help system, it was not possible to assess this aspect of the system.  It is important to document the features of the system if the actions to use it are not immediately clear, and help should be provided for complicated pieces of functionality.
+There is no option to log in as a user, but there is an option in the `tools' menu to choose a database, as shown in Figure \ref{fig:MiteshDatabaseScreen}.  This was assumed to be an implementation of multi-user access. As there was no user manual or help system, it was not possible to assess this aspect of the system, so it could not be examined.  It is important to document the features of the system if the actions to use it are not immediately clear, and help should be provided for complicated pieces of functionality.
 
 \begin{figure}
 	\begin{center}

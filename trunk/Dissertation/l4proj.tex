@@ -17,12 +17,6 @@
 \makeindex
 \makeglossaries
 
-%						Short plural key				 Long plural key
-\newacronym[\glsshortpluralkey=smpls,\glslongpluralkey=samples]{smpl}
-%key		 value
-{SAMPLE}{Sample entry}
-
-\newglossaryentry{sample}{name={sample}, description={a sample glossary entry}}
 % ==========================================
 % 	Acronyms 				acm
 % 				  key  		displayed		Full string
@@ -34,6 +28,7 @@
 \newacronym{case}		{CASE}			{Computer-Aided Software Engineering}
 \newacronym{ci}			{CI}				{Continuous Integration}
 \newacronym{clr}		{CLR}				{Common Language Runtime}
+\newacronym{cocc}		{COCC}			{Conflict-Oriented Concurrency Control}
 \newacronym{css}		{CSS}				{Cascading Style Sheet}
 \newacronym{fnh}		{FNH}				{Fluent NHibernate}
 \newacronym{html}		{HTML}			{HyperText Markup Language}
@@ -45,6 +40,7 @@
 \newacronym{json}		{JSON}			{JavaScript Object Notation}
 \newacronym{jvm}		{JVM}				{Java Virtual Machine}
 \newacronym{linq}		{LINQ}			{Language Integrated Query}
+\newacronym{locc}		{LOCC}			{Locking-Oriented Concurrency Control}
 \newacronym{msdnaa}	{MSDNAA}		{Microsoft Developer Network Academic Alliance}
 \newacronym{msss}		{MSSQL}			{Microsoft SQL Server}
 \newacronym{msvs}		{MSVS}			{Microsoft Visual Studio}
@@ -66,7 +62,44 @@
 \newglossaryentry{unix}		{name = {UNIX},										description={An open-source operating system}}
 \newglossaryentry{net}		{name = {.NET},										description={An application development framework by Microsoft}}
 \newglossaryentry{contInt}{name = {Continuous Integration},	description={A technique which runs all tests after each change to a solution's code repository.}}
-\newglossaryentry{vm}{name = {Virtual Machine},							description={Hardware emulator: allows running of a system as if it were on its own machine where it is actually running as a process on machine}}
+%\newglossaryentry{vm}			{name = {Virtual Machine},				description={Hardware emulator: allows running of a system as if it were on its own machine where it is actually running as a process on machine}}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+%   numbers=left,
+%   numberstyle=\footnotesize,
+%   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+
+
+
+
 
 \lstdefinelanguage{CSharp}
 {
@@ -138,15 +171,9 @@ Authors of \latex documents often maintain lists of bibliographic references sto
 
 Authors would thus value and benefit from a system of maintaining and managing \bibtex{} records that overcame these problems particularly if it enabled them to maintain and manage the records in a collaborative way. 
 
-Two previous projects undertaken by students in the School of Computing Science at the University of Glasgow resulted in a desktop solution and a web-based solution that, overcame some of the problems; both of the studies provide the foundation on which this project is built.
-
 The dissertation identifies some of the problems that continue to hamper the effective management of \bibtex{} entries.  It examines some of the previous attempts to resolve them, discusses the requirements that any improved solution should meet and describes how such a solution was designed and technically implemented.  The dissertation goes on to describe and discuss a set of evaluations and tests to determine the success of the software solution produced.
 
-The author aimed to produce a usable, useful and stable software system that addressed the identified needs of collaborating authors while following disciplined software engineering methods.
-
-The software solution produced was found to be a success –-- an outcome determined by statistical analysis of evaluation participants' responses to a questionnaire.  The measurements derived from this showed that all participants reacted positively to questions on the usability of the software solution.  Moreover, they encouraged further development of the solution and even suggested specific areas of further work.   These areas of further development, along with some areas conceived by the author and supervisor of this dissertation, are included in the discussion of future work in the conclusion section.
-
-The fidelity of the software solution proposed was limited by the length of the academic year.  Some of the shortcomings of the solution include sub-optimal authentication during registration and over-simplification of the search engine and security protocol. These and other residual issues are discussed in the final chapter.
+The author aimed to produce a usable, useful and stable software system that addressed the identified needs of collaborating authors while following disciplined software engineering methods and found by user evaluation that he had succeeded.
 \end{abstract}
 
 
@@ -195,4 +222,29 @@ I owe a debt of gratitude to the following individuals for the support they gave
 
 \bibliographystyle{plain}
 \bibliography{l4proj}
+
+\chapter{Requirements Document}
+\includepdf[pages=-]{Requirements.pdf}
+
+\chapter{Evaluation Introduction and Debriefing Scripts}
+\includepdf[pages=-]{IntroDebriefScript.pdf}
+
+\chapter{Evaluation Questionnaire}
+\includepdf[pages=-]{Questionnaire.pdf}
+
+\chapter{Evaluation Task List}
+\includepdf[pages=1]{TaskList.pdf}
+
+\chapter{Ethics Check List}
+\includegraphics[scale=0.6]{images/EthicsChecklist.jpg}
+\newpage
+\includegraphics{images/EthicsChecklist2.jpg}
+
+\chapter{Deployment}
+The project is hosted at the following URL and will remain there until project marks are received.
+
+\url{http://bibman.dyndns-server.com/}
+
+
+
 \end{document}

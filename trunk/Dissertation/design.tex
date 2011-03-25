@@ -8,7 +8,7 @@ The chapter begins with a description and depiction of the architecture used, be
 \section{System Architecture}
 Non-functional requirement 1 states that interaction with the system should take place through a web-based interface.  This requirement fits well with the client-server model: a set of clients that call on the services offered by a server (or set of servers), facilitated by a network \cite{sommerville}.  The approach taken by the solution is illustrated by the \gls{aod} in Figure \ref{fig:aod}, which is intended to bring the system to life for a reader.
 
-This architecture could, with some reconfiguration, be scaled up to run on multiple servers, including the possibility of separating the database onto another machine, as well as replicating the application across different load-balanced systems.  It was sufficient for deployment of the project to centralise all of the functionality to one piece of hardware, and a \gls{vm} was produced so that it could be emulated on other hardware.
+This architecture could, with some reconfiguration, be scaled up to run on multiple servers, including the possibility of separating the database onto another machine, as well as replicating the application across different load-balanced systems.  It was sufficient for deployment of the project to centralise all of the functionality to one piece of hardware, and a Virtual Machine was produced so that it could be emulated on other hardware.
 
 \begin{figure}
 	\begin{center}
@@ -30,6 +30,35 @@ This architecture could, with some reconfiguration, be scaled up to run on multi
 	\end{center}
 \end{figure}
 
+
+\section{Concurrency Design}
+\label{concurrency}
+Three possible approaches were considered to facilitate concurrent user access and each of them are examined presently in turn.
+
+\subsection{Pessimistic Approach}
+Pessimistic approaches to concurrency work on the assumption that collisions will occur often, or on the assumption that the cost of collision is too great to be allowed to occur.  \gls{locc} is a pessimistic solution \cite{loccCocc} which prevents collisions taking place on an item by blocking access while that item is in use.
+
+The first project examined in Chapter~\ref{backgrnd}, \bibtex{} Entry Manager, took this approach.  Recall that users were neither allowed to view an entry nor make changes to it when it was being viewed by another user.  Also recall that this was found to be an unacceptable solution due to the impedance of other users' progress when an entry was locked.
+
+As a result of the findings of the examination of the \bibtex{} Entry Manager, a pessimistic approach was not adopted in this software solution.
+
+\subsection{Optimistic Approach}
+Optimistic approaches to concurrency work in the hope that collisions will not occur often.  It also works on the assumption that the cost of a collision is not so great that it cannot be allowed to occur, and can be recovered from.
+
+The approach taken in this software solution works on an optimistic, \gls{cocc} approach.  Effectively, users are notified when a change has taken place on an entry of interest at the time.  An entry is of interest if the user has a page loaded containing the entry.
+
+If a change is made to an entry while it is of interest to a user, a message is conveyed to the user to alert them to the modification.  If a user is in a position to make changes to the entry of interest, collision resolution is facilitated by the system.  This might involve opening up the changed entry in a new window so that it can be compared to the changes that the user has made, so that they can manually resolve them.
+
+An optimistic, \gls{cocc} approach was taken with the project as it was chosen to be the most promising solution from the author's point of view, as it facilitates users work even when entries are being modified, rather than interrupting it as the pessimistic approach did.
+
+\subsection{Real-time Approach}
+A real-time concurrency approach was considered as a solution to the problems faced by users in the system.  The idea came from a similar approach taken by Google in their online \textsl{Google Docs} service \cite{googleDocs}, which allows users to see each others' updates to a document in real-time. 
+
+This approach would involve the system constantly tracking which users were looking at which entries and pushing live updates out to them on every change.
+
+This approach was not used because the perceived time it would take to implement it could have exceeded the time that was allocated to the project.  It would be interesting future work to find out if this solution would be practical and useful.
+
+
 \section{Web Interface Design}
 \label{uiDesign}
 The interface design was conceptualised around the idea of a clean, consistent and intuitive interface, in line with the requirements and background findings.  It was important to take account of Fitts' Law, the observation that the smaller a target is, the harder it is for a human to point at and act upon accurately \cite{fitts} (particularly in the 2-dimensional space of a screen \cite{fitts2d}), and to adopt a common sense approach when deciding how large or small clickable items should be.
@@ -39,6 +68,7 @@ This section discusses the class designs as they evolved over different versions
 
 An \gls{oo} approach was taken with the project, as the entries that were to be saved mapped well to the concept of an object, and because the \cs{} language is a natively \gls{oo} language.  The \cs{} language is discussed in more detail in Section \ref{csharpDiscussion}.
 
+The overall class design for the system is shown in the \gls{uml} diagram shown in Figure~\ref{fig:OverallClassDiagram}.  
 
 \begin{figure}
 	\begin{center}
@@ -50,15 +80,13 @@ An \gls{oo} approach was taken with the project, as the entries that were to be 
 	\end{center}
 \end{figure}
 
-
-% reset mvc acronym.
 \glsreset{mvc}
 \subsection{Model View Controller}
-The application's design is heavily based on the \gls{mvc} architecture.  The data model and database interaction are all taken care of in core classes, namely the \texttt{DataPersistence} and \texttt{Publication} classes.
+The application's design is heavily based on the \gls{mvc} architecture.  The data model and database interaction are all taken care of in core classes, namely the \texttt{DataPersistence} and \texttt{Publication} classes.  The business logic sits in the controller classes \texttt{HomeController}, \texttt{AccountController} and \texttt{EntryController}, while the view aspect of the project is taken care of in approximately twenty \gls{asp}\gls{net} pages.  Controllers and views are discussed in detail in Chapter~\ref{impl}.
 
-\subsection{First model version (V0.34 - Columbia)}
+\subsection{First Model Version (Columbia)}
 \label{columbia}
-The approach of the first model version was heavily based on the approach of Mitesh Furia; it was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.  This approach did not survive the entirety of the project; as development progressed, it became apparent that the design would need to be refactored and streamlined, as discussed in Section \ref{designChallenger}.  The main surviving item from Mitesh's solution was the file parser, which was modified to suit the \cs{} language (from Java) and to provide further feedback to users.
+The approach of the first model version was heavily based on the approach taken by Mitesh Furia. It was seen as advantageous to reuse the code from his project as much as possible, to reduce development effort and increase the output functionality at the end of this project.  With this aim in mind, the class design for the initial model was heavily structured around his approach.  This approach did not survive the entirety of the project; as development progressed, it became apparent that the design would need to be refactored and streamlined, as discussed in Section \ref{designChallenger}.  The main surviving item from Mitesh's solution was the file parser, which was modified to suit the \cs{} language (from Java) and to provide further feedback to users.
 
 The initial class design consisted of one class per entry type (see Figure \ref{fig:ColumbiaClassDesign} --- an example list of which fields are required and which are optional are shown in Figure \ref{fig:ArticleFields}).  The main focus behind this approach, aside from following Mitesh's successful approach, was to take advantage of a feature of the \gls{net} Framework called Attributes, which can be used effectively for validation.  Attributes provide the ability to associate extra information with each member variable of a class; as an example, the `required' attribute can be used to enforce the requirement to include data in a field for it to be valid.  This approach worked well for this version of the model, boasting excellent robustness to poor or erroneous user input as well as excellent feedback to users through the provision of error messages assigned by the required attribute.  Optional fields were included as member variables, and took advantage of the `DisplayName' attribute. The \gls{net} framework allows automatic generation of labels for web pages, so when a member name doesn't have spaces it results in poor display on the interface.  An example of a member variable name lacking spaces is the field `howpublished': it is more readable and therefore more user friendly when the field is displayed as `how published', which is achieved as shown in Figure \ref{fig:displayName}.
 
@@ -97,22 +125,22 @@ The initial class design consisted of one class per entry type (see Figure \ref{
 	\end{center}
 \end{figure}
 
-Each entry type was a subclass of the abstract superclass \texttt{Publication}, which contained fields common to all entry types, namely: Id, an int identifier; CiteKey, a string intended to be unique to an entry, but not usable as an identifier in the database, allowing duplicate entries to exist in the system; Owner, the username of the user who created the entry in the first instance; along with Abstract, a string field which was to be optional to all entries.
+Each entry type was a subclass of the abstract superclass \texttt{Publication}, which contained fields common to all entry types, namely: Id, an int identifier; CiteKey, a \texttt{string} intended to be unique to an entry, but not usable as an identifier in the database, allowing duplicate entries to exist in the system; Owner, the username of the user who created the entry in the first instance; along with Abstract, a \texttt{string} field which was to be optional to all entries.
 
-As the class was designated `abstract', the enforcement of rules associated with the concept\footnote{Designating a class `abstract' means that an instance of it cannot be directly created, but an inheriting concrete (antonym of abstract) can be instantiated.} were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a string representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
+As the class was designated `abstract', the enforcement of rules associated with the concept\footnote{Designating a class `abstract' means that an instance of it cannot be directly created, but an inheriting concrete (antonym of abstract) can be instantiated.} were used to the advantage of the developer: several methods, which were to be relied on and required by the controller classes, were added as abstract methods to the Publication class.  These abstract methods included two methods which converted an entry to a \texttt{string} representing the entry as a row in a \gls{html} table, both with and without hyperlinks to the amendment page for the entry.
 
 
-\subsection{Second model: V1.0 - Challenger}
+\subsection{Second Model Version (Challenger)}
 \label{designChallenger}
 The Challenger model was the model adopted in the final (deployed) version of the product.  This is the model that is discussed during the implementation chapter (Chapter~\ref{impl}).
 
-Columbia's design presented a few problems for development and performance on the system, as was discovered after implementation:
+Columbia's design presented a few problems for development and performance of the system, as was discovered after implementation:
 \begin{enumerate}
-	\item 14 entry types meant 14 tables and 14 queries to search for an entry or retrieve all entries, which had a serious impact on performance;
+	\item 14 entry types meant 14 tables and therefore 14 queries to search for an entry or retrieve all entries, which had a negative impact on performance;
 	\item Identifiers were unique to each table only, and did not necessarily identify an entry from all others, which resulted in problems with access by the application.
 \end{enumerate}
 
-To solve these problems, a large refactoring took place to reposition all entries' fields in the top-level class \texttt{Publication}.  This reduced the class diagram for the model from as shown in Figure \ref{fig:ColumbiaClassDesign} to as shown in Figure \ref{fig:ChallengerClassDiagram}
+To solve these problems, a large refactoring took place to reposition all entries' fields in the top-level class \texttt{Publication}.  This reduced the class diagram for the model from as shown in Figure \ref{fig:ColumbiaClassDesign} to the model laid out in Figure \ref{fig:ChallengerClassDiagram}.  This new model directly maps to the single-table database model as mentioned in Section \ref{dbdes}.
 
 \begin{figure}
 	\begin{center}
@@ -124,19 +152,15 @@ To solve these problems, a large refactoring took place to reposition all entrie
 	\end{center}
 \end{figure}
 
-This directly maps to the database model
+The single table for all entry types eradicated the uniqueness problem that arose from the Columbia design.  A large improvement in performance was also noticed by the developer, so the model was adopted for continued use.
 
-Single table for all entry types:\\
-why\\
-what improved?\\
- - faster search\\
- - IDs all in one place - less complicated - don't need to kow what an entry's type is before searching it\\
-
-\subsection{Third (proposed) model: V2.0 - Discovery}
+\subsection{Third Model Version (Discovery)}
 \label{designDiscovery}
-Discovery was intended to add a feature called `tagging' to the system.  \\
-Specifically, this was to involve a many-to-many mapping from \texttt{Publication} to \texttt{Tag}
+Discovery was intended to add a feature called `tagging' to the system, but was not completed due to time constraints.  The proposed solution would have used a many-to-many relationship from the \texttt{Publication} class to the \texttt{Tag} class, which would have been represented in the database in the same way.  The connection is shown by dotted lines and borders in Figure \ref{fig:OverallClassDiagram}, but is left as future work.
 
 
-\section{DB Design Diagram}
-content
+\section{Database Model}
+\label{dbdes}
+The database model which was adopted consists of one table for \texttt{Publication}.  Other tables were not used in the deployed version of the solution and so were not persisted.
+
+In this Chapter, the architecture, concurrency approach and class designs for the system were discussed.  The following Chapter discusses the implementation of the system, including some of the software engineering principles applied throughout development.

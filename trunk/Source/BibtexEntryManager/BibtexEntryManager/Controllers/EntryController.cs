@@ -8,6 +8,7 @@ using BibtexEntryManager.Data;
 using BibtexEntryManager.Helpers;
 using BibtexEntryManager.Models.EntryTypes;
 using BibtexEntryManager.Models.Exceptions;
+using NHibernate;
 using NHibernate.Exceptions;
 using NHibernate.Linq;
 
@@ -55,6 +56,16 @@ namespace BibtexEntryManager.Controllers
             Response.ContentType = "text/plain";
             return File(f, "text/plain", "AllBibEntries.bib");
         }
+
+        [Authorize]
+        public ActionResult DeleteAllEntries()
+        {
+            ISession ses = DataPersistence.GetSession();
+            ses.Delete("from Publication p");
+            ses.Flush();
+            return Redirect("/");
+        }
+
 
         [Authorize]
         [HttpPost]
@@ -333,7 +344,7 @@ namespace BibtexEntryManager.Controllers
         public ActionResult Publication(Publication a)
         {
 
-            Dictionary<string, string> errors = a.IsValidEntry();
+            Dictionary<string, string> errors = a.CheckForValidity();
             var matchingCiteKeys = (from pubs in DataPersistence.GetSession().Linq<Publication>()
                                     where pubs.CiteKey.Equals(a.CiteKey)
                                     select pubs);

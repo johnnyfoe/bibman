@@ -143,15 +143,10 @@ namespace BibtexEntryManager.Data
 
         static AutoPersistenceModel CreatePublicationAutomappings()
         {
-            // This is the actual automapping - use AutoMap to start automapping,
-            // then pick one of the static methods to specify what to map (in this case
-            // all the classes in the assembly that contains Employee), and then either
-            // use the Setup and Where methods to restrict that behaviour, or (preferably)
-            // supply a configuration instance of your definition to control the automapper.
             return AutoMap.AssemblyOf<Publication>(new BibtexAutomappingConfiguration())
                 .Conventions.Add<CascadeConvention>();
         }
-        // todo figure out how to make a configurable time period
+
         /// <summary>
         /// Cleans up publications which have deletion times older than the specified time
         /// </summary>

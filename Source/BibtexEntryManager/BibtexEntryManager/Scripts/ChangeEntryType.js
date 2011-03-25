@@ -25,7 +25,7 @@ function onModificationCheckSuccess(result) {
     }
 
     if (result == 0) {
-        // continue checking for modifications if there was no change (set the timer for another 10 seconds)
+        // continue checking for modifications if there was no change (set the timer for another 3 seconds)
         var t = setTimeout("CheckForModifications()", 3000);
         return;
     }

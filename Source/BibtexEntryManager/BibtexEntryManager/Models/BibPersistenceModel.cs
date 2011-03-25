@@ -12,9 +12,6 @@ namespace BibtexEntryManager.Models
         public BibPersistenceModel()
         {
             AddMappingsFromAssembly(typeof(Publication).Assembly);
-
-
-            //AddMappingsFromAssembly(typeof(PublicationGroupMapping).Assembly);
         }
     }
 

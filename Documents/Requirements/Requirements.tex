@@ -6,14 +6,19 @@
 \usepackage{tabularx}
 \usepackage{a4wide}
 
+
+\newcommand{\BibTeX}{B{\sc ib}\TeX}
+\newcommand{\bibtex}{\BibTeX}
+
+
 \begin{document}
 
 \section*{Problem Definition \& Purpose of Project}
-BibTeX is a piece of reference and citation management software widely used in conjunction with the LaTeX typesetting tool.  Each reference, or `entry', is stored in a well-defined file format with a set of fields specific to the entry's type. It becomes cumbersome to maintain a collection of entries, particularly when there is the possibility for duplication of entries and entries' identifiers.  This problem is further amplified when groups of people are working on a document and need to be able to maintain a shared library of references.\\
-The purpose of the project is to address this problem by providing a web browser-driven tool that allows multiple users to work on sets of shared BibTeX records.
+\BibTeX{} is a piece of reference and citation management software widely used in conjunction with the LaTeX typesetting tool.  Each reference, or `entry', is stored in a well-defined file format with a set of fields specific to the entry's type. It becomes cumbersome to maintain a collection of entries, particularly when there is the possibility for duplication of entries and entries' identifiers.  This problem is further amplified when groups of people are working on a document and need to be able to maintain a shared library of references.\\
+The purpose of the project is to address this problem by providing a web browser-driven tool that allows multiple users to work on sets of shared \BibTeX{} records.
 
 \section*{Functional Requirements}
-The tool should provide management of BibTeX records, specifically:
+The tool should provide management of \BibTeX{} records, specifically:
 \begin{itemize}
 \item Add entry
 \item Edit entry
@@ -32,10 +37,10 @@ The tool should provide management of BibTeX records, specifically:
 The tool should adhere to the following non-functional requirements:
 \begin{itemize}
 \item Interaction with the system should take place through a web-based interface
-\item The server-side application is not required to be portable
+%\item The server-side application is not required to be portable
 \item The client-side (web interface) should be accessible from major (*nix, Windows, Mac) operating systems under the three most widely-used browsers (Mozilla Firefox, Google Chrome, Microsoft Internet Explorer)
 \item Entries should be stored in a central database
-\item The system should allow multiple users to collaborate on a collection of BibTeX entries.
+\item The system should allow multiple users to collaborate on a collection of \BibTeX{} entries.
 \item The system should authenticate users and allow various levels of access to users with different privileges.
 \item The system should be usable by the target audience, users of the LaTeX typsetting tool.
 \item The system should be able to handle concurrent access by multiple users in such a way that it facilitates their collaboration on the centrally stored set of references.
@@ -43,16 +48,16 @@ The tool should adhere to the following non-functional requirements:
 
 \include{Prioritisation}
 
-% Bibtex Record Management Use cases
+% \BibTeX{} Record Management Use cases
 \include{UseCases/BibtexRecordManagement/Add}
 \include{UseCases/BibtexRecordManagement/Edit}
 \include{UseCases/BibtexRecordManagement/Delete}
 \include{UseCases/BibtexRecordManagement/UndoDeletion}
-\include{UseCases/BibtexRecordManagement/AddClone}
+%\include{UseCases/BibtexRecordManagement/AddClone}
 \include{UseCases/BibtexRecordManagement/ReviewDuplicates}
-\include{UseCases/BibtexRecordManagement/ReviewDuplicatePair}
+%\include{UseCases/BibtexRecordManagement/ReviewDuplicatePair}
 \include{UseCases/BibtexRecordManagement/ImportBatch}
-\include{UseCases/BibtexRecordManagement/ExportCurrentQueryResults}
+%\include{UseCases/BibtexRecordManagement/ExportCurrentQueryResults}
 \include{UseCases/BibtexRecordManagement/ExportAllEntries}
 
 % System Tools Use Cases
@@ -61,20 +66,20 @@ The tool should adhere to the following non-functional requirements:
 
 
 % Group Support Use Cases
-\include{UseCases/GroupSupport/CreateGroup}
-\include{UseCases/GroupSupport/EditGroup}
-\include{UseCases/GroupSupport/DisbandGroup}
-\include{UseCases/GroupSupport/RequestToJoinGroup}
-\include{UseCases/GroupSupport/ReviewGroupMembership}
-\include{UseCases/GroupSupport/ReviewJoinRequests}
+%\include{UseCases/GroupSupport/CreateGroup}
+%\include{UseCases/GroupSupport/EditGroup}
+%\include{UseCases/GroupSupport/DisbandGroup}
+%\include{UseCases/GroupSupport/RequestToJoinGroup}
+%\include{UseCases/GroupSupport/ReviewGroupMembership}
+%\include{UseCases/GroupSupport/ReviewJoinRequests}
 
 
 % User Management Use Cases
-\include{UseCases/UserManagement/AlterUserPermissions}
+%\include{UseCases/UserManagement/AlterUserPermissions}
 \include{UseCases/UserManagement/NewUserSignUp}
 \include{UseCases/UserManagement/LogIn}
 \include{UseCases/UserManagement/LogOut}
-\include{UseCases/UserManagement/ManageUsers}
+%\include{UseCases/UserManagement/ManageUsers}
 \include{UseCases/UserManagement/NewUserSignUp}
 \include{UseCases/UserManagement/PasswordReset}
 

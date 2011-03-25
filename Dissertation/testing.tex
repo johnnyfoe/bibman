@@ -12,11 +12,11 @@ A unit test is a test on a unit of code in isolation: a comparison of the actual
 \end{enumerate}
 
 % NUnit - what, why, how.
-NUnit is an open source unit testing framework for the \gls{net} languages, originally ported from the unit testing framework for Java, JUnit \cite{nUnitHome}.  NUnit 2.5.7 is used within the project and was the most up-to-date version at the beginning of project development (released in August of 2010 \cite{nUnitRelease}).  
+NUnit is an open source unit testing framework for the \gls{net} languages, originally ported from the unit testing framework for Java \cite{jUnitHome}, JUnit \cite{nUnitHome}.  NUnit 2.5.7 is used within the project and was the most up-to-date version at the beginning of project development (released in August of 2010 \cite{nUnitRelease}).  
 
 NUnit allows unit tests to be written as methods in a class, which can be run inside or outside the \gls{msvs} \gls{ide}, through ReSharper (see Section \ref{devEnv}), which allows one-click running of unit tests and sets of unit tests.
 
-Unit testing was a focus at the beginning of implementation of the product, but, as time progressed, it was felt that it was becoming a greater burden on the product than the positive effect it was having.  As a result of this, the focus on unit testing was dropped and a greater focus on functionality was taken.
+Unit testing was a key focus at the beginning of implementation of the product.  As time progressed, it was felt that the focus on unit testing was a burden on the development of the product and was not as rewarding a process as was expected.  For this reason, the focus on unit testing was dropped and a greater focus on functionality was taken.
 
 With more time for the project, more unit tests would be created to ensure that the parts of the system which had not been covered by unit tests, thus ensuring that more confidence could be placed in the product.
 
@@ -33,7 +33,7 @@ Continuous Integration is a technique which minimises the risk of bugs cropping 
 
 CruiseControl.NET is an open-source program from Fowler's employer, ThoughtWorks, which acts as a monitor to the repository: it automatically checks-out code each time a commit takes place, builds the project and then runs all unit tests, before outputting the result of the build to both a web page and the CruiseControl Notification Tray client.
 
-The \gls{ci} cycle is primarily intended for teams of developers. \gls{ci} leads to a `Test Early. Test Often. Test Automatically.' attitude --- it drives the developer to find find bugs early, which helps to avoid users finding bugs later and increases confidence in the system \cite{pragmaticProgrammer}.  Risks associated with deferred integration (integration after a long time or large numbers of changes, antonymous to continuous integration) include the risk of bugs being released as part of a product.
+The \gls{ci} cycle is primarily intended for teams of developers. \gls{ci} leads to a `Test Early. Test Often. Test Automatically.' attitude --- it drives the developer to find find bugs early, which helps to avoid users finding bugs later and increases confidence in the system \cite{pragmaticProgrammer}.  Deferred integration\footnote{integration after a long time or large numbers of changes, antonymous to continuous integration} includes the risk of bugs being released as part of a product having not been found prior to release.
 
 \begin{figure}
 	\begin{center}
@@ -45,7 +45,7 @@ The \gls{ci} cycle is primarily intended for teams of developers. \gls{ci} leads
 	\end{center}
 \end{figure}
 
-A factor which was not taken into when considering \gls{ci} was the cost in time of setting up the environment in the first place and the possibility of the server failing.  The time spent on introducing \gls{ci} was not recouped in time saved by identifying problems and, particularly in a one-developer project such as this, it is not recommended as an effective aid to development.
+A factor which was not taken into when considering \gls{ci} was the cost in time of setting up the software.  Further to this, the possibility of the server failing was not considered.  Naturally, the worst occurred during the project and the \gls{ci} software and all of its associated logs were lost.  The time spent on introducing \gls{ci} was not recouped in time saved by identifying problems and is not recommended for use in projects which feature only one developer, particularly if a low-risk hosting solution cannot be found.
 
 \section{Bug Tracking}
 \label{bugTracking}
